@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shortMargin">8dp</dimen>
+    <dimen name="defaultMargin">16dp</dimen>
+    <dimen name="longMargin">24dp</dimen>
+    <dimen name="defaultPadding">16dp</dimen>
+    <dimen name="longPadding">24dp</dimen>
+</resources>
