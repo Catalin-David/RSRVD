@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_small">16dp</dimen>
+    <dimen name="margin_big">56dp</dimen>
+    <dimen name="margin_top_welcome_rsrvd">396dp</dimen>
+    <dimen name="margin_bottom_welcome_rsrvd">320dp</dimen>
+</resources>
