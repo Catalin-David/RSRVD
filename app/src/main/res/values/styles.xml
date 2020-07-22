@@ -38,16 +38,16 @@
     <style name="MaterialComponents.TextButton.Big" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:backgroundTint">@color/primary</item>
         <item name="android:textAppearance">@style/TextAppearance.Body1.DarkerGray</item>
-        <item name="android:paddingTop">@dimen/longPadding</item>
-        <item name="android:paddingBottom">@dimen/longPadding</item>
+        <item name="android:paddingTop">@dimen/long_padding</item>
+        <item name="android:paddingBottom">@dimen/long_padding</item>
     </style>
 
     <style name="MaterialComponents.TextButton.Icon" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="android:backgroundTint">@color/primary</item>
         <item name="android:textAppearance">@style/TextAppearance.Body1.DarkerGray</item>
         <item name="iconTint">@android:color/black</item>
-        <item name="android:paddingTop">@dimen/longPadding</item>
-        <item name="android:paddingBottom">@dimen/longPadding</item>
+        <item name="android:paddingTop">@dimen/long_padding</item>
+        <item name="android:paddingBottom">@dimen/long_padding</item>
     </style>
 
     <style name="TextAppearance.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
