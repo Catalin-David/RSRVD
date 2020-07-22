@@ -1,18 +1,19 @@
 package com.halcyonmobile.rsrvd.signin.activity
 
-import android.content.Context
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
+import com.halcyonmobile.rsrvd.signin.event.ActivityNavigation
 import com.halcyonmobile.rsrvd.signin.viewmodel.SignInViewModel
 
-class SignInActivity : AppCompatActivity() {
+
+class SignInActivity : AppCompatActivity(), ActivityNavigation {
 
     private lateinit var signInBinding: ActivitySignInBinding
 
@@ -20,15 +21,16 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         signInBinding.singInViewModel = SignInViewModel(this)
-/*
-        signInBinding.singInViewModel?.welcomeToTextView?.set(
-            SpannableStringBuilder("welcome to \nrsrvd")
-                .setSpan(
-                    ForegroundColorSpan(resources.getColor(R.color.primary)),
-                    12,
-                    16,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                ).toString())
-        signInBinding.executePendingBindings()*/
+
+        subscribeUi()
+    }
+
+    private fun subscribeUi() {
+        signInBinding.singInViewModel?.startActivityForResultEvent?.setEventReceiver(this, this)!!
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        signInBinding.singInViewModel?.onResultFromActivity(requestCode,resultCode,data)!!
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

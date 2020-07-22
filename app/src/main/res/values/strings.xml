@@ -5,4 +5,6 @@
     <string name="connect_with_google">connect with google</string>
     <string name="explore_reserve_live">explore reserve live</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
+
+    <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
 </resources>
