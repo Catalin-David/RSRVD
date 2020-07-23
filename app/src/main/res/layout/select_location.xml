@@ -62,6 +62,7 @@
             app:layout_constraintStart_toEndOf="@id/search_icon"
             app:layout_constraintTop_toTopOf="parent"
             android:autofillHints="Select location"
+            tools:text="Select location"
             android:inputType="text"
             android:textColorHint="#fff"
             android:hint="@string/select_location"
@@ -79,21 +80,11 @@
             app:layout_constraintStart_toEndOf="@id/search_text"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <fragment
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/location_list"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/search" />
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/location_list"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/right_guideline"-->
-<!--        app:layout_constraintStart_toStartOf="@id/left_guideline"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/search" />-->
+        app:layout_constraintTop_toBottomOf="@id/search"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

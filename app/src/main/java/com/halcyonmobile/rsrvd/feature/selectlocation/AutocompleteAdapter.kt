@@ -4,15 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 
-class AutocompleteAdapter : ListAdapter<Location, PlaceViewHolder>(DIFF_CALLBACK) {
+class AutocompleteAdapter(private val listener: (Location) -> Unit) : ListAdapter<Location, PlaceViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder =
-        PlaceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.place_suggestion, parent, false))
+        PlaceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.place_suggestion, parent, false), listener)
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         holder.setLocation(getItem(position))
     }
+
+    override fun getItemCount(): Int = currentList.size
 
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<Location> = object : DiffUtil.ItemCallback<Location>() {

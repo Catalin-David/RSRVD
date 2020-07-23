@@ -76,7 +76,7 @@ class OnboardingActivity : AppCompatActivity() {
                         val latitude = locationResult.locations[latestIndex].latitude
                         val longitude = locationResult.locations[latestIndex].longitude
 
-                        location = Location(UUID.randomUUID(), latitude, longitude, "Current location")
+                        location = Location(UUID.randomUUID(), latitude, longitude, "Current location", "", null)
                         findViewById<TextView>(R.id.maps_text).text = location.toString()
                     }
                 }
