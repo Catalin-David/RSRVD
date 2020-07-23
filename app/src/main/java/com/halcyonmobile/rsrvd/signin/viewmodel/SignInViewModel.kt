@@ -19,7 +19,6 @@ import com.iuliamariabirsan.core.store.GoogleRepo
 class SignInViewModel(private val context: Context) : ViewModel() {
 
     val startActivityForResultEvent = LiveMessageEvent<ActivityNavigation>()
-
     var welcomeToTextView = ObservableField<String>()
 
     init {

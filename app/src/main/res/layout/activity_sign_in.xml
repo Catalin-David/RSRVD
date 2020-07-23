@@ -17,7 +17,7 @@
             android:id="@+id/running_sign_in_image_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.48"
+            app:layout_constraintHeight_percent="0.5"
             app:layout_constraintWidth_percent="0.99"
             android:adjustViewBounds="true"
             android:contentDescription="@string/running_sign_up_image"
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
+
         <TextView
             android:id="@+id/welcome_to_rsrvd_text_view"
             style="@style/TextAppearance.Headline3.White"
@@ -52,10 +52,12 @@
             android:layout_marginBottom="150dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
+            app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button"/>
+            app:layout_constraintBottom_toTopOf="@id/connect_google_button"
+            app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_second_text_view"/>
 
         <TextView
             android:id="@+id/expl_rsrvd_live_second_text_view"
@@ -64,12 +66,13 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/short_margin"
             android:layout_marginBottom="136dp"
+            app:layout_constraintVertical_chainStyle="packed"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_first_text_view"
             app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button"/>
+            app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_third_text_view"/>
 
         <TextView
             android:id="@+id/expl_rsrvd_live_third_text_view"
@@ -80,10 +83,10 @@
             android:layout_marginBottom="136dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
+            app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_second_text_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"/>
 
         <Button
             android:id="@+id/connect_google_button"
@@ -124,7 +127,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="16dp" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

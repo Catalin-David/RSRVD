@@ -29,9 +29,12 @@ class SignInActivity : AppCompatActivity(), ActivityNavigation {
     }
 
     private fun subscribeUi() {
-        signInBinding.singInViewModel
-            ?.startActivityForResultEvent
-            ?.setEventReceiver(this, this)!!
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        if( account == null ) {
+            signInBinding.singInViewModel
+                ?.startActivityForResultEvent
+                ?.setEventReceiver(this, this)!!
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -39,7 +42,7 @@ class SignInActivity : AppCompatActivity(), ActivityNavigation {
         if( account == null ) {
             signInBinding.singInViewModel
                 ?.onResultFromActivity(requestCode, resultCode, data)!!
+            super.onActivityResult(requestCode, resultCode, data)
         }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }
