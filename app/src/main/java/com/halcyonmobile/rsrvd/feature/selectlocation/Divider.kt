@@ -17,9 +17,9 @@ class Divider(context: Context) : RecyclerView.ItemDecoration() {
 
         for (i in 0 until childCount - 1) {
             val child = parent.getChildAt(i)
-            if (child != null) {
-                val params = child.layoutParams as RecyclerView.LayoutParams
-                val top = child.bottom + params.bottomMargin
+            child?.let {
+                val params = it.layoutParams as RecyclerView.LayoutParams
+                val top = it.bottom + params.bottomMargin
                 val bottom = top + drawable.intrinsicHeight
 
                 drawable.setBounds(left, top, right, bottom)

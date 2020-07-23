@@ -2,14 +2,13 @@ package com.halcyonmobile.rsrvd.feature.selectlocation
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.Places
@@ -21,8 +20,6 @@ import kotlin.collections.ArrayList
 
 
 class SelectLocationActivity : AppCompatActivity() {
-    private val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
-
     private val adapter: AutocompleteAdapter = AutocompleteAdapter {
         setResult(Activity.RESULT_OK, Intent().putExtra("location", it))
         finish()
@@ -74,11 +71,15 @@ class SelectLocationActivity : AppCompatActivity() {
             }
             adapter.submitList(predictions)
         }.addOnFailureListener {
-            println("error")
+            Log.d("autocompletion error", "error")
         }
     }
 
     fun clear(view: View) {
         findViewById<EditText>(R.id.search_text).text.clear()
+    }
+
+    companion object {
+        private val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
     }
 }
