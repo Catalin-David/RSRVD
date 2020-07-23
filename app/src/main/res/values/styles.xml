@@ -77,4 +77,5 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="fontFamily">@font/oswald_light</item>
     </style>
+
 </resources>
