@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">RSRVD</string>
     <string name="running_sign_up_image">running sign up image</string>
-    <string name="welcome_to_rsrvd">welcome to \nrsrvd</string>
+    <string name="welcome_to">welcome to</string>
+    <string name="rsrvd">rsrvd</string>
     <string name="connect_with_google">connect with google</string>
     <string name="explore_reserve_live">explore reserve live</string>
     <string name="explore_the_app_first">I want to explore the app first</string>

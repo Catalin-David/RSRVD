@@ -19,18 +19,6 @@ import com.iuliamariabirsan.core.store.GoogleRepo
 class SignInViewModel(private val context: Context) : ViewModel() {
 
     val startActivityForResultEvent = LiveMessageEvent<ActivityNavigation>()
-    var welcomeToTextView = ObservableField<String>()
-
-    init {
-        val ss = SpannableString(context.resources.getString(R.string.welcome_to_rsrvd))
-        ss.setSpan(
-            ForegroundColorSpan(context.resources.getColor(R.color.primary)),
-            11,
-            16,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        welcomeToTextView.set(ss.substring(0, ss.length))
-    }
 
     fun justExplore () {}
 

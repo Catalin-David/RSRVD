@@ -6,9 +6,8 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="long_padding">24dp</dimen>
     <dimen name="margin_big">56dp</dimen>
-    <dimen name="margin_top_welcome_rsrvd">310dp</dimen>
-    <dimen name="margin_bottom_welcome_rsrvd">320dp</dimen>
-    <dimen name="margin_top_btn_connect_sgnin">120dp</dimen>
+    <dimen name="margin_top_welcome_rsrvd">320dp</dimen>
+    <dimen name="margin_top_btn_connect_sgnin">110dp</dimen>
     <dimen name="height_btn_connect_sgnin">56dp</dimen>
     <dimen name="height_running_image">376dp</dimen>
 </resources>

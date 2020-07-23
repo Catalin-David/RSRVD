@@ -17,45 +17,55 @@
             android:id="@+id/running_sign_in_image_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.5"
-            app:layout_constraintWidth_percent="0.99"
+            app:layout_constraintHeight_percent="0.499"
             android:adjustViewBounds="true"
             android:contentDescription="@string/running_sign_up_image"
             android:scaleType="fitXY"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="56dp"
             android:src="@drawable/img_running_sign_up"
-            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
+            app:layout_constraintBottom_toTopOf="@id/rsrvd_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/welcome_to_rsrvd_text_view"
-            style="@style/TextAppearance.Headline3.White"
+            style="@style/TextAppearance.Headline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/long_margin"
             android:layout_marginTop="@dimen/margin_top_welcome_rsrvd"
-            android:text="@{singInViewModel.welcomeToTextView}"
             android:textAllCaps="true"
-            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
+            app:layout_constraintBottom_toTopOf="@id/rsrvd_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/welcome_to_rsrvd" />
+            android:text="@string/welcome_to" />
+
+        <TextView
+            android:id="@+id/rsrvd_text_view"
+            android:text="@string/rsrvd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Headline3"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            android:layout_marginStart="@dimen/long_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
+            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"/>
 
         <TextView
             android:id="@+id/expl_rsrvd_live_first_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/long_margin"
-            android:layout_marginTop="@dimen/short_margin"
             android:layout_marginBottom="150dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
+            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
             app:layout_constraintBottom_toTopOf="@id/connect_google_button"
             app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_second_text_view"/>
 
@@ -64,14 +74,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/short_margin"
             android:layout_marginBottom="136dp"
             app:layout_constraintVertical_chainStyle="packed"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_first_text_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
+            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
             app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_third_text_view"/>
 
         <TextView
@@ -79,14 +88,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/short_margin"
             android:layout_marginBottom="136dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_second_text_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"/>
+            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"/>
 
         <Button
             android:id="@+id/connect_google_button"
@@ -100,7 +108,7 @@
             app:icon="@drawable/ic_google"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
+            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
