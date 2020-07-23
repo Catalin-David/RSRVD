@@ -1,11 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorPrimaryDark">@color/darkGray</item>
+        <item name="colorOnPrimary">@color/darkerGray</item>
+
+        <item name="colorSecondary">@android:color/white</item>
+        <item name="colorSecondaryVariant">@color/gray</item>
+
+        <item name="colorSurface">@color/darkGray</item>
+        <item name="colorOnSurface">@color/lightGray</item>
+
+        <item name="colorOnBackground">@color/lightGray</item>
+
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@android:color/white</item>
+
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:windowBackground">@color/darkGray</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">@color/primary</item>
+    </style>
 </resources>
