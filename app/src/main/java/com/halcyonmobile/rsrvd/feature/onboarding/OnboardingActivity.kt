@@ -7,19 +7,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.util.AttributeSet
 import android.view.View
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.flexbox.FlexboxLayout
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.databinding.OnboardingBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
 import java.util.*
@@ -29,25 +27,25 @@ class OnboardingActivity : AppCompatActivity() {
     private val selectLocationRequestCode = 1
     private val locationPermissionRequestCode = 2
 
-    private var location: Location? = null
+    private lateinit var viewModel: OnboardingViewModel
+    private lateinit var binding: OnboardingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.onboarding)
+        binding = OnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        loadInterests()
+        viewModel = ViewModelProviders.of(this).get(OnboardingViewModel::class.java)
+
+        binding.dataMap = Interests.values().toMutableList()
 
         if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
         } else {
             getLocation()
         }
-    }
 
-    private fun loadInterests() {
-        Interests.values().map {
-            findViewById<FlexboxLayout>(R.id.interests_grid).addView(InterestView(applicationContext).apply { setInterest(it.toString()) })
-        }
+        viewModel.getLocation().observe(this, Observer<Location> { binding.setLocation(it) })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -76,8 +74,8 @@ class OnboardingActivity : AppCompatActivity() {
                         val latitude = locationResult.locations[latestIndex].latitude
                         val longitude = locationResult.locations[latestIndex].longitude
 
-                        location = Location(UUID.randomUUID(), latitude, longitude, "Current location", "", null)
-                        findViewById<TextView>(R.id.maps_text).text = location.toString()
+                        val location = Location(UUID.randomUUID(), latitude, longitude, "Current location", "", null)
+                        viewModel.setLocation(MutableLiveData(location))
                     }
                 }
             }, Looper.getMainLooper())
@@ -87,8 +85,8 @@ class OnboardingActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == selectLocationRequestCode && resultCode == Activity.RESULT_OK && data != null) {
-            location = data.getParcelableExtra("location")
-            findViewById<TextView>(R.id.maps_text).text = location.toString()
+            val location: Location? = data.getParcelableExtra("location")
+            location?.let { viewModel.setLocation(MutableLiveData(it)) }
         }
     }
 
@@ -97,15 +95,14 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     fun ready(view: View) {
-        val data = OnboardingData(location, getInterests())
+        val data = OnboardingData(viewModel.getLocation().value, getInterests())
 //        startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
     }
 
     private fun getInterests(): List<Interests> {
         val interests = ArrayList<Interests>()
-        val interestsGrid = findViewById<FlexboxLayout>(R.id.interests_grid)
-        for (i in 0 until interestsGrid.childCount) {
-            if ((interestsGrid.getChildAt(i) as InterestView).isChecked()) {
+        for (i in 0 until binding.interestsGrid.childCount) {
+            if ((binding.interestsGrid.getChildAt(i) as InterestView).isChecked()) {
                 interests.add(Interests.values()[i])
             }
         }

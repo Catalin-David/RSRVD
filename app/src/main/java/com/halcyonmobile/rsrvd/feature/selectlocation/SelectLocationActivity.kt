@@ -7,17 +7,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class SelectLocationActivity : AppCompatActivity() {
     private val adapter: AutocompleteAdapter = AutocompleteAdapter {
@@ -26,10 +24,15 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     private lateinit var client: PlacesClient
+    private lateinit var binding: SelectLocationBinding
+    private lateinit var viewModel: SelectLocationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.select_location)
+        binding = SelectLocationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        viewModel = ViewModelProviders.of(this).get(SelectLocationViewModel::class.java)
 
         if (!Places.isInitialized()) {
             Places.initialize(applicationContext, apikey)
@@ -37,7 +40,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
         client = Places.createClient(this)
 
-        findViewById<EditText>(R.id.search_text).addTextChangedListener(
+        binding.searchText.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
@@ -51,7 +54,7 @@ class SelectLocationActivity : AppCompatActivity() {
             }
         )
 
-        findViewById<RecyclerView>(R.id.location_list).apply {
+        binding.locationList.apply {
             layoutManager = LinearLayoutManager(this@SelectLocationActivity)
             this.adapter = this@SelectLocationActivity.adapter
             addItemDecoration(Divider(context))
@@ -76,7 +79,7 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     fun clear(view: View) {
-        findViewById<EditText>(R.id.search_text).text.clear()
+        binding.searchText.text.clear()
     }
 
     companion object {

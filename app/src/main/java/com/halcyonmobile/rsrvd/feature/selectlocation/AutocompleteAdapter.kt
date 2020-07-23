@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 
 class AutocompleteAdapter(private val listener: (Location) -> Unit) : ListAdapter<Location, PlaceViewHolder>(DIFF_CALLBACK) {
