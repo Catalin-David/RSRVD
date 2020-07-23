@@ -1,15 +1,10 @@
-package com.halcyonmobile.rsrvd.launcher
+package com.halcyonmobile.rsrvd.launcher.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class LauncherViewModel(val routeUserToNextActionCallback: (Boolean) -> Unit): ViewModel() {
-
-    private fun isUserLoggedIn(): Boolean {
-        // TODO: Obtain state of currently logged user from repository
+class LauncherViewModel : ViewModel() {
+    fun isUserLoggedIn(): Boolean {
+        // TODO: Obtain state of currently logged user from repository and check
         return true
-    }
-
-    fun routeUserToNextAction(){
-        routeUserToNextActionCallback(isUserLoggedIn())
     }
 }

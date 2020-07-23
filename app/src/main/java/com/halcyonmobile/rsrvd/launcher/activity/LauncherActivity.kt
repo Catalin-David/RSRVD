@@ -1,28 +1,28 @@
-package com.halcyonmobile.rsrvd.launcher
+package com.halcyonmobile.rsrvd.launcher.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import com.halcyonmobile.rsrvd.MainActivity
+import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModel
 
 class LauncherActivity : AppCompatActivity() {
 
-    private val viewModel = LauncherViewModel{isUserLogged -> routeUserToNextActionCallback(isUserLogged)}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        viewModel.routeUserToNextAction()
+
+        val viewModel = ViewModelProvider(this).get(LauncherViewModel::class.java)
+
+        routeUserToNextAction(viewModel.isUserLoggedIn())
 
         finish()
     }
 
-    private fun routeUserToNextActionCallback(isUserLogged: Boolean){
-        if(isUserLogged){
+    private fun routeUserToNextAction(isUserLogged: Boolean) {
+        if (isUserLogged) {
             startActivity(Intent(this, MainActivity::class.java))
-        }
-        else{
+        } else {
             // TODO: send to sign up activity
         }
     }
