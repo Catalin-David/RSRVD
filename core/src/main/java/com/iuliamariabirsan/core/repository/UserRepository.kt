@@ -9,10 +9,10 @@ object UserRepository {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    fun getInstance(context: Context): UserRepository{
-        if(!::sharedPreferences.isInitialized){
-            synchronized(UserRepository::class.java){
-                if(!::sharedPreferences.isInitialized){
+    fun getInstance(context: Context): UserRepository {
+        if (!::sharedPreferences.isInitialized) {
+            synchronized(UserRepository::class.java) {
+                if (!::sharedPreferences.isInitialized) {
                     sharedPreferences = context.getSharedPreferences(context.packageName, Activity.MODE_PRIVATE)
                 }
             }
@@ -22,9 +22,9 @@ object UserRepository {
 
     var isUserLoggedIn: Boolean
         get() = sharedPreferences.getBoolean(IS_USER_LOGGED_IN_KEY, false)
-        set(userStatus){
+        set(userStatus) {
             val editor = sharedPreferences.edit()
-            with(editor){
+            with(editor) {
                 putBoolean(IS_USER_LOGGED_IN_KEY, userStatus)
                 apply()
             }

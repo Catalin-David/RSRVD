@@ -16,16 +16,13 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //UserRepository.getInstance(this).isUserLoggedIn = true --- USED FOR TESTING, THIS IS PLACING MOCK DATA
-
-        val factory = LauncherViewModelFactory(application)
-        val viewModel = ViewModelProvider(this, factory).get(LauncherViewModel::class.java)
-
-        routeUserToNextAction(viewModel.isUserLoggedIn())
+        routeUserToNextAction()
 
         finish()
     }
 
-    private fun routeUserToNextAction(isUserLogged: Boolean) {
+    private fun routeUserToNextAction() {
+        val isUserLogged = ViewModelProvider(this, LauncherViewModelFactory(application)).get(LauncherViewModel::class.java).isUserLoggedIn()
         if (isUserLogged) {
             startActivity(Intent(this, MainActivity::class.java))
         } else {
