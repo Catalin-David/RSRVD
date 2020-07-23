@@ -15,6 +15,7 @@ import com.halcyonmobile.rsrvd.signin.event.ActivityNavigation
 import com.halcyonmobile.rsrvd.signin.event.LiveMessageEvent
 import com.iuliamariabirsan.core.store.GoogleRepo
 
+
 class SignInViewModel(private val context: Context) : ViewModel() {
 
     val startActivityForResultEvent = LiveMessageEvent<ActivityNavigation>()
@@ -41,9 +42,14 @@ class SignInViewModel(private val context: Context) : ViewModel() {
                 .requestEmail()
                 .build()
 
-        val mGoogleSignInClient : GoogleSignInClient = GoogleSignIn.getClient(context, gso)
+        val mGoogleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso)
 
-        startActivityForResultEvent.sendEvent { startActivityForResult(mGoogleSignInClient.signInIntent, GOOGLE_SIGN_IN) }
+        startActivityForResultEvent.sendEvent {
+            startActivityForResult(
+                mGoogleSignInClient.signInIntent,
+                GOOGLE_SIGN_IN
+            )
+        }
     }
 
     fun onResultFromActivity(requestCode: Int, resultCode: Int, data: Intent?) {

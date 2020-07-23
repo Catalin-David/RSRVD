@@ -12,97 +12,121 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    
+
         <ImageView
             android:id="@+id/running_sign_in_image_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="fitXY"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintWidth_percent="0.99"
             android:adjustViewBounds="true"
             android:contentDescription="@string/running_sign_up_image"
+            android:scaleType="centerCrop"
             android:layout_marginBottom="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/img_running_sign_up"
             app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
-            android:src="@drawable/img_running_sign_up" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/welcome_to_rsrvd_text_view"
+            style="@style/TextAppearance.Headline3.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            style="@style/TextAppearance.Headline3.White"
-            tools:text="@string/welcome_to_rsrvd"
-            android:layout_marginTop="@dimen/margin_top_welcome_rsrvd"
-            android:layout_marginBottom="@dimen/margin_bottom_welcome_rsrvd"
             android:layout_marginStart="@dimen/long_margin"
+            android:layout_marginTop="@dimen/margin_top_welcome_rsrvd"
+            android:text="@{singInViewModel.welcomeToTextView}"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{singInViewModel.welcomeToTextView}"/>
+            tools:text="@string/welcome_to_rsrvd" />
 
         <TextView
             android:id="@+id/expl_rsrvd_live_first_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/long_margin"
+            android:layout_marginTop="@dimen/short_margin"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Subtitle1"
-            android:layout_marginTop="@dimen/short_margin"
-            android:layout_marginStart="@dimen/long_margin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
         <TextView
             android:id="@+id/expl_rsrvd_live_second_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/short_margin"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Subtitle1"
-            android:layout_marginTop="@dimen/short_margin"
-            android:layout_marginStart="@dimen/default_margin"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_first_text_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
         <TextView
             android:id="@+id/expl_rsrvd_live_third_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/short_margin"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Subtitle1"
-            android:layout_marginTop="@dimen/short_margin"
-            android:layout_marginStart="@dimen/default_margin"
             app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_second_text_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
         <Button
             android:id="@+id/connect_google_button"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_btn_connect_sgnin"
-            app:icon="@drawable/ic_google"
-            android:text="@string/connect_with_google"
-            android:layout_marginTop="@dimen/margin_top_btn_connect_sgnin"
             android:layout_marginStart="@dimen/long_margin"
+            android:layout_marginTop="@dimen/margin_top_btn_connect_sgnin"
             android:layout_marginEnd="@dimen/long_margin"
+            android:onClick="@{() -> singInViewModel.googleConnect()}"
+            android:text="@string/connect_with_google"
+            app:icon="@drawable/ic_google"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
-            android:onClick="@{() -> singInViewModel.googleConnect()}"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/short_margin"
+            android:onClick="@{() -> singInViewModel.justExplore()}"
             android:text="@string/explore_the_app_first"
             android:textAppearance="@style/TextAppearance.Subtitle1"
-            android:layout_marginTop="@dimen/default_margin"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/connect_google_button"
-            android:onClick="@{() -> singInViewModel.justExplore()}"/>
-    
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/connect_google_button" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="16dp" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -22,15 +22,24 @@ class SignInActivity : AppCompatActivity(), ActivityNavigation {
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         signInBinding.singInViewModel = SignInViewModel(this)
 
-        subscribeUi()
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        if( account == null ) {
+            subscribeUi()
+        }
     }
 
     private fun subscribeUi() {
-        signInBinding.singInViewModel?.startActivityForResultEvent?.setEventReceiver(this, this)!!
+        signInBinding.singInViewModel
+            ?.startActivityForResultEvent
+            ?.setEventReceiver(this, this)!!
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        signInBinding.singInViewModel?.onResultFromActivity(requestCode,resultCode,data)!!
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        if( account == null ) {
+            signInBinding.singInViewModel
+                ?.onResultFromActivity(requestCode, resultCode, data)!!
+        }
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
