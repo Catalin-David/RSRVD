@@ -1,10 +1,12 @@
 package com.halcyonmobile.rsrvd.launcher.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.iuliamariabirsan.core.repository.UserRepository
 
-class LauncherViewModel : ViewModel() {
+class LauncherViewModel(application: Application) : AndroidViewModel(application) {
     fun isUserLoggedIn(): Boolean {
-        // TODO: Obtain state of currently logged user from repository and check
-        return true
+        val userRepo = UserRepository.getInstance(getApplication())
+        return userRepo.isUserLoggedIn
     }
 }
