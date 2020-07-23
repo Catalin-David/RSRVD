@@ -70,12 +70,11 @@ class OnboardingActivity : AppCompatActivity() {
                     LocationServices.getFusedLocationProviderClient(applicationContext).removeLocationUpdates(this)
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        val latestIndex = locationResult.locations.size - 1
-                        val latitude = locationResult.locations[latestIndex].latitude
-                        val longitude = locationResult.locations[latestIndex].longitude
-
-                        val location = Location(UUID.randomUUID(), latitude, longitude, "Current location", "", null)
-                        viewModel.setLocation(MutableLiveData(location))
+                        viewModel.setLocation(MutableLiveData(Location(
+                            UUID.randomUUID(),
+                            locationResult.locations[locationResult.locations.size - 1].latitude,
+                            locationResult.locations[locationResult.locations.size - 1].longitude,
+                            "Current location")))
                     }
                 }
             }, Looper.getMainLooper())

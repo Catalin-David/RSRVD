@@ -10,8 +10,8 @@ data class Location (
     val latitude: Double,
     val longitude: Double,
     val name: String,
-    val details: String,
-    val placeId: String?
+    val details: String = "",
+    val placeId: String? = null
 ) : Parcelable {
     override fun toString(): String {
         return name
