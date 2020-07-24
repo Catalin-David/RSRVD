@@ -68,33 +68,13 @@ class OnboardingActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         LocationServices.getFusedLocationProviderClient(this)
-//            .lastLocation.addOnCompleteListener {
-//                        viewModel.setLocation(
-//                MutableLiveData(
-//                    Location(
-//                        latitude = it.latitude,
-//                        longitude = it.longitude,
-//                        name = "Current location"
-//                    )
-//                )
-//            )
-            .requestLocationUpdates(LocationRequest().apply {
-                interval = 10000
-                fastestInterval = 3000
-                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            }, object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult?) {
-                    super.onLocationResult(locationResult)
-
-                    LocationServices.getFusedLocationProviderClient(applicationContext).removeLocationUpdates(this)
-                    if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        viewModel.setLocation(MutableLiveData(Location(
-                            latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
-                            longitude = locationResult.locations[locationResult.locations.size - 1].longitude,
-                            name = "Current location")))
-                    }
-                }
-            }, Looper.getMainLooper())
+            .lastLocation.addOnSuccessListener {
+                viewModel.setLocation(
+                    MutableLiveData(
+                        Location(latitude = it.latitude, longitude = it.longitude, name = "Current location")
+                    )
+                )
+            }
     }
 
 
