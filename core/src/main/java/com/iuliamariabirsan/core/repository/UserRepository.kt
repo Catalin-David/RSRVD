@@ -16,10 +16,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object UserRepository {
     fun userSignIn(userToken :String) {
-        val authenticationDto = AuthenticationDto()
-        authenticationDto.idToken = userToken
+        val authenticationDto = AuthenticationDto(userToken)
 
-        Retrofit.Builder()
+        Retrofit.Builder()   //singleton ptr urm cateva linii
             .baseUrl("https://app.swaggerhub.com/")
             .client(HttpClientFactoryAuth.getClient())
             .addConverterFactory(MoshiConverterFactory.create().asLenient())

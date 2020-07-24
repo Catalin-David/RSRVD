@@ -4,10 +4,10 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class AuthenticationResponseDto {
+/*data */class AuthenticationResponseDto {
     @Json(name = "accessToken")
-    var accessToken: String? = null
+    val accessToken: String? = null
 
     @Json(name = "refreshToken")
-    var refreshToken: String? = null
+    val refreshToken: String? = null
 }

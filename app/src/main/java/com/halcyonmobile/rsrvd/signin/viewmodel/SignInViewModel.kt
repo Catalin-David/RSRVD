@@ -22,7 +22,7 @@ class SignInViewModel(private val context: Context) : ViewModel() {
 
     fun justExplore () {}
 
-    fun googleConnect() {
+    fun googleConnect() { //onClick in activity
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.resources.getString(R.string.client_id))
@@ -39,10 +39,10 @@ class SignInViewModel(private val context: Context) : ViewModel() {
         }
     }
 
-    fun onResultFromActivity(requestCode: Int, resultCode: Int, data: Intent?) {
+    fun onResultFromActivity(requestCode: Int, resultCode: Int, data: Intent?) { //request code verif in activity
         if (requestCode == GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            GoogleRepo().handleSignInResult(task)
+            GoogleRepo().handleSignInResult(task) //doar asta ramane in viewModel
         }
     }
 

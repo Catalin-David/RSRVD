@@ -14,7 +14,7 @@ import com.iuliamariabirsan.core.repository.UserRepository
 
 class GoogleRepo {
 
-     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) { //tot ce este aici in viewmodel, viewModel trebuie sa stie de repo
          try {
              val account = completedTask.getResult(ApiException::class.java)
              val idToken = account!!.idToken
