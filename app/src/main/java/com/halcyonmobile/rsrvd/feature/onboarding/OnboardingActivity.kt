@@ -7,8 +7,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
@@ -45,13 +47,18 @@ class OnboardingActivity : AppCompatActivity() {
 
         binding.ready.setOnClickListener {
             val data = OnboardingData(viewModel.getLocation().value, getInterests())
-            // startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+//             startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
         }
 
         binding.locationSelector.setOnClickListener {
-//            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans")
-//            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE, options.toBundle())
-            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
+            // Shared item transition
+            startActivityForResult(
+                Intent(this, SelectLocationActivity::class.java),
+                SELECT_LOCATION_REQUEST_CODE,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans").toBundle())
+
+            // No transition
+//            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
         }
     }
 

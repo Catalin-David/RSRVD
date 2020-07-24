@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.onboarding.OnboardingActivity"/>
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".feature.onboarding.OnboardingActivity"/>
 
         <activity
             android:name=".feature.selectlocation.SelectLocationActivity"
