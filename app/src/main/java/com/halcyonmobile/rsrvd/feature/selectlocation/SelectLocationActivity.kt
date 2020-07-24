@@ -56,6 +56,8 @@ class SelectLocationActivity : AppCompatActivity() {
 
         binding.searchText.requestFocus()
 
+        binding.back.setOnClickListener { finish() }
+
         binding.locationList.apply {
             layoutManager = LinearLayoutManager(this@SelectLocationActivity)
             this.adapter = this@SelectLocationActivity.adapter

@@ -10,4 +10,5 @@
     <string name="rsrvd">RSRVD</string>
     <string name="search_icon">search icon</string>
     <string name="placeholder_for_empty_search">Placeholder for empty search</string>
+    <string name="back_to_onboarding">Back to onboarding</string>
 </resources>
