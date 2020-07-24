@@ -9,24 +9,14 @@ object SharedPreferencesManager {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    fun getInstance(context: Context): SharedPreferencesManager {
-        if(!::sharedPreferences.isInitialized){
-            synchronized(SharedPreferencesManager::class.java) {
-                if (!::sharedPreferences.isInitialized) {
-                    sharedPreferences = context.getSharedPreferences(context.packageName, Activity.MODE_PRIVATE)
-                }
-            }
-        }
-        return this
+    fun init(context: Context) {
+        sharedPreferences = context.getSharedPreferences(context.packageName, Activity.MODE_PRIVATE)
     }
 
     var isUserLoggedIn: Boolean
         get() = sharedPreferences.getBoolean(IS_USER_LOGGED_IN_KEY, false)
-        set(userStatus) {
-            val editor = sharedPreferences.edit()
-            with(editor) {
-                putBoolean(IS_USER_LOGGED_IN_KEY, userStatus)
-                apply()
-            }
+        set(userStatus) = with(sharedPreferences.edit()) {
+            putBoolean(IS_USER_LOGGED_IN_KEY, userStatus)
+            apply()
         }
 }

@@ -8,21 +8,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModel
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModelFactory
-//import com.halcyonmobile.rsrvd.core.repository.UserRepository
 
 class LauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //UserRepository.getSharedPreferences(this).isUserLoggedIn = true //--- USED FOR TESTING, THIS IS PLACING MOCK DATA
         routeUserToNextAction()
 
         finish()
     }
 
     private fun routeUserToNextAction() {
-        val isUserLogged = ViewModelProvider(this, LauncherViewModelFactory(application)).get(LauncherViewModel::class.java).isUserLoggedIn()
+        val viewModel = ViewModelProvider(this, LauncherViewModelFactory(application))
+        val isUserLogged = viewModel.get(LauncherViewModel::class.java).isUserLoggedIn()
         if (isUserLogged) {
             startActivity(Intent(this, MainActivity::class.java))
         } else {
