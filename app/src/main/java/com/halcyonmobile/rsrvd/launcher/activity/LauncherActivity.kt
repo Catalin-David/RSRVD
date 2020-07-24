@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModel
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModelFactory
-//import com.iuliamariabirsan.core.repository.UserRepository
+//import com.halcyonmobile.rsrvd.core.repository.UserRepository
 
 class LauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //UserRepository.getInstance(this).isUserLoggedIn = true --- USED FOR TESTING, THIS IS PLACING MOCK DATA
+        //UserRepository.getSharedPreferences(this).isUserLoggedIn = true //--- USED FOR TESTING, THIS IS PLACING MOCK DATA
         routeUserToNextAction()
 
         finish()
