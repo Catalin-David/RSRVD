@@ -71,6 +71,7 @@
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/title" />
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:transitionName="search_trans"
                 android:id="@+id/location_selector"
                 android:layout_width="0dp"
                 android:layout_height="40dp"

@@ -20,6 +20,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="20dp" />
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:transitionName="search_trans"
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="40dp"

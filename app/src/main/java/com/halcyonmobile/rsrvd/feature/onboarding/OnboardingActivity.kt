@@ -7,14 +7,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
-import androidx.lifecycle.Observer
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -23,8 +21,6 @@ import com.google.android.gms.location.LocationServices
 import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
-import java.util.*
-import kotlin.collections.ArrayList
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var viewModel: OnboardingViewModel
@@ -53,6 +49,8 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         binding.locationSelector.setOnClickListener {
+//            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans")
+//            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE, options.toBundle())
             startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
         }
     }
@@ -67,23 +65,44 @@ class OnboardingActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-        LocationServices.getFusedLocationProviderClient(this)
-            .lastLocation.addOnSuccessListener {
-                viewModel.setLocation(
-                    MutableLiveData(
-                        Location(latitude = it.latitude, longitude = it.longitude, name = "Current location")
-                    )
-                )
-            }
-    }
+//        LocationServices.getFusedLocationProviderClient(this)
+//            .lastLocation.addOnSuccessListener {
+//                it?.let {
+//                    viewModel.setLocation(
+//                        Location(latitude = it.latitude, longitude = it.longitude, name = "Current location")
+//                    )
+//                }
+//            }
 
+        LocationServices.getFusedLocationProviderClient(this)
+            .requestLocationUpdates(LocationRequest().apply {
+                interval = 10000
+                fastestInterval = 3000
+                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            }, object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    super.onLocationResult(locationResult)
+
+                    LocationServices.getFusedLocationProviderClient(applicationContext).removeLocationUpdates(this)
+
+                    if (locationResult != null && locationResult.locations.isNotEmpty()) {
+                        viewModel.setLocation(
+                            Location(
+                                latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
+                                longitude = locationResult.locations[locationResult.locations.size - 1].longitude,
+                                name = "Current location")
+                        )
+                    }
+                }
+            }, Looper.getMainLooper())
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val location: Location? = data.getParcelableExtra("location")
-            location?.let { viewModel.setLocation(MutableLiveData(it)) }
+            location?.let { viewModel.setLocation(it) }
         }
     }
 

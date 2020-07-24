@@ -10,7 +10,7 @@ class OnboardingViewModel : ViewModel() {
 
     fun getLocation(): LiveData<Location> = location
 
-    fun setLocation(newLocation: MutableLiveData<Location>) {
-        location.value = newLocation.value
+    fun setLocation(newLocation: Location) {
+        location.value = newLocation
     }
 }
