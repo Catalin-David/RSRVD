@@ -20,4 +20,8 @@ class InterestView(context: Context) : ConstraintLayout(context) {
     }
 
     fun isChecked() = findViewById<CheckBox>(R.id.interest_button)?.isChecked ?: false
+
+    companion object {
+        private const val TAG = "InterestView"
+    }
 }

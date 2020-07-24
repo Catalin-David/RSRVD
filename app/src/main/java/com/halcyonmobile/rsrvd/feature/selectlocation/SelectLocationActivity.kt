@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.feature.selectlocation
 
 import android.app.Activity
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,14 +26,11 @@ class SelectLocationActivity : AppCompatActivity() {
 
     private lateinit var client: PlacesClient
     private lateinit var binding: SelectLocationBinding
-    private lateinit var viewModel: SelectLocationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SelectLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = ViewModelProviders.of(this).get(SelectLocationViewModel::class.java)
 
         if (!Places.isInitialized()) {
             Places.initialize(applicationContext, apikey)
@@ -49,10 +47,14 @@ class SelectLocationActivity : AppCompatActivity() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    setSuggestions(s)
+                    if (s.toString().isNotEmpty()) {
+                        setSuggestions(s)
+                    }
                 }
             }
         )
+
+        binding.searchText.requestFocus()
 
         binding.locationList.apply {
             layoutManager = LinearLayoutManager(this@SelectLocationActivity)
@@ -70,9 +72,14 @@ class SelectLocationActivity : AppCompatActivity() {
 
         client.findAutocompletePredictions(request).addOnSuccessListener { response ->
             for (prediction in response.autocompletePredictions) {
-                predictions.add(Location(UUID.randomUUID(), 0.0, 0.0, prediction.getPrimaryText(null).toString(), prediction.getFullText(null).toString(), prediction.placeId))
+                predictions.add(Location(
+                    name = prediction.getPrimaryText(null).toString(),
+                    details = prediction.getFullText(null).toString(),
+                    placeId = prediction.placeId))
             }
             adapter.submitList(predictions)
+
+            binding.emptyPlaceholder.visibility = if (predictions.size > 0) View.INVISIBLE else View.VISIBLE
         }.addOnFailureListener {
             Log.d("autocompletion error", "error")
         }
@@ -80,9 +87,13 @@ class SelectLocationActivity : AppCompatActivity() {
 
     fun clear(view: View) {
         binding.searchText.text.clear()
+        adapter.submitList(listOf())
+        binding.emptyPlaceholder.visibility = View.VISIBLE
     }
 
     companion object {
         private val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
+
+        private const val TAG = "SelectLocationActivity"
     }
 }

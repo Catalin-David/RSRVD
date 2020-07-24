@@ -9,4 +9,5 @@
     <string name="ready">i\'m ready</string>
     <string name="rsrvd">RSRVD</string>
     <string name="search_icon">search icon</string>
+    <string name="placeholder_for_empty_search">Placeholder for empty search</string>
 </resources>

@@ -11,28 +11,28 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
+import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.halcyonmobile.rsrvd.databinding.OnboardingBinding
+import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
 class OnboardingActivity : AppCompatActivity() {
-    private val selectLocationRequestCode = 1
-    private val locationPermissionRequestCode = 2
-
     private lateinit var viewModel: OnboardingViewModel
-    private lateinit var binding: OnboardingBinding
+    private lateinit var binding: OnboardingActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = OnboardingBinding.inflate(layoutInflater)
+        binding = OnboardingActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(OnboardingViewModel::class.java)
@@ -40,18 +40,23 @@ class OnboardingActivity : AppCompatActivity() {
         binding.dataMap = Interests.values().toMutableList()
 
         if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
         } else {
             getLocation()
         }
 
-        viewModel.getLocation().observe(this, Observer<Location> { binding.setLocation(it) })
+        viewModel.getLocation().observe(this) { binding.setLocation(it) }
+
+        binding.ready.setOnClickListener {
+            val data = OnboardingData(viewModel.getLocation().value, getInterests())
+            // startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == locationPermissionRequestCode && grantResults.isNotEmpty()) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.isNotEmpty()) {
             getLocation()
         }
     }
@@ -71,10 +76,9 @@ class OnboardingActivity : AppCompatActivity() {
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
                         viewModel.setLocation(MutableLiveData(Location(
-                            UUID.randomUUID(),
-                            locationResult.locations[locationResult.locations.size - 1].latitude,
-                            locationResult.locations[locationResult.locations.size - 1].longitude,
-                            "Current location")))
+                            latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
+                            longitude = locationResult.locations[locationResult.locations.size - 1].longitude,
+                            name = "Current location")))
                     }
                 }
             }, Looper.getMainLooper())
@@ -83,28 +87,35 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == selectLocationRequestCode && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val location: Location? = data.getParcelableExtra("location")
             location?.let { viewModel.setLocation(MutableLiveData(it)) }
         }
     }
 
     fun selectLocation(view: View) {
-        startActivityForResult(Intent(this, SelectLocationActivity::class.java), selectLocationRequestCode)
+        startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
     }
 
-    fun ready(view: View) {
-        val data = OnboardingData(viewModel.getLocation().value, getInterests())
-//        startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
-    }
+    private fun getInterests(): List<Interests> =
+        binding.interestsGrid.children
+            .filterIsInstance<InterestView>()
+            .mapIndexed { index, view -> if (view.isChecked()) Interests.values()[index] else null }
+            .filterNotNull()
+            .toList()
 
-    private fun getInterests(): List<Interests> {
-        val interests = ArrayList<Interests>()
-        for (i in 0 until binding.interestsGrid.childCount) {
-            if ((binding.interestsGrid.getChildAt(i) as InterestView).isChecked()) {
-                interests.add(Interests.values()[i])
+    companion object {
+        private const val TAG = "OnboardingActivity"
+
+        private const val SELECT_LOCATION_REQUEST_CODE = 1
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 2
+
+        @JvmStatic
+        @BindingAdapter("inflateData")
+        fun inflateData(layout: FlexboxLayout, data: List<Interests>) {
+            for (entry in data) {
+                layout.addView(InterestView(layout.context).apply { setInterest(entry.name) })
             }
         }
-        return interests
     }
 }

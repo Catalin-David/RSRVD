@@ -6,14 +6,10 @@ import java.util.*
 
 @Parcelize
 data class Location (
-    val id: UUID,
-    val latitude: Double,
-    val longitude: Double,
+    val id: UUID = UUID.randomUUID(),
     val name: String,
     val details: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
     val placeId: String? = null
-) : Parcelable {
-    override fun toString(): String {
-        return name
-    }
-}
+) : Parcelable
