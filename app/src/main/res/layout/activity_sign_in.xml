@@ -5,7 +5,7 @@
     <data>
         <variable
             name="singInViewModel"
-            type="com.halcyonmobile.rsrvd.signin.viewmodel.SignInViewModel" />
+            type="com.halcyonmobile.rsrvd.signin.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +16,10 @@
             android:id="@+id/running_sign_in_image_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.5"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/running_sign_up_image"
             android:scaleType="centerCrop"
-            android:layout_marginBottom="@dimen/margin_big"
-            android:src="@drawable/copy_img"
+            android:contentDescription="@string/running_sign_up_image"
+            android:src="@drawable/img_authentication"
             app:layout_constraintBottom_toTopOf="@id/rsrvd_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,39 +59,13 @@
             android:layout_marginBottom="150dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
+            android:singleLine="true"
+            android:maxWidth="450dp"
             app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button"
-            app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_second_text_view"/>
-
-        <TextView
-            android:id="@+id/expl_rsrvd_live_second_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginBottom="136dp"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:text="@string/explore_reserve_live"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_first_text_view"
-            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
-            app:layout_constraintEnd_toStartOf="@id/expl_rsrvd_live_third_text_view"/>
-
-        <TextView
-            android:id="@+id/expl_rsrvd_live_third_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginBottom="136dp"
-            android:text="@string/explore_reserve_live"
-            android:textAllCaps="true"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            app:layout_constraintStart_toEndOf="@id/expl_rsrvd_live_second_text_view"
-            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"/>
+            app:layout_constraintBottom_toTopOf="@id/connect_google_button"/>
 
         <Button
             android:id="@+id/connect_google_button"
@@ -102,9 +74,11 @@
             android:layout_marginStart="@dimen/long_margin"
             android:layout_marginTop="@dimen/margin_top_btn_connect_sgnin"
             android:layout_marginEnd="@dimen/long_margin"
-            android:onClick="@{() -> singInViewModel.googleConnect()}"
             android:text="@string/connect_with_google"
             app:icon="@drawable/ic_google"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textAllCaps="true"
+            style="@style/MaterialComponents.Button.Icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
@@ -120,7 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/connect_google_button" />
-
+<!--
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_guideline"
             android:layout_width="wrap_content"
@@ -134,7 +108,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="16dp" />
-
+-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

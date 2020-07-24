@@ -12,12 +12,15 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".signin.activity.SignInActivity" android:screenOrientation="portrait">
+        <activity android:name=".signin.SignInActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 </manifest>
