@@ -10,12 +10,12 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="10dp">
         <TextView
             android:id="@+id/location_name"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             tools:text="City"
             android:text="@{location.name}"
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/location_details"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             tools:text="Details"
             android:text="@{location.details}"
             android:textColor="#9fff"

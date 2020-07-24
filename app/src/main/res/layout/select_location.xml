@@ -3,50 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
-
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:contentDescription="@string/back_to_onboarding"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            app:layout_constraintStart_toEndOf="@id/left_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/search"/>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/rsrvd"
-            android:textColor="#fff"
-            android:layout_marginVertical="25dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/search"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/right_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="20dp" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search"
             android:layout_width="0dp"
@@ -55,8 +27,7 @@
             app:layout_constraintBottom_toTopOf="@id/location_list"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@id/title">
-
+            app:layout_constraintTop_toTopOf="parent">
             <ImageView
                 android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
@@ -68,7 +39,6 @@
                 app:layout_constraintEnd_toStartOf="@id/search_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <EditText
                 android:id="@+id/search_text"
                 android:layout_width="0dp"
@@ -86,22 +56,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="LabelFor"
                 tools:text="Select location" />
-
-            <ImageView
+            <ImageButton
                 android:id="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/maps_icon"
-                android:hapticFeedbackEnabled="true"
-                android:onClick="clear"
+                android:background="?attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/search_text"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/location_list"
             android:layout_width="0dp"
@@ -109,7 +77,6 @@
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@id/search" />
-
         <ImageView
             android:id="@+id/empty_placeholder"
             android:layout_width="0dp"
@@ -119,6 +86,5 @@
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@id/search" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

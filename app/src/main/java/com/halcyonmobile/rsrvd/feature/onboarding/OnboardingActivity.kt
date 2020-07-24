@@ -51,6 +51,10 @@ class OnboardingActivity : AppCompatActivity() {
             val data = OnboardingData(viewModel.getLocation().value, getInterests())
             // startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
         }
+
+        binding.locationSelector.setOnClickListener {
+            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -64,6 +68,16 @@ class OnboardingActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         LocationServices.getFusedLocationProviderClient(this)
+//            .lastLocation.addOnCompleteListener {
+//                        viewModel.setLocation(
+//                MutableLiveData(
+//                    Location(
+//                        latitude = it.latitude,
+//                        longitude = it.longitude,
+//                        name = "Current location"
+//                    )
+//                )
+//            )
             .requestLocationUpdates(LocationRequest().apply {
                 interval = 10000
                 fastestInterval = 3000
@@ -73,7 +87,6 @@ class OnboardingActivity : AppCompatActivity() {
                     super.onLocationResult(locationResult)
 
                     LocationServices.getFusedLocationProviderClient(applicationContext).removeLocationUpdates(this)
-
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
                         viewModel.setLocation(MutableLiveData(Location(
                             latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
@@ -84,6 +97,7 @@ class OnboardingActivity : AppCompatActivity() {
             }, Looper.getMainLooper())
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -91,10 +105,6 @@ class OnboardingActivity : AppCompatActivity() {
             val location: Location? = data.getParcelableExtra("location")
             location?.let { viewModel.setLocation(MutableLiveData(it)) }
         }
-    }
-
-    fun selectLocation(view: View) {
-        startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
     }
 
     private fun getInterests(): List<Interests> =

@@ -3,7 +3,8 @@
     package="com.halcyonmobile.rsrvd">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION "/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,13 @@
         </activity>
 
         <activity android:name=".feature.onboarding.OnboardingActivity"/>
-        <activity android:name=".feature.selectlocation.SelectLocationActivity"/>
+
+        <activity
+            android:name=".feature.selectlocation.SelectLocationActivity"
+            android:parentActivityName=".feature.onboarding.OnboardingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".feature.onboarding.OnboardingActivity" />
+        </activity>
     </application>
 </manifest>

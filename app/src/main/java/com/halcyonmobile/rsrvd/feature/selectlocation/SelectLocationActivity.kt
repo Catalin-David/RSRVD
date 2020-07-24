@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,13 +59,19 @@ class SelectLocationActivity : AppCompatActivity() {
 
         binding.searchText.requestFocus()
 
-        binding.back.setOnClickListener { finish() }
+        binding.clear.setOnClickListener {
+            binding.searchText.text.clear()
+            adapter.submitList(listOf())
+            binding.emptyPlaceholder.visibility = View.VISIBLE
+        }
 
         binding.locationList.apply {
             layoutManager = LinearLayoutManager(this@SelectLocationActivity)
             this.adapter = this@SelectLocationActivity.adapter
             addItemDecoration(Divider(context))
         }
+
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setSuggestions(s: CharSequence?) {
@@ -85,12 +94,6 @@ class SelectLocationActivity : AppCompatActivity() {
         }.addOnFailureListener {
             Log.d("autocompletion error", "error")
         }
-    }
-
-    fun clear(view: View) {
-        binding.searchText.text.clear()
-        adapter.submitList(listOf())
-        binding.emptyPlaceholder.visibility = View.VISIBLE
     }
 
     companion object {
