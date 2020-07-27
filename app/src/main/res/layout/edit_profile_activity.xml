@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="@dimen/picture_small"
                 android:contentDescription="@string/sport_photo"
                 android:scaleType="centerCrop"
                 android:src="@drawable/photo_1562771379_eafdca7a02f81"
@@ -38,11 +38,11 @@
                 android:id="@+id/close"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/box_line_height"
+                android:layout_margin="@dimen/long_margin"
                 android:contentDescription="@string/exit_editing_profile"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="@dimen/long_margin" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/left_guideline"
@@ -62,7 +62,7 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="230dp"
+                android:layout_marginTop="@dimen/picture_title_offset_small"
                 android:lineHeight="40sp"
                 android:text="@string/edit_profile"
                 android:textAllCaps="true"

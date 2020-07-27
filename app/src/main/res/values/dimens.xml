@@ -7,4 +7,6 @@
     <dimen name="long_padding">24dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
     <dimen name="side_guide">20dp</dimen>
+    <dimen name="picture_small">250dp</dimen>
+    <dimen name="picture_title_offset_small">230dp</dimen>
 </resources>
