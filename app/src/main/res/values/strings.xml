@@ -12,4 +12,7 @@
     <string name="placeholder_for_empty_search">Placeholder for empty search</string>
     <string name="back_to_onboarding">Back to onboarding</string>
     <string name="hello_world">Hello world!</string>
+    <string name="explore">Explore</string>
+    <string name="reservations">Reservations</string>
+    <string name="profile">Profile</string>
 </resources>
