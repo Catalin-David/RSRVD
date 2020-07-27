@@ -38,4 +38,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
     kapt 'androidx.databinding:databinding-compiler-common:4.0.1'
+
+    //core module
+    implementation project(":core")
 }
