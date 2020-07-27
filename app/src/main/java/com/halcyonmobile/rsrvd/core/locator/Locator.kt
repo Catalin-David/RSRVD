@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -12,7 +13,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 
-class Locator(private val activity: Activity, private val callback: (LocationResult?) -> Unit) {
+class Locator(private val activity: Activity, private val callback: (Location) -> Unit) {
     fun init() {
         if (ContextCompat.checkSelfPermission(activity.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
@@ -41,7 +42,7 @@ class Locator(private val activity: Activity, private val callback: (LocationRes
                     LocationServices.getFusedLocationProviderClient(activity.applicationContext).removeLocationUpdates(this)
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        callback(locationResult)
+                        callback(locationResult.locations[locationResult.locations.size - 1])
                     }
                 }
             }, Looper.getMainLooper())

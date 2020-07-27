@@ -39,6 +39,12 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
     kapt 'androidx.databinding:databinding-compiler-common:4.0.1'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
     //core module
     implementation project(":core")
 }

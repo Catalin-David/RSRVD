@@ -11,11 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startActivityForResult(Intent(this, EditProfileActivity::class.java), EDIT_PROFILE_REQUEST_CODE)
-//        startActivity(Intent(this, OnboardingActivity::class.java))
-    }
-
-    companion object {
-        private const val EDIT_PROFILE_REQUEST_CODE = 1
+        startActivity(Intent(this, EditProfileActivity::class.java))
     }
 }

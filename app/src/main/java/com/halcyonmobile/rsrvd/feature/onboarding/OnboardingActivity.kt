@@ -3,6 +3,7 @@ package com.halcyonmobile.rsrvd.feature.onboarding
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
@@ -10,21 +11,27 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.api.AppService
+import com.halcyonmobile.rsrvd.core.api.UpdateUserBody
+import com.halcyonmobile.rsrvd.core.api.RetrofitManager
+import com.halcyonmobile.rsrvd.core.api.User
 import com.halcyonmobile.rsrvd.core.locator.Locator
 import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
+import retrofit2.Call
+import retrofit2.Callback
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var viewModel: LocationViewModel
     private lateinit var binding: OnboardingActivityBinding
 
     private val locator: Locator = Locator(this) {
-        it?.let {
+        it.let {
             viewModel.setLocation(
                 Location(
-                    latitude = it.locations[it.locations.size - 1].latitude,
-                    longitude = it.locations[it.locations.size - 1].longitude,
+                    latitude = it.latitude,
+                    longitude = it.longitude,
                     name = getString(R.string.current_location)
                 )
             )
@@ -45,7 +52,24 @@ class OnboardingActivity : AppCompatActivity() {
 
         binding.ready.setOnClickListener {
 //            val data = OnboardingData(viewModel.getLocation().value, getInterests())
-//             startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+//            startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+
+            viewModel.getLocation().value?.let {
+                RetrofitManager.retrofit
+                    .create(AppService::class.java)
+                    .update(UpdateUserBody(location = it, interests = ArrayList(getInterests())))
+                    .enqueue(object : Callback<String> {
+                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                            Toast.makeText(applicationContext, "Preferences saved", Toast.LENGTH_LONG).show()
+                        }
+
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            println("-----------------------------------------------------")
+                            println(t.message)
+                        }
+                    })
+            }
+//            startActivity(Intent(this, NEXTACTIVITY::class.java))
         }
 
         binding.locationSelector.setOnClickListener {
