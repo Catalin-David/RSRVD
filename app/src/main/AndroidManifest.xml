@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.halcyonmobile.rsrvd">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION " />
 
     <application
@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
 
         <activity
             android:name="com.halcyonmobile.rsrvd.MainActivity"
@@ -34,6 +35,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".feature.onboarding.OnboardingActivity" />
         </activity>
+
+        <activity android:name=".feature.editprofile.EditProfileActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 
-class OnboardingViewModel : ViewModel() {
+class LocationViewModel : ViewModel() {
     private val location: MutableLiveData<Location> = MutableLiveData()
 
     fun getLocation(): LiveData<Location> = location

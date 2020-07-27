@@ -1,22 +1,26 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.feature.editprofile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.core.locator.Locator
-import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
+import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
+import com.halcyonmobile.rsrvd.feature.onboarding.*
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
 
-class OnboardingActivity : AppCompatActivity() {
+class EditProfileActivity : AppCompatActivity() {
+    private lateinit var binding: EditProfileActivityBinding
     private lateinit var viewModel: LocationViewModel
-    private lateinit var binding: OnboardingActivityBinding
 
     private val locator: Locator = Locator(this) {
         it?.let {
@@ -32,7 +36,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = OnboardingActivityBinding.inflate(layoutInflater)
+        binding = EditProfileActivityBinding.inflate(layoutInflater)
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
         setContentView(binding.root)
 
@@ -43,8 +47,17 @@ class OnboardingActivity : AppCompatActivity() {
         viewModel.getLocation().observe(this) { binding.setLocation(it) }
 
         binding.ready.setOnClickListener {
-//            val data = OnboardingData(viewModel.getLocation().value, getInterests())
-//             startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+            val data = OnboardingData(viewModel.getLocation().value, getInterests())
+            setResult(Activity.RESULT_OK, Intent().putExtra("location", data))
+
+            // Shared item transition after closing keyboard
+            this.currentFocus?.let { view ->
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
+            }
+            supportFinishAfterTransition()
+
+            // No transition
+//            finish()
         }
 
         binding.locationSelector.setOnClickListener {
@@ -58,6 +71,8 @@ class OnboardingActivity : AppCompatActivity() {
             // No transition
 //            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
         }
+
+        binding.close.setOnClickListener { finish() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
