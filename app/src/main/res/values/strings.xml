@@ -12,4 +12,16 @@
     <string name="placeholder_for_empty_search">Placeholder for empty search</string>
     <string name="back_to_onboarding">Back to onboarding</string>
     <string name="hello_world">Hello world!</string>
+    <string name="explore">Explore</string>
+    <string name="reservations">Reservations</string>
+    <string name="profile">Profile</string>
+    <string name="running_sign_up_image">running sign up image</string>
+    <string name="welcome_to">welcome to</string>
+    <string name="connect_with_google">connect with google</string>
+    <string name="explore_reserve_live">explore reserve live explore reserve live explore reserve live</string>
+    <string name="explore_the_app_first">I want to explore the app first</string>
+    <string name="account">account</string>
+    <string name="create">create</string>
+
+    <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
 </resources>
