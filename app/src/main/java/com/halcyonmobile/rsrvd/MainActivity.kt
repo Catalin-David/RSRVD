@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
 import com.halcyonmobile.rsrvd.explore.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
@@ -18,22 +19,30 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
              when(menuItem.itemId){
-                R.id.navigation_profile -> openFragment(ProfileFragment())
-                R.id.navigation_reservations -> openFragment(ReservationFragment())
-                R.id.navigation_explore -> openFragment(ExploreFragment())
+                R.id.navigation_profile -> {
+                    openFragment(ProfileFragment(), supportFragmentManager)
+                    true
+                }
+                R.id.navigation_reservations -> {
+                    openFragment(ReservationFragment(), supportFragmentManager)
+                    true
+                }
+                R.id.navigation_explore -> {
+                    openFragment(ExploreFragment(), supportFragmentManager)
+                    true
+                }
                 else -> false
             }
         }
 
-        openFragment(ExploreFragment())
+        openFragment(ExploreFragment(), supportFragmentManager)
     }
 
-    private fun openFragment(fragment: Fragment): Boolean {
-        supportFragmentManager.beginTransaction().apply {
+    private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null){
+        fragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
-            addToBackStack(null)
+            addToBackStack(addToBackStackParameter)
             commit()
         }
-        return true
     }
 }
