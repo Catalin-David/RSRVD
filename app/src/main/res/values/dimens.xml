@@ -11,4 +11,5 @@
     <dimen name="height_btn_connect_sgnin">56dp</dimen>
     <dimen name="height_running_image">376dp</dimen>
     <dimen name="medium_margin">32dp</dimen>
+    <dimen name="margin_bottom_live_expl_text_view">150dp</dimen>
 </resources>

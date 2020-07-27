@@ -20,7 +20,7 @@
             android:scaleType="fitXY"
             android:contentDescription="@string/running_sign_up_image"
             android:src="@drawable/img_authentication_running"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="@dimen/medium_margin"
             app:layout_constraintBottom_toTopOf="@id/rsrvd_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,17 +54,19 @@
 
         <TextView
             android:id="@+id/expl_rsrvd_live_first_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="@dimen/margin_bottom_live_expl_text_view"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
-            android:ellipsize="none"
-            android:singleLine="true"
+            android:ems="100"
+            android:maxLength="100"
+            android:maxLines="1"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button" />
+            app:layout_constraintBottom_toTopOf="@id/connect_google_button"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <Button
             android:id="@+id/connect_google_button"

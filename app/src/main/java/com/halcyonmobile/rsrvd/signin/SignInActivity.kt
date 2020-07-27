@@ -55,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
                 .getSignedInAccountFromIntent(data)
                 .getResult(ApiException::class.java)?.idToken.let {
                     if (it != null) {
-                        signInBinding.singInViewModel.onAuthenticationResult(it)
+                        signInBinding.singInViewModel?.onAuthenticationResult(it)
                     }
                 }
         }
