@@ -1,4 +1,4 @@
-package com.iuliamariabirsan.core
+package com.halcyobmobile.rsrvd.core
 
 import org.junit.Test
 
