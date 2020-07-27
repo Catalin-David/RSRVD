@@ -13,7 +13,7 @@
 
         <item name="colorSurface">@color/dark_gray</item>
         <item name="colorOnSurface">@color/light_gray</item>
-        
+
         <item name="colorOnBackground">@color/light_gray</item>
 
         <item name="colorError">@color/error</item>
@@ -28,10 +28,10 @@
         <item name="textAppearanceSubtitle1">@style/TextAppearance.Subtitle1</item>
         <item name="textAppearanceBody1">@style/TextAppearance.Body1</item>
         <item name="textAppearanceBody2">@style/TextAppearance.Body2</item>
-        
+
         <item name="materialButtonStyle">@style/MaterialComponents.Button</item>
     </style>
-    
+
     <style name="MaterialComponents.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primary</item>
         <item name="android:textColor">@color/darker_gray</item>
@@ -77,4 +77,5 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="fontFamily">@font/oswald_light</item>
     </style>
+
 </resources>
