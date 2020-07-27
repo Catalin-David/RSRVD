@@ -17,9 +17,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:contentDescription="@string/running_sign_up_image"
-            android:src="@drawable/img_authentication"
+            android:src="@drawable/img_authentication_running"
+            android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toTopOf="@id/rsrvd_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,17 +56,15 @@
             android:id="@+id/expl_rsrvd_live_first_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/long_margin"
             android:layout_marginBottom="150dp"
             android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
+            android:ellipsize="none"
             android:singleLine="true"
-            android:maxWidth="450dp"
-            app:layout_constraintVertical_chainStyle="packed"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/connect_google_button"/>
+            app:layout_constraintBottom_toTopOf="@id/connect_google_button" />
 
         <Button
             android:id="@+id/connect_google_button"
@@ -94,21 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/connect_google_button" />
-<!--
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/left_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/right_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
--->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
