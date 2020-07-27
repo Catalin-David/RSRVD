@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="location"
+            type="com.halcyonmobile.rsrvd.feature.selectlocation.Location" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/short_margin">
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{location.name}"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/location_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="City" />
+
+        <TextView
+            android:id="@+id/location_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{location.details}"
+            android:textColor="#9fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location_name"
+            tools:text="Details" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
