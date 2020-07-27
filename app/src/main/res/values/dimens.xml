@@ -5,4 +5,6 @@
     <dimen name="long_margin">24dp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="long_padding">24dp</dimen>
+    <dimen name="box_line_height">40dp</dimen>
+    <dimen name="side_guide">20dp</dimen>
 </resources>
