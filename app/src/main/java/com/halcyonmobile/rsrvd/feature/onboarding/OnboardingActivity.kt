@@ -9,6 +9,7 @@ import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.google.android.flexbox.FlexboxLayout
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.locator.Locator
 import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
@@ -24,7 +25,7 @@ class OnboardingActivity : AppCompatActivity() {
                 Location(
                     latitude = it.locations[it.locations.size - 1].latitude,
                     longitude = it.locations[it.locations.size - 1].longitude,
-                    name = "Current location"
+                    name = getString(R.string.current_location)
                 )
             )
         }

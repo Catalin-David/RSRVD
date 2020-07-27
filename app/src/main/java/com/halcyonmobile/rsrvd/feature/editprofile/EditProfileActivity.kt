@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.google.android.flexbox.FlexboxLayout
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.locator.Locator
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.feature.onboarding.*
@@ -28,7 +29,7 @@ class EditProfileActivity : AppCompatActivity() {
                 Location(
                     latitude = it.locations[it.locations.size - 1].latitude,
                     longitude = it.locations[it.locations.size - 1].longitude,
-                    name = "Current location"
+                    name = getString(R.string.current_location)
                 )
             )
         }

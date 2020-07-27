@@ -15,4 +15,5 @@
     <string name="save_changes">save changes</string>
     <string name="exit_editing_profile">exit editing profile</string>
     <string name="edit_profile">edit\nprofile</string>
+    <string name="current_location">Current location</string>
 </resources>
