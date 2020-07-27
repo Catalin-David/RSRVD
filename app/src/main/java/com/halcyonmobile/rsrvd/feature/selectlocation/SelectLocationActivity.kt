@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd.feature.selectlocation
 
-import android.R
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -12,22 +11,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.app.NavUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
-import com.halcyonmobile.rsrvd.feature.onboarding.OnboardingActivity
-
 
 class SelectLocationActivity : AppCompatActivity() {
     private val adapter: AutocompleteAdapter = AutocompleteAdapter {
         setResult(Activity.RESULT_OK, Intent().putExtra("location", it))
 
         // Shared item transition after closing keyboard
-        this.currentFocus?.let {view ->
+        this.currentFocus?.let { view ->
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
         supportFinishAfterTransition()
@@ -111,11 +107,12 @@ class SelectLocationActivity : AppCompatActivity() {
             .build()
 
         client.findAutocompletePredictions(request).addOnSuccessListener { response ->
-            val predictions = response.autocompletePredictions.map{
+            val predictions = response.autocompletePredictions.map {
                 Location(
                     name = it.getPrimaryText(null).toString(),
                     details = it.getFullText(null).toString(),
-                    placeId = it.placeId)
+                    placeId = it.placeId
+                )
             }
 
             adapter.submitList(predictions)
@@ -127,8 +124,6 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
-
-        private const val TAG = "SelectLocationActivity"
+        private const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
     }
 }

@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
@@ -55,7 +54,8 @@ class OnboardingActivity : AppCompatActivity() {
             startActivityForResult(
                 Intent(this, SelectLocationActivity::class.java),
                 SELECT_LOCATION_REQUEST_CODE,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans").toBundle())
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans").toBundle()
+            )
 
             // No transition
 //            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
@@ -72,15 +72,6 @@ class OnboardingActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-//        LocationServices.getFusedLocationProviderClient(this)
-//            .lastLocation.addOnSuccessListener {
-//                it?.let {
-//                    viewModel.setLocation(
-//                        Location(latitude = it.latitude, longitude = it.longitude, name = "Current location")
-//                    )
-//                }
-//            }
-
         LocationServices.getFusedLocationProviderClient(this)
             .requestLocationUpdates(LocationRequest().apply {
                 interval = 10000
@@ -97,7 +88,8 @@ class OnboardingActivity : AppCompatActivity() {
                             Location(
                                 latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
                                 longitude = locationResult.locations[locationResult.locations.size - 1].longitude,
-                                name = "Current location")
+                                name = "Current location"
+                            )
                         )
                     }
                 }
@@ -108,8 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            val location: Location? = data.getParcelableExtra("location")
-            location?.let { viewModel.setLocation(it) }
+            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
         }
     }
 
@@ -121,17 +112,13 @@ class OnboardingActivity : AppCompatActivity() {
             .toList()
 
     companion object {
-        private const val TAG = "OnboardingActivity"
-
         private const val SELECT_LOCATION_REQUEST_CODE = 1
         private const val LOCATION_PERMISSION_REQUEST_CODE = 2
 
         @JvmStatic
         @BindingAdapter("inflateData")
         fun inflateData(layout: FlexboxLayout, data: List<Interests>) {
-            for (entry in data) {
-                layout.addView(InterestView(layout.context).apply { setInterest(entry.name) })
-            }
+            data.map { layout.addView(InterestView(layout.context).apply { setInterest(it.name) }) }
         }
     }
 }
