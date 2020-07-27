@@ -1,11 +1,10 @@
-package com.halcyonmobile.rsrvd.profile
+package com.halcyonmobile.rsrvd.profile.signup
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,7 +20,8 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signUpBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
-        signUpBinding.signUpViewModel = SignUpViewModel()
+        signUpBinding.signUpViewModel =
+            SignUpViewModel()
 
         findViewById<TextView>(R.id.expl_rsrvd_live_first_text_view_signup).startAnimation(
             AnimationUtils.loadAnimation(
@@ -30,7 +30,6 @@ class SignUpActivity : AppCompatActivity() {
             )
         )
 
-
         findViewById<Button>(R.id.connect_google_button_signup).setOnClickListener {
             signUp()
         }
@@ -38,17 +37,17 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUp() {
-        GoogleSignIn.getLastSignedInAccount(this)?.let {
-            val gso =
-                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.client_id))
-                    .requestEmail()
-                    .build()
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.client_id))
+                .requestEmail()
+                .build()
 
-            val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-            startActivityForResult(mGoogleSignInClient.signInIntent, GOOGLE_SIGN_UP)
-        }
+        startActivityForResult(mGoogleSignInClient.signInIntent,
+            GOOGLE_SIGN_UP
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

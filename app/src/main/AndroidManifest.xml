@@ -40,7 +40,7 @@
                 android:value=".feature.onboarding.OnboardingActivity" />
         </activity>
 
-        <activity android:name=".profile.SignUpActivity"
+        <activity android:name=".profile.signup.SignUpActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

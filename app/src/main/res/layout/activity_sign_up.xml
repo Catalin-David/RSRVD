@@ -5,7 +5,7 @@
     <data>
         <variable
             name="signUpViewModel"
-            type="com.halcyonmobile.rsrvd.profile.SignUpViewModel" />
+            type="com.halcyonmobile.rsrvd.profile.signup.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
