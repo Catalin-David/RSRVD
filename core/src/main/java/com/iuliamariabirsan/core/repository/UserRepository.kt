@@ -25,7 +25,7 @@ object UserRepository {
                     call: Call<AuthenticationResponseDto>,
                     response: Response<AuthenticationResponseDto>
                 ) {
-                    Log.w(ContentValues.TAG, "token ${response.code()}")
+                    Log.w(ContentValues.TAG, "code ${response.code()}")
                 }
             })
 

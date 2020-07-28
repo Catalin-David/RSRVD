@@ -1,7 +1,9 @@
 package com.halcyonmobile.rsrvd.signin
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -61,6 +63,7 @@ class SignInActivity : AppCompatActivity() {
             GoogleSignIn
                 .getSignedInAccountFromIntent(data)
                 .getResult(ApiException::class.java)?.idToken?.let {
+                    Log.w(ContentValues.TAG, "code $it")
                     viewModel.onAuthenticationResult(it)
                 }
         }
