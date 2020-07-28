@@ -9,12 +9,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RetrofitSingleton {
 
     private val RetrofitSingle = Retrofit.Builder()
-
-    fun get(): Retrofit = RetrofitSingle
         .baseUrl("https://app.swaggerhub.com/")
         .client(getClient())
         .addConverterFactory(MoshiConverterFactory.create().asLenient())
         .build()
+
+    fun get(): Retrofit = RetrofitSingle
 
     private fun getClient(): OkHttpClient =
         OkHttpClient.Builder().apply {

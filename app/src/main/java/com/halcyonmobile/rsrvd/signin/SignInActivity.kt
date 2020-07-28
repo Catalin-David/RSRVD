@@ -3,8 +3,6 @@ package com.halcyonmobile.rsrvd.signin
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,30 +11,37 @@ import com.google.android.gms.common.api.ApiException
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 
+
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var signInBinding: ActivitySignInBinding
+    private var viewModel = SignInViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
-        signInBinding.singInViewModel =
-            SignInViewModel()
 
-        findViewById<TextView>(R.id.expl_rsrvd_live_first_text_view).startAnimation(
+        signInBinding.exploreFirst.isSelected = true
+
+
+        signInBinding.explRsrvdLiveFirstTextView.startAnimation(
             AnimationUtils.loadAnimation(
                 this,
                 R.anim.text_view_animation
             )
         )
 
-        findViewById<Button>(R.id.connect_google_button).setOnClickListener {
+        signInBinding.connectGoogleButton.setOnClickListener {
             signIn()
+        }
+
+        signInBinding.exploreFirst.setOnClickListener {
+            exploreFirst()
         }
     }
 
     private fun signIn() {
-        GoogleSignIn.getLastSignedInAccount(this)?.let {
+        if ( GoogleSignIn.getLastSignedInAccount(this) == null ) {
             val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.client_id))
@@ -49,14 +54,14 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun exploreFirst () {}
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {
             GoogleSignIn
                 .getSignedInAccountFromIntent(data)
-                .getResult(ApiException::class.java)?.idToken.let {
-                    if (it != null) {
-                        signInBinding.singInViewModel?.onAuthenticationResult(it)
-                    }
+                .getResult(ApiException::class.java)?.idToken?.let {
+                    viewModel.onAuthenticationResult(it)
                 }
         }
         super.onActivityResult(requestCode, resultCode, data)
