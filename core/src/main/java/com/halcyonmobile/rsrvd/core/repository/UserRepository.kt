@@ -18,20 +18,34 @@ object UserRepository {
             SharedPreferencesManager.isUserLoggedIn = userStatus
         }
 
-    fun userSignIn(idToken: String) =
+    fun userSignIn(idToken: String, onSuccess: (token: String) -> Unit, onFailure: () -> Unit) =
         RetrofitSingleton.get()
             .create(AuthenticationAPI::class.java)
             .postToken(AuthenticationRequestDto(idToken))
-            .enqueue(object : Callback<AuthenticationResponseDto>{
+            .enqueue(object : Callback<AuthenticationResponseDto> {
                 override fun onFailure(call: Call<AuthenticationResponseDto>, t: Throwable) {
                     Log.w(ContentValues.TAG, "error: ", t)
+                    onFailure()
                 }
 
                 override fun onResponse(
                     call: Call<AuthenticationResponseDto>,
                     response: Response<AuthenticationResponseDto>
                 ) {
-                    Log.w(ContentValues.TAG, "token ${response.code()}")
+
+                    val result = response.body()
+
+                    if ( !response.isSuccessful || result == null ) {
+                        onFailure()
+                    }
+                    else {
+                        onSuccess(result.accessToken)
+
+                        Log.w(
+                            ContentValues.TAG,
+                            "code ${response.code()} ${result.accessToken}"
+                        )
+                    }
                 }
             })
 
