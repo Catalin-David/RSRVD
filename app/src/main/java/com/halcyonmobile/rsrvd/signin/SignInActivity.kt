@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 
@@ -59,12 +61,28 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {
-            GoogleSignIn
-                .getSignedInAccountFromIntent(data)
-                .getResult(ApiException::class.java)?.idToken?.let {
-                    Log.w(ContentValues.TAG, "code $it")
-                    viewModel.onAuthenticationResult(it)
-                }
+            try {
+                GoogleSignIn
+                    .getSignedInAccountFromIntent(data)
+                    .getResult(ApiException::class.java)?.idToken?.let {
+                        Log.w(ContentValues.TAG, "code $it")
+
+                        val result = viewModel.onAuthenticationResult(it)
+                        if (!result) {
+                            Toast.makeText(
+                                applicationContext,
+                                getString(R.string.authentication_failed),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+            } catch (e: ApiException) {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.authentication_failed),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

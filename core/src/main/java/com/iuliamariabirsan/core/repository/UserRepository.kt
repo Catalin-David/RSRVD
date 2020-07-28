@@ -12,21 +12,32 @@ import retrofit2.Response
 
 object UserRepository {
 
-    fun userSignIn(idToken: String) =
+    fun userSignIn(idToken: String) : Boolean {
+        var result = true
+
         RetrofitSingleton.get()
             .create(AuthenticationAPI::class.java)
             .postToken(AuthenticationRequestDto(idToken))
-            .enqueue(object : Callback<AuthenticationResponseDto>{
+            .enqueue(object : Callback<AuthenticationResponseDto> {
                 override fun onFailure(call: Call<AuthenticationResponseDto>, t: Throwable) {
                     Log.w(ContentValues.TAG, "error: ", t)
+
+                    result = false
                 }
 
                 override fun onResponse(
                     call: Call<AuthenticationResponseDto>,
                     response: Response<AuthenticationResponseDto>
                 ) {
-                    Log.w(ContentValues.TAG, "code ${response.code()} ${response.body()?.accessToken}")
+
+                    if ( !response.isSuccessful )
+                        result = false
+
+                    Log.w(ContentValues.TAG, "code ${response.code()}")
                 }
             })
+
+        return result
+    }
 
 }
