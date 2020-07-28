@@ -14,10 +14,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.api.AppService
-import com.halcyonmobile.rsrvd.core.api.UpdateUserBody
-import com.halcyonmobile.rsrvd.core.api.RetrofitManager
-import com.halcyonmobile.rsrvd.core.api.User
+import com.halcyonmobile.rsrvd.core.api.*
+import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
+import com.halcyonmobile.rsrvd.core.api.dto.UserDto
 import com.halcyonmobile.rsrvd.core.locator.Locator
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.feature.onboarding.*
@@ -34,9 +33,10 @@ class EditProfileActivity : AppCompatActivity() {
         it.let {
             viewModel.setLocation(
                 Location(
+                    name = getString(R.string.current_location),
+                    details = "current location",
                     latitude = it.latitude,
-                    longitude = it.longitude,
-                    name = getString(R.string.current_location)
+                    longitude = it.longitude
                 )
             )
         }
@@ -54,50 +54,30 @@ class EditProfileActivity : AppCompatActivity() {
 
         viewModel.getLocation().observe(this) { binding.setLocation(it) }
 
-        binding.ready.setOnClickListener {
-//            val data = OnboardingData(viewModel.getLocation().value, getInterests())
-//            setResult(Activity.RESULT_OK, Intent().putExtra("location", data))
+        binding.close.setOnClickListener { finish() }
 
-            // Save data
+        binding.ready.setOnClickListener {
             viewModel.getLocation().value?.let {
                 RetrofitManager.retrofit
                     .create(AppService::class.java)
-                    .update(UpdateUserBody(location = it, interests = ArrayList(getInterests())))
-                    .enqueue(object : Callback<String> {
-                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
-                            Toast.makeText(applicationContext, "Preferences updated", Toast.LENGTH_LONG).show()
-                        }
-
-                        override fun onFailure(call: Call<String>, t: Throwable) {
-                            println("-----------------------------------------------------")
-                            println(t.message)
-                        }
-                    })
+                    .update(ProfileDto(location = it, interests = ArrayList(getInterests())))
+                    .enqueue(ProfileUpdateHandler(applicationContext))
             }
 
             // Shared item transition after closing keyboard
-            this.currentFocus?.let { view ->
-                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
+            this.currentFocus?.let {
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(it.windowToken, 0)
             }
             supportFinishAfterTransition()
-
-            // No transition
-//            finish()
         }
 
         binding.locationSelector.setOnClickListener {
-            // Shared item transition
             startActivityForResult(
                 Intent(this, SelectLocationActivity::class.java),
                 SELECT_LOCATION_REQUEST_CODE,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans").toBundle()
             )
-
-            // No transition
-//            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
         }
-
-        binding.close.setOnClickListener { finish() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

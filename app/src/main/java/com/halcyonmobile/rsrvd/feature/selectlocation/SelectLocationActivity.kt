@@ -21,9 +21,18 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 
 class SelectLocationActivity : AppCompatActivity() {
-    private val adapter: AutocompleteAdapter = AutocompleteAdapter {location ->
+    private lateinit var client: PlacesClient
+    private lateinit var binding: SelectLocationBinding
+
+    private val adapter: AutocompleteAdapter = AutocompleteAdapter { location ->
+        // Only fetching details, if location is selected
         location.placeId?.let {
-            val details = client.fetchPlace(FetchPlaceRequest.newInstance(location.placeId, listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)))
+            client.fetchPlace(
+                FetchPlaceRequest.newInstance(
+                    location.placeId,
+                    listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
+                )
+            )
                 .addOnSuccessListener {
                     if (it.place.name != null && it.place.address != null && it.place.latLng != null) {
                         val locationDetailed = Location(
@@ -45,13 +54,7 @@ class SelectLocationActivity : AppCompatActivity() {
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
         supportFinishAfterTransition()
-
-        // No transition
-//        finish()
     }
-
-    private lateinit var client: PlacesClient
-    private lateinit var binding: SelectLocationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,19 +103,11 @@ class SelectLocationActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
-                // No transition
-//                finish()
-
-                // Slide out transition
-//                finish()
-//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
                 // Shared Item transition after closing keyboard
                 this.currentFocus?.let {
                     (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(it.windowToken, 0)
                 }
                 supportFinishAfterTransition()
-
                 true
             }
             else -> super.onOptionsItemSelected(item)

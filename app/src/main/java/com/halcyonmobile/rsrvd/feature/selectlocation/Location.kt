@@ -14,9 +14,9 @@ data class Location(
     @Transient
     val placeId: String? = null,
     @Json(name = "city")
-    val name: String,
+    val name: String = "no city found",
     @Json(name = "address")
-    val details: String = "",
+    val details: String = "no address found",
     @Json(name = "latitude")
     val latitude: Double = 0.0,
     @Json(name = "longitude")

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 
 class Divider(private val context: Context) : RecyclerView.ItemDecoration() {
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         parent.children.forEach {
             ContextCompat.getDrawable(context, R.drawable.divider)?.apply {
                 setBounds(
@@ -17,7 +17,7 @@ class Divider(private val context: Context) : RecyclerView.ItemDecoration() {
                     parent.width - parent.paddingRight,
                     it.bottom + (it.layoutParams as RecyclerView.LayoutParams).bottomMargin + intrinsicHeight
                 )
-                draw(c)
+                draw(canvas)
             }
         }
     }

@@ -7,11 +7,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitManager {
     val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://app.swaggerhub.com/")
+        .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
         .client(
             OkHttpClient.Builder()
                 .addInterceptor(HeaderInterceptor())
-                .addInterceptor(HttpLoggingInterceptor())
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
         )
         .addConverterFactory(MoshiConverterFactory.create().asLenient())
