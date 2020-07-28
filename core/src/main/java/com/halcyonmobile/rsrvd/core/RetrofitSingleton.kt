@@ -1,4 +1,4 @@
-package com.iuliamariabirsan.core
+package com.halcyonmobile.rsrvd.core
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,7 +14,8 @@ object RetrofitSingleton {
         .addConverterFactory(MoshiConverterFactory.create().asLenient())
         .build()
 
-    fun get(): Retrofit = retrofitSingle
+    fun get(): Retrofit =
+        retrofitSingle
 
     private fun getClient(): OkHttpClient =
         OkHttpClient.Builder().apply {

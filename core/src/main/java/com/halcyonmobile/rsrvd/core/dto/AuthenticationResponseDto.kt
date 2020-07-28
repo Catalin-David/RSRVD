@@ -1,4 +1,4 @@
-package com.iuliamariabirsan.core.dto
+package com.halcyonmobile.rsrvd.core.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

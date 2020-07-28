@@ -1,7 +1,7 @@
 package com.halcyonmobile.rsrvd.signin
 
 import androidx.lifecycle.ViewModel
-import com.iuliamariabirsan.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 
 class SignInViewModel : ViewModel() {
 

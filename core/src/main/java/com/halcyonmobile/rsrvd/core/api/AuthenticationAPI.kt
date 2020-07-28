@@ -1,7 +1,7 @@
-package com.iuliamariabirsan.core.api
+package com.halcyonmobile.rsrvd.core.api
 
-import com.iuliamariabirsan.core.dto.AuthenticationRequestDto
-import com.iuliamariabirsan.core.dto.AuthenticationResponseDto
+import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
+import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
