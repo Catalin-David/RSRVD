@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/interest_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/short_margin"
+    android:background="@drawable/onboarding_checkbox"
+    android:button="@null"
+    android:checked="false"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/long_padding"
+    android:paddingVertical="@dimen/default_padding"
+    android:textAllCaps="true"
+    android:textColor="@drawable/onboarding_textcolor"
+    tools:text="Sport" />

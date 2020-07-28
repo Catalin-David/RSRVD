@@ -32,6 +32,11 @@
         <item name="materialButtonStyle">@style/MaterialComponents.Button</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
+    </style>
+
     <style name="MaterialComponents.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primary</item>
         <item name="android:textColor">@color/darker_gray</item>
