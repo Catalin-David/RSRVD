@@ -13,6 +13,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.google.android.flexbox.FlexboxLayout
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.api.*
 import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
@@ -61,17 +62,14 @@ class EditProfileActivity : AppCompatActivity() {
                 RetrofitManager.retrofit
                     .create(AppService::class.java)
                     .update(ProfileDto(location = it, interests = ArrayList(getInterests())))
-                    .enqueue(ProfileUpdateHandler(applicationContext))
+                    .enqueue(ProfileUpdateHandler(binding.root))
             }
 
-            // Shared item transition after closing keyboard
-            this.currentFocus?.let {
-                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(it.windowToken, 0)
-            }
-            supportFinishAfterTransition()
+            // finish()
         }
 
         binding.locationSelector.setOnClickListener {
+            // Shared item transition
             startActivityForResult(
                 Intent(this, SelectLocationActivity::class.java),
                 SELECT_LOCATION_REQUEST_CODE,

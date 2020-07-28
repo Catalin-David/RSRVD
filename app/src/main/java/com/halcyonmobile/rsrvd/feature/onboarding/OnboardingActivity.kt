@@ -56,7 +56,7 @@ class OnboardingActivity : AppCompatActivity() {
                 RetrofitManager.retrofit
                     .create(AppService::class.java)
                     .update(ProfileDto(location = it, interests = ArrayList(getInterests())))
-                    .enqueue(ProfileUpdateHandler(applicationContext))
+                    .enqueue(ProfileUpdateHandler(binding.root))
             }
 //            startActivity(Intent(this, NEXTACTIVITY::class.java))
         }
