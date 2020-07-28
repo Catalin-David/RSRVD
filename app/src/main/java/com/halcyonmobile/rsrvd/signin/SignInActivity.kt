@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -67,21 +66,22 @@ class SignInActivity : AppCompatActivity() {
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
-                        val result = viewModel.onAuthenticationResult(it)
-                        if (!result) {
-                            Toast.makeText(
-                                applicationContext,
+
+                        viewModel.onAuthenticationResult(it,
+                        onSuccess = { accessToken ->
+                            //TO DO: assign the access token
+                            Log.w(ContentValues.TAG, "access token $accessToken")
+                        },
+                        onFailure = {
+                            Snackbar.make(signInBinding.layoutSignIn,
                                 getString(R.string.authentication_failed),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                Snackbar.LENGTH_SHORT).show()
+                        })
                     }
             } catch (e: ApiException) {
-                Toast.makeText(
-                    applicationContext,
+                Snackbar.make(signInBinding.layoutSignIn,
                     getString(R.string.authentication_failed),
-                    Toast.LENGTH_SHORT
-                ).show()
+                    Snackbar.LENGTH_SHORT).show()
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

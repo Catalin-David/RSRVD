@@ -12,17 +12,14 @@ import retrofit2.Response
 
 object UserRepository {
 
-    fun userSignIn(idToken: String) : Boolean {
-        var result = true
-
+    fun userSignIn(idToken: String, onSuccess: (token: String) -> Unit, onFailure: () -> Unit) =
         RetrofitSingleton.get()
             .create(AuthenticationAPI::class.java)
             .postToken(AuthenticationRequestDto(idToken))
             .enqueue(object : Callback<AuthenticationResponseDto> {
                 override fun onFailure(call: Call<AuthenticationResponseDto>, t: Throwable) {
                     Log.w(ContentValues.TAG, "error: ", t)
-
-                    result = false
+                    onFailure()
                 }
 
                 override fun onResponse(
@@ -30,14 +27,20 @@ object UserRepository {
                     response: Response<AuthenticationResponseDto>
                 ) {
 
-                    if ( !response.isSuccessful )
-                        result = false
+                    val result = response.body()
 
-                    Log.w(ContentValues.TAG, "code ${response.code()}")
+                    if ( !response.isSuccessful || result == null ) {
+                        onFailure()
+                    }
+                    else {
+                        onSuccess(result.accessToken)
+
+                        Log.w(
+                            ContentValues.TAG,
+                            "code ${response.code()} ${result.accessToken}"
+                        )
+                    }
                 }
             })
-
-        return result
-    }
 
 }
