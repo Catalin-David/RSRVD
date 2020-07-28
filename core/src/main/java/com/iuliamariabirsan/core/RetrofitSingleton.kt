@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RetrofitSingleton {
 
     private val retrofitSingle = Retrofit.Builder()
-        .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/auth/google/")
+        .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
         .client(getClient())
         .addConverterFactory(MoshiConverterFactory.create().asLenient())
         .build()

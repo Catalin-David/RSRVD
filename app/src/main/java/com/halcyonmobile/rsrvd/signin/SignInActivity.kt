@@ -25,7 +25,6 @@ class SignInActivity : AppCompatActivity() {
 
         signInBinding.exploreFirst.isSelected = true
 
-
         signInBinding.explRsrvdLiveFirstTextView.startAnimation(
             AnimationUtils.loadAnimation(
                 this,
