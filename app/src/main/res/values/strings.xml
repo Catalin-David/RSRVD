@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">RSRVD</string>
+    <string name="running_sign_up_image">running sign up image</string>
+    <string name="welcome_to">welcome to</string>
+    <string name="rsrvd">rsrvd</string>
+    <string name="connect_with_google">connect with google</string>
+    <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
+    <string name="explore_the_app_first">I want to explore the app first</string>
+    <string name="authentication_failed">Authentication Failed</string>
+
+    <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
     <string name="about_you">tell us more\nabout you</string>
     <string name="sport_photo">sport photo</string>
     <string name="location">your location</string>
@@ -7,7 +16,6 @@
     <string name="select_location">Select location</string>
     <string name="interests">select your interests</string>
     <string name="ready">i\'m ready</string>
-    <string name="rsrvd">RSRVD</string>
     <string name="search_icon">search icon</string>
     <string name="placeholder_for_empty_search">Placeholder for empty search</string>
     <string name="back_to_onboarding">Back to onboarding</string>

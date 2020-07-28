@@ -40,6 +40,8 @@
                 android:value=".feature.onboarding.OnboardingActivity" />
         </activity>
 
+        <activity android:name=".signin.SignInActivity" android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
