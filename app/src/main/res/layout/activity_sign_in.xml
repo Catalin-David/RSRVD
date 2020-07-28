@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/expl_rsrvd_live_first_text_view"
-            android:layout_width="900dp"
+            android:layout_width="@dimen/width_text_view_anim"
             android:layout_height="wrap_content"
             android:text="@string/explore_reserve_live"
             android:ellipsize="marquee"
