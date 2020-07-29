@@ -1,18 +1,26 @@
-package com.halcyonmobile.rsrvd.explore_venues
+package com.halcyonmobile.rsrvd.explore_venues.shared.cards
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.halcyonmobile.rsrvd.databinding.CardBinding
+import com.halcyonmobile.rsrvd.explore_venues.shared.card.CardViewHolder
+import com.halcyonmobile.rsrvd.explore_venues.shared.card.Card
 
 class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, CardViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder =
-        CardViewHolder(CardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        CardViewHolder(
+            CardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-//        holder.setTitle(getItem(position))
-//        holder.itemView.setOnClickListener { listener(getItem(position)) }
+        holder.setTitle(getItem(position).title)
+        holder.itemView.setOnClickListener { listener(getItem(position)) }
     }
 
     override fun getItemCount(): Int = currentList.size

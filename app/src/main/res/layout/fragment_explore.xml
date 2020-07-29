@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
-            name="recentlyVisited"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+            name="recentlyVisitedList"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
+
         <variable
-            name="explore"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+            name="exploreList"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
+
         <variable
-            name="weRecommend"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+            name="weRecommendList"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
     </data>
 
     <ScrollView
@@ -33,11 +36,11 @@
                 android:layout_marginVertical="@dimen/long_margin" />
 
             <!-- Recently visited -->
-            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+            <com.halcyonmobile.rsrvd.explore_venues.components.recentlyvisited.RecentlyVisitedView
                 android:id="@+id/recently_visited"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:loadRecentlyVisited="@{recentlyVisited}"
+                app:loadList="@{recentlyVisitedList}"
                 app:title="recently visited" />
 
             <!-- Info -->
@@ -45,27 +48,27 @@
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha=".25"
                 android:layout_marginTop="@dimen/long_margin"
+                android:alpha=".25"
                 android:text="running / 1.2 km away"
                 android:textAllCaps="true"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="#fff" />
 
             <!-- Explore -->
-            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+            <com.halcyonmobile.rsrvd.explore_venues.components.explore.ExploreView
                 android:id="@+id/explore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:loadExplore="@{explore}"
+                app:loadList="@{exploreList}"
                 app:title="explore" />
 
             <!-- We recommend -->
-            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+            <com.halcyonmobile.rsrvd.explore_venues.components.werecommend.WeRecommendView
                 android:id="@+id/we_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:loadWeRecommend="@{weRecommend}"
+                app:loadList="@{weRecommendList}"
                 app:title="we recommend" />
 
             <!-- Read more -->

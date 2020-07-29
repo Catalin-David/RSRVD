@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.explore_venues
+package com.halcyonmobile.rsrvd.explore_venues.shared.card
 
 import java.util.*
 

@@ -1,11 +1,11 @@
-package com.halcyonmobile.rsrvd.explore_venues
+package com.halcyonmobile.rsrvd.explore_venues.shared.card
 
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.databinding.CardBinding
 
 class CardViewHolder(private val binding: CardBinding) : RecyclerView.ViewHolder(binding.root) {
-//    fun setTitle(title: String) {
-//        binding.title = title
-//        binding.executePendingBindings()
-//    }
+    fun setTitle(title: String) {
+        binding.titleTextView.text = title
+        binding.executePendingBindings()
+    }
 }
