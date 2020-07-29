@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.locator
+package com.halcyonmobile.rsrvd.core.shared
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -13,10 +13,12 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 
-class Locator(private val activity: Activity, private val callback: (Location) -> Unit) {
+class LocationProvider(private val activity: Activity, private val callback: (Location) -> Unit) {
     fun init() {
-        if (ContextCompat.checkSelfPermission(activity.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
         } else {
             getLocation()
         }
@@ -39,7 +41,7 @@ class Locator(private val activity: Activity, private val callback: (Location) -
                 override fun onLocationResult(locationResult: LocationResult?) {
                     super.onLocationResult(locationResult)
 
-                    LocationServices.getFusedLocationProviderClient(activity.applicationContext).removeLocationUpdates(this)
+                    LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(this)
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
                         callback(locationResult.locations[locationResult.locations.size - 1])

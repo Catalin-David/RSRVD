@@ -9,7 +9,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ProfileDto(
     @Json(name = "name")
-    val name: String = UserRepository.getName(),
+    val name: String,
     @Json(name = "location")
     val location: Location,
     @Json(name = "interests")
