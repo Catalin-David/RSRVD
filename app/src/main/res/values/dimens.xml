@@ -11,4 +11,8 @@
     <dimen name="width_text_view_anim">900dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
     <dimen name="side_guide">20dp</dimen>
+
+    <dimen name="card_width">307dp</dimen>
+    <dimen name="card_height">174dp</dimen>
+    <dimen name="cards_height">400dp</dimen>
 </resources>

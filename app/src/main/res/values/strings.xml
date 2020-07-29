@@ -23,4 +23,6 @@
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
+    <string name="sport_activity">sport activity</string>
+    <string name="read_more">Read more</string>
 </resources>

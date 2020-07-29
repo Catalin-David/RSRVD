@@ -21,7 +21,7 @@ class LauncherActivity : AppCompatActivity() {
 
     private fun routeUserToNextAction() {
         val viewModel = ViewModelProvider(this, LauncherViewModelFactory(application))
-        val isUserLogged = viewModel.get(LauncherViewModel::class.java).isUserLoggedIn()
+        val isUserLogged = true // viewModel.get(LauncherViewModel::class.java).isUserLoggedIn()
         if (isUserLogged) {
             startActivity(Intent(this, MainActivity::class.java))
         } else {
