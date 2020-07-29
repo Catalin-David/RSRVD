@@ -6,7 +6,7 @@ import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 class MeRepository {
     private val meRemoteSource: MeRemoteSource = MeRemoteSource()
 
-    fun update(location: Location, interests: List<Interests>) {
-        meRemoteSource.update(location, interests)
+    fun update(location: Location, interests: List<Interests>, callback: (Boolean) -> Unit) {
+        meRemoteSource.update(location, interests, callback)
     }
 }

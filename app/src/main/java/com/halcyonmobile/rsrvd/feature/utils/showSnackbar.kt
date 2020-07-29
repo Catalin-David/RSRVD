@@ -2,7 +2,6 @@ package com.halcyonmobile.rsrvd.feature.utils
 
 import android.graphics.Color
 import android.view.View
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackbar(text: String) =

@@ -8,14 +8,11 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.*
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.api.*
-import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
-import com.halcyonmobile.rsrvd.feature.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
-import com.iuliamariabirsan.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
@@ -38,7 +35,13 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            getLocation().observe(this@OnboardingActivity) { binding.setLocation(it) }
+            getLocation().observe(this@OnboardingActivity) {
+                binding.setLocation(it)
+            }
+
+            getUpdateState().observe(this@OnboardingActivity) {
+                binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+            }
         }
 
         locationProvider.init()
@@ -59,13 +62,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                viewModel.getLocation().value?.let {
-                    RetrofitManager.retrofit
-                        .create(MeApi::class.java)
-                        .update(ProfileDto(location = it, interests = ArrayList(getInterests()), name = UserRepository.name))
-                        .enqueue(ProfileUpdateHandler(binding.root))
-                }
-
+                viewModel.onReadyClick(getInterests())
                 // startActivity(Intent(this@OnboardingActivity, NEXTACTIVITY::class.java))
             }
         }

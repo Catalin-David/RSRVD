@@ -15,6 +15,7 @@ import com.iuliamariabirsan.core.repository.UserRepository
 class LocationViewModel : ViewModel() {
     private val meRepository: MeRepository = MeRepository()
     private val location: MutableLiveData<Location> = MutableLiveData()
+    private val updateState: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getLocation(): LiveData<Location> = location
 
@@ -22,7 +23,13 @@ class LocationViewModel : ViewModel() {
         location.value = newLocation
     }
 
+    fun getUpdateState(): LiveData<Boolean> = updateState
+
+    private fun setUpdateState(newState: Boolean) {
+        updateState.value = newState
+    }
+
     fun onReadyClick(interests: List<Interests>) {
-        location.value?.let { meRepository.update(it, ArrayList(interests)) }
+        location.value?.let { myLocation -> meRepository.update(myLocation, ArrayList(interests)) { setUpdateState(it) } }
     }
 }

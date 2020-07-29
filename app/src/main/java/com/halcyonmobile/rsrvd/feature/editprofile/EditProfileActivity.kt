@@ -16,6 +16,7 @@ import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.feature.onboarding.*
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
+import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
 import com.iuliamariabirsan.core.repository.UserRepository
 
 class EditProfileActivity : AppCompatActivity() {
@@ -39,7 +40,13 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            getLocation().observe(this@EditProfileActivity) { binding.setLocation(it) }
+            getLocation().observe(this@EditProfileActivity) {
+                binding.setLocation(it)
+            }
+
+            getUpdateState().observe(this@EditProfileActivity) {
+                binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+            }
         }
 
         locationProvider.init()
@@ -63,7 +70,7 @@ class EditProfileActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 viewModel.onReadyClick(getInterests())
-                // finish()
+//                finish()
             }
         }
     }
