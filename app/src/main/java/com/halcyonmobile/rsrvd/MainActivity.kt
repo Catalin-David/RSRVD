@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
-import com.halcyonmobile.rsrvd.explore.ExploreFragment
+import com.halcyonmobile.rsrvd.explore_venues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
 

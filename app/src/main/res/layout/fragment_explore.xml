@@ -1,64 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="recentlyVisited"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+        <variable
+            name="explore"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+        <variable
+            name="weRecommend"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.Card>" />
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.halcyonmobile.rsrvd.explore.recentlyvisited.CardsView
-            android:id="@+id/recently_visited"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="recently visited" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:alpha=".25"
-            android:text="running / 1.2 km away"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recently_visited" />
+            <!-- Search bar -->
+            <include
+                android:id="@+id/search_venue_bar"
+                layout="@layout/search_venue_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/long_margin" />
 
-        <com.halcyonmobile.rsrvd.explore.recentlyvisited.CardsView
-            android:id="@+id/explore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/details"
-            app:title="explore" />
+            <!-- Recently visited -->
+            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+                android:id="@+id/recently_visited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:loadRecentlyVisited="@{recentlyVisited}"
+                app:title="recently visited" />
 
-        <com.halcyonmobile.rsrvd.explore.recentlyvisited.CardsView
-            android:id="@+id/we_recommend"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/explore"
-            app:title="we recommend" />
+            <!-- Info -->
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha=".25"
+                android:layout_marginTop="@dimen/long_margin"
+                android:text="running / 1.2 km away"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="#fff" />
 
-        <TextView
-            android:id="@+id/read_more"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/read_more"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/we_recommend" />
+            <!-- Explore -->
+            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+                android:id="@+id/explore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:loadExplore="@{explore}"
+                app:title="explore" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <!-- We recommend -->
+            <com.halcyonmobile.rsrvd.explore_venues.CardsView
+                android:id="@+id/we_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:loadWeRecommend="@{weRecommend}"
+                app:title="we recommend" />
+
+            <!-- Read more -->
+            <TextView
+                android:id="@+id/read_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/long_margin"
+                android:gravity="center_horizontal"
+                android:text="@string/read_more"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -27,9 +27,6 @@ class SelectLocationActivity : AppCompatActivity() {
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
         supportFinishAfterTransition()
-
-        // No transition
-//        finish()
     }
 
     private lateinit var client: PlacesClient
@@ -46,23 +43,24 @@ class SelectLocationActivity : AppCompatActivity() {
 
         client = Places.createClient(this)
 
-        binding.searchText.addTextChangedListener(
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
+        binding.searchText.apply {
+            addTextChangedListener(
+                object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                    }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.toString().isNotEmpty()) {
-                        setSuggestions(s)
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        if (s.toString().isNotEmpty()) {
+                            setSuggestions(s)
+                        }
                     }
                 }
-            }
-        )
-
-        binding.searchText.requestFocus()
+            )
+            requestFocus()
+        }
 
         binding.clear.setOnClickListener {
             binding.searchText.text.clear()
@@ -82,19 +80,11 @@ class SelectLocationActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.home -> {
-                // No transition
-//                finish()
-
-                // Slide out transition
-//                finish()
-//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
                 // Shared Item transition after closing keyboard
                 this.currentFocus?.let {
                     (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(it.windowToken, 0)
                 }
                 supportFinishAfterTransition()
-
                 true
             }
             else -> super.onOptionsItemSelected(item)
