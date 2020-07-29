@@ -11,14 +11,14 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.api.*
 import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
-import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
+import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.feature.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
 import com.iuliamariabirsan.core.repository.UserRepository
 
 class OnboardingActivity : AppCompatActivity() {
-    private lateinit var binding: OnboardingActivityBinding
+    private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
     private val locationProvider: LocationProvider = LocationProvider(this) {
@@ -34,7 +34,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = OnboardingActivityBinding.inflate(layoutInflater)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
@@ -62,7 +62,7 @@ class OnboardingActivity : AppCompatActivity() {
                 viewModel.getLocation().value?.let {
                     RetrofitManager.retrofit
                         .create(MeApi::class.java)
-                        .update(ProfileDto(location = it, interests = ArrayList(getInterests()), name = UserRepository.getName()))
+                        .update(ProfileDto(location = it, interests = ArrayList(getInterests()), name = UserRepository.name))
                         .enqueue(ProfileUpdateHandler(binding.root))
                 }
 

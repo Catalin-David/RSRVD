@@ -6,16 +6,16 @@ import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
 import retrofit2.Call
 import retrofit2.Callback
 
-class ProfileUpdateHandler(private val view: View) : Callback<UserDto> {
+class ProfileUpdateHandler(private val view: View?) : Callback<UserDto> {
     override fun onResponse(call: Call<UserDto>, response: retrofit2.Response<UserDto>) {
         if (response.code() == 200) {
-            showSnackbar("Preferences saved").show()
+            view?.showSnackbar("Preferences saved")?.show()
         } else {
-            showSnackbar("Preferences NOT saved").show()
+            view?.showSnackbar("Preferences NOT saved")?.show()
         }
     }
 
     override fun onFailure(call: Call<UserDto>, t: Throwable) {
-        showSnackbar("Something went wrong").show()
+        view?.showSnackbar("Something went wrong")?.show()
     }
 }

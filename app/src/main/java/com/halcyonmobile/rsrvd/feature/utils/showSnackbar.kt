@@ -5,9 +5,9 @@ import android.view.View
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 
-fun showSnackbar(text: String) =
+fun View.showSnackbar(text: String) =
     Snackbar.make(
-
+        this,
         text,
         Snackbar.LENGTH_LONG
     ).apply {
