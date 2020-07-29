@@ -60,7 +60,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun exploreFirst () {
-        UserRepository.isUserLoggedIn = false
+        //TO DO: create another variable in repo
+       // UserRepository.isUserLoggedIn = false
         startActivity(Intent(this, MainActivity::class.java))
     }
 
