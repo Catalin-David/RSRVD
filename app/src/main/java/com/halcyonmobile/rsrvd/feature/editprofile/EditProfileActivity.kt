@@ -9,15 +9,12 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.api.*
-import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.feature.onboarding.*
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
-import com.iuliamariabirsan.core.repository.UserRepository
 
 class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: EditProfileActivityBinding

@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd.core.api
 
-import androidx.lifecycle.LiveData
 import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
 import com.halcyonmobile.rsrvd.feature.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.feature.onboarding.Interests
