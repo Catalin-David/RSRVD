@@ -11,8 +11,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
+import com.halcyonmobile.rsrvd.feature.onboarding.OnboardingActivity
 
 
 class SignInActivity : AppCompatActivity() {
@@ -56,7 +59,10 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun exploreFirst () {}
+    private fun exploreFirst () {
+        UserRepository.isUserLoggedIn = false
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {
@@ -66,16 +72,19 @@ class SignInActivity : AppCompatActivity() {
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
-
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
                             //TO DO: assign the access token
                             Log.w(ContentValues.TAG, "access token $accessToken")
+                            startActivity(Intent(this, OnboardingActivity::class.java))
+                            UserRepository.isUserLoggedIn = true
                         },
                         onFailure = {
                             Snackbar.make(signInBinding.layoutSignIn,
                                 getString(R.string.authentication_failed),
                                 Snackbar.LENGTH_SHORT).show()
+
+                            UserRepository.isUserLoggedIn = false
                         })
                     }
             } catch (e: ApiException) {
