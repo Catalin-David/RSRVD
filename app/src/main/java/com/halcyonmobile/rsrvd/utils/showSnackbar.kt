@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.utils
+package com.halcyonmobile.rsrvd.utils
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar

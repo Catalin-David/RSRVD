@@ -1,8 +1,7 @@
-package com.halcyonmobile.rsrvd.feature.editprofile
+package com.halcyonmobile.rsrvd.editprofile
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -12,10 +11,10 @@ import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
-import com.halcyonmobile.rsrvd.feature.onboarding.*
-import com.halcyonmobile.rsrvd.feature.selectlocation.Location
-import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
-import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
+import com.halcyonmobile.rsrvd.onboarding.*
+import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
+import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: EditProfileActivityBinding

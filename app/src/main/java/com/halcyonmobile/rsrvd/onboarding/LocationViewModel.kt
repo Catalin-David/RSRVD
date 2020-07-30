@@ -1,10 +1,10 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.onboarding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.me.MeRepository
-import com.halcyonmobile.rsrvd.feature.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.Location
 
 class LocationViewModel : ViewModel() {
     private val meRepository: MeRepository = MeRepository()
@@ -15,10 +15,6 @@ class LocationViewModel : ViewModel() {
     val location: LiveData<Location> = _location
     val updateState: LiveData<Boolean> = _updateState
     val errorMessage: LiveData<String> = _errorMessage
-
-    init {
-        _location.value = null
-    }
 
     fun setLocation(newLocation: Location) {
         _location.value = newLocation

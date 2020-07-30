@@ -1,7 +1,7 @@
 package com.halcyonmobile.rsrvd.core.me
 
-import com.halcyonmobile.rsrvd.feature.onboarding.Interests
-import com.halcyonmobile.rsrvd.feature.selectlocation.Location
+import com.halcyonmobile.rsrvd.onboarding.Interests
+import com.halcyonmobile.rsrvd.selectlocation.Location
 
 class MeRepository {
     private val meRemoteSource: MeRemoteSource = MeRemoteSource()

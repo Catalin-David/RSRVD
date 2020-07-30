@@ -1,8 +1,7 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.onboarding
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -11,9 +10,9 @@ import androidx.lifecycle.*
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
-import com.halcyonmobile.rsrvd.feature.selectlocation.Location
-import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
-import com.halcyonmobile.rsrvd.feature.utils.showSnackbar
+import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
+import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding

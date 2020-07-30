@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.selectlocation
+package com.halcyonmobile.rsrvd.selectlocation
 
 import android.app.Activity
 import android.content.Context

@@ -31,18 +31,18 @@
 
 
         <activity
-            android:name=".feature.onboarding.OnboardingActivity"
+            android:name="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".feature.selectlocation.SelectLocationActivity"
-            android:parentActivityName=".feature.onboarding.OnboardingActivity">
+            android:name="com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity"
+            android:parentActivityName="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".feature.onboarding.OnboardingActivity" />
+                android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
         </activity>
 
-        <activity android:name=".feature.editprofile.EditProfileActivity"
+        <activity android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity android:name=".signin.SignInActivity" android:screenOrientation="portrait"/>
