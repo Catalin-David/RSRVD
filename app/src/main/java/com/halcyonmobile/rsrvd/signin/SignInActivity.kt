@@ -4,25 +4,49 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
+import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var signInBinding: ActivitySignInBinding
-    private var viewModel = SignInViewModel()
+    private lateinit var viewModel: SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
+        viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
+
+        val signUp = intent.getBooleanExtra("sign_up", false)
+        if ( signUp ) {
+            signInBinding.exploreFirst.visibility = View.INVISIBLE
+            signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
+
+            val paramsExploreFirst: ViewGroup.MarginLayoutParams =
+                signInBinding.exploreFirst.layoutParams as ViewGroup.MarginLayoutParams
+            paramsExploreFirst.bottomMargin = 0
+            signInBinding.exploreFirst.requestLayout()
+
+            val paramsButton: ViewGroup.MarginLayoutParams =
+                signInBinding.welcomeToRsrvdTextView.layoutParams as ViewGroup.MarginLayoutParams
+            paramsExploreFirst.bottomMargin = 0
+            signInBinding.welcomeToRsrvdTextView.requestLayout()
+
+            signInBinding.rsrvdTextView.text = getString(R.string.account)
+        }
 
         signInBinding.exploreFirst.isSelected = true
 
@@ -69,19 +93,15 @@ class SignInActivity : AppCompatActivity() {
 
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            //TO DO: assign the access token
+                            // TODO: assign the access token
                             Log.w(ContentValues.TAG, "access token $accessToken")
                         },
                         onFailure = {
-                            Snackbar.make(signInBinding.layoutSignIn,
-                                getString(R.string.authentication_failed),
-                                Snackbar.LENGTH_SHORT).show()
+                            signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
                         })
                     }
             } catch (e: ApiException) {
-                Snackbar.make(signInBinding.layoutSignIn,
-                    getString(R.string.authentication_failed),
-                    Snackbar.LENGTH_SHORT).show()
+                signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

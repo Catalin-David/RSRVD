@@ -14,9 +14,4 @@
     <dimen name="picture_small">250dp</dimen>
     <dimen name="picture_title_offset_small">220dp</dimen>
     <dimen name="margin_big">56dp</dimen>
-    <dimen name="margin_top_welcome_rsrvd">330dp</dimen>
-    <dimen name="margin_top_btn_connect_sgnin">100dp</dimen>
-    <dimen name="height_running_image">376dp</dimen>
-    <dimen name="margin_bottom_live_expl_text_view">150dp</dimen>
-    <dimen name="margin_top_btn_connect_sgnup">136dp</dimen>
 </resources>
