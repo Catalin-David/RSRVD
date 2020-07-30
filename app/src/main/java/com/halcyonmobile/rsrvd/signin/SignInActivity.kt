@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -72,6 +73,7 @@ class SignInActivity : AppCompatActivity() {
                     .getSignedInAccountFromIntent(data)
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
+                        signInBinding.signInProgress.visibility = View.VISIBLE
 
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
@@ -79,6 +81,7 @@ class SignInActivity : AppCompatActivity() {
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             startActivity(Intent(this, OnboardingActivity::class.java))
                             UserRepository.isUserLoggedIn = true
+                            signInBinding.signInProgress.visibility = View.INVISIBLE
                         },
                         onFailure = {
                             Snackbar.make(signInBinding.layoutSignIn,
@@ -86,6 +89,7 @@ class SignInActivity : AppCompatActivity() {
                                 Snackbar.LENGTH_SHORT).show()
 
                             UserRepository.isUserLoggedIn = false
+                            signInBinding.signInProgress.visibility = View.INVISIBLE
                         })
                     }
             } catch (e: ApiException) {
