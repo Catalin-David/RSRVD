@@ -19,7 +19,6 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
@@ -42,83 +41,3 @@ class OnboardingActivity : AppCompatActivity() {
         } else {
             getLocation()
         }
-
-        viewModel.getLocation().observe(this) { binding.setLocation(it) }
-
-        binding.ready.setOnClickListener {
-             startActivity(Intent(this, MainActivity::class.java))
-        }
-
-        binding.locationSelector.setOnClickListener {
-            // Shared item transition
-            startActivityForResult(
-                Intent(this, SelectLocationActivity::class.java),
-                SELECT_LOCATION_REQUEST_CODE,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.locationSelector, "search_trans").toBundle()
-            )
-
-            // No transition
-//            startActivityForResult(Intent(this, SelectLocationActivity::class.java), SELECT_LOCATION_REQUEST_CODE)
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.isNotEmpty()) {
-            getLocation()
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getLocation() {
-        LocationServices.getFusedLocationProviderClient(this)
-            .requestLocationUpdates(LocationRequest().apply {
-                interval = 10000
-                fastestInterval = 3000
-                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            }, object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult?) {
-                    super.onLocationResult(locationResult)
-
-                    LocationServices.getFusedLocationProviderClient(applicationContext).removeLocationUpdates(this)
-
-                    if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        viewModel.setLocation(
-                            Location(
-                                latitude = locationResult.locations[locationResult.locations.size - 1].latitude,
-                                longitude = locationResult.locations[locationResult.locations.size - 1].longitude,
-                                name = "Current location"
-                            )
-                        )
-                    }
-                }
-            }, Looper.getMainLooper())
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
-        }
-    }
-
-    private fun getInterests(): List<Interests> =
-        binding.interestsGrid.children
-            .filterIsInstance<InterestView>()
-            .mapIndexed { index, view -> if (view.isChecked()) Interests.values()[index] else null }
-            .filterNotNull()
-            .toList()
-
-    companion object {
-        private const val SELECT_LOCATION_REQUEST_CODE = 1
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 2
-
-        @JvmStatic
-        @BindingAdapter("inflateData")
-        fun inflateData(layout: FlexboxLayout, data: List<Interests>) {
-            data.map { layout.addView(InterestView(layout.context).apply { setInterest(it.name) }) }
-        }
-    }
-}

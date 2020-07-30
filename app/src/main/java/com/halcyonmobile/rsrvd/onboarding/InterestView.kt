@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.onboarding
 
 import android.content.Context
 import android.widget.CheckBox
@@ -20,8 +20,4 @@ class InterestView(context: Context) : ConstraintLayout(context) {
     }
 
     fun isChecked() = findViewById<CheckBox>(R.id.interest_button)?.isChecked ?: false
-
-    companion object {
-        private const val TAG = "InterestView"
-    }
 }
