@@ -1,7 +1,7 @@
-package com.halcyonmobile.rsrvd.core.api
+package com.halcyonmobile.rsrvd.core.me
 
-import com.halcyonmobile.rsrvd.core.api.dto.ProfileDto
-import com.halcyonmobile.rsrvd.core.api.dto.UserDto
+import com.halcyonmobile.rsrvd.core.me.dto.ProfileDto
+import com.halcyonmobile.rsrvd.core.me.dto.UserDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

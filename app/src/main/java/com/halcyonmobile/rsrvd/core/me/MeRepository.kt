@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.api
+package com.halcyonmobile.rsrvd.core.me
 
 import com.halcyonmobile.rsrvd.feature.onboarding.Interests
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location

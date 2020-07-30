@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.feature.onboarding
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -35,12 +36,16 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            getLocation().observe(this@OnboardingActivity) {
+            location.observe(this@OnboardingActivity) {
                 binding.setLocation(it)
             }
 
-            getUpdateState().observe(this@OnboardingActivity) {
+            updateState.observe(this@OnboardingActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+            }
+
+            errorMessage.observe(this@OnboardingActivity) {
+                binding.root.showSnackbar(it).show()
             }
         }
 

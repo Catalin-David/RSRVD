@@ -1,6 +1,6 @@
 package com.halcyonmobile.rsrvd.feature.editprofile
 
-import com.halcyonmobile.rsrvd.core.api.dto.UserDto
+import com.halcyonmobile.rsrvd.core.me.dto.UserDto
 import retrofit2.Call
 import retrofit2.Callback
 

@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.api.dto
+package com.halcyonmobile.rsrvd.core.me.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

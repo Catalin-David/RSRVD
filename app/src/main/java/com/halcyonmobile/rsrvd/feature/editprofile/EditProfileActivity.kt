@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.feature.editprofile
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -37,12 +38,16 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            getLocation().observe(this@EditProfileActivity) {
+            location.observe(this@EditProfileActivity) {
                 binding.setLocation(it)
             }
 
-            getUpdateState().observe(this@EditProfileActivity) {
+            updateState.observe(this@EditProfileActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+            }
+
+            errorMessage.observe(this@EditProfileActivity) {
+                binding.root.showSnackbar(it).show()
             }
         }
 

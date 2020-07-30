@@ -13,13 +13,9 @@
             type="java.util.List&lt;com.halcyonmobile.rsrvd.feature.onboarding.Interests>" />
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/dark_gray">
 
             <ImageView
@@ -52,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/picture_title_offset_small"
-                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textAppearance="@style/TextAppearance.Headline4"
                 android:text="@string/about_you"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
@@ -64,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/long_margin"
-                android:textAppearance="?attr/textAppearanceBody2"
+                android:textAppearance="@style/TextAppearance.Body2"
                 android:text="@string/location"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
@@ -101,7 +97,7 @@
                     android:gravity="center_vertical"
                     android:hint="@string/select_location"
                     android:text="@{location.name}"
-                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textAppearance="@style/TextAppearance.Body1"
                     android:textColorHint="#fff"
                     android:textColor="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +125,7 @@
                 android:layout_marginVertical="@dimen/long_margin"
                 android:text="@string/interests"
                 android:textAllCaps="true"
-                android:textAppearance="?attr/textAppearanceBody2"
+                android:textAppearance="@style/TextAppearance.Body2"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/location_selector" />
@@ -155,12 +151,11 @@
                 android:text="@string/ready"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="@style/TextAppearance.Body2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/interests_grid"
                 app:layout_constraintVertical_bias="1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </layout>

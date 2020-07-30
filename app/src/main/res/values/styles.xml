@@ -30,6 +30,8 @@
         <item name="textAppearanceBody2">@style/TextAppearance.Body2</item>
 
         <item name="materialButtonStyle">@style/MaterialComponents.Button</item>
+
+        <item name="snackbarStyle">@style/RSRVD.Snackbar</item>
     </style>
 
     <style name="MaterialComponents.Button" parent="Widget.MaterialComponents.Button">
@@ -78,4 +80,8 @@
         <item name="fontFamily">@font/oswald_light</item>
     </style>
 
+    <style name="RSRVD.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:textColor">#fff</item>
+        <item name="backgroundColor">#fc000000</item>
+    </style>
 </resources>

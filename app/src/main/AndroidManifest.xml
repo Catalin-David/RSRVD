@@ -36,7 +36,8 @@
                 android:value=".feature.onboarding.OnboardingActivity" />
         </activity>
 
-        <activity android:name=".feature.editprofile.EditProfileActivity" />
+        <activity android:name=".feature.editprofile.EditProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"
