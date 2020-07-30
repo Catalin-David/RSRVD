@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="location"
-            type="com.halcyonmobile.rsrvd.feature.selectlocation.Location" />
+            type="com.halcyonmobile.rsrvd.selectlocation.Location" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

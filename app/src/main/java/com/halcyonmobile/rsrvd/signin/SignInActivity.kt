@@ -16,7 +16,7 @@ import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
-import com.halcyonmobile.rsrvd.feature.onboarding.OnboardingActivity
+import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 
 
 class SignInActivity : AppCompatActivity() {
@@ -77,7 +77,7 @@ class SignInActivity : AppCompatActivity() {
 
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            //TO DO: assign the access token
+                            // TODO: assign the access token
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             startActivity(Intent(this, OnboardingActivity::class.java))
                             UserRepository.isUserLoggedIn = true

@@ -13,6 +13,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.editprofile.EditProfileActivity
+import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.signin.SignInActivity
 import kotlin.system.exitProcess
 
@@ -38,6 +40,10 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 setNegativeButton("Cancel") { _, _ -> }
                 show()
             }
+        }
+
+        view.findViewById<Button>(R.id.edit_profile).setOnClickListener {
+            startActivity(Intent(this.activity, EditProfileActivity::class.java))
         }
     }
 

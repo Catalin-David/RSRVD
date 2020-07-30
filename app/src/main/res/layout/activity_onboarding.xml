@@ -6,11 +6,11 @@
 
         <variable
             name="location"
-            type="com.halcyonmobile.rsrvd.feature.selectlocation.Location" />
+            type="com.halcyonmobile.rsrvd.selectlocation.Location" />
 
         <variable
             name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.feature.onboarding.Interests>" />
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.onboarding.Interests>" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
