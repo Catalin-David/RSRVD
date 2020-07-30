@@ -38,7 +38,7 @@
         android:layout_width="@dimen/box_line_height"
         android:layout_height="@dimen/box_line_height"
         android:contentDescription="@string/maps_icon"
-        android:src="@drawable/ic_baseline_filter_list_24"
+        android:src="@drawable/ic_filter"
         android:background="@color/primary"
         android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -2,21 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="recentlyVisitedList"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
-
-        <variable
-            name="exploreList"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
-
-        <variable
-            name="weRecommendList"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.explore_venues.shared.card.Card>" />
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -36,51 +21,148 @@
                 android:layout_marginVertical="@dimen/long_margin" />
 
             <!-- Recently visited -->
-            <com.halcyonmobile.rsrvd.explore_venues.components.recentlyvisited.RecentlyVisitedView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:clipToPadding="false"
                 android:id="@+id/recently_visited"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:loadList="@{recentlyVisitedList}"
-                app:title="recently visited" />
+                android:layout_height="@dimen/cards_height">
+
+                <TextView
+                    android:id="@+id/recently_visited_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/recently_visited"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recently_visited_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Info -->
-            <TextView
-                android:id="@+id/details"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/long_margin"
-                android:alpha=".25"
-                android:text="running / 1.2 km away"
-                android:textAllCaps="true"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="#fff" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:alpha=".25"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="running / 1.2 km away"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2" />
+                <TextView
+                    android:id="@+id/all_venues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="See all venues"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Explore -->
-            <com.halcyonmobile.rsrvd.explore_venues.components.explore.ExploreView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/explore"
+                android:clipToPadding="false"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:loadList="@{exploreList}"
-                app:title="explore" />
+                android:layout_height="@dimen/cards_height">
+
+                <TextView
+                    android:id="@+id/explore_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/explore"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/explore_list"
+                    android:clipToPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- We recommend -->
-            <com.halcyonmobile.rsrvd.explore_venues.components.werecommend.WeRecommendView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/we_recommend"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:loadList="@{weRecommendList}"
-                app:title="we recommend" />
+                android:layout_height="@dimen/cards_height">
+
+                <TextView
+                    android:id="@+id/we_recommend_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/we_recommend"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_height_short"
+                    android:background="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/long_margin"
+                        android:contentDescription="@string/we_recommend_placeholder"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_img_recommendation"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/we_recommend_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX=".8"
+                        android:scaleY=".8"
+                        android:text="@string/we_recommend_script"
+                        android:textAppearance="@style/TextAppearance.Headline4"
+                        android:textColor="#000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Read more -->
             <TextView
                 android:id="@+id/read_more"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/long_margin"
-                android:gravity="center_horizontal"
                 android:text="@string/read_more"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="#fff" />
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:foreground="?attr/selectableItemBackground" />
 
         </LinearLayout>
     </ScrollView>

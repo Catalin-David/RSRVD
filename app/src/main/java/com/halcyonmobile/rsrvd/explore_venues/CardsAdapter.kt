@@ -1,12 +1,10 @@
-package com.halcyonmobile.rsrvd.explore_venues.shared.cards
+package com.halcyonmobile.rsrvd.explore_venues
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.halcyonmobile.rsrvd.databinding.CardBinding
-import com.halcyonmobile.rsrvd.explore_venues.shared.card.CardViewHolder
-import com.halcyonmobile.rsrvd.explore_venues.shared.card.Card
 
 class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, CardViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder =
