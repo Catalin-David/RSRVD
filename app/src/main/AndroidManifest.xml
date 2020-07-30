@@ -43,6 +43,8 @@
         <activity android:name=".profile.signup.SignUpActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".signin.SignInActivity" android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

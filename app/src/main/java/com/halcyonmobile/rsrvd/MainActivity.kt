@@ -12,9 +12,9 @@ import com.halcyonmobile.rsrvd.profile.signup.SignUpActivity
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        openFragment(ExploreFragment(), supportFragmentManager)
     }
 
     private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null){
@@ -47,5 +49,4 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
-
 }
