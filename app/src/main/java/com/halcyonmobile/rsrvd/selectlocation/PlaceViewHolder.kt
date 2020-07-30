@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.selectlocation
+package com.halcyonmobile.rsrvd.selectlocation
 
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.databinding.PlaceSuggestionBinding
