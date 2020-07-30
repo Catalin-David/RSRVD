@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +23,6 @@
 
             <!-- Recently visited -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:clipToPadding="false"
                 android:id="@+id/recently_visited"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cards_height">
@@ -43,7 +43,6 @@
                     android:id="@+id/recently_visited_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clipToPadding="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -52,33 +51,34 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/long_margin"
                     android:alpha=".25"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="running / 1.2 km away"
                     android:textAllCaps="true"
-                    android:textAppearance="@style/TextAppearance.Body2" />
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="running" />
+
                 <TextView
                     android:id="@+id/all_venues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/long_margin"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:text="See all venues"
+                    android:text="@string/see_all_venues"
                     android:textAllCaps="true"
-                    android:textAppearance="@style/TextAppearance.Body2" />
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Explore -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/explore"
-                android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cards_height">
 
@@ -96,7 +96,6 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/explore_list"
-                    android:clipToPadding="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -160,9 +159,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/long_margin"
+                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/read_more"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:foreground="?attr/selectableItemBackground" />
+                tools:ignore="UnusedAttribute" />
 
         </LinearLayout>
     </ScrollView>

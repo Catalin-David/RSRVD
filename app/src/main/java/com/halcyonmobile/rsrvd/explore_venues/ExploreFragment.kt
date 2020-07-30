@@ -55,5 +55,8 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
         }
+
+        // TODO set dynamically
+        binding.details.text = getString(R.string.details_placeholder)
     }
 }
