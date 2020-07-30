@@ -107,7 +107,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/we_recommend"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cards_height">
+                android:layout_height="@dimen/cards_height_short">
 
                 <TextView
                     android:id="@+id/we_recommend_title"

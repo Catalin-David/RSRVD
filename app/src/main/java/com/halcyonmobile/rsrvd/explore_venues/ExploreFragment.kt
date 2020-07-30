@@ -5,11 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
+import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
     private val recentlyViewedAdapter = CardsAdapter {
@@ -19,20 +21,23 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         // TODO start activity to open Details
     }
 
-    private val viewModel = ExploreViewModel()
+    private lateinit var binding: FragmentExploreBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding: FragmentExploreBinding = FragmentExploreBinding.bind(view)
+        binding = FragmentExploreBinding.bind(view)
 
-        viewModel.recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
-
-        viewModel.exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
+        // Observers
+        ViewModelProviders.of(this).get(ExploreViewModel::class.java).apply {
+            recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
+            exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
+            error.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
+        }
 
         // Recently Visited Setup
         binding.recentlyVisitedList.apply {
-            setHasFixedSize(true)
+            setHasFixedSize(false)
             adapter = recentlyViewedAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             LinearSnapHelper().attachToRecyclerView(this)
@@ -40,7 +45,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         // Explore Setup
         binding.exploreList.apply {
-            setHasFixedSize(true)
+            setHasFixedSize(false)
             adapter = exploreAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             LinearSnapHelper().attachToRecyclerView(this)
@@ -50,11 +55,5 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
         }
-
-        // TODO retrieve cards
-//        viewModel.setRecentlyVisitedCards(listOf(Card(title="a"), Card(title="c")))
-
-        // TODO retrieve cards
-        viewModel.setExploreCards(listOf(Card(title="b"), Card(title="a")))
     }
 }

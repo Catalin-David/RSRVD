@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.me
+package com.halcyonmobile.rsrvd.core.shared
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

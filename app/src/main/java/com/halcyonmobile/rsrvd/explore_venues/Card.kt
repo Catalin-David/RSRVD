@@ -4,7 +4,8 @@ import java.util.*
 
 data class Card(
     val id: UUID = UUID.randomUUID(),
-    val title: String
+    val title: String,
+    val image: String? = null
 )
 
 object NoRecentCard {

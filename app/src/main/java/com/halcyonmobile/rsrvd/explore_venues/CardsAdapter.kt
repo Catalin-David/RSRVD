@@ -17,8 +17,12 @@ class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, Car
         )
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.setTitle(getItem(position).title)
-        holder.itemView.setOnClickListener { listener(getItem(position)) }
+        val currentCard = getItem(position)
+        holder.apply {
+            setTitle(currentCard.title)
+            currentCard.image?.let { setImage(it) }
+            itemView.setOnClickListener { listener(currentCard) }
+        }
     }
 
     override fun getItemCount(): Int = currentList.size
