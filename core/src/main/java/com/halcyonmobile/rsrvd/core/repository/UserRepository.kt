@@ -12,6 +12,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object UserRepository {
+    var name: String = "NAME"
+
     var isUserLoggedIn: Boolean
         get() = SharedPreferencesManager.isUserLoggedIn
         set(userStatus) {
