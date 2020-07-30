@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.selectlocation
+package com.halcyonmobile.rsrvd.selectlocation
 
 import android.app.Activity
 import android.content.Context
@@ -13,14 +13,41 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 
 class SelectLocationActivity : AppCompatActivity() {
-    private val adapter: AutocompleteAdapter = AutocompleteAdapter {
-        setResult(Activity.RESULT_OK, Intent().putExtra("location", it))
+    private lateinit var client: PlacesClient
+    private lateinit var binding: SelectLocationBinding
+
+    private val adapter: AutocompleteAdapter = AutocompleteAdapter { location ->
+        // Only fetching details, if location is selected
+        location.placeId?.let {
+            client.fetchPlace(
+                FetchPlaceRequest.newInstance(
+                    location.placeId,
+                    listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
+                )
+            )
+                .addOnSuccessListener {
+                    if (it.place.name != null && it.place.address != null && it.place.latLng != null) {
+                        val locationDetailed = Location(
+                            name = it.place.name!!,
+                            details = it.place.address!!,
+                            latitude = it.place.latLng!!.latitude,
+                            longitude = it.place.latLng!!.longitude,
+                            placeId = it.place.id
+                        )
+
+                        setResult(Activity.RESULT_OK, Intent().putExtra("location", locationDetailed))
+                    }
+                }
+                .addOnFailureListener { println("SOMETHING WENT WRONG ___ DETAILS") }
+        }
 
         // Shared item transition after closing keyboard
         this.currentFocus?.let { view ->
@@ -28,9 +55,6 @@ class SelectLocationActivity : AppCompatActivity() {
         }
         supportFinishAfterTransition()
     }
-
-    private lateinit var client: PlacesClient
-    private lateinit var binding: SelectLocationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

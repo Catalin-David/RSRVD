@@ -1,7 +1,7 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.onboarding
 
 import android.os.Parcelable
-import com.halcyonmobile.rsrvd.feature.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.Location
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

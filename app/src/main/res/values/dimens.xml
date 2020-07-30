@@ -10,6 +10,7 @@
     <dimen name="long_padding">24dp</dimen>
 
     <dimen name="height_btn_connect_sgnin">56dp</dimen>
+    <dimen name="medium_margin">32dp</dimen>
 
     <dimen name="width_text_view_anim">900dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
@@ -17,6 +18,8 @@
 
     <dimen name="card_width">400dp</dimen>
     <dimen name="card_height">220dp</dimen>
-    <dimen name="cards_height">285dp</dimen>
     <dimen name="card_height_short">180dp</dimen>
+    <dimen name="cards_height">285dp</dimen>
+    <dimen name="picture_small">250dp</dimen>
+    <dimen name="picture_title_offset_small">220dp</dimen>
 </resources>

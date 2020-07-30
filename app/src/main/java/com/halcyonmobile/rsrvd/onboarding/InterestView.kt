@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.feature.onboarding
+package com.halcyonmobile.rsrvd.onboarding
 
 import android.content.Context
 import android.widget.CheckBox

@@ -19,6 +19,10 @@
     <string name="placeholder_for_empty_search">Placeholder for empty search</string>
     <string name="back_to_onboarding">Back to onboarding</string>
     <string name="hello_world">Hello world!</string>
+    <string name="save_changes">save changes</string>
+    <string name="exit_editing_profile">exit editing profile</string>
+    <string name="edit_profile">edit\nprofile</string>
+    <string name="current_location">Current location</string>
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
