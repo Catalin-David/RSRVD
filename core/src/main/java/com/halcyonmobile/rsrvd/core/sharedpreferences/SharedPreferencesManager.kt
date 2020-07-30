@@ -14,7 +14,7 @@ object SharedPreferencesManager {
     }
 
     var isUserLoggedIn: Boolean
-        get() = sharedPreferences.getBoolean(IS_USER_LOGGED_IN_KEY, true)
+        get() = sharedPreferences.getBoolean(IS_USER_LOGGED_IN_KEY, false)
         set(userStatus) = with(sharedPreferences.edit()) {
             putBoolean(IS_USER_LOGGED_IN_KEY, userStatus)
             apply()
