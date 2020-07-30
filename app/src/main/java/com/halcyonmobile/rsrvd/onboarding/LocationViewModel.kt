@@ -7,7 +7,8 @@ import com.halcyonmobile.rsrvd.core.me.MeRepository
 import com.halcyonmobile.rsrvd.selectlocation.Location
 
 class LocationViewModel : ViewModel() {
-    private val meRepository: MeRepository = MeRepository()
+    private val meRepository: MeRepository =
+        MeRepository()
     private val _location: MutableLiveData<Location> = MutableLiveData()
     private val _updateState: MutableLiveData<Boolean> = MutableLiveData()
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()

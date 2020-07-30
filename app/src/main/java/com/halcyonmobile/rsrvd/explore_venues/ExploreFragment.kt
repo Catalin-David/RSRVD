@@ -52,7 +52,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         }
 
         // TODO retrieve cards
-        viewModel.setRecentlyVisitedCards(listOf(Card(title="a"), Card(title="c")))
+//        viewModel.setRecentlyVisitedCards(listOf(Card(title="a"), Card(title="c")))
 
         // TODO retrieve cards
         viewModel.setExploreCards(listOf(Card(title="b"), Card(title="a")))
