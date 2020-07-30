@@ -5,6 +5,10 @@
     <dimen name="long_margin">24dp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="long_padding">24dp</dimen>
+    <dimen name="height_btn_connect_sgnin">56dp</dimen>
+    <dimen name="medium_margin">32dp</dimen>
+
+    <dimen name="width_text_view_anim">900dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
     <dimen name="side_guide">20dp</dimen>
     <dimen name="picture_small">250dp</dimen>
