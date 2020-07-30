@@ -43,9 +43,6 @@
                 android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
         </activity>
 
-        <activity android:name=".profile.signup.SignUpActivity"
-            android:screenOrientation="portrait"/>
-
         <activity android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
