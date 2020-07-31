@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.core.me
 
 import com.halcyonmobile.rsrvd.core.me.dto.ProfileDto
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.onboarding.Interests
 import com.halcyonmobile.rsrvd.selectlocation.Location

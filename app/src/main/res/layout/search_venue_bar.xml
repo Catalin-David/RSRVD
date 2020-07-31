@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:hint="@string/search_venue"
-        android:text="Search venue"
+        android:text="@string/search_venue"
         android:textAppearance="?attr/textAppearanceBody2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/filter_icon"

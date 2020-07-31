@@ -22,4 +22,5 @@
     <dimen name="cards_height_short">240dp</dimen>
     <dimen name="picture_small">250dp</dimen>
     <dimen name="picture_title_offset_small">220dp</dimen>
+    <dimen name="margin_big">56dp</dimen>
 </resources>
