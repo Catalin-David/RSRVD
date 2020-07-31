@@ -1,7 +1,6 @@
 package com.halcyonmobile.rsrvd.signin
 
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +16,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -81,10 +82,13 @@ class SignInActivity : AppCompatActivity() {
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
+
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
                             // TODO: assign the access token
                             Log.w(ContentValues.TAG, "access token $accessToken")
+                            UserRepository.isUserLoggedIn = true
+                            startActivity(Intent(this, MainActivity::class.java))
                         },
                         onFailure = {
                             signInBinding.root.showSnackbar(getString(R.string.authentication_failed))

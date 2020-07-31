@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModel
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModelFactory
+import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class LauncherActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class LauncherActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         } else {
             Log.d("TAG: ", "USER NOT LOGGED IN")
-            // TODO: send user to Sign up activity
+            startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 }

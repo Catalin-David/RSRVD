@@ -27,6 +27,16 @@
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
+    <string name="sport_activity">sport activity</string>
+    <string name="read_more">Read more</string>
+    <string name="search_venue">Search venue</string>
+    <string name="recently_visited">recently visited</string>
+    <string name="we_recommend">we recommend</string>
+    <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
+    <string name="we_recommend_placeholder">we recommend placeholder</string>
+    <string name="read_more_link">https://blog.myfitnesspal.com/</string>
+    <string name="see_all_venues">See all venues</string>
+    <string name="details_place_holder">running / 1.2 km away</string>
     <string name="account">account</string>
     <string name="create">create</string>
 </resources>
