@@ -58,11 +58,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/long_margin"
                     android:alpha=".25"
+                    android:text="@string/running"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.Body2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="running" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/details_distance"
@@ -171,10 +171,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/long_margin"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="?attr/selectableItemBackground"
                 android:text="@string/read_more"
-                android:textAppearance="@style/TextAppearance.Body2"
-                tools:ignore="UnusedAttribute" />
+                android:textAppearance="@style/TextAppearance.Body2" />
 
         </LinearLayout>
     </ScrollView>

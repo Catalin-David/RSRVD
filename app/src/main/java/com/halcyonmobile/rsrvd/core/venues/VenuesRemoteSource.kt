@@ -2,7 +2,7 @@ package com.halcyonmobile.rsrvd.core.venues
 
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
-import com.halcyonmobile.rsrvd.explore_venues.GetVenuesHandler
+import com.halcyonmobile.rsrvd.explorevenues.GetVenuesHandler
 
 class VenuesRemoteSource {
     private val venuesApi = RetrofitManager.retrofit.create(VenuesApi::class.java)
