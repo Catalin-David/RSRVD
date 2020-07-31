@@ -34,4 +34,7 @@
     <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
     <string name="we_recommend_placeholder">we recommend placeholder</string>
     <string name="read_more_link">https://blog.myfitnesspal.com/</string>
+    <string name="see_all_venues">See all venues</string>
+    <string name="details_place_holder">running / 1.2 km away</string>
+    <string name="search_venue">Search venue</string>
 </resources>

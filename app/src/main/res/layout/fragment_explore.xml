@@ -60,7 +60,7 @@
                     android:alpha=".25"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="running / 1.2 km away"
+                    android:text="@string/details_place_holder"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.Body2" />
                 <TextView
@@ -70,7 +70,7 @@
                     android:layout_marginTop="@dimen/long_margin"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="See all venues"
+                    android:text="@string/see_all_venues"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.Body2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
