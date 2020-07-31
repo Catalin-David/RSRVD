@@ -33,7 +33,6 @@ class SignInActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
 
         if ( intent.getBooleanExtra(SIGN_UP_KEY, false) ) {
-            signInBinding.exploreFirst.isVisible = false
             signInBinding.exploreFirst.visibility = View.GONE
             signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
 
