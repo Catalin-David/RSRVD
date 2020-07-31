@@ -14,8 +14,7 @@ object RetrofitSingleton {
         .addConverterFactory(MoshiConverterFactory.create().asLenient())
         .build()
 
-    fun get(): Retrofit =
-        retrofitSingle
+    fun get(): Retrofit = retrofitSingle
 
     private fun getClient(): OkHttpClient =
         OkHttpClient.Builder().apply {
@@ -30,3 +29,4 @@ object RetrofitSingleton {
                 })
         }.build()
 }
+

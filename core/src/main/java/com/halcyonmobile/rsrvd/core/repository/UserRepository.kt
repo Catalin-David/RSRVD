@@ -2,11 +2,11 @@ package com.halcyonmobile.rsrvd.core.repository
 
 import android.content.ContentValues
 import android.util.Log
+import com.halcyonmobile.rsrvd.core.RetrofitSingleton
 import com.halcyonmobile.rsrvd.core.api.AuthenticationAPI
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
-import com.halcyonmobile.rsrvd.core.RetrofitSingleton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
