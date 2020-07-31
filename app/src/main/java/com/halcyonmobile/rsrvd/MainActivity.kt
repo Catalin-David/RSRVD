@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_profile -> {
-                    if (UserRepository.exploreFirst) {
+                    if (UserRepository.exploreFirst && !UserRepository.isUserLoggedIn) {
                         startActivity(SignInActivity.getStartIntent(this, true))
                     } else {
                         openFragment(ProfileFragment(), supportFragmentManager)
