@@ -3,6 +3,7 @@
     package="com.halcyonmobile.rsrvd">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION " />
 
     <application
@@ -42,10 +43,13 @@
                 android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
         </activity>
 
-        <activity android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity android:name=".signin.SignInActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".signin.SignInActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"

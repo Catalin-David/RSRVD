@@ -60,7 +60,7 @@
         <Button
             android:id="@+id/connect_google_button"
             android:layout_width="0dp"
-            android:layout_height="@dimen/height_btn_connect_sgnin"
+            android:layout_height="@dimen/height_btn_connect_signin"
             android:layout_marginStart="@dimen/long_margin"
             android:layout_marginEnd="@dimen/long_margin"
             android:layout_marginBottom="@dimen/short_margin"

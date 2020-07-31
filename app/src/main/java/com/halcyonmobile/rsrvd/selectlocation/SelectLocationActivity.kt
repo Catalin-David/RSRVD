@@ -67,23 +67,24 @@ class SelectLocationActivity : AppCompatActivity() {
 
         client = Places.createClient(this)
 
-        binding.searchText.addTextChangedListener(
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
+        binding.searchText.apply {
+            addTextChangedListener(
+                object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                    }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.toString().isNotEmpty()) {
-                        setSuggestions(s)
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        if (s.toString().isNotEmpty()) {
+                            setSuggestions(s)
+                        }
                     }
                 }
-            }
-        )
-
-        binding.searchText.requestFocus()
+            )
+            requestFocus()
+        }
 
         binding.clear.setOnClickListener {
             binding.searchText.text.clear()

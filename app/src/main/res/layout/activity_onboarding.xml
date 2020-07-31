@@ -13,9 +13,14 @@
             type="java.util.List&lt;com.halcyonmobile.rsrvd.onboarding.Interests>" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/dark_gray">
 
             <ImageView
@@ -158,4 +163,5 @@
                 app:layout_constraintTop_toBottomOf="@id/interests_grid"
                 app:layout_constraintVertical_bias="1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
