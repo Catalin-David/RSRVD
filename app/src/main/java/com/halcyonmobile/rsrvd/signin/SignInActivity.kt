@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.signin
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -30,20 +32,10 @@ class SignInActivity : AppCompatActivity() {
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
 
-        val signUp = intent.getBooleanExtra("sign_up", false)
-        if ( signUp ) {
-            signInBinding.exploreFirst.visibility = View.INVISIBLE
+        if ( intent.getBooleanExtra(SIGN_UP_KEY, false) ) {
+            signInBinding.exploreFirst.isVisible = false
+            signInBinding.exploreFirst.visibility = View.GONE
             signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
-
-            val paramsExploreFirst: ViewGroup.MarginLayoutParams =
-                signInBinding.exploreFirst.layoutParams as ViewGroup.MarginLayoutParams
-            paramsExploreFirst.bottomMargin = 0
-            signInBinding.exploreFirst.requestLayout()
-
-            val paramsButton: ViewGroup.MarginLayoutParams =
-                signInBinding.welcomeToRsrvdTextView.layoutParams as ViewGroup.MarginLayoutParams
-            paramsExploreFirst.bottomMargin = 0
-            signInBinding.welcomeToRsrvdTextView.requestLayout()
 
             signInBinding.rsrvdTextView.text = getString(R.string.account)
         }
@@ -90,7 +82,6 @@ class SignInActivity : AppCompatActivity() {
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
-
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
                             // TODO: assign the access token
@@ -109,5 +100,9 @@ class SignInActivity : AppCompatActivity() {
 
     companion object {
         private const val GOOGLE_SIGN_IN = 19
+        private const val SIGN_UP_KEY = "SIGN_UP_KEY"
+
+        fun getStartIntent(context: Context, data: Boolean) =
+            Intent(context, SignInActivity::class.java).putExtra(SIGN_UP_KEY, data)
     }
 }
