@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.me
+package com.halcyonmobile.rsrvd.core.shared
 
 import okhttp3.Interceptor
 import okhttp3.Response
