@@ -101,7 +101,7 @@ class SignInActivity : AppCompatActivity() {
         private const val GOOGLE_SIGN_IN = 19
         private const val SIGN_UP_KEY = "SIGN_UP_KEY"
 
-        fun getStartIntent(context: Context, data: Boolean) =
-            Intent(context, SignInActivity::class.java).putExtra(SIGN_UP_KEY, data)
+        fun getStartIntent(context: Context, showSignUp: Boolean) =
+            Intent(context, SignInActivity::class.java).putExtra(SIGN_UP_KEY, showSignUp)
     }
 }
