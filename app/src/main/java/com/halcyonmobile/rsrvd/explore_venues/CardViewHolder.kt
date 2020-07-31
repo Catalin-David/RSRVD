@@ -20,4 +20,5 @@ class CardViewHolder(private val binding: CardBinding) : RecyclerView.ViewHolder
             .placeholder(R.drawable.ic_baseline_cloud_download_24)
             .into(binding.background)
     }
+    
 }
