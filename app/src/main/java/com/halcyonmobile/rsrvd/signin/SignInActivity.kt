@@ -1,23 +1,21 @@
 package com.halcyonmobile.rsrvd.signin
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.me.State
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
@@ -74,23 +72,23 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun exploreFirst () {
-        //TO DO: create another variable in repo
-       // UserRepository.isUserLoggedIn = false
+        UserRepository.exploreFirst = true
         startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {
             try {
+                signInBinding.signInProgress.visibility = View.VISIBLE
                 GoogleSignIn
                     .getSignedInAccountFromIntent(data)
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
-
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            // TODO: assign the access token
+                            State.authorization = accessToken
+                            
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
                             startActivity(Intent(this, OnboardingActivity::class.java))

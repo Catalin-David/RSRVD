@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.*
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.selectlocation.Location
@@ -67,7 +69,8 @@ class OnboardingActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 viewModel.onReadyClick(getInterests())
-                // startActivity(Intent(this@OnboardingActivity, NEXTACTIVITY::class.java))
+
+                startActivity(Intent(this@OnboardingActivity, MainActivity::class.java))
             }
         }
     }

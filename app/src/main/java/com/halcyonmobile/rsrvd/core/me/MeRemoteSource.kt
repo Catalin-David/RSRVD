@@ -5,7 +5,6 @@ import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.onboarding.Interests
 import com.halcyonmobile.rsrvd.selectlocation.Location
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
 
 class MeRemoteSource {
     private val meApi = RetrofitManager.retrofit.create(MeApi::class.java)

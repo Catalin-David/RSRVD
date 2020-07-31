@@ -13,6 +13,11 @@ import retrofit2.Response
 
 object UserRepository {
     var name: String = "NAME"
+    var exploreFirst: Boolean
+        get() = SharedPreferencesManager.exploreFirst
+        set(exploreStatus) {
+            SharedPreferencesManager.exploreFirst = exploreStatus
+        }
 
     var isUserLoggedIn: Boolean
         get() = SharedPreferencesManager.isUserLoggedIn

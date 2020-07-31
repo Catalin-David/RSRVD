@@ -29,16 +29,17 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         .signOut()
                         .addOnCompleteListener {
                             UserRepository.isUserLoggedIn = false
+                            UserRepository.exploreFirst = false
                             startActivity(Intent(activity, SignInActivity::class.java))
                         }
                 }
                 setNegativeButton("Cancel") { _, _ -> }
                 show()
             }
+        }
 
-            view.findViewById<Button>(R.id.edit_profile).setOnClickListener {
-                startActivity(Intent(this.activity, EditProfileActivity::class.java))
-            }
+        view.findViewById<Button>(R.id.edit_profile).setOnClickListener {
+            startActivity(Intent(this.activity, EditProfileActivity::class.java))
         }
     }
 }

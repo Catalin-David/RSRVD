@@ -25,13 +25,8 @@ class LauncherActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, LauncherViewModelFactory(application))
         val isUserLogged = viewModel.get(LauncherViewModel::class.java).isUserLoggedIn()
         if (isUserLogged) {
-            Log.d("TAG: ", "${GoogleSignIn.getLastSignedInAccount(this)?.email}")
-            println("${GoogleSignIn.getLastSignedInAccount(this)?.email}")
             startActivity(Intent(this, MainActivity::class.java))
         } else {
-            Log.d("TAG: ", "${GoogleSignIn.getLastSignedInAccount(this)?.email} 222")
-            Log.d("TAG: ", "USER NOT LOGGED IN")
-            println("${GoogleSignIn.getLastSignedInAccount(this)?.email} 2222")
             startActivity(Intent(this, SignInActivity::class.java))
         }
     }
