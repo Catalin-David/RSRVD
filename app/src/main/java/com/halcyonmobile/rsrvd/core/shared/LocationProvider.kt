@@ -4,14 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.location.Location
-import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
+import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 
 class LocationProvider(private val activity: Activity, private val callback: (Location) -> Unit) {
     fun init() {
@@ -33,22 +32,26 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-        LocationServices.getFusedLocationProviderClient(activity)
-            .requestLocationUpdates(LocationRequest().apply {
-                interval = 10000
-                fastestInterval = 3000
-                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            }, object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult?) {
-                    super.onLocationResult(locationResult)
+        if (!Places.isInitialized()) {
+            Places.initialize(activity, SelectLocationActivity.apikey)
+        }
 
-                    LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(this)
-
-                    if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        callback(locationResult.locations[locationResult.locations.size - 1])
-                    }
+        Places.createClient(activity)
+            .findCurrentPlace(FindCurrentPlaceRequest.builder(listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.ID, Place.Field.LAT_LNG)).build())
+            .addOnCompleteListener(activity) { task ->
+                if (task.isSuccessful) {
+                    val place = task.result?.placeLikelihoods?.get(0)?.place
+                    callback(
+                        Location(
+                            placeId = place?.id,
+                            name = place?.name!!,
+                            details = place.address!!,
+                            latitude = place.latLng!!.latitude,
+                            longitude = place.latLng!!.longitude
+                        )
+                    )
                 }
-            }, Looper.getMainLooper())
+            }
     }
 
     companion object {

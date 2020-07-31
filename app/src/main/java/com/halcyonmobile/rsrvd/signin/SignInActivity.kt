@@ -16,7 +16,6 @@ import com.google.android.gms.common.api.ApiException
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.core.shared.State
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
@@ -73,6 +72,8 @@ class SignInActivity : AppCompatActivity() {
 
     private fun exploreFirst () {
         UserRepository.exploreFirst = true
+        UserRepository.accessToken = ""
+        UserRepository.location = Pair(0.0, 0.0)
         startActivity(Intent(this, MainActivity::class.java))
     }
 
@@ -87,7 +88,7 @@ class SignInActivity : AppCompatActivity() {
 
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            State.authorization = accessToken
+                            UserRepository.accessToken = accessToken
                             
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
@@ -96,13 +97,17 @@ class SignInActivity : AppCompatActivity() {
                             signInBinding.signInProgress.visibility = View.INVISIBLE
                         },
                         onFailure = {
+                            UserRepository.accessToken = ""
                             signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
 
                             UserRepository.isUserLoggedIn = false
+                            UserRepository.location = Pair(0.0, 0.0)
                             signInBinding.signInProgress.visibility = View.INVISIBLE
                         })
                     }
             } catch (e: ApiException) {
+                UserRepository.accessToken = ""
+                UserRepository.location = Pair(0.0, 0.0)
                 signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
             }
         }

@@ -10,7 +10,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.core.shared.State
 import com.halcyonmobile.rsrvd.editprofile.EditProfileActivity
 import com.halcyonmobile.rsrvd.signin.SignInActivity
 
@@ -31,7 +30,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         .addOnCompleteListener {
                             UserRepository.isUserLoggedIn = false
                             UserRepository.exploreFirst = false
-                            State.authorization = ""
+                            UserRepository.accessToken = ""
+                            UserRepository.location = Pair(0.0, 0.0)
                             startActivity(Intent(activity, SignInActivity::class.java))
                         }
                 }
@@ -41,7 +41,9 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
 
         view.findViewById<Button>(R.id.edit_profile).setOnClickListener {
-            startActivity(Intent(this.activity, EditProfileActivity::class.java))
+            if (UserRepository.isUserLoggedIn) {
+                startActivity(Intent(this.activity, EditProfileActivity::class.java))
+            }
         }
     }
 }
