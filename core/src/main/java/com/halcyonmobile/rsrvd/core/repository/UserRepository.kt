@@ -12,12 +12,16 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object UserRepository {
+    // TODO set when looged in
     var name: String = "NAME"
     var exploreFirst: Boolean
         get() = SharedPreferencesManager.exploreFirst
         set(exploreStatus) {
             SharedPreferencesManager.exploreFirst = exploreStatus
         }
+
+    // TODO change when selected
+    var location: Pair<Double, Double> = Pair(0.0, 0.0)
 
     var isUserLoggedIn: Boolean
         get() = SharedPreferencesManager.isUserLoggedIn
@@ -42,10 +46,9 @@ object UserRepository {
 
                     val result = response.body()
 
-                    if ( !response.isSuccessful || result == null ) {
+                    if (!response.isSuccessful || result == null) {
                         onFailure()
-                    }
-                    else {
+                    } else {
                         onSuccess(result.accessToken)
 
                         Log.w(

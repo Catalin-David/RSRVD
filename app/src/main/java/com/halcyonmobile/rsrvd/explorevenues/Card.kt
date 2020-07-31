@@ -1,10 +1,13 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
+import com.halcyonmobile.rsrvd.selectlocation.Location
 import java.util.*
 
 data class Card(
     val id: UUID = UUID.randomUUID(),
-    val title: String
+    val title: String,
+    val image: String? = null,
+    val location: Location? = null
 )
 
 object NoRecentCard {
