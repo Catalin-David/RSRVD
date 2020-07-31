@@ -31,7 +31,6 @@
                     android:id="@+id/recently_visited_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/short_margin"
                     android:alpha=".25"
                     android:text="@string/recently_visited"
                     android:textAllCaps="true"
@@ -86,7 +85,6 @@
                     android:id="@+id/explore_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/short_margin"
                     android:alpha=".25"
                     android:text="@string/explore"
                     android:textAllCaps="true"
@@ -113,7 +111,6 @@
                     android:id="@+id/we_recommend_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/short_margin"
                     android:alpha=".25"
                     android:text="@string/we_recommend"
                     android:textAllCaps="true"
@@ -162,7 +159,7 @@
                 android:layout_marginVertical="@dimen/long_margin"
                 android:text="@string/read_more"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:foreground="?attr/selectableItemBackground" />
+                android:background="?attr/selectableItemBackground" />
 
         </LinearLayout>
     </ScrollView>
