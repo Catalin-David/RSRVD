@@ -39,6 +39,5 @@
     <string name="details_place_holder">running / 1.2 km away</string>
     <string name="account">account</string>
     <string name="create">create</string>
-    <string name="see_all_venues">See all venues</string>
     <string name="running">running</string>
 </resources>
