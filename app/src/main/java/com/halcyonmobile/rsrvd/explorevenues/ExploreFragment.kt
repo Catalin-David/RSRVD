@@ -73,5 +73,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
         }
+
+        binding.detailsDistance.text = viewModel.getFormattedDistance()
     }
 }

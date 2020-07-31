@@ -55,7 +55,9 @@ class EditProfileActivity : AppCompatActivity() {
         binding.apply {
             dataMap = Interests.values().toMutableList()
 
-            close.setOnClickListener { finish() }
+            close.setOnClickListener {
+                finish()
+            }
 
             locationSelector.setOnClickListener {
                 startActivityForResult(

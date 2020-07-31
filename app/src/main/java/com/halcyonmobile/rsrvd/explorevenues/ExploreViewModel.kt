@@ -37,6 +37,10 @@ class ExploreViewModel : ViewModel() {
             (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
                 _exploreCards.value = it
             }
+
+            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
+            }
         }
 
         _cardInFocus.value = _recentlyVisitedCards.value!![0]
