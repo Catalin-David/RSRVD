@@ -43,14 +43,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
             exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
             error.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
-            cardInFocus.observe(viewLifecycleOwner) { card ->
-                card.location?.let {
-                    val distances = FloatArray(1)
-                    Location.distanceBetween(it.latitude, it.longitude, UserRepository.location.first, UserRepository.location.second, distances)
-                    val distanceFormatted = if (distances[0] > 1000) "${"%.2f".format(distances[0] / 1000)}km" else "${distances[0]}m"
-                    binding.detailsDistance.text = " / $distanceFormatted away"
-                }
-            }
+            cardInFocus.observe(viewLifecycleOwner) { binding.detailsDistance.text = viewModel.getFormattedDistance() }
         }
 
         // Recently Visited Setup

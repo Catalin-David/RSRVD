@@ -1,8 +1,10 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 
 class ExploreViewModel : ViewModel() {
@@ -25,9 +27,9 @@ class ExploreViewModel : ViewModel() {
     init {
         venuesRepository.getRecentlyVisitedVenues { venues, error ->
             _error.value = error
-//            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-//                _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
-//            }
+            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
+            }
         }
 
         venuesRepository.getExploreVenues { venues, error ->
@@ -35,12 +37,19 @@ class ExploreViewModel : ViewModel() {
             (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
                 _exploreCards.value = it
             }
-            // TODO remove after testing
-            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-                _recentlyVisitedCards.value = it
-            }
         }
 
         _cardInFocus.value = _recentlyVisitedCards.value!![0]
+    }
+
+    fun getFormattedDistance(): String {
+        _cardInFocus.value?.location?.let {
+            val distances = FloatArray(1)
+            Location.distanceBetween(it.latitude, it.longitude, UserRepository.location.first, UserRepository.location.second, distances)
+            val distanceFormatted = if (distances[0] > 1000) "${"%.2f".format(distances[0] / 1000)}km" else "${distances[0]}m"
+            return " / $distanceFormatted away"
+        }
+
+        return ""
     }
 }
