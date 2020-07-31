@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.explore_venues
+package com.halcyonmobile.rsrvd.explorevenues
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

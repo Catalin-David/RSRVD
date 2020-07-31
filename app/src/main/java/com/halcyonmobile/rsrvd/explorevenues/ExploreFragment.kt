@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.explore_venues
+package com.halcyonmobile.rsrvd.explorevenues
 
 import android.annotation.SuppressLint
 import android.content.Intent
