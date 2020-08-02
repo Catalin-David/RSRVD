@@ -7,6 +7,7 @@ import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
 import com.halcyonmobile.rsrvd.core.RetrofitSingleton
+import com.halcyonmobile.rsrvd.core.dto.UserResponseDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,4 +49,5 @@ object UserRepository {
                     }
                 }
             })
+    fun getUserProfileData(): UserResponseDto? = UserRemoteSource.getSignedInUserInformation()
 }

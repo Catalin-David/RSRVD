@@ -11,4 +11,7 @@
     <dimen name="width_text_view_anim">900dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
     <dimen name="side_guide">20dp</dimen>
+
+    <dimen name="picture_dimension">125dp</dimen>
+    <dimen name="text_on_picture_margin">93dp</dimen>
 </resources>

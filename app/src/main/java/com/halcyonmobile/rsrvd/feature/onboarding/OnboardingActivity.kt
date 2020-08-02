@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.databinding.OnboardingActivityBinding
 import com.halcyonmobile.rsrvd.feature.selectlocation.Location
 import com.halcyonmobile.rsrvd.feature.selectlocation.SelectLocationActivity
@@ -46,7 +47,7 @@ class OnboardingActivity : AppCompatActivity() {
 
         binding.ready.setOnClickListener {
             val data = OnboardingData(viewModel.getLocation().value, getInterests())
-//             startActivity(Intent(this, NEXTACTIVITY::class.java).putExtra("data", data))
+            startActivity(Intent(this, MainActivity::class.java).putExtra("data", data))
         }
 
         binding.locationSelector.setOnClickListener {

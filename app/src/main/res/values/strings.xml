@@ -23,4 +23,18 @@
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
+
+    <string name="profile_location">LOCATION</string>
+    <string name="profile_activities">ACTIVITIES COMPLETED</string>
+    <string name="profile_interests">INTERESTS</string>
+    <string name="profile_reminder">ACTIVITY REMINDER</string>
+    <string name="profile_legal">LEGAL</string>
+    <string name="profile_terms">Terms of service</string>
+    <string name="profile_privacy">Privacy policy</string>
+    <string name="profile_logout">LOG OUT</string>
+    <string-array name="spinner_array">
+        <item>10 minutes before</item>
+        <item>30 minutes before</item>
+        <item>1 hour before</item>
+    </string-array>
 </resources>
