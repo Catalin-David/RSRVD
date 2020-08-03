@@ -1,24 +1,27 @@
 package com.halcyonmobile.rsrvd
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
-import com.halcyonmobile.rsrvd.explore.ExploreFragment
+import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
+import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMainBinding= DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-             when(menuItem.itemId){
+            when (menuItem.itemId) {
                 R.id.navigation_profile -> {
                     openFragment(ProfileFragment(), supportFragmentManager)
                     true
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+
         }
 
         openFragment(ExploreFragment(), supportFragmentManager)

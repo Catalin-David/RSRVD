@@ -1,13 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Explore fragment"
-        android:textAppearance="?attr/textAppearanceHeadline4"/>
-</FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Search bar -->
+            <include
+                android:id="@+id/search_venue_bar"
+                layout="@layout/search_venue_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/long_margin" />
+
+            <!-- Recently visited -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recently_visited"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cards_height">
+
+                <TextView
+                    android:id="@+id/recently_visited_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/recently_visited"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recently_visited_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Info -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/details_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:alpha=".25"
+                    android:text="@string/running"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/details_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:alpha=".25"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintStart_toEndOf="@id/details_activity"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text=" / 1.2 km away" />
+
+                <TextView
+                    android:id="@+id/all_venues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:text="@string/see_all_venues"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Explore -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/explore"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cards_height">
+
+                <TextView
+                    android:id="@+id/explore_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/explore"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/explore_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- We recommend -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/we_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cards_height_short">
+
+                <TextView
+                    android:id="@+id/we_recommend_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:alpha=".25"
+                    android:text="@string/we_recommend"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Headline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_height_short"
+                    android:background="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/long_margin"
+                        android:contentDescription="@string/we_recommend_placeholder"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_img_recommendation"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/we_recommend_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX=".8"
+                        android:scaleY=".8"
+                        android:text="@string/we_recommend_script"
+                        android:textAppearance="@style/TextAppearance.Headline4"
+                        android:textColor="#000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Read more -->
+            <TextView
+                android:id="@+id/read_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/long_margin"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/read_more"
+                android:textAppearance="@style/TextAppearance.Body2" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

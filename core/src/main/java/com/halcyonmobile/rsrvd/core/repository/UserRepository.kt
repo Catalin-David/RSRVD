@@ -2,17 +2,23 @@ package com.halcyonmobile.rsrvd.core.repository
 
 import android.content.ContentValues
 import android.util.Log
+import com.halcyonmobile.rsrvd.core.RetrofitSingleton
 import com.halcyonmobile.rsrvd.core.api.AuthenticationAPI
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
-import com.halcyonmobile.rsrvd.core.RetrofitSingleton
 import com.halcyonmobile.rsrvd.core.dto.UserResponseDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 object UserRepository {
+    // TODO set when looged in
+    var name: String = "NAME"
+
+    // TODO change when selected
+    var location: Pair<Double, Double> = Pair(0.0, 0.0)
+
     var isUserLoggedIn: Boolean
         get() = SharedPreferencesManager.isUserLoggedIn
         set(userStatus) {
@@ -36,10 +42,9 @@ object UserRepository {
 
                     val result = response.body()
 
-                    if ( !response.isSuccessful || result == null ) {
+                    if (!response.isSuccessful || result == null) {
                         onFailure()
-                    }
-                    else {
+                    } else {
                         onSuccess(result.accessToken)
 
                         Log.w(

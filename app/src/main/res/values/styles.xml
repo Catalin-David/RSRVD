@@ -33,6 +33,8 @@
 
         <item name="materialButtonStyle">@style/MaterialComponents.Button</item>
         <item name="materialButtonOutlinedStyle">@style/Button.Outlined</item>
+
+        <item name="snackbarStyle">@style/RSRVD.Snackbar</item>
     </style>
 
     <style name="AppTheme.Launcher">
@@ -61,7 +63,7 @@
         <item name="android:padding">@dimen/default_padding</item>
         <item name="shapeAppearanceOverlay">@style/ButtonAppearance</item>
     </style>
-    
+
     <style name="ButtonAppearance">
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeTopRight">0dp</item>
@@ -112,5 +114,10 @@
     <style name="TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">@android:color/white</item>
         <item name="fontFamily">@font/oswald_light</item>
+    </style>
+
+    <style name="RSRVD.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:textColor">#fff</item>
+        <item name="backgroundColor">#fc000000</item>
     </style>
 </resources>
