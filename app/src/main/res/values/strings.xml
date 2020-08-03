@@ -44,4 +44,5 @@
     <string name="no_results">no results</string>
     <string name="don_t_give_up">don\'t give up, just try again.</string>
     <string name="clear_search_term">clear search term</string>
+    <string name="something_went_wrong">Something went wrong</string>
 </resources>

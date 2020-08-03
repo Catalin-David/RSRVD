@@ -8,15 +8,12 @@ import com.halcyonmobile.rsrvd.explorevenues.GetVenuesHandler
 class VenuesRemoteSource {
     private val venuesApi = RetrofitManager.retrofit.create(VenuesApi::class.java)
 
-    fun getRecentlyVisitedVenues(callback: (List<Venue>?, Boolean) -> Unit) {
+    fun getRecentlyVisitedVenues(callback: (List<Venue>?, Boolean) -> Unit) =
         venuesApi.getRecentlyVisitedVenues().enqueue(GetVenuesHandler(callback))
-    }
 
-    fun getExploreVenues(callback: (List<Venue>?, Boolean) -> Unit) {
+    fun getExploreVenues(callback: (List<Venue>?, Boolean) -> Unit) =
         venuesApi.getExploreVenues().enqueue(GetVenuesHandler(callback))
-    }
 
-    fun search(term: String, callback: (List<Venue>?, Boolean) -> Unit) {
+    fun search(term: String, callback: (List<Venue>?, Boolean) -> Unit) =
         venuesApi.search(SearchVenueBodyDto(name = term)).enqueue(GetVenuesHandler(callback))
-    }
 }

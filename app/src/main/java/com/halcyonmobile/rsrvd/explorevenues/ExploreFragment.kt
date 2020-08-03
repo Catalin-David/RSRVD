@@ -18,18 +18,12 @@ import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
-    private val searchResultsAdapter = CardsAdapter {
-        // TODO start activity to open Details
-    }
-    private val recentlyViewedAdapter = CardsAdapter {
-        // TODO start activity to open Details
-    }
-    private val exploreAdapter = CardsAdapter {
-        // TODO start activity to open Details
-    }
-
     private lateinit var binding: FragmentExploreBinding
     private lateinit var viewModel: ExploreViewModel
+
+    private val searchResultsAdapter = CardsAdapter { /* TODO start activity to open Details */ }
+    private val recentlyViewedAdapter = CardsAdapter { /* TODO start activity to open Details */ }
+    private val exploreAdapter = CardsAdapter { /* TODO start activity to open Details */ }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +31,25 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding = FragmentExploreBinding.bind(view)
         viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
 
-        // Observers
+        setUpObservers()
+        setUpLists()
+
+        // Clear button
+        binding.searchVenueBar.clear.setOnClickListener {
+            binding.searchVenueBar.searchText.text.clear()
+        }
+
+        // Readme Button
+        binding.readMore.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
+        }
+
+        binding.searchVenueBar.searchTerm?.term?.observe(viewLifecycleOwner) {
+            viewModel.searchTermChanged(it)
+        }
+    }
+
+    private fun setUpObservers() {
         viewModel.apply {
             recentlyVisitedCards.observe(viewLifecycleOwner) {
                 recentlyViewedAdapter.submitList(it)
@@ -49,7 +61,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
             error.observe(viewLifecycleOwner) {
                 if (it) {
-                    view.showSnackbar("Something went wrong")
+                    view?.showSnackbar(getString(R.string.something_went_wrong))
                 }
             }
 
@@ -76,9 +88,10 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
                 binding.searchVenueBar.clear.visibility = if (it) View.VISIBLE else View.GONE
             }
         }
+    }
 
-        // LISTS
-
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setUpLists() {
         // Search Results Setup
         binding.searchResultsList.apply {
             setHasFixedSize(false)
@@ -111,32 +124,5 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             LinearSnapHelper().attachToRecyclerView(this)
             addItemDecoration(MarginDecorator(right = true))
         }
-
-        // BUTTONS
-
-        // Clear button
-        binding.searchVenueBar.clear.setOnClickListener {
-            binding.searchVenueBar.searchText.text.clear()
-        }
-
-        // Readme Button
-        binding.readMore.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
-        }
-
-        // OTHER
-
-        // Search term changed
-        binding.searchVenueBar.searchText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.searchTermChanged(s.toString())
-            }
-        })
     }
 }

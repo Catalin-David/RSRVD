@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="search_term"
+            type="com.halcyonmobile.rsrvd.explorevenues.SearchTerm" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/search_bar"
@@ -29,6 +35,7 @@
             android:gravity="center_vertical"
             android:hint="@string/search_venue"
             android:inputType="text"
+            android:text="@={search_term.term}"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="#fff"
             android:textColorHint="#fff"

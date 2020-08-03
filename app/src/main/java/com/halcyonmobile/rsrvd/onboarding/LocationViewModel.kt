@@ -8,8 +8,6 @@ import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.selectlocation.Location
 
 class LocationViewModel : ViewModel() {
-    private val meRepository: MeRepository = MeRepository()
-
     private val _location: MutableLiveData<Location> = MutableLiveData()
     private val _updateState: MutableLiveData<Boolean> = MutableLiveData()
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
@@ -29,7 +27,7 @@ class LocationViewModel : ViewModel() {
                     (if (_location.value == null && interests.isEmpty()) " & " else "") +
                     if (interests.isEmpty()) "No interests" else ""
         } else {
-            meRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
+            MeRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
             UserRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
         }
     }
