@@ -2,7 +2,6 @@ package com.halcyonmobile.rsrvd.explorevenues
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 

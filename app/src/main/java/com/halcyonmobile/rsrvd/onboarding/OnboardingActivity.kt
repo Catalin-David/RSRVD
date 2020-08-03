@@ -8,9 +8,10 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.*
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -18,16 +19,17 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) {
-        viewModel.setLocation(
-            Location(
-                name = getString(R.string.current_location),
-                details = "current location",
-                latitude = it.latitude,
-                longitude = it.longitude
+    private val locationProvider: LocationProvider =
+        LocationProvider(this) {
+            viewModel.setLocation(
+                Location(
+                    name = getString(R.string.current_location),
+                    details = "current location",
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                )
             )
-        )
-    }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

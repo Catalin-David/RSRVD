@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.me.MeRepository
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.shared.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 
 class LocationViewModel : ViewModel() {
     private val meRepository: MeRepository = MeRepository()
