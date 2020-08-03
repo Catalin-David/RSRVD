@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.halcyonmobile.rsrvd.core.dto.UserResponseDto
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.feature.onboarding.Interests
+import com.halcyonmobile.rsrvd.onboarding.Interests
 
-class ProfileViewModel: ViewModel() {
+class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData()
     private val profileData: MutableLiveData<UserProfileData> = MutableLiveData()
 
@@ -20,14 +20,15 @@ class ProfileViewModel: ViewModel() {
         //loadUserInformation()
     }
 
-    private fun loadAccount(){
+    private fun loadAccount() {
         account.value = ProfileFragment.getLastSignedInAccount()
     }
-    private fun loadUserInformation(){
+
+    private fun loadUserInformation() {
         val userInformation: UserResponseDto? = UserRepository.getUserProfileData()
         userInformation?.let {
             profileData.value = UserProfileData(userInformation._location.toString(), userInformation._reservations, userInformation._interests.map {
-                when(it){
+                when (it) {
                     "RUNNING" -> Interests.RUNNING
                     "WORKOUT" -> Interests.WORKOUT
                     "YOGA" -> Interests.YOGA
@@ -42,9 +43,9 @@ class ProfileViewModel: ViewModel() {
         }
     }
 
-    val userName: LiveData<String> = Transformations.map(account){it?.displayName}
-    val imageUrl: LiveData<String> = Transformations.map(account){it?.photoUrl.toString()}
-    val location: LiveData<String> = Transformations.map(profileData){it.location}
-    val activities: LiveData<String> = Transformations.map(profileData){it.activitiesCompleted.toString()}
-    val interests: LiveData<List<Interests>> = Transformations.map(profileData){it.interests}
+    val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
+    val imageUrl: LiveData<String> = Transformations.map(account) { it?.photoUrl.toString() }
+    val location: LiveData<String> = Transformations.map(profileData) { it.location }
+    val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
+    val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
 }

@@ -15,7 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentProfileBinding
 
-class ProfileFragment: Fragment(R.layout.fragment_profile){
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val viewModel: ProfileViewModel by activityViewModels()
     private lateinit var binding: FragmentProfileBinding
 
@@ -35,12 +35,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile){
             viewmodel = viewModel
         }
 
-        viewModel.userName.observe(viewLifecycleOwner, Observer<String>{
+        viewModel.userName.observe(viewLifecycleOwner, Observer<String> {
             binding.textViewProfileName.text = it
         })
-        viewModel.imageUrl.observe(viewLifecycleOwner, Observer<String>{
+        viewModel.imageUrl.observe(viewLifecycleOwner, Observer<String> {
             Glide.with(this).asBitmap().load(it).error(R.mipmap.ic_launcher).into(binding.imageViewProfilePicture)
-        } )
+        })
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.spinner_array,
@@ -53,7 +53,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile){
         return binding.root
     }
 
-    companion object{
+    companion object {
         private var fragmentContext: Context? = null
         fun getLastSignedInAccount() = GoogleSignIn.getLastSignedInAccount(fragmentContext)
     }
