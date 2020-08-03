@@ -10,11 +10,15 @@ import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 class ExploreViewModel : ViewModel() {
     private val venuesRepository = VenuesRepository()
 
+    private val _searching: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _searchResults: MutableLiveData<List<Card>> = MutableLiveData()
     private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NoRecentCard.instance))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
     private val _error = MutableLiveData(false)
     private val _cardInFocus: MutableLiveData<Card> = MutableLiveData()
 
+    val searching: LiveData<Boolean> = _searching
+    val searchResults: LiveData<List<Card>> = _searchResults
     val recentlyVisitedCards: LiveData<List<Card>> = _recentlyVisitedCards
     val exploreCards: LiveData<List<Card>> = _exploreCards
     val error: LiveData<Boolean> = _error
@@ -51,5 +55,20 @@ class ExploreViewModel : ViewModel() {
         }
 
         return ""
+    }
+
+    fun searchTermChanged(term: String) {
+        _searching.value = term.isNotEmpty()
+
+        if (term.isNotEmpty()) {
+            venuesRepository.search(term) { venues, error ->
+                _error.value = error
+                (venues?.map { venue ->
+                    Card(title = venue.name, image = venue.image, location = venue.location)
+                }).let { _searchResults.value = it }
+            }
+        } else {
+            _searchResults.value = listOf()
+        }
     }
 }

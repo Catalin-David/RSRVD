@@ -40,4 +40,8 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
+    <string name="search_results">search results</string>
+    <string name="no_results">no results</string>
+    <string name="don_t_give_up">don\'t give up, just try again.</string>
+    <string name="clear_search_term">clear search term</string>
 </resources>
