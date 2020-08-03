@@ -48,7 +48,9 @@ class LocationViewModel : ViewModel() {
         meRepository.get {
             _interests.value = it?.interests
             _location.value = it?.location
-            UserRepository.location = Pair(it?.location!!.latitude, it.location.longitude)
+            if (it?.location?.latitude != null) {
+                UserRepository.location = Pair(it.location.latitude, it.location.longitude)
+            }
 
             _retrieving.value = RetrieveState.POST
         }
