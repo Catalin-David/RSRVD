@@ -4,7 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.location.Location
+import android.location.Geocoder
 import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -12,6 +12,8 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.halcyonmobile.rsrvd.selectlocation.Location
+import java.util.*
 
 class LocationProvider(private val activity: Activity, private val callback: (Location) -> Unit) {
     fun init() {
@@ -45,7 +47,19 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
                     LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(this)
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        callback(locationResult.locations[locationResult.locations.size - 1])
+                        val address = Geocoder(activity, Locale.getDefault()).getFromLocation(
+                            locationResult.lastLocation.latitude,
+                            locationResult.lastLocation.longitude,
+                            1
+                        )[0]
+                        callback(
+                            Location(
+                                name = address.locality,
+                                details = address.getAddressLine(0),
+                                latitude = locationResult.lastLocation.latitude,
+                                longitude = locationResult.lastLocation.longitude
+                            )
+                        )
                     }
                 }
             }, Looper.getMainLooper())
@@ -54,4 +68,5 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 2
     }
+
 }

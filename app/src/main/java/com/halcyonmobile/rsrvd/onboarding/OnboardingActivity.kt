@@ -66,7 +66,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                viewModel.onReadyClick(getInterests())
+                viewModel.readyToUpdate(getInterests())
                 // startActivity(Intent(this@OnboardingActivity, NEXTACTIVITY::class.java))
             }
         }

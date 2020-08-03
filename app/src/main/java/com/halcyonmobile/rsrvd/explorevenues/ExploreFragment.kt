@@ -1,8 +1,8 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
-import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,10 +14,9 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
+import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
-
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
     private val recentlyViewedAdapter = CardsAdapter {
@@ -73,5 +72,22 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
         }
+
+        // Filter button
+        binding.searchVenueBar.filterIcon.setOnClickListener {
+            startActivityForResult(Intent(activity, FilterActivity::class.java), FILTER_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (data != null && resultCode == Activity.RESULT_OK && requestCode == FILTER_REQUEST_CODE) {
+            // TODO set filters
+        }
+    }
+
+    companion object {
+        const val FILTER_REQUEST_CODE = 1
     }
 }

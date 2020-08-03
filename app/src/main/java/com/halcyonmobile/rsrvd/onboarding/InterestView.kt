@@ -20,4 +20,8 @@ class InterestView(context: Context) : ConstraintLayout(context) {
     }
 
     fun isChecked() = findViewById<CheckBox>(R.id.interest_button)?.isChecked ?: false
+
+    fun setChecked(state: Boolean) {
+        findViewById<CheckBox>(R.id.interest_button)?.isChecked = state
+    }
 }

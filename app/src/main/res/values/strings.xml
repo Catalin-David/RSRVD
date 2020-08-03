@@ -7,7 +7,6 @@
     <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
-
     <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
     <string name="about_you">tell us more\nabout you</string>
     <string name="sport_photo">sport photo</string>
@@ -40,4 +39,13 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
+    <string name="cancel_filtering">cancel filtering</string>
+    <string name="activities">activities</string>
+    <string name="date">date</string>
+    <string name="refine_results">refine results</string>
+    <string name="see_results">see results</string>
+    <string name="_12_august_2019">12 August, 2019</string>
+    <string name="loading">Loading</string>
+    <string name="pick_location">Pick a location</string>
+    <string name="yellow_shapes">yellow shapes</string>
 </resources>

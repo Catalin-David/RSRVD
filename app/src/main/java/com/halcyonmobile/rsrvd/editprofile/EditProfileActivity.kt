@@ -70,7 +70,7 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                viewModel.onReadyClick(getInterests())
+                viewModel.readyToUpdate(getInterests())
 //                finish()
             }
         }
