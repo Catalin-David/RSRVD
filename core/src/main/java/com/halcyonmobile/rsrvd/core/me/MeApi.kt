@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface MeApi {
+internal interface MeApi {
     @POST("me")
     fun update(@Body body: ProfileDto): Call<UserDto>
 }

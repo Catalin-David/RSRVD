@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface AuthenticationApi {
+internal interface AuthenticationApi {
     @POST("auth/google")
     fun postToken(@Body authenticationRequestDto: AuthenticationRequestDto) : Call<AuthenticationResponseDto>
 }

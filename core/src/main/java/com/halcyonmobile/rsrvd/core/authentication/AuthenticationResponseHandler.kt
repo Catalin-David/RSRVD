@@ -6,7 +6,7 @@ import com.halcyonmobile.rsrvd.core.authentication.dto.AuthenticationResponseDto
 import retrofit2.Call
 import retrofit2.Callback
 
-class AuthenticationResponseHandler(private val onSuccess: (token: String) -> Unit, private val onFailure: () -> Unit) : Callback<AuthenticationResponseDto> {
+internal class AuthenticationResponseHandler(private val onSuccess: (token: String) -> Unit, private val onFailure: () -> Unit) : Callback<AuthenticationResponseDto> {
     override fun onResponse(call: Call<AuthenticationResponseDto>, response: retrofit2.Response<AuthenticationResponseDto>) {
         val result = response.body()
 

@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.shared.State
 import com.halcyonmobile.rsrvd.core.shared.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
@@ -83,6 +84,7 @@ class SignInActivity : AppCompatActivity() {
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
                             // TODO: assign the access token
+                            State.authorization = accessToken
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
                             startActivity(Intent(this, MainActivity::class.java))

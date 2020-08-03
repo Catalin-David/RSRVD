@@ -4,7 +4,7 @@ import com.halcyonmobile.rsrvd.core.venues.models.Venue
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface VenuesApi {
+internal interface VenuesApi {
     @GET("venues/recently-visited")
     fun getRecentlyVisitedVenues(): Call<List<Venue>>
 
