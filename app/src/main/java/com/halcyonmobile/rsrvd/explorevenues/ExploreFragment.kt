@@ -37,6 +37,9 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         val viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
 
+        binding.header.viewModel = viewModel
+        binding.header.lifecycleOwner = this
+
         // Observers
         viewModel.apply {
             recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }

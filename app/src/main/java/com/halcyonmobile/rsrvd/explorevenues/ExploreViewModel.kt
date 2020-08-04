@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
+import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
 
 class ExploreViewModel : ViewModel() {
     private val venuesRepository = VenuesRepository()
@@ -19,6 +20,11 @@ class ExploreViewModel : ViewModel() {
     val exploreCards: LiveData<List<Card>> = _exploreCards
     val error: LiveData<Boolean> = _error
     val cardInFocus: LiveData<Card> = _cardInFocus
+
+    val filters = MutableLiveData<List<Filters>>(emptyList())
+
+    fun clearFilters() {
+    }
 
     fun setCardInFocus(newCard: Card) {
         _cardInFocus.value = newCard

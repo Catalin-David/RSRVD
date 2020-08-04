@@ -13,13 +13,20 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <!-- Header -->
+            <include
+                android:id="@+id/header"
+                layout="@layout/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <!-- Search bar -->
             <include
                 android:id="@+id/search_venue_bar"
                 layout="@layout/search_venue_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/long_margin" />
+                android:layout_marginVertical="@dimen/default_margin"/>
 
             <!-- Recently visited -->
             <androidx.constraintlayout.widget.ConstraintLayout
