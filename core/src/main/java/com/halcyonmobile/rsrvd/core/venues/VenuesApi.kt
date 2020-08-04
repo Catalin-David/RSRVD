@@ -1,6 +1,6 @@
 package com.halcyonmobile.rsrvd.core.venues
 
-import com.halcyonmobile.rsrvd.core.venues.models.Venue
+import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 import retrofit2.Call
 import retrofit2.http.GET
 

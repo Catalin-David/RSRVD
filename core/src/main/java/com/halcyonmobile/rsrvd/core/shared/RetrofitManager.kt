@@ -16,14 +16,13 @@ internal object RetrofitManager {
                     .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
                     .client(
                         OkHttpClient.Builder()
-                            .addInterceptor(object : Interceptor {
-                                @Throws(IOException::class)
-                                override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(
+                            .addInterceptor { chain ->
+                                chain.proceed(
                                     chain.request().newBuilder()
-                                        .addHeader("Authorization", "${State.authorization}")
+                                        .addHeader("Authorization", State.authorization)
                                         .build()
                                 )
-                            })
+                            }
                             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                             .build()
                     )

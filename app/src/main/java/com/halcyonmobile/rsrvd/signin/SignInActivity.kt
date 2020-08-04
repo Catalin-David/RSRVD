@@ -83,7 +83,6 @@ class SignInActivity : AppCompatActivity() {
 
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            // TODO: assign the access token
                             State.authorization = accessToken
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
