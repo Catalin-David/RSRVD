@@ -6,21 +6,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
+import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 
@@ -73,29 +70,44 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun exploreFirst () {}
+    private fun exploreFirst () {
+        UserRepository.exploreFirst = true
+        UserRepository.accessToken = ""
+        UserRepository.location = Pair(0.0, 0.0)
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {
             try {
+                signInBinding.signInProgress.visibility = View.VISIBLE
                 GoogleSignIn
                     .getSignedInAccountFromIntent(data)
                     .getResult(ApiException::class.java)?.idToken?.let {
                         Log.w(ContentValues.TAG, "code $it")
 
-
                         viewModel.onAuthenticationResult(it,
                         onSuccess = { accessToken ->
-                            // TODO: assign the access token
+                            UserRepository.accessToken = accessToken
+                            
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
-                            startActivity(Intent(this, MainActivity::class.java))
+                            startActivity(Intent(this, OnboardingActivity::class.java))
+                            UserRepository.isUserLoggedIn = true
+                            signInBinding.signInProgress.visibility = View.INVISIBLE
                         },
                         onFailure = {
+                            UserRepository.accessToken = ""
                             signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
+
+                            UserRepository.isUserLoggedIn = false
+                            UserRepository.location = Pair(0.0, 0.0)
+                            signInBinding.signInProgress.visibility = View.INVISIBLE
                         })
                     }
             } catch (e: ApiException) {
+                UserRepository.accessToken = ""
+                UserRepository.location = Pair(0.0, 0.0)
                 signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
             }
         }

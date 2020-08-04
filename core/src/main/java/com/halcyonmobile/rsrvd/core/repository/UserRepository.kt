@@ -14,9 +14,22 @@ import retrofit2.Response
 object UserRepository {
     // TODO set when looged in
     var name: String = "NAME"
+    var exploreFirst: Boolean
+        get() = SharedPreferencesManager.exploreFirst
+        set(exploreStatus) {
+            SharedPreferencesManager.exploreFirst = exploreStatus
+        }
+    var accessToken: String?
+        get() = SharedPreferencesManager.accessToken
+        set(token) {
+            SharedPreferencesManager.accessToken = token
+        }
 
-    // TODO change when selected
-    var location: Pair<Double, Double> = Pair(0.0, 0.0)
+    var location: Pair<Double, Double>
+        get() = SharedPreferencesManager.location
+        set(newLocation) {
+            SharedPreferencesManager.location = newLocation
+        }
 
     var isUserLoggedIn: Boolean
         get() = SharedPreferencesManager.isUserLoggedIn
