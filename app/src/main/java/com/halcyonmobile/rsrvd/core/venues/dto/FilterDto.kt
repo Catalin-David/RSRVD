@@ -9,11 +9,11 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class FilterDto(
     @Json(name = "name")
-    private val name: String,
+    val name: String,
     @Json(name = "location")
-    private val location: FilterLocation,
+    val location: FilterLocation,
     @Json(name = "activities")
-    private val activities: List<Interests>,
+    val activities: List<Interests>,
     @Json(name = "availability")
-    private val availability: StartEnd
+    val availability: StartEnd
 )

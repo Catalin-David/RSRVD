@@ -9,8 +9,6 @@ import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
 
 class ExploreViewModel : ViewModel() {
-    private val venuesRepository = VenuesRepository()
-
     private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NoRecentCard.instance))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
     private val _error = MutableLiveData(false)
@@ -31,14 +29,14 @@ class ExploreViewModel : ViewModel() {
     }
 
     init {
-        venuesRepository.getRecentlyVisitedVenues { venues, error ->
+        VenuesRepository.getRecentlyVisitedVenues { venues, error ->
             _error.value = error
             (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
                 _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
             }
         }
 
-        venuesRepository.getExploreVenues { venues, error ->
+        VenuesRepository.getExploreVenues { venues, error ->
             _error.value = error
             (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
                 _exploreCards.value = it
