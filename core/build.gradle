@@ -55,6 +55,4 @@ dependencies {
 
     //Google
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-
-    implementation project(':app')
 }

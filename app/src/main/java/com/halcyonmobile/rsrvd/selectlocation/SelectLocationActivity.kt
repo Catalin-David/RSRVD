@@ -18,6 +18,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.model.Location
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 
 class SelectLocationActivity : AppCompatActivity() {
@@ -29,7 +30,7 @@ class SelectLocationActivity : AppCompatActivity() {
         location.placeId?.let {
             client.fetchPlace(
                 FetchPlaceRequest.newInstance(
-                    location.placeId,
+                    location.placeId!!,
                     listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
                 )
             )

@@ -1,7 +1,7 @@
 package com.halcyonmobile.rsrvd.profile
 
-import com.halcyonmobile.rsrvd.onboarding.Interests
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.model.Interests
+import com.halcyonmobile.rsrvd.core.model.Location
 
 data class UserProfileData(
     val location: Location? = null,

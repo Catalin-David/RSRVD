@@ -1,14 +1,17 @@
 package com.halcyonmobile.rsrvd.profile
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.onboarding.Interests
+import com.halcyonmobile.rsrvd.core.model.UserProfileData
+import com.halcyonmobile.rsrvd.core.model.Interests
 
 class ProfileViewModel : ViewModel() {
+    private var signInAccount: GoogleSignInAccount? = null
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData()
     private val profileData: MutableLiveData<UserProfileData> = MutableLiveData()
 
@@ -19,8 +22,13 @@ class ProfileViewModel : ViewModel() {
         loadUserInformation()
     }
 
+    fun setSignInAccount(newSignInAccount: GoogleSignInAccount?){
+        signInAccount = newSignInAccount
+        loadAccount()
+    }
+
     private fun loadAccount() {
-        account.value = ProfileFragment.getLastSignedInAccount()
+        account.value = signInAccount
     }
 
     private fun loadUserInformation() {
@@ -28,7 +36,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
-    val imageUrl: LiveData<String> = Transformations.map(account) { it?.photoUrl.toString() }
+    val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
     val location: LiveData<String> = Transformations.map(profileData) { it.location?.name }
     val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
     val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }

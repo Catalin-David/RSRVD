@@ -1,10 +1,20 @@
-package com.halcyonmobile.rsrvd.selectlocation
+package com.halcyonmobile.rsrvd.core.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import java.util.*
+
+enum class Interests {
+    RUNNING, WORKOUT, YOGA, FOOTBALL, BASKETBALL, TENNIS, VOLLEY, BADMINTON, HANDBALL
+}
+
+data class UserProfileData(
+    val location: Location? = null,
+    val activitiesCompleted: Int = 0,
+    val interests: List<Interests> = listOf()
+)
 
 @Parcelize
 @JsonClass(generateAdapter = true)

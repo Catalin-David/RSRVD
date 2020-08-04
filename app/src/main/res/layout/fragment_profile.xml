@@ -32,6 +32,7 @@
                     android:layout_width="@dimen/picture_dimension"
                     android:layout_height="@dimen/picture_dimension"
                     android:src="@mipmap/ic_launcher"
+                    imageUrl="@{viewmodel.imageUrl}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

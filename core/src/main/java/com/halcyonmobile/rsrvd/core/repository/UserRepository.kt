@@ -8,7 +8,7 @@ import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
 import com.halcyonmobile.rsrvd.core.dto.UserResponseDto
-import com.halcyonmobile.rsrvd.profile.UserProfileData
+import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

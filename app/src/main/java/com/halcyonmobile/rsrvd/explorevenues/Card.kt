@@ -1,6 +1,6 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.model.Location
 import java.util.*
 
 data class Card(
