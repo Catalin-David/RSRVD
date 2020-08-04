@@ -17,9 +17,14 @@ class ProfileViewModel : ViewModel() {
 
     init {
         loadAccount()
+        initializeDefaults()
         //profileData.value =
             //UserProfileData("CLUJ-NAPOCA, RO", 16, listOf(Interests.FOOTBALL, Interests.BASKETBALL))
         loadUserInformation()
+    }
+
+    private fun initializeDefaults(){
+        profileData.value = UserProfileData()
     }
 
     fun setSignInAccount(newSignInAccount: GoogleSignInAccount?){
@@ -32,12 +37,15 @@ class ProfileViewModel : ViewModel() {
     }
 
     private fun loadUserInformation() {
-        profileData.value = UserRepository.getUserProfileData()
+        UserRepository.loadProfileData(
+            onSuccess = {
+            profileData.value = it
+        })
     }
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
-    val location: LiveData<String> = Transformations.map(profileData) { it.location?.name }
+    val location: LiveData<String> = Transformations.map(profileData) { it.location?.name ?: "" }
     val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
     val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
 }

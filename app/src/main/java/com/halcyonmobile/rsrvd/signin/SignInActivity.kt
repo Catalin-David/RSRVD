@@ -21,6 +21,7 @@ import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
+import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 
@@ -89,7 +90,7 @@ class SignInActivity : AppCompatActivity() {
                             // TODO: assign the access token
                             Log.w(ContentValues.TAG, "access token $accessToken")
                             UserRepository.isUserLoggedIn = true
-                            startActivity(Intent(this, MainActivity::class.java))
+                            startActivity(Intent(this, OnboardingActivity::class.java))
                         },
                         onFailure = {
                             signInBinding.root.showSnackbar(getString(R.string.authentication_failed))

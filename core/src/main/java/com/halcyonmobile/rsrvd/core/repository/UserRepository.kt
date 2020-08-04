@@ -15,6 +15,7 @@ import retrofit2.Response
 
 object UserRepository {
     private val userRemoteSource = UserRemoteSource()
+
     // TODO set when looged in
     var name: String = "NAME"
 
@@ -56,11 +57,11 @@ object UserRepository {
                     }
                 }
             })
-    fun getUserProfileData(): UserProfileData{
-        val response = userRemoteSource.getSignedInUserInformation()
-        response?.let {
-            return UserProfileData(response.location, response.reservations, response.interests)
-        }
-        return UserProfileData()
-    }
+
+    fun loadProfileData(onSuccess: (userProfileData: UserProfileData) -> Unit) =
+        userRemoteSource.getSignedInUserInformation(onRequestSuccess= { dto ->
+                dto?.let{
+                    onSuccess(UserProfileData(dto.location, dto.reservations, dto.interests))
+            }
+        })
 }
