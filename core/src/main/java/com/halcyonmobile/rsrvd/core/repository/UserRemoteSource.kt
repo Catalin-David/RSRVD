@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class UserRemoteSource {
-    fun getSignedInUserInformation(onRequestSuccess: (userProfileData: UserResponseDto?) -> Unit){
+    fun getSignedInUserInformation(onRequestSuccess: (userProfileData: UserResponseDto?) -> Unit) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
             .client(
@@ -25,17 +25,20 @@ class UserRemoteSource {
                             val newRequest: Request =
                                 chain.request()
                                     .newBuilder()
-                                    .header("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyX2NrZDVyMXpsZzAwMDAwN21nNWY3OTVlZzAiLCJpYXQiOjE1OTYwMjU5NjAsImV4cCI6MTU5NjExMjM2MCwiYXVkIjoiYnJhbWJsZTphY2Nlc3MifQ.Q8kvIWJnb6-SoYO4WOukU1v-r34XJ8k0DtK7Ia6naHYHyeKnMkKU_6ePFA5HJbBh9Bf1wNW1RIR8BcKd1BbaQlYTMYg8x9Y-ARxjQ6K9MEuFGcYodBftgRp7LadiRVyyhKXgocUn4Q0axb2L23WyA8DwSC9b3bYbuerA-xdL6vs")
+                                    .header(
+                                        "Authorization",
+                                        "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyX2NrZDVyMXpsZzAwMDAwN21nNWY3OTVlZzAiLCJpYXQiOjE1OTYwMjU5NjAsImV4cCI6MTU5NjExMjM2MCwiYXVkIjoiYnJhbWJsZTphY2Nlc3MifQ.Q8kvIWJnb6-SoYO4WOukU1v-r34XJ8k0DtK7Ia6naHYHyeKnMkKU_6ePFA5HJbBh9Bf1wNW1RIR8BcKd1BbaQlYTMYg8x9Y-ARxjQ6K9MEuFGcYodBftgRp7LadiRVyyhKXgocUn4Q0axb2L23WyA8DwSC9b3bYbuerA-xdL6vs"
+                                    )
                                     .build()
                             chain.proceed(newRequest)
                         })
                 }
-                .build()
+                    .build()
             )
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-        retrofit.create(UserAPI::class.java).getCurrentlySignedInUser().enqueue(object: Callback<UserResponseDto>{
+        retrofit.create(UserAPI::class.java).getCurrentlySignedInUser().enqueue(object : Callback<UserResponseDto> {
             override fun onFailure(call: Call<UserResponseDto>, t: Throwable) {
                 Log.d("USER REMOTE SOURCE", "REQUEST FAILED")
                 Log.d("USER REMOTE SOURCE", t.message ?: "Null message")
@@ -46,6 +49,7 @@ class UserRemoteSource {
                 onRequestSuccess(response.body())
             }
         })
+//      JUST ANOTHER WAY I THOUGHT OF DOING THIS REQUEST. SO FAR IT DOESN'T WORK EITHER WAY :(
 //        RetrofitSingleton.get()
 //            .create(UserAPI::class.java)
 //            .getCurrentlySignedInUser()

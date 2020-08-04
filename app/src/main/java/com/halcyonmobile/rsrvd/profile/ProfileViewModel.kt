@@ -19,15 +19,15 @@ class ProfileViewModel : ViewModel() {
         loadAccount()
         initializeDefaults()
         //profileData.value =
-            //UserProfileData("CLUJ-NAPOCA, RO", 16, listOf(Interests.FOOTBALL, Interests.BASKETBALL))
+        //UserProfileData("CLUJ-NAPOCA, RO", 16, listOf(Interests.FOOTBALL, Interests.BASKETBALL))
         loadUserInformation()
     }
 
-    private fun initializeDefaults(){
+    private fun initializeDefaults() {
         profileData.value = UserProfileData()
     }
 
-    fun setSignInAccount(newSignInAccount: GoogleSignInAccount?){
+    fun setSignInAccount(newSignInAccount: GoogleSignInAccount?) {
         signInAccount = newSignInAccount
         loadAccount()
     }
@@ -39,8 +39,8 @@ class ProfileViewModel : ViewModel() {
     private fun loadUserInformation() {
         UserRepository.loadProfileData(
             onSuccess = {
-            profileData.value = it
-        })
+                profileData.value = it
+            })
     }
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }

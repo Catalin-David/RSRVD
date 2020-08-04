@@ -8,7 +8,8 @@ import com.halcyonmobile.rsrvd.R
 
 object BindingAdapter {
     @BindingAdapter("imageUrl")
-    @JvmStatic fun ImageView.setImageUrl(imageUrl: Uri?){
+    @JvmStatic
+    fun ImageView.setImageUrl(imageUrl: Uri?) {
         Glide.with(this).asBitmap().load(imageUrl).error(R.mipmap.ic_launcher).into(this)
     }
 }

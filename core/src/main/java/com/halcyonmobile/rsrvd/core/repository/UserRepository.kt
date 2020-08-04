@@ -59,9 +59,9 @@ object UserRepository {
             })
 
     fun loadProfileData(onSuccess: (userProfileData: UserProfileData) -> Unit) =
-        userRemoteSource.getSignedInUserInformation(onRequestSuccess= { dto ->
-                dto?.let{
-                    onSuccess(UserProfileData(dto.location, dto.reservations, dto.interests))
+        userRemoteSource.getSignedInUserInformation(onRequestSuccess = { dto ->
+            dto?.let {
+                onSuccess(UserProfileData(dto.location, dto.reservations, dto.interests))
             }
         })
 }
