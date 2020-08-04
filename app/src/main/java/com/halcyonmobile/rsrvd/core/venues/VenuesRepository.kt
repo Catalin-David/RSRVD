@@ -1,8 +1,9 @@
 package com.halcyonmobile.rsrvd.core.venues
 
+import com.halcyonmobile.rsrvd.core.venues.dto.FilterDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 
-class VenuesRepository {
+object VenuesRepository {
     private val venuesRemoteSource = VenuesRemoteSource()
 
     fun getRecentlyVisitedVenues(callback: (List<Venue>?, Boolean) -> Unit) {
@@ -11,5 +12,9 @@ class VenuesRepository {
 
     fun getExploreVenues(callback: (List<Venue>?, Boolean) -> Unit) {
         venuesRemoteSource.getExploreVenues(callback)
+    }
+
+    fun filterVenues(dto: FilterDto, callback: (List<Venue>?, Boolean) -> Unit) {
+        venuesRemoteSource.filterVenues(dto, callback)
     }
 }
