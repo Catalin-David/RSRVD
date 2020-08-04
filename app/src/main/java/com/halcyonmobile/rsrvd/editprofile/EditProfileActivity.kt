@@ -36,11 +36,10 @@ class EditProfileActivity : AppCompatActivity() {
         binding = EditProfileActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            location.observe(this@EditProfileActivity) {
-                binding.setLocation(it)
-            }
+        binding.locationViewModel = this.viewModel
+        binding.lifecycleOwner = this
 
+        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
             updateState.observe(this@EditProfileActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }

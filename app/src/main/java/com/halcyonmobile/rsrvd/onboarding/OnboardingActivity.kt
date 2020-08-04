@@ -34,11 +34,10 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            location.observe(this@OnboardingActivity) {
-                binding.setLocation(it)
-            }
+        binding.locationViewModel = this.viewModel
+        binding.lifecycleOwner = this
 
+        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
             updateState.observe(this@OnboardingActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }

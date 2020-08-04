@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <data>
+
+        <variable
+            name="view_model"
+            type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -12,10 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-
             android:padding="20dp">
 
-            <!-- Search bar -->
+            <!-- Search Venue Bar -->
             <include
                 android:id="@+id/search_venue_bar"
                 layout="@layout/search_venue_bar"
@@ -23,250 +28,70 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/long_margin" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- No results -->
+            <include
                 android:id="@+id/no_results"
+                layout="@layout/no_results"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="gone">
+                android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/x"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/no_results"
-                    android:src="@drawable/ic_img_no_results"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@id/x"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/x">
-
-                    <TextView
-                        android:id="@+id/first_line"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/no_results"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Headline4"
-                        app:layout_constraintBottom_toTopOf="@id/second_line"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1" />
-
-                    <TextView
-                        android:id="@+id/second_line"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/don_t_give_up"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Body2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/first_line"
-                        app:layout_constraintVertical_bias="0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Search Results -->
+            <include
                 android:id="@+id/search_results"
+                layout="@layout/search_results"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/search_results_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/short_margin"
-                    android:alpha=".25"
-                    android:text="@string/search_results"
-                    android:textAllCaps="true"
-                    android:textAppearance="@style/TextAppearance.Headline3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/search_results_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="65dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:visible="@{!view_model.searching}">
+
                 <!-- Recently visited -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <include
                     android:id="@+id/recently_visited"
+                    layout="@layout/recently_visited"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height">
-
-                    <TextView
-                        android:id="@+id/recently_visited_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/short_margin"
-                        android:alpha=".25"
-                        android:text="@string/recently_visited"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Headline3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recently_visited_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="@dimen/cards_height" />
 
                 <!-- Info -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <include
+                    android:id="@+id/activity_info"
+                    layout="@layout/activity_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/details_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/long_margin"
-                        android:alpha=".25"
-                        android:text="@string/running"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Body2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/details_distance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/long_margin"
-                        android:alpha=".25"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Body2"
-                        app:layout_constraintStart_toEndOf="@id/details_activity"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text=" / 1.2 km away" />
-
-                    <TextView
-                        android:id="@+id/all_venues"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/long_margin"
-                        android:text="@string/see_all_venues"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Body2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="wrap_content" />
 
                 <!-- Explore -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <include
                     android:id="@+id/explore"
+                    layout="@layout/explore"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height">
-
-                    <TextView
-                        android:id="@+id/explore_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/short_margin"
-                        android:alpha=".25"
-                        android:text="@string/explore"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Headline3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/explore_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="@dimen/cards_height" />
 
                 <!-- We recommend -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <include
                     android:id="@+id/we_recommend"
+                    layout="@layout/we_recommend"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height_short">
-
-                    <TextView
-                        android:id="@+id/we_recommend_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/short_margin"
-                        android:alpha=".25"
-                        android:text="@string/we_recommend"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Headline3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/card_height_short"
-                        android:background="@color/primary"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/long_margin"
-                            android:contentDescription="@string/we_recommend_placeholder"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_img_recommendation"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/we_recommend_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:scaleX=".8"
-                            android:scaleY=".8"
-                            android:text="@string/we_recommend_script"
-                            android:textAppearance="@style/TextAppearance.Headline4"
-                            android:textColor="#000"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="@dimen/cards_height_short" />
 
                 <!-- Read more -->
-                <TextView
+                <Button
                     android:id="@+id/read_more"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="@dimen/long_margin"
                     android:background="?attr/selectableItemBackground"
                     android:text="@string/read_more"
-                    android:textAppearance="@style/TextAppearance.Body2" />
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    android:textColor="#fff" />
 
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

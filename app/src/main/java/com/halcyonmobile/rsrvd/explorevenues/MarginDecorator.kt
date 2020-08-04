@@ -10,24 +10,23 @@ class MarginDecorator(
     private val bottom: Boolean? = false,
     private val left: Boolean? = false
 ) : RecyclerView.ItemDecoration() {
+    // Default margin for a card (dp)
+    private val margin: Int = 40
+
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         with(outRect) {
             if (this@MarginDecorator.top == true) {
-                this.top = DEFAULT_MARGIN
+                this.top = margin
             }
             if (this@MarginDecorator.right == true) {
-                this.right = DEFAULT_MARGIN
+                this.right = margin
             }
             if (this@MarginDecorator.bottom == true) {
-                this.bottom = DEFAULT_MARGIN
+                this.bottom = margin
             }
             if (this@MarginDecorator.left == true) {
-                this.left = DEFAULT_MARGIN
+                this.left = margin
             }
         }
-    }
-
-    companion object {
-        const val DEFAULT_MARGIN = 35
     }
 }

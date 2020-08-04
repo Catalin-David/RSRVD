@@ -4,17 +4,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
+import com.halcyonmobile.rsrvd.utils.debounce
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
@@ -34,58 +34,36 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         setUpObservers()
         setUpLists()
 
-        // Clear button
-        binding.searchVenueBar.clear.setOnClickListener {
-            binding.searchVenueBar.searchText.text.clear()
-        }
+        binding.viewModel = this.viewModel
+        binding.lifecycleOwner = activity
 
-        // Readme Button
+        binding.activityInfo.viewModel = this.viewModel
+        binding.activityInfo.lifecycleOwner = activity
+
+        binding.searchResults.viewModel = this.viewModel
+        binding.searchResults.lifecycleOwner = activity
+
+        binding.noResults.viewModel = this.viewModel
+        binding.noResults.lifecycleOwner = activity
+
+        binding.searchVenueBar.viewModel = this.viewModel
+        binding.searchVenueBar.lifecycleOwner = activity
+
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
-        }
-
-        binding.searchVenueBar.searchTerm?.term?.observe(viewLifecycleOwner) {
-            viewModel.searchTermChanged(it)
         }
     }
 
     private fun setUpObservers() {
         viewModel.apply {
-            recentlyVisitedCards.observe(viewLifecycleOwner) {
-                recentlyViewedAdapter.submitList(it)
-            }
+            searchResults.observe(viewLifecycleOwner) { searchResultsAdapter.submitList(it) }
+            recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
+            exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
 
-            exploreCards.observe(viewLifecycleOwner) {
-                exploreAdapter.submitList(it)
-            }
+            error.observe(viewLifecycleOwner) { if (it) view?.showSnackbar(getString(R.string.something_went_wrong)) }
 
-            error.observe(viewLifecycleOwner) {
-                if (it) {
-                    view?.showSnackbar(getString(R.string.something_went_wrong))
-                }
-            }
-
-            cardInFocus.observe(viewLifecycleOwner) {
-                binding.detailsDistance.text = viewModel.getFormattedDistance()
-                binding.detailsActivity.visibility = if (cardInFocus.value?.location != null) View.VISIBLE else View.GONE
-            }
-
-            searchResults.observe(viewLifecycleOwner) {
-                searchResultsAdapter.submitList(it)
-
-                if (it.isNotEmpty()) {
-                    binding.noResults.visibility = View.GONE
-                    binding.searchResults.visibility = View.VISIBLE
-                }
-            }
-
-            searching.observe(viewLifecycleOwner) {
-                val isEmpty = viewModel.searchResults.value.isNullOrEmpty()
-
-                binding.content.visibility = if (it) View.GONE else View.VISIBLE
-                binding.noResults.visibility = if (it && isEmpty) View.VISIBLE else View.GONE
-                binding.searchResults.visibility = if (it && !isEmpty) View.VISIBLE else View.GONE
-                binding.searchVenueBar.clear.visibility = if (it) View.VISIBLE else View.GONE
+            searchTerm.observe(viewLifecycleOwner) {
+                debounce(300L, viewLifecycleOwner.lifecycleScope, viewModel::searchTermChanged)(it)
             }
         }
     }
@@ -93,7 +71,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun setUpLists() {
         // Search Results Setup
-        binding.searchResultsList.apply {
+        binding.searchResults.searchResultsList.apply {
             setHasFixedSize(false)
             adapter = searchResultsAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
@@ -101,7 +79,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         }
 
         // Recently Visited Setup
-        binding.recentlyVisitedList.apply {
+        binding.recentlyVisited.recentlyVisitedList.apply {
             setHasFixedSize(false)
             adapter = recentlyViewedAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
@@ -117,7 +95,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         }
 
         // Explore Setup
-        binding.exploreList.apply {
+        binding.explore.exploreList.apply {
             setHasFixedSize(false)
             adapter = exploreAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
