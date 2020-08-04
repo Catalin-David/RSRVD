@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object UserRemoteSource {
+class UserRemoteSource {
     fun getSignedInUserInformation(): UserResponseDto? {
         var result: UserResponseDto? = null
         RetrofitSingleton.get()
