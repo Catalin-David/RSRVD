@@ -7,7 +7,7 @@ import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 
 internal class MeRemoteSource {
-    private val meApi = RetrofitManager.retrofitWithAuthorication.create(MeApi::class.java)
+    private val meApi = RetrofitManager.retrofitWithAuthentication!!.create(MeApi::class.java)
 
     fun update(location: Location, interests: List<Interests>, updateState: (Boolean) -> Unit) {
         meApi.update(ProfileDto(UserRepository.name, location, interests)).enqueue(ProfileUpdateHandler(updateState))
