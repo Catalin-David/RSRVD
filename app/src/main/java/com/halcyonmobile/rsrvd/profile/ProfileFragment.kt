@@ -45,7 +45,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.buttonLogOut.setOnClickListener {
             AlertDialog.Builder(binding.root.context).apply {
                 setTitle(getString(R.string.log_out_prompt))
-                setPositiveButton(getString(R.string.log_out)){_, _ ->
+                setPositiveButton(getString(R.string.log_out)) { _, _ ->
                     GoogleSignIn.getClient(
                         context,
                         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
@@ -56,13 +56,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             startActivity(Intent(activity, SignInActivity::class.java))
                         }
                 }
-                setNegativeButton(getString(R.string.cancel)){_, _ -> }
+                setNegativeButton(getString(R.string.cancel)) { _, _ -> }
                 show()
             }
         }
 
         binding.buttonEditProfile.setOnClickListener {
-            if(viewModel.isUserLoggedIn()){
+            if (viewModel.isUserLoggedIn()) {
                 startActivity(Intent(this.activity, EditProfileActivity::class.java))
             }
         }
