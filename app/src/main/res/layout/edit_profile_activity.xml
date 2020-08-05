@@ -11,7 +11,7 @@
 
         <variable
             name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.onboarding.Interests>" />
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

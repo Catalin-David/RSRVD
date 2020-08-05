@@ -10,7 +10,7 @@
 
         <variable
             name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.onboarding.Interests>" />
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
     </data>
 
     <ScrollView
@@ -53,6 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/picture_title_offset_small"
+                android:textAppearance="@style/TextAppearance.Headline4"
                 android:text="@string/about_you"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.Headline4"

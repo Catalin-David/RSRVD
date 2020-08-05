@@ -3,6 +3,7 @@ package com.halcyonmobile.rsrvd.explorevenues
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.halcyonmobile.rsrvd.core.shared.repository.UserRepository
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 
 class ExploreViewModel : ViewModel() {

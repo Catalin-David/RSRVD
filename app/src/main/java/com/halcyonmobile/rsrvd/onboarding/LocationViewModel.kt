@@ -3,9 +3,8 @@ package com.halcyonmobile.rsrvd.onboarding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.halcyonmobile.rsrvd.core.me.MeRepository
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 
 class LocationViewModel : ViewModel() {
     private val _location: MutableLiveData<Location> = MutableLiveData()
@@ -27,7 +26,7 @@ class LocationViewModel : ViewModel() {
                     (if (_location.value == null && interests.isEmpty()) " & " else "") +
                     if (interests.isEmpty()) "No interests" else ""
         } else {
-            MeRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
+            UserRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
             UserRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
         }
     }
