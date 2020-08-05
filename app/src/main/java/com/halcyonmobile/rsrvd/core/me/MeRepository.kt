@@ -1,8 +1,8 @@
 package com.halcyonmobile.rsrvd.core.me
 
 import com.halcyonmobile.rsrvd.core.me.dto.UserDto
-import com.halcyonmobile.rsrvd.core.model.Interests
-import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 
 
 class MeRepository {

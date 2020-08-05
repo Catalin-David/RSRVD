@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.model
+package com.halcyonmobile.rsrvd.core.shared
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

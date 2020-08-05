@@ -1,7 +1,7 @@
-package com.halcyonmobile.rsrvd.core.dto
+package com.halcyonmobile.rsrvd.core.user
 
-import com.halcyonmobile.rsrvd.core.model.Location
-import com.halcyonmobile.rsrvd.core.model.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

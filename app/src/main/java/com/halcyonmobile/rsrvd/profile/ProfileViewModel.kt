@@ -7,12 +7,14 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
-import com.halcyonmobile.rsrvd.core.model.UserProfileData
-import com.halcyonmobile.rsrvd.core.model.Interests
+import com.halcyonmobile.rsrvd.core.user.UserProfileData
+import com.halcyonmobile.rsrvd.core.shared.Interests
 
 class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
-    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData())
+    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(
+        UserProfileData()
+    )
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
     val location: LiveData<String> = Transformations.map(profileData) { it.location?.name ?: "" }

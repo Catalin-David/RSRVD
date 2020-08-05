@@ -5,8 +5,8 @@ import com.halcyonmobile.rsrvd.core.me.dto.UserDto
 import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 import com.halcyonmobile.rsrvd.editprofile.ProfileUpdateHandler
-import com.halcyonmobile.rsrvd.core.model.Interests
-import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 import retrofit2.Call
 import retrofit2.Callback
 

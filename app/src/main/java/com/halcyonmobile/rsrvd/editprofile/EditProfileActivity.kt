@@ -9,8 +9,8 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.model.Interests
-import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.onboarding.*
@@ -101,7 +101,8 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun markInterests() {
         viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            val position = Interests.values().indexOf(
+                Interests.values().find { it.name == myInterest.name })
             (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
         }
     }

@@ -1,6 +1,5 @@
-package com.halcyonmobile.rsrvd.core.api
+package com.halcyonmobile.rsrvd.core.user
 
-import com.halcyonmobile.rsrvd.core.dto.UserResponseDto
 import retrofit2.Call
 import retrofit2.http.GET
 

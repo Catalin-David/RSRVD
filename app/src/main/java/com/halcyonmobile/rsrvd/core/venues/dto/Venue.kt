@@ -1,6 +1,6 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
-import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.venues.models.Facilities
 import com.halcyonmobile.rsrvd.core.venues.models.Open
 import com.squareup.moshi.Json

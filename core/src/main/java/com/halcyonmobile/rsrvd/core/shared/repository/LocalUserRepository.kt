@@ -1,18 +1,9 @@
 package com.halcyonmobile.rsrvd.core.shared.repository
 
-import android.content.ContentValues
-import android.util.Log
-import com.halcyonmobile.rsrvd.core.shared.RetrofitSingleton
-import com.halcyonmobile.rsrvd.core.authentication.AuthenticationAPI
 import com.halcyonmobile.rsrvd.core.authentication.AuthenticationRepository
-import com.halcyonmobile.rsrvd.core.authentication.dto.AuthenticationRequestDto
-import com.halcyonmobile.rsrvd.core.authentication.dto.AuthenticationResponseDto
-import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
-import com.halcyonmobile.rsrvd.core.model.UserProfileData
-import com.halcyonmobile.rsrvd.core.repository.UserRemoteSource
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.halcyonmobile.rsrvd.core.shared.sharedpreferences.SharedPreferencesManager
+import com.halcyonmobile.rsrvd.core.user.UserProfileData
+import com.halcyonmobile.rsrvd.core.user.UserRemoteSource
 
 object LocalUserRepository {
     private val userRemoteSource =
@@ -47,5 +38,11 @@ object LocalUserRepository {
         AuthenticationRepository().postToken(idToken, onSuccess, onFailure)
 
     fun loadProfileData(onSuccess: (userProfileData: UserProfileData) -> Unit) =
-        userRemoteSource.get { it?.let { onSuccess(UserProfileData(it.location, it.reservations, it.interests)) } }
+        userRemoteSource.get { it?.let { onSuccess(
+            UserProfileData(
+                it.location,
+                it.reservations,
+                it.interests
+            )
+        ) } }
 }

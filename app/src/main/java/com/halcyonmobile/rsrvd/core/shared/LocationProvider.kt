@@ -12,7 +12,6 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.halcyonmobile.rsrvd.core.model.Location
 import java.util.*
 
 class LocationProvider(private val activity: Activity, private val callback: (Location) -> Unit) {
@@ -48,12 +47,14 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
                         val address = Geocoder(activity, Locale.getDefault()).getFromLocation(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude, 1)[0]
-                        callback(Location(
-                            name = address.locality,
-                            details = address.getAddressLine(0),
-                            latitude = locationResult.lastLocation.latitude,
-                            longitude = locationResult.lastLocation.longitude
-                        ))
+                        callback(
+                            Location(
+                                name = address.locality,
+                                details = address.getAddressLine(0),
+                                latitude = locationResult.lastLocation.latitude,
+                                longitude = locationResult.lastLocation.longitude
+                            )
+                        )
                     }
                 }
             }, Looper.getMainLooper())
