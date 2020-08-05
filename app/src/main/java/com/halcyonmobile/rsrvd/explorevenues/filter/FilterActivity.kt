@@ -21,16 +21,19 @@ import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class FilterActivity : AppCompatActivity() {
     private lateinit var binding: FilterActivityBinding
-    private lateinit var viewModel: LocationViewModel
+    private lateinit var locationViewModel: LocationViewModel
+    private lateinit var filterViewModel: FilterViewModel
 
     private val locationProvider: LocationProvider = LocationProvider(this) {
-        viewModel.setLocation(it)
+        locationViewModel.setLocation(it)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FilterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
@@ -50,12 +53,24 @@ class FilterActivity : AppCompatActivity() {
             cancel.setOnClickListener { finish() }
 
             ready.setOnClickListener {
-//            setResult()
-                finish()
+                if (!filterViewModel.isReady()) {
+                    binding.root.showSnackbar("No filter applied!").show()
+                } else {
+                    setResult(
+                        Activity.RESULT_OK, Intent().putExtra(
+                            "filters", Filters(
+                                activities = getActivities(),
+                                location = filterViewModel.location.value
+                            )
+                        )
+                    )
+
+                    finish()
+                }
             }
         }
 
-        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
+        locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
             location.observe(this@FilterActivity) {
                 binding.location = it
             }
@@ -68,15 +83,12 @@ class FilterActivity : AppCompatActivity() {
                 binding.root.showSnackbar(it).show()
             }
 
-            interests.observe(this@FilterActivity) {
-                markInterests()
-            }
-
             retrieving.observe(this@FilterActivity) {
                 when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
                     RetrieveState.POST ->
-                        if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
+                        if (this@FilterActivity.locationViewModel.location.value != null) binding.mapsText.text =
+                            this@FilterActivity.locationViewModel.location.value!!.name
                         else {
                             binding.mapsText.text = getString(R.string.pick_location)
                             locationProvider.init()
@@ -92,7 +104,10 @@ class FilterActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
+            data.getParcelableExtra<Location>("location")?.let {
+                locationViewModel.setLocation(it)
+                filterViewModel.setLocation(it)
+            }
         }
     }
 
@@ -102,14 +117,7 @@ class FilterActivity : AppCompatActivity() {
         locationProvider.onRequestPermissionsResult(requestCode, grantResults)
     }
 
-    private fun markInterests() {
-        viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
-            (binding.activities.children.toList()[position] as InterestView).setChecked(true)
-        }
-    }
-
-    private fun getInterests(): List<Interests> = binding.activities.children
+    private fun getActivities(): List<Interests> = binding.activities.children
         .filterIsInstance<InterestView>()
         .mapIndexed { index, view -> if (view.isChecked()) Interests.values()[index] else null }
         .filterNotNull()

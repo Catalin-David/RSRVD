@@ -27,6 +27,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     }
 
     private lateinit var binding: FragmentExploreBinding
+    private lateinit var viewModel: ExploreViewModel
 
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
@@ -34,18 +35,21 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentExploreBinding.bind(view)
-
-        val viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
 
         binding.header.viewModel = viewModel
         binding.header.lifecycleOwner = this
 
         // Observers
         viewModel.apply {
-            recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
+            recentlyVisitedCards.observe(viewLifecycleOwner) {
+                recentlyViewedAdapter.submitList(it)
+                setCardInFocus(recentlyVisitedCards.value?.get(0))
+            }
             exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
-            error.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
+            error.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong").show() }
             cardInFocus.observe(viewLifecycleOwner) { binding.detailsDistance.text = viewModel.getFormattedDistance() }
+            filters.observe(viewLifecycleOwner) { viewModel.filterVenues() }
         }
 
         // Recently Visited Setup
@@ -54,11 +58,11 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             adapter = recentlyViewedAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             LinearSnapHelper().attachToRecyclerView(this)
-            setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            setOnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
                     val layoutManager = layoutManager as LinearLayoutManager
                     val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-                    viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value!![firstVisiblePosition])
+                    viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value?.get(firstVisiblePosition))
                 }
             }
         }
@@ -86,7 +90,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (data != null && resultCode == Activity.RESULT_OK && requestCode == FILTER_REQUEST_CODE) {
-            // TODO set filters
+            viewModel.setFilters(data.getParcelableExtra("filters"))
         }
     }
 

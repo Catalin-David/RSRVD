@@ -3,8 +3,6 @@ package com.halcyonmobile.rsrvd.core.venues
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
-import com.halcyonmobile.rsrvd.core.venues.models.StartEnd
-import com.halcyonmobile.rsrvd.core.venues.models.FilterLocation
 import com.halcyonmobile.rsrvd.explorevenues.GetVenuesHandler
 
 class VenuesRemoteSource {
