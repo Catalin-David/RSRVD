@@ -3,8 +3,8 @@ package com.halcyonmobile.rsrvd.core.repository
 import android.content.ContentValues
 import android.util.Log
 import com.halcyonmobile.rsrvd.core.shared.RetrofitSingleton
-import com.halcyonmobile.rsrvd.core.api.AuthenticationAPI
-import com.halcyonmobile.rsrvd.core.dto.AuthenticationRequestDto
+import com.halcyonmobile.rsrvd.core.authentification.AuthenticationAPI
+import com.halcyonmobile.rsrvd.core.authentification.dto.AuthenticationRequestDto
 import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
 import com.halcyonmobile.rsrvd.core.sharedpreferences.SharedPreferencesManager
 import com.halcyonmobile.rsrvd.core.model.UserProfileData
@@ -43,7 +43,11 @@ object UserRepository {
     fun userSignIn(idToken: String, onSuccess: (token: String) -> Unit, onFailure: () -> Unit) =
         RetrofitSingleton.get()
             .create(AuthenticationAPI::class.java)
-            .postToken(AuthenticationRequestDto(idToken))
+            .postToken(
+                AuthenticationRequestDto(
+                    idToken
+                )
+            )
             .enqueue(object : Callback<AuthenticationResponseDto> {
                 override fun onFailure(call: Call<AuthenticationResponseDto>, t: Throwable) {
                     Log.w(ContentValues.TAG, "error: ", t)
