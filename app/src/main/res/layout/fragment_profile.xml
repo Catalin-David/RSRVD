@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.halcyonmobile.rsrvd.profile.ProfileViewModel" />
@@ -114,7 +113,8 @@
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flexbox_interests"
-                inflateData="@{viewmodel.interests}"
+                app:interests="@{viewmodel.interests}"
+                app:checkable="@{false}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"

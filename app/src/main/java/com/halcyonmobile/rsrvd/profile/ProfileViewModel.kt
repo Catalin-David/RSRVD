@@ -27,4 +27,25 @@ class ProfileViewModel : ViewModel() {
     val location: LiveData<String> = Transformations.map(profileData) { it.location?.name ?: "" }
     val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
     val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
+
+    var isUserLoggedIn
+        get() = UserRepository.isUserLoggedIn
+        set(value) {
+            UserRepository.isUserLoggedIn = value
+        }
+    var exploreFirst
+        get() = UserRepository.exploreFirst
+        set(value) {
+            UserRepository.exploreFirst = value
+        }
+    var accessToken
+        get() = UserRepository.accessToken
+        set(value){
+            UserRepository.accessToken = value
+        }
+    var repoLocation
+        get() = UserRepository.location
+        set(value) {
+            UserRepository.location = value
+        }
 }

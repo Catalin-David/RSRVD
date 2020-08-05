@@ -52,10 +52,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     )
                         .signOut()
                         .addOnCompleteListener {
-                            UserRepository.isUserLoggedIn = false
-                            UserRepository.exploreFirst = false
-                            UserRepository.accessToken = ""
-                            UserRepository.location = Pair(0.0, 0.0)
+                            viewModel.isUserLoggedIn = false
+                            viewModel.exploreFirst = false
+                            viewModel.accessToken = ""
+                            viewModel.repoLocation = Pair(0.0, 0.0)
                             startActivity(Intent(activity, SignInActivity::class.java))
                         }
                 }
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         binding.buttonEditProfile.setOnClickListener {
-            if(UserRepository.isUserLoggedIn){
+            if(viewModel.isUserLoggedIn){
                 startActivity(Intent(this.activity, EditProfileActivity::class.java))
             }
         }
