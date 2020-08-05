@@ -6,6 +6,7 @@ import com.halcyonmobile.rsrvd.core.model.Interests
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 
 @BindingAdapter("inflateData")
-fun inflateData(layout: FlexboxLayout, data: List<Interests>) {
-    data.map { layout.addView(InterestView(layout.context).apply { setInterest(it.name) }) }
+fun FlexboxLayout.inflateData(data: List<Interests>) {
+    removeAllViews()
+    data.map { addView(InterestView(context).apply { setInterest(it.name) }) }
 }
