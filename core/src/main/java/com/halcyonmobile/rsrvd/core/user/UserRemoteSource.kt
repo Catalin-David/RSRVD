@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.core.user
 
 import android.util.Log
 import com.halcyonmobile.rsrvd.core.shared.RetrofitSingleton
+import com.halcyonmobile.rsrvd.core.user.dto.UserResponseDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

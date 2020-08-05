@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.user
+package com.halcyonmobile.rsrvd.core.user.model
 
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location

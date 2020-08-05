@@ -13,7 +13,8 @@ enum class RetrieveState {
 }
 
 class LocationViewModel : ViewModel() {
-    private val meRepository: MeRepository = MeRepository()
+    private val meRepository: MeRepository =
+        MeRepository()
 
     private val _location: MutableLiveData<Location> = MutableLiveData()
     private val _updateState: MutableLiveData<Boolean> = MutableLiveData()

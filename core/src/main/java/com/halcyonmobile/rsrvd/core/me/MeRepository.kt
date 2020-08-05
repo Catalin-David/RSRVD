@@ -6,7 +6,8 @@ import com.halcyonmobile.rsrvd.core.shared.Location
 
 
 class MeRepository {
-    private val meRemoteSource = MeRemoteSource()
+    private val meRemoteSource =
+        MeRemoteSource()
 
     fun update(location: Location, interests: List<Interests>, callback: (Boolean) -> Unit) {
         meRemoteSource.update(location, interests, callback)

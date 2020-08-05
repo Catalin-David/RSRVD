@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.editprofile
+package com.halcyonmobile.rsrvd.core.me
 
 import com.halcyonmobile.rsrvd.core.me.dto.UserDto
 import retrofit2.Call
