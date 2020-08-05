@@ -11,7 +11,8 @@ import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.model.Interests
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
