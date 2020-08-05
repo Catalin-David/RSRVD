@@ -4,7 +4,7 @@ import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.halcyonmobile.rsrvd.core.shared.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 
 class ExploreViewModel : ViewModel() {
@@ -45,7 +45,7 @@ class ExploreViewModel : ViewModel() {
     fun getFormattedDistance(): String {
         _cardInFocus.value?.location?.let {
             val distances = FloatArray(1)
-            Location.distanceBetween(it.latitude, it.longitude, UserRepository.location.first, UserRepository.location.second, distances)
+            Location.distanceBetween(it.latitude, it.longitude, UserLocalRepository.location.first, UserLocalRepository.location.second, distances)
             val distanceFormatted = if (distances[0] > 1000) "${"%.2f".format(distances[0] / 1000)}km" else "${distances[0]}m"
             return " / $distanceFormatted away"
         }

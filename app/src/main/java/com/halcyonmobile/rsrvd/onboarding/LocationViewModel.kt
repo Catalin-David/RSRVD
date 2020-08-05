@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 
 class LocationViewModel : ViewModel() {
     private val userRepository: com.halcyonmobile.rsrvd.core.user.UserRepository = com.halcyonmobile.rsrvd.core.user.UserRepository()
@@ -29,7 +30,7 @@ class LocationViewModel : ViewModel() {
                     if (interests.isEmpty()) "No interests" else ""
         } else {
             userRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
-            UserRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
+            UserLocalRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
         }
     }
 }
