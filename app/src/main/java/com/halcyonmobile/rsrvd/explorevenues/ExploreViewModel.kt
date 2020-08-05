@@ -9,7 +9,7 @@ import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 class ExploreViewModel : ViewModel() {
     private val _searching: MutableLiveData<Boolean> = MutableLiveData(false)
     private val _searchResults: MutableLiveData<List<Card>> = MutableLiveData(emptyList())
-    private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NoRecentCard.instance))
+    private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NO_RECENTS_CARD))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
     private val _error = MutableLiveData(false)
     private val _cardInFocus: MutableLiveData<Card> = MutableLiveData()
@@ -39,13 +39,13 @@ class ExploreViewModel : ViewModel() {
         initializeRecentlyVisitedList()
         initializeExploreList()
 
-        _cardInFocus.value = _recentlyVisitedCards.value?.get(0) ?: NoRecentCard.instance
+        _cardInFocus.value = _recentlyVisitedCards.value?.get(0) ?: NO_RECENTS_CARD
     }
 
     private fun initializeRecentlyVisitedList() = VenuesRepository.getRecentlyVisitedVenues { venues, error ->
         _error.value = error
         (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-            _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
+            _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NO_RECENTS_CARD) else it
         }
     }
 
@@ -93,5 +93,9 @@ class ExploreViewModel : ViewModel() {
         } else {
             _searchResults.value = listOf()
         }
+    }
+
+    companion object {
+        private val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!")
     }
 }
