@@ -2,21 +2,20 @@
 <resources>
     <dimen name="short_margin">8dp</dimen>
     <dimen name="default_margin">16dp</dimen>
-    <dimen name="long_margin">32dp</dimen>
-    <dimen name="medium_margin">24dp</dimen>
+    <dimen name="medium_margin">32dp</dimen>
+    <dimen name="long_margin">24dp</dimen>
 
     <dimen name="short_padding">8dp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="long_padding">24dp</dimen>
-
-    <dimen name="height_btn_connect_signin">56dp</dimen>
+    <dimen name="height_btn_connect_sgnin">56dp</dimen>
 
     <dimen name="width_text_view_anim">900dp</dimen>
     <dimen name="box_line_height">40dp</dimen>
     <dimen name="side_guide">20dp</dimen>
-
-    <dimen name="picture_dimension">160dp</dimen>
-    <dimen name="text_on_picture_margin">115dp</dimen>
+    <dimen name="background_square_padding">6dp</dimen>
+    <dimen name="margin_start_square">42dp</dimen>
+    <dimen name="margin_start_venue_facilities">64dp</dimen>
 
     <dimen name="card_width">400dp</dimen>
     <dimen name="card_height">220dp</dimen>

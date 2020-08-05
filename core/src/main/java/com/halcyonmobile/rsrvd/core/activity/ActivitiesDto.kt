@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd.core.activity
 
-import com.halcyonmobile.rsrvd.core.activity.PriceDto
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
