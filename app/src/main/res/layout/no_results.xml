@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="view_model"
+            name="viewModel"
             type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
     </data>
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:visible="@{view_model.loading == false &amp;&amp; view_model.searching == true &amp;&amp; view_model.searchResults.empty}">
+        app:visible="@{viewModel.noResultsVisible}">
 
         <ImageView
             android:id="@+id/no_results_img"

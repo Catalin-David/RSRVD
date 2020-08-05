@@ -5,14 +5,14 @@
     <data>
 
         <variable
-            name="view_model"
+            name="viewModel"
             type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:visible="@{view_model.searching &amp;&amp; !view_model.searchResults.empty}">
+        app:visible="@{viewModel.searchResultsVisible}">
 
         <TextView
             android:id="@+id/search_results_title"

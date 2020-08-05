@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,7 +9,6 @@ import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
 import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
-import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,13 +34,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
-
         }
 
         openFragment(ExploreFragment(), supportFragmentManager)
     }
 
-    private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null){
+    private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null) {
         fragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
             addToBackStack(addToBackStackParameter)

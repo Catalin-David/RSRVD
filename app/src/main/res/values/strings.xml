@@ -45,4 +45,6 @@
     <string name="don_t_give_up">don\'t give up, just try again.</string>
     <string name="clear_search_term">clear search term</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="reservation_fragment">Reservation fragment</string>
+    <string name="profile_fragment">Profile fragment</string>
 </resources>

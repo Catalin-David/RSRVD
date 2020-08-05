@@ -3,7 +3,7 @@ package com.halcyonmobile.rsrvd.core.shared.repository
 import com.halcyonmobile.rsrvd.core.authentication.AuthenticationRepository
 import com.halcyonmobile.rsrvd.core.shared.sharedpreferences.SharedPreferencesManager
 
-object UserRepository {
+object UserLocalRepository {
     // TODO set when looged in
     var name: String = "NAME"
 

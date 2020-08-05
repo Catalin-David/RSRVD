@@ -2,19 +2,19 @@ package com.halcyonmobile.rsrvd.shared
 
 import android.annotation.SuppressLint
 import android.location.Location
-import com.halcyonmobile.rsrvd.selectlocation.Location as myLocation
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.google.android.flexbox.FlexboxLayout
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
-import com.halcyonmobile.rsrvd.onboarding.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
 
-@BindingAdapter("interests")
-fun FlexboxLayout.interests(data: List<Interests>) = data.map {
-    addView(InterestView(context).apply { setInterest(it.name) })
+@BindingAdapter(value = ["bind:interests", "bind:checkable"], requireAll = false)
+fun FlexboxLayout.interests(data: List<Interests>, checkable: Boolean?) = data.map {
+    addView(InterestView(context, checkable).apply { setInterest(it.name) })
 }
 
 @BindingAdapter("visible")
@@ -30,8 +30,8 @@ fun TextView.formattedDistance(location: myLocation?) = if (location != null) {
     Location.distanceBetween(
         location.latitude,
         location.longitude,
-        UserRepository.location.first,
-        UserRepository.location.second,
+        UserLocalRepository.location.first,
+        UserLocalRepository.location.second,
         distances
     )
 

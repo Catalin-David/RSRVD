@@ -43,7 +43,7 @@ class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, Car
                 Glide
                     .with(binding.root)
                     .load(item.image)
-                    .placeholder(R.drawable.ic_baseline_cloud_download_24)
+                    .placeholder(R.drawable.ic_baseline_cloud_download)
                     .into(binding.background)
             }
         }

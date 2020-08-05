@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="view_model"
+            name="viewModel"
             type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
     </data>
 
@@ -25,7 +25,7 @@
             android:textAppearance="@style/TextAppearance.Body2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{view_model.cardInFocus.location != null}" />
+            app:visible="@{viewModel.cardInFocus.location != null}" />
 
         <TextView
             android:id="@+id/details_distance"
@@ -35,7 +35,7 @@
             android:alpha=".25"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Body2"
-            app:formattedDistance="@{view_model.cardInFocus.location}"
+            app:formattedDistance="@{viewModel.cardInFocus.location}"
             app:layout_constraintStart_toEndOf="@id/details_activity"
             app:layout_constraintTop_toTopOf="parent"
             tools:text=" / 1.2 km away" />

@@ -26,7 +26,8 @@
                 layout="@layout/search_venue_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/long_margin" />
+                android:layout_marginVertical="@dimen/long_margin"
+                app:viewModel="@{view_model}" />
 
             <!-- No results -->
             <include
@@ -34,14 +35,16 @@
                 layout="@layout/no_results"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:viewModel="@{view_model}" />
 
             <!-- Search Results -->
             <include
                 android:id="@+id/search_results"
                 layout="@layout/search_results"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:viewModel="@{view_model}" />
 
             <LinearLayout
                 android:id="@+id/content"
@@ -62,7 +65,8 @@
                     android:id="@+id/activity_info"
                     layout="@layout/activity_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:viewModel="@{view_model}" />
 
                 <!-- Explore -->
                 <include

@@ -1,14 +1,14 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.halcyonmobile.rsrvd.core.shared.repository.UserRepository
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 
 class ExploreViewModel : ViewModel() {
     private val _searching: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val _searchResults: MutableLiveData<List<Card>> = MutableLiveData()
+    private val _searchResults: MutableLiveData<List<Card>> = MutableLiveData(emptyList())
     private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NoRecentCard.instance))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
     private val _error = MutableLiveData(false)
@@ -21,27 +21,50 @@ class ExploreViewModel : ViewModel() {
     val exploreCards: LiveData<List<Card>> = _exploreCards
     val error: LiveData<Boolean> = _error
     val cardInFocus: LiveData<Card> = _cardInFocus
-    val loading: LiveData<Boolean> = _loading
 
     val searchTerm: MutableLiveData<String> = MutableLiveData("")
 
+    val noResultsVisible = MediatorLiveData<Boolean>()
+    val searchResultsVisible = MediatorLiveData<Boolean>()
+
     init {
-        VenuesRepository.getRecentlyVisitedVenues { venues, error ->
-            _error.value = error
-            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-                _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
-            }
-        }
+        noResultsVisibleSources()
+        searchResultsVisibleSources()
 
-        VenuesRepository.getExploreVenues { venues, error ->
-            _error.value = error
-            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-                _exploreCards.value = it
-            }
-        }
+        initializeRecentlyVisitedList()
+        initializeExploreList()
 
-        _cardInFocus.value = _recentlyVisitedCards.value!![0]
+        _cardInFocus.value = _recentlyVisitedCards.value?.get(0) ?: NoRecentCard.instance
     }
+
+    private fun noResultsVisibleSources() {
+        noResultsVisible.addSource(_loading) { noResultsVisible.value = checkNoResults() }
+        noResultsVisible.addSource(_searching) { noResultsVisible.value = checkNoResults() }
+        noResultsVisible.addSource(_searchResults) { noResultsVisible.value = checkNoResults() }
+    }
+
+    private fun searchResultsVisibleSources() {
+        searchResultsVisible.addSource(_searching) { searchResultsVisible.value = checkSearchResults() }
+        searchResultsVisible.addSource(_searchResults) { searchResultsVisible.value = checkSearchResults() }
+    }
+
+    private fun initializeRecentlyVisitedList() = VenuesRepository.getRecentlyVisitedVenues { venues, error ->
+        _error.value = error
+        (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+            _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
+        }
+    }
+
+    private fun initializeExploreList() = VenuesRepository.getExploreVenues { venues, error ->
+        _error.value = error
+        (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+            _exploreCards.value = it
+        }
+    }
+
+    private fun checkNoResults() = _loading.value != true && searching.value == true && searchResults.value?.isEmpty() ?: false
+
+    private fun checkSearchResults() = _searching.value == true && _searchResults.value?.isNotEmpty() ?: false
 
     fun setCardInFocus(newCard: Card) {
         _cardInFocus.value = newCard
@@ -51,12 +74,12 @@ class ExploreViewModel : ViewModel() {
         searchTerm.value = ""
     }
 
-    fun searchTermChanged(term: String) {
-        _searching.value = term.isNotEmpty()
+    fun searchTermChanged() {
+        _searching.value = searchTerm.value?.isNotEmpty()
 
         if (_searching.value == true) {
             _loading.value = true
-            VenuesRepository.search(term) { venues, error ->
+            VenuesRepository.search(searchTerm.value!!) { venues, error ->
                 _error.value = error
                 (venues?.map { venue ->
                     Card(title = venue.name, image = venue.image, location = venue.location)

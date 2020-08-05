@@ -1,11 +1,10 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
-import com.halcyonmobile.rsrvd.selectlocation.Location
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SearchVenueBodyDto (
+data class SearchVenueBodyDto(
     @Json(name = "name")
     val name: String,
     @Json(name = "location")

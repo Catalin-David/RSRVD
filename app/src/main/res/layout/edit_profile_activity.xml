@@ -36,7 +36,7 @@
             android:layout_height="@dimen/box_line_height"
             android:layout_margin="@dimen/long_margin"
             android:contentDescription="@string/exit_editing_profile"
-            android:src="@drawable/ic_baseline_close_24"
+            android:src="@drawable/ic_baseline_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,7 +97,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/short_margin"
                 android:contentDescription="@string/maps_icon"
-                android:src="@drawable/ic_outline_pin_drop_24"
+                android:src="@drawable/ic_outline_pin_drop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/maps_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/short_margin"
                 android:contentDescription="@string/maps_icon"
-                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:src="@drawable/ic_baseline_arrow_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/maps_text"

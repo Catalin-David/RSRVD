@@ -1,12 +1,9 @@
 package com.halcyonmobile.rsrvd.core.shared
 
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.IOException
 
 internal object RetrofitManager {
     var retrofitWithAuthentication: Retrofit? = null
@@ -35,7 +32,7 @@ internal object RetrofitManager {
     var retrofit: Retrofit? = null
         get() {
             if (field == null) {
-                Retrofit.Builder()
+                field = Retrofit.Builder()
                     .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
                     .client(
                         OkHttpClient.Builder()

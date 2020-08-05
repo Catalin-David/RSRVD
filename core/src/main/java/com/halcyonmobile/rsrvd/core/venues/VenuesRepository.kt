@@ -1,7 +1,6 @@
 package com.halcyonmobile.rsrvd.core.venues
 
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
-import com.halcyonmobile.rsrvd.explorevenues.Card
 
 object VenuesRepository {
     private val venuesRemoteSource = VenuesRemoteSource()
