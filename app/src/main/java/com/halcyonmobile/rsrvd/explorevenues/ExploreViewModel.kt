@@ -5,10 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
-import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
+import com.halcyonmobile.rsrvd.core.venue.VenuesRepository
 
 class ExploreViewModel : ViewModel() {
-    private val venuesRepository = VenuesRepository()
+    private val venuesRepository =
+        VenuesRepository()
 
     private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(StaticCards.noRecents))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()

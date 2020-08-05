@@ -9,7 +9,7 @@ import androidx.core.view.children
 import androidx.lifecycle.*
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.shared.Interests
@@ -20,7 +20,10 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
+    private val locationProvider: LocationProvider =
+        LocationProvider(this) {
+            viewModel.setLocation(it)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

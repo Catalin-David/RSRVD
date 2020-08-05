@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.shared
+package com.halcyonmobile.rsrvd.selectlocation
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -12,6 +12,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.halcyonmobile.rsrvd.core.shared.Location
 import java.util.*
 
 class LocationProvider(private val activity: Activity, private val callback: (Location) -> Unit) {

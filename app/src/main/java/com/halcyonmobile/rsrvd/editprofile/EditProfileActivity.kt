@@ -11,7 +11,7 @@ import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.onboarding.*
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
@@ -21,7 +21,10 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: EditProfileActivityBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
+    private val locationProvider: LocationProvider =
+        LocationProvider(this) {
+            viewModel.setLocation(it)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

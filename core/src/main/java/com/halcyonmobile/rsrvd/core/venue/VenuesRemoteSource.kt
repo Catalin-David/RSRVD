@@ -1,11 +1,10 @@
-package com.halcyonmobile.rsrvd.core.venues
+package com.halcyonmobile.rsrvd.core.venue
 
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
-import com.halcyonmobile.rsrvd.core.venues.dto.Venue
-import com.halcyonmobile.rsrvd.explorevenues.GetVenuesHandler
+import com.halcyonmobile.rsrvd.core.venue.dto.Venue
 
 class VenuesRemoteSource {
-    private val venuesApi = RetrofitManager.retrofit.create(VenuesApi::class.java)
+    private val venuesApi = RetrofitManager.retrofit!!.create(VenuesApi::class.java)
 
     fun getRecentlyVisitedVenues(callback: (List<Venue>?, Boolean) -> Unit) {
         venuesApi.getRecentlyVisitedVenues().enqueue(GetVenuesHandler(callback))
