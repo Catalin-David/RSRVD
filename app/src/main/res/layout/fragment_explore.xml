@@ -89,7 +89,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:text="@string/read_more"
                     android:textAppearance="@style/TextAppearance.Body2"
-                    android:textColor="#fff" />
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
         </LinearLayout>

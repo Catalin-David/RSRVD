@@ -111,7 +111,7 @@
                 android:hint="@string/select_location"
                 android:text="@{location_view_model.location.name}"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:textColorHint="#fff"
+                android:textColorHint="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/maps_enter"
                 app:layout_constraintStart_toEndOf="@id/maps_icon"
