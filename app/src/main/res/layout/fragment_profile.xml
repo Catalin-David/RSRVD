@@ -91,6 +91,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageButton
+                android:id="@+id/button_edit_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
@@ -189,6 +190,7 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_legal" />
 
             <Button
+                android:id="@+id/button_log_out"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"

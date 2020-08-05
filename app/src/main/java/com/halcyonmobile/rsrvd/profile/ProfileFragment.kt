@@ -1,19 +1,21 @@
 package com.halcyonmobile.rsrvd.profile
 
-import android.content.Context
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.FragmentProfileBinding
+import com.halcyonmobile.rsrvd.editprofile.EditProfileActivity
+import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val viewModel: ProfileViewModel by viewModels()
@@ -40,6 +42,40 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.spinnerReminder.adapter = adapter
         }
 
+        binding.buttonLogOut.setOnClickListener {
+            AlertDialog.Builder(binding.root.context).apply {
+                setTitle(getString(R.string.log_out_prompt))
+                setPositiveButton(getString(R.string.log_out)){_, _ ->
+                    GoogleSignIn.getClient(
+                        context,
+                        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+                    )
+                        .signOut()
+                        .addOnCompleteListener {
+                            UserRepository.isUserLoggedIn = false
+                            UserRepository.exploreFirst = false
+                            UserRepository.accessToken = ""
+                            UserRepository.location = Pair(0.0, 0.0)
+                            startActivity(Intent(activity, SignInActivity::class.java))
+                        }
+                }
+                setNegativeButton(getString(R.string.cancel)){_, _ -> }
+                show()
+            }
+        }
+
+        binding.buttonEditProfile.setOnClickListener {
+            if(UserRepository.isUserLoggedIn){
+                startActivity(Intent(this.activity, EditProfileActivity::class.java))
+            }
+        }
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.loadUserInformation()
     }
 }

@@ -11,25 +11,14 @@ import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import com.halcyonmobile.rsrvd.core.model.Interests
 
 class ProfileViewModel : ViewModel() {
-    private var signInAccount: GoogleSignInAccount? = null
-    private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData()
+    private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
     private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData())
 
-    init {
-        loadAccount()
-        loadUserInformation()
-    }
-
     fun setSignInAccount(newSignInAccount: GoogleSignInAccount?) {
-        signInAccount = newSignInAccount
-        loadAccount()
+        account.value = newSignInAccount
     }
 
-    private fun loadAccount() {
-        account.value = signInAccount
-    }
-
-    private fun loadUserInformation() {
+    fun loadUserInformation() {
         UserRepository.loadProfileData { profileData.value = it }
     }
 
