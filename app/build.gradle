@@ -59,6 +59,8 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
     kapt 'androidx.databinding:databinding-compiler-common:4.0.1'
 
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //core module
     implementation project(":core")
     implementation 'com.google.android.gms:play-services-auth:18.1.0'

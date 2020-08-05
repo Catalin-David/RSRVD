@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.selectlocation
+package com.halcyonmobile.rsrvd.core.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

@@ -1,29 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Profile fragment"
-        android:textAppearance="?attr/textAppearanceHeadline4"/>
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.halcyonmobile.rsrvd.profile.ProfileViewModel" />
+    </data>
 
-    <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Edit profile"
-        android:layout_gravity="center_horizontal"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log out"
-        android:layout_gravity="center_horizontal"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</FrameLayout>
+            <ImageView
+                android:id="@+id/image_view_profile_picture"
+                android:layout_width="@dimen/picture_dimension"
+                android:layout_height="@dimen/picture_dimension"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:src="@mipmap/ic_launcher"
+                app:imageUrl="@{viewmodel.imageUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_profile_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_on_picture_margin"
+                android:maxLines="3"
+                android:text="@{viewmodel.userName}"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                app:layout_constraintEnd_toStartOf="@id/profile_location"
+                app:layout_constraintStart_toStartOf="@id/image_view_profile_picture"
+                app:layout_constraintTop_toTopOf="@id/image_view_profile_picture"
+                tools:text="Catalin David" />
+
+            <TextView
+                android:id="@+id/profile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:text="@string/profile_location"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toEndOf="@id/image_view_profile_picture"
+                app:layout_constraintTop_toTopOf="@id/image_view_profile_picture" />
+
+            <TextView
+                android:id="@+id/text_view_profile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.location}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintStart_toStartOf="@id/profile_location"
+                app:layout_constraintTop_toBottomOf="@id/profile_location" />
+
+            <TextView
+                android:id="@+id/profile_activities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/profile_activities"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="@id/profile_location"
+                app:layout_constraintTop_toBottomOf="@id/text_view_profile_location" />
+
+            <TextView
+                android:id="@+id/text_view_profile_activities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.activities}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintStart_toStartOf="@id/profile_location"
+                app:layout_constraintTop_toBottomOf="@id/profile_activities" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_yellow_shape"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_profile_name"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:backgroundTint="@color/dark_gray"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_interests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/profile_interests"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_profile_name" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexbox_interests"
+                app:interests="@{viewmodel.interests}"
+                app:checkable="@{false}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:flexWrap="wrap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/profile_interests"
+                app:layout_constraintTop_toBottomOf="@id/profile_interests" />
+
+            <TextView
+                android:id="@+id/profile_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/long_margin"
+                android:text="@string/profile_reminder"
+                android:textAppearance="@style/TextAppearance.Subtitle1"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="@id/profile_interests"
+                app:layout_constraintTop_toBottomOf="@id/flexbox_interests" />
+
+            <Spinner
+                android:id="@+id/spinner_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                app:layout_constraintStart_toStartOf="@id/profile_interests"
+                app:layout_constraintTop_toBottomOf="@id/profile_reminder" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:checked="true"
+                android:thumb="@drawable/thumb_selector"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_reminder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profile_reminder"
+                app:track="@drawable/track_selector" />
+
+            <TextView
+                android:id="@+id/profile_legal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/profile_legal"
+                android:textAppearance="@style/TextAppearance.Subtitle1"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_reminder" />
+
+            <Button
+                android:id="@+id/button_terms"
+                style="@style/Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_terms"
+                app:layout_constraintEnd_toStartOf="@+id/button_privacy"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/profile_legal"
+                app:layout_constraintTop_toBottomOf="@+id/profile_legal" />
+
+            <Button
+                android:id="@+id/button_privacy"
+                style="@style/Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:text="@string/profile_privacy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/button_terms"
+                app:layout_constraintTop_toBottomOf="@id/profile_legal" />
+
+            <Button
+                android:id="@+id/button_log_out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:paddingTop="@dimen/default_padding"
+                android:paddingBottom="@dimen/default_padding"
+                android:text="@string/profile_logout"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintEnd_toEndOf="@id/button_privacy"
+                app:layout_constraintStart_toStartOf="@id/profile_legal"
+                app:layout_constraintTop_toBottomOf="@id/button_terms" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

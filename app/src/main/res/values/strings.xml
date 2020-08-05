@@ -27,6 +27,20 @@
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
+
+    <string name="profile_location">LOCATION</string>
+    <string name="profile_activities">ACTIVITIES COMPLETED</string>
+    <string name="profile_interests">INTERESTS</string>
+    <string name="profile_reminder">ACTIVITY REMINDER</string>
+    <string name="profile_legal">LEGAL</string>
+    <string name="profile_terms">Terms of Service</string>
+    <string name="profile_privacy">Privacy Policy</string>
+    <string name="profile_logout">LOG OUT</string>
+    <string-array name="spinner_array">
+        <item>10 minutes before</item>
+        <item>30 minutes before</item>
+        <item>1 hour before</item>
+    </string-array>
     <string name="sport_activity">sport activity</string>
     <string name="read_more">Read more</string>
     <string name="search_venue">Search venue</string>
@@ -42,4 +56,8 @@
     <string name="running">running</string>
     <string name="loading">Loading... Please wait</string>
     <string name="pick_location">Pick a location</string>
+
+    <string name="log_out_prompt">Are you sure you want to log out?</string>
+    <string name="log_out">Log out</string>
+    <string name="cancel">Cancel</string>
 </resources>

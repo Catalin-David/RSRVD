@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_sign_in"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/layout_sign_in">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/running_sign_in_image_view"
@@ -20,69 +20,69 @@
 
         <TextView
             android:id="@+id/welcome_to_rsrvd_text_view"
-            android:textAppearance = "?attr/textAppearanceHeadline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/long_margin"
+            android:text="@string/welcome_to"
             android:textAllCaps="true"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?attr/textAppearanceHeadline3"
             app:layout_constraintBottom_toBottomOf="@id/running_sign_in_image_view"
-            app:layout_constraintTop_toBottomOf="@id/running_sign_in_image_view"
-            android:text="@string/welcome_to" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/running_sign_in_image_view" />
 
         <TextView
             android:id="@+id/rsrvd_text_view"
-            android:text="@string/rsrvd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance = "?attr/textAppearanceHeadline3"
-            android:textAllCaps="true"
-            android:textColor="@color/primary"
             android:layout_marginStart="@dimen/long_margin"
+            android:text="@string/rsrvd"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceHeadline3"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view"
-            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"/>
+            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
         <TextView
             android:id="@+id/expl_rsrvd_live_first_text_view"
             android:layout_width="@dimen/width_text_view_anim"
             android:layout_height="wrap_content"
-            android:text="@string/explore_reserve_live"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
-            android:textIsSelectable="true"
+            android:text="@string/explore_reserve_live"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:textIsSelectable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view" />
 
         <Button
             android:id="@+id/connect_google_button"
+            style="@style/MaterialComponents.Button.Icon"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_btn_connect_signin"
             android:layout_marginStart="@dimen/long_margin"
             android:layout_marginEnd="@dimen/long_margin"
             android:layout_marginBottom="@dimen/short_margin"
             android:text="@string/connect_with_google"
-            app:icon="@drawable/ic_google"
-            android:textAppearance="?attr/textAppearanceBody1"
             android:textAllCaps="true"
-            style="@style/MaterialComponents.Button.Icon"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:icon="@drawable/ic_google"
+            app:layout_constraintBottom_toTopOf="@id/explore_first"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/explore_first"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/explore_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:text="@string/explore_the_app_first"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:layout_marginBottom="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/sign_in_progress"

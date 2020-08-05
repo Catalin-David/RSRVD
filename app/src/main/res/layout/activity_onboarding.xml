@@ -6,11 +6,11 @@
 
         <variable
             name="location"
-            type="com.halcyonmobile.rsrvd.selectlocation.Location" />
+            type="com.halcyonmobile.rsrvd.core.model.Location" />
 
         <variable
             name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.onboarding.Interests>" />
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.model.Interests>" />
     </data>
 
     <ScrollView
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/short_margin"
                 app:flexWrap="wrap"
-                app:inflateData="@{dataMap}"
+                app:interests="@{dataMap}"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/interests" />
