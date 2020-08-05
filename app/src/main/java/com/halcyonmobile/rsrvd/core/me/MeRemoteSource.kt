@@ -2,7 +2,7 @@ package com.halcyonmobile.rsrvd.core.me
 
 import com.halcyonmobile.rsrvd.core.me.dto.ProfileDto
 import com.halcyonmobile.rsrvd.core.me.dto.UserDto
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 import com.halcyonmobile.rsrvd.editprofile.ProfileUpdateHandler
 import com.halcyonmobile.rsrvd.core.model.Interests
@@ -14,7 +14,7 @@ class MeRemoteSource {
     private val meApi = RetrofitManager.retrofit.create(MeApi::class.java)
 
     fun update(location: Location, interests: List<Interests>, updateState: (Boolean) -> Unit) {
-        meApi.update(ProfileDto(UserRepository.name, location, interests)).enqueue(ProfileUpdateHandler(updateState))
+        meApi.update(ProfileDto(LocalUserRepository.name, location, interests)).enqueue(ProfileUpdateHandler(updateState))
     }
 
     fun get(updateState: (UserDto?) -> Unit) {

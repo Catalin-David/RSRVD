@@ -1,7 +1,7 @@
-package com.halcyonmobile.rsrvd.core.authentification
+package com.halcyonmobile.rsrvd.core.authentication
 
-import com.halcyonmobile.rsrvd.core.authentification.dto.AuthenticationRequestDto
-import com.halcyonmobile.rsrvd.core.dto.AuthenticationResponseDto
+import com.halcyonmobile.rsrvd.core.authentication.dto.AuthenticationRequestDto
+import com.halcyonmobile.rsrvd.core.authentication.dto.AuthenticationResponseDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

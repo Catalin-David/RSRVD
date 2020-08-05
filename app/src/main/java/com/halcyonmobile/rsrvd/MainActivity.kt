@@ -1,12 +1,11 @@
 package com.halcyonmobile.rsrvd
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
 import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
 import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_profile -> {
-                    if (UserRepository.exploreFirst && !UserRepository.isUserLoggedIn) {
+                    if (LocalUserRepository.exploreFirst && !LocalUserRepository.isUserLoggedIn) {
                         startActivity(SignInActivity.getStartIntent(this, true))
                     } else {
                         openFragment(ProfileFragment(), supportFragmentManager)
