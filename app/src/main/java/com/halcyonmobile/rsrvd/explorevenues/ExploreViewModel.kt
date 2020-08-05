@@ -36,7 +36,7 @@ class ExploreViewModel : ViewModel() {
                 _recentlyVisitedCards.value = listOf(StaticCards.noRecents)
                 _noRecents.value = true
             } else {
-                (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                (venues?.map { Card(idVenue = it.id, title = it.name, image = it.image, location = it.location) }).let {
                     if (it != null && it.isNotEmpty()) {
                         _recentlyVisitedCards.value = it
                         _noRecents.value = false
@@ -53,7 +53,7 @@ class ExploreViewModel : ViewModel() {
                 _errorExplore.value = error
                 _exploreCards.value = listOf(StaticCards.noExplore)
             } else {
-                (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                (venues?.map { Card(idVenue = it.id, title = it.name, image = it.image, location = it.location) }).let {
                     _exploreCards.value = if (it != null && it.isNotEmpty()) it else listOf(StaticCards.noExplore)
                 }
             }

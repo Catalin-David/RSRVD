@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
+import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
@@ -22,7 +23,11 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         // TODO start activity to open Details
     }
     private val exploreAdapter = CardsAdapter {
-        // TODO start activity to open Details
+        startActivity(context?.let { intent ->
+            it.idVenue.let { id ->
+                VenueDetailActivity.getStartIntent(intent, id)
+            }
+        })
     }
 
     private lateinit var binding: FragmentExploreBinding
