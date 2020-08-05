@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.venue.dto
+package com.halcyonmobile.rsrvd.core.venues.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
