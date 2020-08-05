@@ -1,6 +1,6 @@
-package com.halcyonmobile.rsrvd.core.me
+package com.halcyonmobile.rsrvd.core.user
 
-import com.halcyonmobile.rsrvd.core.me.dto.UserDto
+import com.halcyonmobile.rsrvd.core.user.dto.UserDto
 import retrofit2.Call
 import retrofit2.Callback
 

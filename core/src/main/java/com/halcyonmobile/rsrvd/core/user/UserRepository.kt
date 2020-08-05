@@ -1,12 +1,12 @@
-package com.halcyonmobile.rsrvd.core.me
+package com.halcyonmobile.rsrvd.core.user
 
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 
-class MeRepository {
-    private val meRemoteSource = MeRemoteSource()
+class UserRepository {
+    private val userRemoteSource = UserRemoteSource()
 
     fun update(location: Location, interests: List<Interests>, callback: (Boolean) -> Unit) {
-        meRemoteSource.update(location, interests, callback)
+        userRemoteSource.update(location, interests, callback)
     }
 }

@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.me.dto
+package com.halcyonmobile.rsrvd.core.user.dto
 
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
