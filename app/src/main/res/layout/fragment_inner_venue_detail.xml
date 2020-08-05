@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dataMap"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
+
+        <variable
+            name="facilitiesDataMap"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Facilities>" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars = "vertical"
+        android:scrollbarStyle="insideInset"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/open_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/open"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginTop="@dimen/long_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/venue_weekly_program_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weekly_program"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginTop="@dimen/short_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/open_text_view"/>
+
+            <TextView
+                android:id="@+id/activities_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activities"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/venue_weekly_program_text_view"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/activities_flex_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:interests="@{dataMap}"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activities_text_view"/>
+
+            <TextView
+                android:id="@+id/location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_text_view"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activities_flex_box"/>
+
+            <TextView
+                android:id="@+id/venue_location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_text_view"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:maxWidth="180dp"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/short_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location_text_view"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_directions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location_text_view">
+
+                <TextView
+                    android:id="@+id/directions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_direction"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    android:fontFamily="@font/oswald"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_forward"
+                    android:layout_marginStart="@dimen/short_margin"
+                    app:layout_constraintStart_toEndOf="@id/directions"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/forward" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/good_to_know"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/good_to_know"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/venue_location_text_view"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/facilities_flex_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:facilities="@{facilitiesDataMap}"
+                app:flexWrap="wrap"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/good_to_know"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/facilities_flex_box"/>
+
+            <TextView
+                android:id="@+id/venue_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="@android:color/white"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:fontFamily="@font/oswald"
+                android:maxLines="15"
+                android:layout_marginTop="@dimen/background_square_padding"
+                android:layout_marginStart="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"/>
+
+            <ImageView
+                android:layout_width="335dp"
+                android:layout_height="174dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baza_sportiva_gheorghieni_cluj"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/venue_description"
+                android:contentDescription="@string/sport_base" />
+
+            <ImageView
+                android:id="@+id/play_button"
+                android:layout_width="@dimen/medium_margin"
+                android:layout_height="@dimen/medium_margin"
+                android:src="@drawable/ic_play"
+                android:layout_marginBottom="@dimen/medium_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/venue_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/youtube_video" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/have_a_tour"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:layout_marginTop="@dimen/default_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/play_button"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

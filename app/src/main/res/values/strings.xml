@@ -28,6 +28,39 @@
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
 
+    <string name="profile_location">LOCATION</string>
+    <string name="profile_activities">ACTIVITIES COMPLETED</string>
+    <string name="profile_interests">INTERESTS</string>
+    <string name="profile_reminder">ACTIVITY REMINDER</string>
+    <string name="profile_legal">LEGAL</string>
+    <string name="profile_terms">Terms of Service</string>
+    <string name="profile_privacy">Privacy Policy</string>
+    <string name="profile_logout">LOG OUT</string>
+    <string-array name="spinner_array">
+        <item>10 minutes before</item>
+        <item>30 minutes before</item>
+        <item>1 hour before</item>
+    </string-array>
+    <string name="sport_activity">sport activity</string>
+    <string name="read_more">Read more</string>
+    <string name="search_venue">Search venue</string>
+    <string name="recently_visited">recently visited</string>
+    <string name="we_recommend">we recommend</string>
+    <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
+    <string name="we_recommend_placeholder">we recommend placeholder</string>
+    <string name="read_more_link">https://blog.myfitnesspal.com/</string>
+    <string name="see_all_venues">See all venues</string>
+    <string name="details_place_holder">running / 1.2 km away</string>
+    <string name="account">account</string>
+    <string name="create">create</string>
+    <string name="running">running</string>
+    <string name="loading">Loading... Please wait</string>
+    <string name="pick_location">Pick a location</string>
+
+    <string name="log_out_prompt">Are you sure you want to log out?</string>
+    <string name="log_out">Log out</string>
+    <string name="cancel">Cancel</string>
+
     <string name="venue_details_image">Venue Details Image</string>
     <string name="venue_name">venue name</string>
     <string name="make_a_reservation">make a reservation</string>
@@ -50,21 +83,6 @@
     <string name="toilet">toilet</string>
     <string name="description">description</string>
     <string name="google_api_key">AIzaSyABYjMBctFxQ25UQgBIg5PEz0w-P6Kp_UA</string>
-    <string name="sport_activity">sport activity</string>
-    <string name="read_more">Read more</string>
-    <string name="search_venue">Search venue</string>
-    <string name="recently_visited">recently visited</string>
-    <string name="we_recommend">we recommend</string>
-    <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
-    <string name="we_recommend_placeholder">we recommend placeholder</string>
-    <string name="read_more_link">https://blog.myfitnesspal.com/</string>
-    <string name="see_all_venues">See all venues</string>
-    <string name="details_place_holder">running / 1.2 km away</string>
-    <string name="account">account</string>
-    <string name="create">create</string>
-    <string name="running">running</string>
-    <string name="loading">Loading... Please wait</string>
-    <string name="pick_location">Pick a location</string>
     <string name="location_description">%s, \n%s</string>
     <string name="youtube_video">youtube video</string>
     <string name="have_a_tour">have a virtual tour</string>
