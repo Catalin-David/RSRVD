@@ -73,7 +73,7 @@
                 app:flexWrap="wrap"
                 app:interests="@{dataMap}"
                 android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activities_text_view"/>
 
@@ -111,6 +111,7 @@
                 android:id="@+id/container_directions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/location_text_view">
 
@@ -130,7 +131,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_forward"
-                    android:layout_marginStart="@dimen/short_margin"
                     app:layout_constraintStart_toEndOf="@id/directions"
                     app:layout_constraintTop_toTopOf="parent"
                     android:contentDescription="@string/forward" />
@@ -190,43 +190,53 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description"/>
 
-            <ImageView
-                android:layout_width="335dp"
-                android:layout_height="174dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/baza_sportiva_gheorghieni_cluj"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/youtube_video_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/venue_description"
-                android:contentDescription="@string/sport_base" />
+                app:layout_constraintTop_toBottomOf="@id/venue_description">
 
-            <ImageView
-                android:id="@+id/play_button"
-                android:layout_width="@dimen/medium_margin"
-                android:layout_height="@dimen/medium_margin"
-                android:src="@drawable/ic_play"
-                android:layout_marginBottom="@dimen/medium_margin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/venue_description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:contentDescription="@string/youtube_video" />
+                <ImageView
+                    android:layout_width="335dp"
+                    android:layout_height="174dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baza_sportiva_gheorghieni_cluj"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:contentDescription="@string/sport_base" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/have_a_tour"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_marginTop="@dimen/default_margin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/play_button"/>
+                <ImageView
+                    android:id="@+id/play_button"
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="@dimen/medium_margin"
+                    android:src="@drawable/ic_play"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:contentDescription="@string/youtube_video" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/have_a_tour"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:layout_marginTop="@dimen/default_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/play_button"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

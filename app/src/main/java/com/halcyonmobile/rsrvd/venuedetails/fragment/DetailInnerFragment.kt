@@ -70,7 +70,7 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
             dataMap = emptyList()
             facilitiesDataMap = emptyList()
 
-            playButton.setOnClickListener {
+            youtubeVideoContainer.setOnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.venue_tour_link))))
             }
 
