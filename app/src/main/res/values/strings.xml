@@ -54,4 +54,6 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
+    <string name="loading">Loading... Please wait</string>
+    <string name="pick_location">Pick a location</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.halcyonmobile.rsrvd.selectlocation
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -12,11 +13,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.api.net.*
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.model.Location
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
@@ -139,6 +139,6 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
+        const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
     }
 }

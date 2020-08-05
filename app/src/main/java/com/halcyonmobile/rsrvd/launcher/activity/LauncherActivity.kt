@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModel
 import com.halcyonmobile.rsrvd.launcher.viewmodel.LauncherViewModelFactory
