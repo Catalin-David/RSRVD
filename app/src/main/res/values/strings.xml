@@ -47,4 +47,7 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="reservation_fragment">Reservation fragment</string>
     <string name="profile_fragment">Profile fragment</string>
+    <string name="distance_away">\t/\t %s away</string>
+    <string name="meters">%d m</string>
+    <string name="kilometers">%.2f km</string>
 </resources>

@@ -69,7 +69,9 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun exploreFirst() {}
+    private fun exploreFirst() {
+        // TODO Implement the Explore the app first case
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == GOOGLE_SIGN_IN) {

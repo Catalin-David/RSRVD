@@ -27,7 +27,7 @@ class EditProfileActivity : AppCompatActivity() {
             viewModel.setLocation(
                 Location(
                     name = getString(R.string.current_location),
-                    details = "current location",
+                    details = getString(R.string.current_location),
                     latitude = it.latitude,
                     longitude = it.longitude
                 )

@@ -21,9 +21,6 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     private lateinit var binding: FragmentExploreBinding
     private lateinit var viewModel: ExploreViewModel
 
-    private val handler = Handler()
-    private val runnable = Runnable { viewModel.searchTermChanged() }
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,6 +45,9 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     }
 
     private fun setUpObservers(searchResultsAdapter: CardsAdapter, recentlyViewedAdapter: CardsAdapter, exploreAdapter: CardsAdapter) {
+        val handler = Handler()
+        val runnable = Runnable { viewModel.searchTermChanged() }
+
         viewModel.apply {
             searchResults.observe(viewLifecycleOwner) { searchResultsAdapter.submitList(it) }
             recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
@@ -57,7 +57,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
             searchTerm.observe(viewLifecycleOwner) {
                 handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable, debounceDuration)
+                handler.postDelayed(runnable, DEBOUNCE_DURATION)
             }
         }
     }
@@ -65,19 +65,19 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun setUpRecyclerView(
         recyclerView: RecyclerView,
-        listOrientation: Int,
+        linearLayoutManager: LinearLayoutManager,
         listAdapter: CardsAdapter,
         itemDecorator: MarginDecorator,
-        scrollListener: View.OnScrollChangeListener? = null,
-        snapHelper: Boolean? = null
+        snapHelper: Boolean? = null,
+        scrollListener: View.OnScrollChangeListener? = null
     ) {
         recyclerView.apply {
             setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(context).apply { orientation = listOrientation }
+            layoutManager = linearLayoutManager
             adapter = listAdapter
             addItemDecoration(itemDecorator)
-            scrollListener?.let { setOnScrollChangeListener(scrollListener) }
             if (snapHelper == true) LinearSnapHelper().attachToRecyclerView(this)
+            scrollListener?.let { setOnScrollChangeListener(scrollListener) }
         }
     }
 
@@ -86,39 +86,41 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         // Search Results Setup
         setUpRecyclerView(
             binding.searchResults.searchResultsList,
-            LinearLayoutManager.VERTICAL,
+            LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL },
             searchResultsAdapter,
-            MarginDecorator(context, bottom = true)
+            MarginDecorator(bottom = true)
         )
+
+        val recyclerViewLayoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
 
         // Recently Visited Setup
         setUpRecyclerView(
             binding.recentlyVisited.recentlyVisitedList,
-            LinearLayoutManager.HORIZONTAL,
+            recyclerViewLayoutManager,
             recentlyViewedAdapter,
-            MarginDecorator(context, right = true),
+            MarginDecorator(right = true),
+            snapHelper = true,
             scrollListener = View.OnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
-                    val firstVisiblePosition = LinearLayoutManager(context).findFirstVisibleItemPosition()
+                    val firstVisiblePosition = recyclerViewLayoutManager.findFirstVisibleItemPosition()
                     if (firstVisiblePosition != -1) {
                         viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value!![firstVisiblePosition])
                     }
                 }
-            },
-            snapHelper = true
+            }
         )
 
         // Explore Setup
         setUpRecyclerView(
             binding.explore.exploreList,
-            LinearLayoutManager.HORIZONTAL,
+            LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL },
             exploreAdapter,
-            MarginDecorator(context, right = true),
+            MarginDecorator(right = true),
             snapHelper = true
         )
     }
 
     companion object {
-        const val debounceDuration: Long = 500
+        const val DEBOUNCE_DURATION: Long = 500
     }
 }

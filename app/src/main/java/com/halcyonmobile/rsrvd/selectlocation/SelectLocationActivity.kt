@@ -30,21 +30,21 @@ class SelectLocationActivity : AppCompatActivity() {
         location.placeId?.let {
             client.fetchPlace(
                 FetchPlaceRequest.newInstance(
-                    location.placeId!!,
+                    it,
                     listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
                 )
             )
-                .addOnSuccessListener {
-                    if (it.place.name != null && it.place.address != null && it.place.latLng != null) {
+                .addOnSuccessListener { response ->
+                    if (response.place.name != null && response.place.address != null && response.place.latLng != null) {
                         val locationDetailed = Location(
-                            name = it.place.name!!,
-                            details = it.place.address!!,
-                            latitude = it.place.latLng!!.latitude,
-                            longitude = it.place.latLng!!.longitude,
-                            placeId = it.place.id
+                            name = response.place.name!!,
+                            details = response.place.address!!,
+                            latitude = response.place.latLng!!.latitude,
+                            longitude = response.place.latLng!!.longitude,
+                            placeId = response.place.id
                         )
 
-                        setResult(Activity.RESULT_OK, Intent().putExtra("location", locationDetailed))
+                        setResult(Activity.RESULT_OK, Intent().putExtra(EXTRA_LOCATION, locationDetailed))
                     }
                 }
                 .addOnFailureListener { println("SOMETHING WENT WRONG ___ DETAILS") }
@@ -63,7 +63,7 @@ class SelectLocationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, apikey)
+            Places.initialize(applicationContext, API_KEY)
         }
 
         client = Places.createClient(this)
@@ -139,6 +139,7 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
+        private const val API_KEY = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
+        private const val EXTRA_LOCATION = "location"
     }
 }

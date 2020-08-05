@@ -24,28 +24,22 @@ class ExploreViewModel : ViewModel() {
 
     val searchTerm: MutableLiveData<String> = MutableLiveData("")
 
-    val noResultsVisible = MediatorLiveData<Boolean>()
-    val searchResultsVisible = MediatorLiveData<Boolean>()
+    val noResultsVisible = MediatorLiveData<Boolean>().apply {
+        addSource(_loading) { value = checkNoResults(isLoading = it) }
+        addSource(_searching) { value = checkNoResults(isSearching = it) }
+        addSource(_searchResults) { value = checkNoResults(isSearchResultEmpty = it.isEmpty()) }
+    }
+
+    val searchResultsVisible = MediatorLiveData<Boolean>().apply {
+        addSource(_searching) { value = checkSearchResults(isSearching = it) }
+        addSource(_searchResults) { value = checkSearchResults(isSearchResultEmpty = it.isEmpty()) }
+    }
 
     init {
-        noResultsVisibleSources()
-        searchResultsVisibleSources()
-
         initializeRecentlyVisitedList()
         initializeExploreList()
 
         _cardInFocus.value = _recentlyVisitedCards.value?.get(0) ?: NoRecentCard.instance
-    }
-
-    private fun noResultsVisibleSources() {
-        noResultsVisible.addSource(_loading) { noResultsVisible.value = checkNoResults() }
-        noResultsVisible.addSource(_searching) { noResultsVisible.value = checkNoResults() }
-        noResultsVisible.addSource(_searchResults) { noResultsVisible.value = checkNoResults() }
-    }
-
-    private fun searchResultsVisibleSources() {
-        searchResultsVisible.addSource(_searching) { searchResultsVisible.value = checkSearchResults() }
-        searchResultsVisible.addSource(_searchResults) { searchResultsVisible.value = checkSearchResults() }
     }
 
     private fun initializeRecentlyVisitedList() = VenuesRepository.getRecentlyVisitedVenues { venues, error ->
@@ -62,9 +56,16 @@ class ExploreViewModel : ViewModel() {
         }
     }
 
-    private fun checkNoResults() = _loading.value != true && searching.value == true && searchResults.value?.isEmpty() ?: false
+    private fun checkNoResults(
+        isLoading: Boolean = _loading.value ?: false,
+        isSearching: Boolean = _searching.value ?: false,
+        isSearchResultEmpty: Boolean = _searchResults.value?.isEmpty() ?: false
+    ) = !isLoading && isSearching && isSearchResultEmpty
 
-    private fun checkSearchResults() = _searching.value == true && _searchResults.value?.isNotEmpty() ?: false
+    private fun checkSearchResults(
+        isSearching: Boolean = _searching.value ?: false,
+        isSearchResultEmpty: Boolean = _searchResults.value?.isEmpty() ?: true
+    ) = isSearching && !isSearchResultEmpty
 
     fun setCardInFocus(newCard: Card) {
         _cardInFocus.value = newCard

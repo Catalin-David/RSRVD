@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.google.android.flexbox.FlexboxLayout
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
@@ -36,10 +37,13 @@ fun TextView.formattedDistance(location: myLocation?) = if (location != null) {
     )
 
     val distanceFormatted =
-        if (distances[0] > 1000) "${"%.2f".format(distances[0] / 1000)}km"
-        else "${distances[0]}m"
+        if (distances[0] > 1000) context.getString(R.string.kilometers, distances[0] / 1000)
+        else context.getString(R.string.meters, distances[0])
 
-    text = " / $distanceFormatted away"
+    println(context.getString(R.string.kilometers, distances[0] / 1000))
+    println(context.getString(R.string.distance_away, distanceFormatted))
+
+    text = context.getString(R.string.distance_away, distanceFormatted)
 } else {
     text = ""
 }
