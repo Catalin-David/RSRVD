@@ -10,16 +10,10 @@ internal object RetrofitManager {
         get() {
             if (field == null) {
                 field = Retrofit.Builder()
-                    .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
+                    .baseUrl(BASE_URL)
                     .client(
                         OkHttpClient.Builder()
-                            .addInterceptor { chain ->
-                                chain.proceed(
-                                    chain.request().newBuilder()
-                                        .addHeader("Authorization", State.authorization)
-                                        .build()
-                                )
-                            }
+                            .addInterceptor(AuthorizationInterceptor())
                             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                             .build()
                     )
@@ -32,8 +26,8 @@ internal object RetrofitManager {
     var retrofit: Retrofit? = null
         get() {
             if (field == null) {
-                field = Retrofit.Builder()
-                    .baseUrl("https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/")
+                Retrofit.Builder()
+                    .baseUrl(BASE_URL)
                     .client(
                         OkHttpClient.Builder()
                             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -44,4 +38,6 @@ internal object RetrofitManager {
             }
             return field
         }
+
+    private const val BASE_URL = "https://39cutl7qwd.execute-api.eu-central-1.amazonaws.com/development/"
 }
