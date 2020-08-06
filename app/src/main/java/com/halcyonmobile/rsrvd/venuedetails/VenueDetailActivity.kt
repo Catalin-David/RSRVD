@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
 
@@ -35,6 +36,10 @@ class VenueDetailActivity : AppCompatActivity() {
                 .into(venueBinding.venueDetailsImageView)
 
             venueBinding.venueNameTextView.text = it.name
+        }
+
+        venueBinding.arrowBack.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         initTabLayout(venueId)

@@ -33,6 +33,17 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <ImageView
+                    android:id="@+id/arrow_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/arrow_back" />
+
                 <TextView
                     android:id="@+id/yellow_shape_text_view"
                     android:layout_width="wrap_content"
