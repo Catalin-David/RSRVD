@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserRemoteSource {
-    private val meApi = RetrofitSingleton.get().create(UserAPI::class.java)
+    private val meApi = RetrofitSingleton.get().create(UserApi::class.java)
 
     fun get(updateState: (UserResponseDto?) -> Unit) {
         meApi.get().enqueue(object : Callback<UserResponseDto> {
