@@ -60,4 +60,7 @@
     <string name="log_out_prompt">Are you sure you want to log out?</string>
     <string name="log_out">Log out</string>
     <string name="cancel">Cancel</string>
+
+    <string name="tabname_upcoming">Upcoming</string>
+    <string name="tabname_history">History</string>
 </resources>
