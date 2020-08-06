@@ -12,8 +12,8 @@ import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
-import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.onboarding.RetrieveState
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
@@ -30,11 +30,12 @@ class EditProfileActivity : AppCompatActivity() {
         binding = EditProfileActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            location.observe(this@EditProfileActivity) {
-                binding.setLocation(it)
-            }
+        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
 
+        binding.locationViewModel = this.viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.apply {
             updateState.observe(this@EditProfileActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }

@@ -9,9 +9,3 @@ data class Card(
     val image: String? = null,
     val location: Location? = null
 )
-
-object StaticCards {
-    val noRecents = Card(title = "No activity yet. But it looks like it’s time for some!")
-
-    val noExplore = Card(title = "No venues found")
-}

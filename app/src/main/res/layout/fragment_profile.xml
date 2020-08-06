@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.halcyonmobile.rsrvd.profile.ProfileViewModel" />
@@ -23,11 +24,11 @@
                 android:layout_height="@dimen/picture_dimension"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
+                android:contentDescription="@string/profile_picture"
                 android:src="@mipmap/ic_launcher"
                 app:imageUrl="@{viewmodel.imageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/profile_picture" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_view_profile_name"
@@ -86,10 +87,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/art"
                 android:src="@drawable/ic_yellow_shape"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_profile_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/art" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageButton
                 android:id="@+id/button_edit_profile"
@@ -97,10 +98,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:backgroundTint="@color/dark_gray"
+                android:contentDescription="@string/edit_icon"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/edit_icon" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/profile_interests"
@@ -116,13 +117,13 @@
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flexbox_interests"
-                app:interests="@{viewmodel.interests}"
-                app:checkable="@{false}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
+                app:checkable="@{false}"
                 app:flexWrap="wrap"
+                app:interests="@{viewmodel.interests}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/profile_interests"
                 app:layout_constraintTop_toBottomOf="@id/profile_interests" />
