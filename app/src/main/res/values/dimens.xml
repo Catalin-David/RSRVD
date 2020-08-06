@@ -31,4 +31,5 @@
     <dimen name="picture_small">250dp</dimen>
     <dimen name="picture_title_offset_small">220dp</dimen>
     <dimen name="margin_big">56dp</dimen>
+    <dimen name="default_card_margin">40</dimen>
 </resources>

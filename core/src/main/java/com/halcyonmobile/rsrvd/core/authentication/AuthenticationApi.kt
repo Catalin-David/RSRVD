@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 internal interface AuthenticationApi {
     @POST("auth/google")
-    fun postToken(@Body authenticationRequestDto: AuthenticationRequestDto) : Call<AuthenticationResponseDto>
+    fun postToken(@Body authenticationRequestDto: AuthenticationRequestDto): Call<AuthenticationResponseDto>
 }

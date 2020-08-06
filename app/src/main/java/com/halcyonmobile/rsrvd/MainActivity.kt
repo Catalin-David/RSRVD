@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
-
         }
 
         openFragment(ExploreFragment(), supportFragmentManager)

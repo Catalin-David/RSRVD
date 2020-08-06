@@ -12,8 +12,8 @@ import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
-import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -31,11 +31,12 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            location.observe(this@OnboardingActivity) {
-                binding.setLocation(it)
-            }
+        viewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
 
+        binding.locationViewModel = this.viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.apply {
             updateState.observe(this@OnboardingActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }
