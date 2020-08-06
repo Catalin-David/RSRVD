@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
 import com.halcyonmobile.rsrvd.databinding.FragmentProfileBinding
 import com.halcyonmobile.rsrvd.editprofile.EditProfileActivity
 import com.halcyonmobile.rsrvd.signin.SignInActivity

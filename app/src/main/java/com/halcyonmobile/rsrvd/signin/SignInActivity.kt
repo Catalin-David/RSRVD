@@ -15,14 +15,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
-
 class SignInActivity : AppCompatActivity() {
-
     private lateinit var signInBinding: ActivitySignInBinding
     private lateinit var viewModel: SignInViewModel
 
@@ -31,10 +29,9 @@ class SignInActivity : AppCompatActivity() {
         signInBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
 
-        if ( intent.getBooleanExtra(SIGN_UP_KEY, false) ) {
+        if (intent.getBooleanExtra(SIGN_UP_KEY, false)) {
             signInBinding.exploreFirst.visibility = View.GONE
             signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
-
             signInBinding.rsrvdTextView.text = getString(R.string.account)
         }
 
@@ -57,7 +54,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        if ( GoogleSignIn.getLastSignedInAccount(this) == null ) {
+        if (GoogleSignIn.getLastSignedInAccount(this) == null) {
             val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.client_id))
@@ -70,10 +67,10 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun exploreFirst () {
-        UserRepository.exploreFirst = true
-        UserRepository.accessToken = ""
-        UserRepository.location = Pair(0.0, 0.0)
+    private fun exploreFirst() {
+        UserLocalRepository.exploreFirst = true
+        UserLocalRepository.accessToken = ""
+        UserLocalRepository.location = Pair(0.0, 0.0)
         startActivity(Intent(this, MainActivity::class.java))
     }
 
@@ -87,27 +84,24 @@ class SignInActivity : AppCompatActivity() {
                         Log.w(ContentValues.TAG, "code $it")
 
                         viewModel.onAuthenticationResult(it,
-                        onSuccess = { accessToken ->
-                            UserRepository.accessToken = accessToken
-                            
-                            Log.w(ContentValues.TAG, "access token $accessToken")
-                            UserRepository.isUserLoggedIn = true
-                            startActivity(Intent(this, OnboardingActivity::class.java))
-                            UserRepository.isUserLoggedIn = true
-                            signInBinding.signInProgress.visibility = View.INVISIBLE
-                        },
-                        onFailure = {
-                            UserRepository.accessToken = ""
-                            signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
-
-                            UserRepository.isUserLoggedIn = false
-                            UserRepository.location = Pair(0.0, 0.0)
-                            signInBinding.signInProgress.visibility = View.INVISIBLE
-                        })
+                            onSuccess = { accessToken ->
+                                UserLocalRepository.accessToken = accessToken
+                                Log.w(ContentValues.TAG, "access token $accessToken")
+                                UserLocalRepository.isUserLoggedIn = true
+                                signInBinding.signInProgress.visibility = View.INVISIBLE
+                                startActivity(Intent(this, OnboardingActivity::class.java))
+                            },
+                            onFailure = {
+                                UserLocalRepository.accessToken = ""
+                                UserLocalRepository.isUserLoggedIn = false
+                                UserLocalRepository.location = Pair(0.0, 0.0)
+                                signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
+                                signInBinding.signInProgress.visibility = View.INVISIBLE
+                            })
                     }
             } catch (e: ApiException) {
-                UserRepository.accessToken = ""
-                UserRepository.location = Pair(0.0, 0.0)
+                UserLocalRepository.accessToken = ""
+                UserLocalRepository.location = Pair(0.0, 0.0)
                 signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
             }
         }

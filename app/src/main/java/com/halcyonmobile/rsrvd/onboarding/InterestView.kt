@@ -15,8 +15,8 @@ class InterestView(context: Context) : ConstraintLayout(context) {
         this.layoutParams = params
     }
 
-    constructor(context: Context, isCheckable: Boolean): this(context){
-        if(!isCheckable){
+    constructor(context: Context, isCheckable: Boolean) : this(context) {
+        if (!isCheckable) {
             button.isClickable = false
         }
     }

@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd.selectlocation
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -13,12 +12,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.*
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.model.Location
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
 
 class SelectLocationActivity : AppCompatActivity() {
@@ -30,7 +28,7 @@ class SelectLocationActivity : AppCompatActivity() {
         location.placeId?.let {
             client.fetchPlace(
                 FetchPlaceRequest.newInstance(
-                    location.placeId as String,
+                    location.placeId!!,
                     listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
                 )
             )

@@ -7,7 +7,6 @@
     <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
-
     <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
     <string name="about_you">tell us more\nabout you</string>
     <string name="sport_photo">sport photo</string>
@@ -27,7 +26,6 @@
     <string name="explore">Explore</string>
     <string name="reservations">Reservations</string>
     <string name="profile">Profile</string>
-
     <string name="profile_location">LOCATION</string>
     <string name="profile_activities">ACTIVITIES COMPLETED</string>
     <string name="profile_interests">INTERESTS</string>
@@ -54,10 +52,13 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
-    <string name="loading">Loading... Please wait</string>
+    <string name="loading">Loading… Please wait</string>
     <string name="pick_location">Pick a location</string>
-
     <string name="log_out_prompt">Are you sure you want to log out?</string>
     <string name="log_out">Log out</string>
     <string name="cancel">Cancel</string>
+    <string name="reservation_fragment">Reservation fragment</string>
+    <string name="profile_picture">Logged in user profile picture</string>
+    <string name="art">art</string>
+    <string name="edit_icon">edit icon</string>
 </resources>
