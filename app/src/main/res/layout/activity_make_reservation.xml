@@ -3,20 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/close_reservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close"
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/margin_big"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cancel" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_img_reservation"
+            android:layout_marginTop="@dimen/short_margin"
+            app:layout_constraintTop_toBottomOf="@id/close_reservation"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/reservation_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/make_a_reservation"
+            android:textSize="40sp"
+            android:textAppearance="?attr/textAppearanceHeadline3"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/medium_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/close_reservation"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>

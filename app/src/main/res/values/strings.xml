@@ -60,4 +60,6 @@
     <string name="log_out_prompt">Are you sure you want to log out?</string>
     <string name="log_out">Log out</string>
     <string name="cancel">Cancel</string>
+    <string name="reservation_image">reservation image</string>
+    <string name="make_a_reservation">make a \nreservation</string>
 </resources>
