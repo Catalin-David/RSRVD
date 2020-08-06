@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.me.MeRepository
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 
 enum class RetrieveState {
     PRE, POST
@@ -30,7 +30,7 @@ class LocationViewModel : ViewModel() {
 
     fun setLocation(newLocation: Location) {
         _location.value = newLocation
-        LocalUserRepository.location = Pair(newLocation.latitude, newLocation.longitude)
+        UserLocalRepository.location = Pair(newLocation.latitude, newLocation.longitude)
     }
 
     fun onReadyClick(interests: List<Interests>): Boolean =
@@ -42,7 +42,7 @@ class LocationViewModel : ViewModel() {
             false
         } else {
             meRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
-            LocalUserRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
+            UserLocalRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
             true
         }
 
@@ -51,7 +51,7 @@ class LocationViewModel : ViewModel() {
             _interests.value = it?.interests
             _location.value = it?.location
             if (it?.location?.latitude != null) {
-                LocalUserRepository.location = Pair(it.location.latitude, it.location.longitude)
+                UserLocalRepository.location = Pair(it.location.latitude, it.location.longitude)
             }
 
             _retrieving.value = RetrieveState.POST

@@ -5,7 +5,7 @@ import com.halcyonmobile.rsrvd.core.shared.sharedpreferences.SharedPreferencesMa
 import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import com.halcyonmobile.rsrvd.core.user.UserRemoteSource
 
-object LocalUserRepository {
+object UserLocalRepository {
     private val userRemoteSource =
         UserRemoteSource()
 

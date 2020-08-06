@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import com.halcyonmobile.rsrvd.core.shared.Interests
 
@@ -26,11 +26,11 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun loadUserInformation() {
-        LocalUserRepository.loadProfileData { profileData.value = it }
+        UserLocalRepository.loadProfileData { profileData.value = it }
     }
 
     fun handleLogOut() {
-        LocalUserRepository.apply {
+        UserLocalRepository.apply {
             isUserLoggedIn = false
             exploreFirst = false
             accessToken = ""
@@ -38,5 +38,5 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun isUserLoggedIn() = LocalUserRepository.isUserLoggedIn
+    fun isUserLoggedIn() = UserLocalRepository.isUserLoggedIn
 }
