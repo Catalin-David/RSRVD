@@ -9,5 +9,5 @@ import com.halcyonmobile.rsrvd.venuedetails.FacilityView
 
 @BindingAdapter("facilities")
 fun FlexboxLayout.facilities(facilities: List<Facilities>) {
-    facilities.map { addView(FacilityView(context).apply { setFacility(it.name) }) }
+    facilities.map { addView(FacilityView(context).apply { setFacility(it) }) }
 }
