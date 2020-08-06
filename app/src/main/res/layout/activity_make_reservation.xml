@@ -27,22 +27,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_img_reservation"
-            android:layout_marginTop="@dimen/short_margin"
             app:layout_constraintTop_toBottomOf="@id/close_reservation"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/reservation_image" />
 
         <TextView
+            android:id="@+id/make_reservation_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/make_a_reservation"
             android:textSize="40sp"
             android:textAppearance="?attr/textAppearanceHeadline3"
             android:textAllCaps="true"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/medium_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/close_reservation"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/venue_name_reservation"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textAllCaps="true"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/short_margin"
+            app:layout_constraintTop_toBottomOf="@id/make_reservation_text_view"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

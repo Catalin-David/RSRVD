@@ -63,4 +63,5 @@
     <string name="edit_icon">edit icon</string>
     <string name="reservation_image">reservation image</string>
     <string name="make_a_reservation">make a \nreservation</string>
+    <string name="venue_name_reservation">venue name reservation</string>
 </resources>
