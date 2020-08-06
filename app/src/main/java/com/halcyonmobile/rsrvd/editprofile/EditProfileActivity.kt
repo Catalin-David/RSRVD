@@ -8,12 +8,14 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.model.Interests
-import com.halcyonmobile.rsrvd.core.model.Location
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.EditProfileActivityBinding
-import com.halcyonmobile.rsrvd.onboarding.*
+import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.onboarding.InterestView
+import com.halcyonmobile.rsrvd.onboarding.RetrieveState
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -46,7 +48,7 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             retrieving.observe(this@EditProfileActivity) {
-                when(it) {
+                when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
                     RetrieveState.POST ->
                         if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
@@ -78,7 +80,7 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                if(viewModel.onReadyClick(getInterests())) {
+                if (viewModel.onReadyClick(getInterests())) {
                     finish()
                 }
             }

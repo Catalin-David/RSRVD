@@ -6,11 +6,11 @@
 
         <variable
             name="location"
-            type="com.halcyonmobile.rsrvd.core.model.Location" />
+            type="com.halcyonmobile.rsrvd.core.shared.Location" />
 
         <variable
             name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.model.Interests>" />
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
     </data>
 
     <ScrollView
