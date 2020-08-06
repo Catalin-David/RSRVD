@@ -26,7 +26,7 @@ internal object RetrofitManager {
     var retrofit: Retrofit? = null
         get() {
             if (field == null) {
-                Retrofit.Builder()
+                field = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(
                         OkHttpClient.Builder()

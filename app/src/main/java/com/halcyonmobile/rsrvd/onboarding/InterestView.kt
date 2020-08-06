@@ -19,9 +19,19 @@ class InterestView(context: Context, checkable: Boolean? = null) : ConstraintLay
         checkable?.let { view.isClickable = it }
     }
 
+    constructor(context: Context, isCheckable: Boolean) : this(context) {
+        if (!isCheckable) {
+            button.isClickable = false
+        }
+    }
+
     fun setInterest(interest: String) {
         button.text = interest
     }
 
-    fun isChecked() = findViewById<CheckBox>(R.id.interest_button)?.isChecked ?: false
+    fun isChecked() = button?.isChecked ?: false
+
+    fun setChecked(state: Boolean) {
+        button?.isChecked = state
+    }
 }

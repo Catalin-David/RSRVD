@@ -8,6 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
@@ -20,17 +21,7 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider =
-        LocationProvider(this) {
-            viewModel.setLocation(
-                Location(
-                    name = getString(R.string.current_location),
-                    details = getString(R.string.current_location),
-                    latitude = it.latitude,
-                    longitude = it.longitude
-                )
-            )
-        }
+    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +39,23 @@ class OnboardingActivity : AppCompatActivity() {
             errorMessage.observe(this@OnboardingActivity) {
                 binding.root.showSnackbar(it).show()
             }
-        }
 
-        locationProvider.init()
+            interests.observe(this@OnboardingActivity) {
+                markInterests()
+            }
+
+            retrieving.observe(this@OnboardingActivity) {
+                when (it) {
+                    RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
+                    RetrieveState.POST ->
+                        if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
+                        else {
+                            binding.mapsText.text = getString(R.string.pick_location)
+                            locationProvider.init()
+                        }
+                }
+            }
+        }
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
@@ -68,8 +73,9 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                viewModel.onReadyClick(getInterests())
-                // startActivity(Intent(this@OnboardingActivity, NEXTACTIVITY::class.java))
+                if (viewModel.onReadyClick(getInterests())) {
+                    startActivity(Intent(this@OnboardingActivity, MainActivity::class.java))
+                }
             }
         }
     }
@@ -86,6 +92,13 @@ class OnboardingActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         locationProvider.onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    private fun markInterests() {
+        viewModel.interests.value?.map { myInterest ->
+            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
+        }
     }
 
     private fun getInterests(): List<Interests> = binding.interestsGrid.children

@@ -1,6 +1,5 @@
 package com.halcyonmobile.rsrvd.core.shared.repository
 
-import com.halcyonmobile.rsrvd.core.authentication.AuthenticationRepository
 import com.halcyonmobile.rsrvd.core.shared.sharedpreferences.SharedPreferencesManager
 
 object UserLocalRepository {
@@ -15,7 +14,14 @@ object UserLocalRepository {
         set(userStatus) {
             SharedPreferencesManager.isUserLoggedIn = userStatus
         }
-
-    fun userSignIn(idToken: String, onSuccess: (token: String) -> Unit, onFailure: () -> Unit) =
-        AuthenticationRepository().postToken(idToken, onSuccess, onFailure)
+    var accessToken: String?
+        get() = SharedPreferencesManager.accessToken
+        set(token) {
+            SharedPreferencesManager.accessToken = token
+        }
+    var exploreFirst: Boolean
+        get() = SharedPreferencesManager.exploreFirst
+        set(explore) {
+            SharedPreferencesManager.exploreFirst = explore
+        }
 }
