@@ -16,6 +16,6 @@ class VenuesRepository {
     }
 
     fun getVenueById(venueId: String, callback: (VenueById) -> Unit) {
-        venuesRemoteSource.getVenueById(venueId, callback)
+   //     venuesRemoteSource.getVenueById(venueId, callback)
     }
 }
