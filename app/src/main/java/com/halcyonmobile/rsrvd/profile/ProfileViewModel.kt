@@ -10,7 +10,6 @@ import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.core.user.UserProfileData
 import com.halcyonmobile.rsrvd.core.user.UserRepository
-import com.halcyonmobile.rsrvd.core.user.dto.UserDto
 
 class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
