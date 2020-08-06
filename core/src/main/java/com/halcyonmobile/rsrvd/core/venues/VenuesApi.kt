@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface VenuesApi {
+internal interface VenuesApi {
     @GET("venues/recently-visited")
     fun getRecentlyVisitedVenues(): Call<List<Venue>>
 

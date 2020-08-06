@@ -1,7 +1,7 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
 import com.halcyonmobile.rsrvd.core.shared.Location
-import java.util.*
+import java.util.UUID
 
 data class Card(
     val id: UUID = UUID.randomUUID(),

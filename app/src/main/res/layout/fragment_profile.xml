@@ -26,7 +26,8 @@
                 android:src="@mipmap/ic_launcher"
                 app:imageUrl="@{viewmodel.imageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/profile_picture" />
 
             <TextView
                 android:id="@+id/text_view_profile_name"
@@ -87,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_yellow_shape"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_profile_name"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/art" />
 
             <ImageButton
                 android:id="@+id/button_edit_profile"
@@ -97,7 +99,8 @@
                 android:backgroundTint="@color/dark_gray"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/edit_icon" />
 
             <TextView
                 android:id="@+id/profile_interests"

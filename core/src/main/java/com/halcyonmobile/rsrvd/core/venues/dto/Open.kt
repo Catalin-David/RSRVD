@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Open (
+data class Open(
     @Json(name = "0")
     val dayZero: DailyOpenHours,
     @Json(name = "1")

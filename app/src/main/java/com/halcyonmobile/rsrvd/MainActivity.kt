@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         openFragment(ExploreFragment(), supportFragmentManager)
     }
 
-    private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null){
+    private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null) {
         fragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
             addToBackStack(addToBackStackParameter)

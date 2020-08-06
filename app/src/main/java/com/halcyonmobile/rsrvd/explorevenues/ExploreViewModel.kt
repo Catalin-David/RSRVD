@@ -66,7 +66,6 @@ class ExploreViewModel : ViewModel() {
         _cardInFocus.value?.location?.let {
             val distances = FloatArray(1)
             Location.distanceBetween(it.latitude, it.longitude, UserLocalRepository.location.first, UserLocalRepository.location.second, distances)
-            println("-------------------------------------------------${it.latitude}--${it.longitude}--${UserLocalRepository.location.first}--${UserLocalRepository.location.second}--${distances[0]}")
             val distanceFormatted = if (distances[0] > 1000) "${"%.2f".format(distances[0] / 1000)}km" else "${distances[0]}m"
             return " / $distanceFormatted away"
         }

@@ -47,7 +47,11 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
                     LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(this)
 
                     if (locationResult != null && locationResult.locations.isNotEmpty()) {
-                        val address = Geocoder(activity, Locale.getDefault()).getFromLocation(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude, 1)[0]
+                        val address = Geocoder(activity, Locale.getDefault()).getFromLocation(
+                            locationResult.lastLocation.latitude,
+                            locationResult.lastLocation.longitude,
+                            1
+                        )[0]
                         callback(
                             Location(
                                 name = address.locality,

@@ -1,25 +1,24 @@
-package com.halcyonmobile.rsrvd.core.venues.dto
+package com.halcyonmobile.rsrvd.core.user.dto
 
-import com.halcyonmobile.rsrvd.core.shared.Facilities
+import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.venues.dto.Open
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Venue(
+data class UserDto(
     @Json(name = "id")
     val id: String,
+    @Json(name = "email")
+    val email: String,
     @Json(name = "name")
     val name: String,
-    @Json(name = "description")
-    val description: String,
     @Json(name = "image")
     val image: String,
+    @Json(name = "interests")
+    val interests: List<Interests>,
     @Json(name = "location")
     val location: Location,
-    @Json(name = "open")
-    val open: Open,
-    @Json(name = "facilities")
-    val facilities: List<Facilities>
+    @Json(name = "reservations")
+    val reservations: Int
 )

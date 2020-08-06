@@ -28,7 +28,7 @@ class SelectLocationActivity : AppCompatActivity() {
         location.placeId?.let {
             client.fetchPlace(
                 FetchPlaceRequest.newInstance(
-                    location.placeId as String,
+                    location.placeId!!,
                     listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
                 )
             )

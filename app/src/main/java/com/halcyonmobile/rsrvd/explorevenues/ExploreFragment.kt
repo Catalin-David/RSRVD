@@ -17,7 +17,6 @@ import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
-
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
     private val recentlyVisitedAdapter = CardsAdapter {
         // TODO start activity to open Details
