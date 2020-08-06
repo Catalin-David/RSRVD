@@ -2,7 +2,7 @@ package com.halcyonmobile.rsrvd.core.shared.repository
 
 import com.halcyonmobile.rsrvd.core.authentication.AuthenticationRepository
 import com.halcyonmobile.rsrvd.core.shared.sharedpreferences.SharedPreferencesManager
-import com.halcyonmobile.rsrvd.core.user.model.UserProfileData
+import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import com.halcyonmobile.rsrvd.core.user.UserRemoteSource
 
 object LocalUserRepository {

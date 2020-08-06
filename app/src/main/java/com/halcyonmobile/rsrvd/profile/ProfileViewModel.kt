@@ -7,7 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.halcyonmobile.rsrvd.core.shared.repository.LocalUserRepository
-import com.halcyonmobile.rsrvd.core.user.model.UserProfileData
+import com.halcyonmobile.rsrvd.core.model.UserProfileData
 import com.halcyonmobile.rsrvd.core.shared.Interests
 
 class ProfileViewModel : ViewModel() {
