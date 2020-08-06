@@ -20,9 +20,13 @@ class FilterViewModel : ViewModel() {
     val availability: LiveData<StartEnd> = _availability
 
     fun setLocation(myLocation: Location) {
-        _location.value = FilterLocation(myLocation.latitude, myLocation.longitude, 3.0)
+        _location.value = FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS)
     }
 
     // TODO activities from the FlexBox
     fun isReady(): Boolean = _name.value != null || _location.value != null || !_activities.value.isNullOrEmpty() || _availability.value != null || true
+
+    companion object {
+        const val RADIUS = 5000.0
+    }
 }

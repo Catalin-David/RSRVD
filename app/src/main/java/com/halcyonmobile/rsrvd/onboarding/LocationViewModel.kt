@@ -28,6 +28,7 @@ class LocationViewModel : ViewModel() {
 
     fun setLocation(newLocation: Location) {
         _location.value = newLocation
+        // TODO Should not happen if in ExploreVenuesFilter mode
         UserRepository.location = Pair(newLocation.latitude, newLocation.longitude)
     }
 

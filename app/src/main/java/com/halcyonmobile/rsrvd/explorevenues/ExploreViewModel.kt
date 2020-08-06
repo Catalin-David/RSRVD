@@ -64,15 +64,15 @@ class ExploreViewModel : ViewModel() {
         return ""
     }
 
-    private fun storeVenuesAsCardsIn(storage: MutableLiveData<List<Card>>, venues: List<Venue>?, error: Boolean) {
+    private fun storeVenuesAsCardsIn(storage: MutableLiveData<List<Card>>, venues: List<Venue>?, error: Boolean?) {
         _error.value = error
-
-        (venues?.map { Card(title = it.name, image = it.image, location = it.location) })?.let {
-            storage.value = it
-        }
+        storage.value =
+            if (venues.isNullOrEmpty()) listOf(NoRecentCard.instance) else venues.map { Card(title = it.name, image = it.image, location = it.location) }
     }
 
     fun filterVenues() {
+        println(filters.value)
+
         VenuesRepository.filterVenues(
             FilterDto(
                 name = filters.value?.name,

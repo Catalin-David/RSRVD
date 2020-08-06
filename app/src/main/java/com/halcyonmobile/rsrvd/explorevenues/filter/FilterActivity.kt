@@ -26,6 +26,7 @@ class FilterActivity : AppCompatActivity() {
 
     private val locationProvider: LocationProvider = LocationProvider(this) {
         locationViewModel.setLocation(it)
+        filterViewModel.setLocation(it)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +60,7 @@ class FilterActivity : AppCompatActivity() {
                     setResult(
                         Activity.RESULT_OK, Intent().putExtra(
                             "filters", Filters(
-                                activities = getActivities(),
+                                activities = if (getActivities().isNotEmpty()) getActivities() else null,
                                 location = filterViewModel.location.value
                             )
                         )
