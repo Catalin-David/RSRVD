@@ -14,73 +14,119 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/side_guide" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/side_guide" />
 
             <!-- Search Venue Bar -->
             <include
                 android:id="@+id/search_venue_bar"
                 layout="@layout/search_venue_bar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/long_margin"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toTopOf="parent"
                 app:viewModel="@{view_model}" />
 
             <!-- No results -->
             <include
                 android:id="@+id/no_results"
                 layout="@layout/no_results"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
                 app:viewModel="@{view_model}" />
 
             <!-- Search Results -->
             <include
                 android:id="@+id/search_results"
                 layout="@layout/search_results"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
                 app:viewModel="@{view_model}" />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
                 app:visible="@{!view_model.searching}">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/right_guideline_inner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/side_guide" />
 
                 <!-- Recently visited -->
                 <include
                     android:id="@+id/recently_visited"
                     layout="@layout/recently_visited"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cards_height"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    app:layout_constraintBottom_toTopOf="@id/activity_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Info -->
                 <include
                     android:id="@+id/activity_info"
                     layout="@layout/activity_info"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recently_visited"
                     app:viewModel="@{view_model}" />
 
                 <!-- Explore -->
                 <include
                     android:id="@+id/explore"
                     layout="@layout/explore"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cards_height"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_info" />
 
                 <!-- We recommend -->
                 <include
                     android:id="@+id/we_recommend"
                     layout="@layout/we_recommend"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cards_height_short" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/cards_height_short"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/explore" />
 
                 <!-- Read more -->
                 <Button
@@ -89,13 +135,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="@dimen/long_margin"
+                    android:layout_marginVertical="@dimen/default_margin"
                     android:background="?attr/selectableItemBackground"
                     android:text="@string/read_more"
                     android:textAppearance="@style/TextAppearance.Body2"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/we_recommend" />
 
-            </LinearLayout>
-        </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

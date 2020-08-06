@@ -8,22 +8,23 @@ import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 
 class ExploreViewModel : ViewModel() {
     private val _searching: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData(false)
+
     private val _searchResults: MutableLiveData<List<Card>> = MutableLiveData(emptyList())
+
     private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NO_RECENTS_CARD))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
-    private val _errorRecentlyVisited = MutableLiveData(false)
-    private val _errorExplore = MutableLiveData(false)
+
+    private val _error = MutableLiveData(false)
+
     private val _cardInFocus: MutableLiveData<Card> = MutableLiveData()
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val searching: LiveData<Boolean> = _searching
     val searchResults: LiveData<List<Card>> = _searchResults
     val recentlyVisitedCards: LiveData<List<Card>> = _recentlyVisitedCards
     val exploreCards: LiveData<List<Card>> = _exploreCards
-    val errorRecentlyVisited: LiveData<Boolean> = _errorRecentlyVisited
-    val errorExplore: LiveData<Boolean> = _errorExplore
+    val error: LiveData<Boolean> = _error
     val cardInFocus: LiveData<Card> = _cardInFocus
-    val noRecents: LiveData<Boolean> = _noRecents
 
     val searchTerm: MutableLiveData<String> = MutableLiveData("")
 

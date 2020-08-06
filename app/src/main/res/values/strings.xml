@@ -67,7 +67,6 @@
     <string name="log_out_prompt">Are you sure you want to log out?</string>
     <string name="log_out">Log out</string>
     <string name="cancel">Cancel</string>
-    <string name="reservation_fragment">Reservation fragment</string>
     <string name="profile_picture">Logged in user profile picture</string>
     <string name="art">art</string>
     <string name="edit_icon">edit icon</string>

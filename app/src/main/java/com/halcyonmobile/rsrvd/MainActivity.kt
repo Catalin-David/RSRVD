@@ -10,6 +10,7 @@ import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
 import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
+import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 

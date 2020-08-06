@@ -18,7 +18,7 @@
     <dimen name="picture_dimension">160dp</dimen>
     <dimen name="text_on_picture_margin">115dp</dimen>
 
-    <dimen name="card_width">400dp</dimen>
+    <dimen name="card_width">320dp</dimen>
     <dimen name="card_height">220dp</dimen>
     <dimen name="card_height_short">180dp</dimen>
     <dimen name="cards_height">280dp</dimen>

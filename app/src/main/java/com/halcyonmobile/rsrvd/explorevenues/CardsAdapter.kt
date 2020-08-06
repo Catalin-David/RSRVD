@@ -1,8 +1,13 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
+import android.content.res.Resources
 import android.graphics.Color
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +17,7 @@ import com.halcyonmobile.rsrvd.databinding.ItemCardBinding
 
 class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, CardsAdapter.CardViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder =
-        CardViewHolder(
-            ItemCardBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        CardViewHolder(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.apply {
@@ -37,7 +36,9 @@ class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, Car
     inner class CardViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Card) {
             binding.titleTextView.text = item.title
-            binding.titleTextView.setShadowLayer(1f, 1f, 1f, Color.BLACK);
+            binding.titleTextView.setShadowLayer(1f, 1f, 1f, Color.BLACK)
+
+            binding.root.layoutParams.width = (Resources.getSystem().displayMetrics.widthPixels * .85).toInt()
 
             item.image?.let {
                 Glide

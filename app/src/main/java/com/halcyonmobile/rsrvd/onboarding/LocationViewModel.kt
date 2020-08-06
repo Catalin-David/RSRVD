@@ -7,7 +7,6 @@ import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.core.user.UserRepository
-import com.halcyonmobile.rsrvd.core.user.UserRepository
 
 enum class RetrieveState {
     PRE, POST
