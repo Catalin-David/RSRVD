@@ -14,9 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.api.net.*
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.databinding.SelectLocationBinding
@@ -139,6 +137,6 @@ class SelectLocationActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
+        const val apikey = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
     }
 }

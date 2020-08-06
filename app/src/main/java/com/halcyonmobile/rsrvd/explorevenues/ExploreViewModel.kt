@@ -10,36 +10,55 @@ import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 class ExploreViewModel : ViewModel() {
     private val venuesRepository = VenuesRepository()
 
-    private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(NoRecentCard.instance))
+    private val _recentlyVisitedCards: MutableLiveData<List<Card>> = MutableLiveData(listOf(StaticCards.noRecents))
     private val _exploreCards: MutableLiveData<List<Card>> = MutableLiveData()
-    private val _error = MutableLiveData(false)
+    private val _errorRecentlyVisited = MutableLiveData(false)
+    private val _errorExplore = MutableLiveData(false)
     private val _cardInFocus: MutableLiveData<Card> = MutableLiveData()
+    private val _noRecents: MutableLiveData<Boolean> = MutableLiveData(true)
 
     val recentlyVisitedCards: LiveData<List<Card>> = _recentlyVisitedCards
     val exploreCards: LiveData<List<Card>> = _exploreCards
-    val error: LiveData<Boolean> = _error
+    val errorRecentlyVisited: LiveData<Boolean> = _errorRecentlyVisited
+    val errorExplore: LiveData<Boolean> = _errorExplore
     val cardInFocus: LiveData<Card> = _cardInFocus
+    val noRecents: LiveData<Boolean> = _noRecents
 
-    fun setCardInFocus(newCard: Card) {
+    fun setCardInFocus(newCard: Card?) {
         _cardInFocus.value = newCard
     }
 
     init {
         venuesRepository.getRecentlyVisitedVenues { venues, error ->
-            _error.value = error
-            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-                _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NoRecentCard.instance) else it
+            if (error) {
+                _errorRecentlyVisited.value = error
+                _recentlyVisitedCards.value = listOf(StaticCards.noRecents)
+                _noRecents.value = true
+            } else {
+                (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                    if (it != null && it.isNotEmpty()) {
+                        _recentlyVisitedCards.value = it
+                        _noRecents.value = false
+                    } else {
+                        _recentlyVisitedCards.value = listOf(StaticCards.noRecents)
+                        _noRecents.value = true
+                    }
+                }
             }
         }
 
         venuesRepository.getExploreVenues { venues, error ->
-            _error.value = error
-            (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
-                _exploreCards.value = it
+            if (error) {
+                _errorExplore.value = error
+                _exploreCards.value = listOf(StaticCards.noExplore)
+            } else {
+                (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+                    _exploreCards.value = if (it != null && it.isNotEmpty()) it else listOf(StaticCards.noExplore)
+                }
             }
         }
 
-        _cardInFocus.value = _recentlyVisitedCards.value!![0]
+        _cardInFocus.value = if (_recentlyVisitedCards.value == null || _recentlyVisitedCards.value!!.isEmpty()) null else _recentlyVisitedCards.value!![0]
     }
 
     fun getFormattedDistance(): String {

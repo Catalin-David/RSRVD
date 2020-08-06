@@ -50,10 +50,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 
     //Moshi
-    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.7.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.3'
 
     //Google
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 }

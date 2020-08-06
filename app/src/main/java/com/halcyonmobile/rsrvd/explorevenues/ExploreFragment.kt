@@ -16,9 +16,8 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
-
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
-    private val recentlyViewedAdapter = CardsAdapter {
+    private val recentlyVisitedAdapter = CardsAdapter {
         // TODO start activity to open Details
     }
     private val exploreAdapter = CardsAdapter {
@@ -38,23 +37,28 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         // Observers
         viewModel.apply {
-            recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
+            recentlyVisitedCards.observe(viewLifecycleOwner) {
+                recentlyVisitedAdapter.submitList(it)
+                viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value?.get(0))
+            }
             exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
-            error.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
+            errorRecentlyVisited.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
+            errorExplore.observe(viewLifecycleOwner) { if (it) view.showSnackbar("Something went wrong") }
             cardInFocus.observe(viewLifecycleOwner) { binding.detailsDistance.text = viewModel.getFormattedDistance() }
+            noRecents.observe(viewLifecycleOwner) { binding.detailsDistance.visibility = if (it) View.VISIBLE else View.INVISIBLE }
         }
 
         // Recently Visited Setup
         binding.recentlyVisitedList.apply {
             setHasFixedSize(false)
-            adapter = recentlyViewedAdapter
+            adapter = recentlyVisitedAdapter
             layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             LinearSnapHelper().attachToRecyclerView(this)
-            setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            setOnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
                     val layoutManager = layoutManager as LinearLayoutManager
                     val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-                    viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value!![firstVisiblePosition])
+                    viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value?.get(firstVisiblePosition))
                 }
             }
         }
