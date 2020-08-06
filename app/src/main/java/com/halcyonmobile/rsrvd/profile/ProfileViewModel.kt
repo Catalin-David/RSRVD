@@ -6,17 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.core.model.UserProfileData
-import com.halcyonmobile.rsrvd.core.model.Interests
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
+import com.halcyonmobile.rsrvd.core.user.UserRepository
+import com.halcyonmobile.rsrvd.core.user.dto.UserDto
 
 class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
-    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData())
+    private val profileData: MutableLiveData<UserDto> = MutableLiveData()
+
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
-    val location: LiveData<String> = Transformations.map(profileData) { it.location?.name ?: "" }
-    val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
+    val location: LiveData<String> = Transformations.map(profileData) { it.location.name }
+    val activities: LiveData<String> = Transformations.map(profileData) { it.reservations.toString() }
     val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
 
     fun setSignInAccount(newSignInAccount: GoogleSignInAccount?) {
@@ -24,11 +26,11 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun loadUserInformation() {
-        UserRepository.loadProfileData { profileData.value = it }
+        UserRepository.get { profileData.value = it }
     }
 
     fun handleLogOut() {
-        UserRepository.apply {
+        UserLocalRepository.apply {
             isUserLoggedIn = false
             exploreFirst = false
             accessToken = ""
@@ -36,5 +38,5 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun isUserLoggedIn() = UserRepository.isUserLoggedIn
+    fun isUserLoggedIn() = UserLocalRepository.isUserLoggedIn
 }

@@ -6,13 +6,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
-import com.halcyonmobile.rsrvd.core.model.Location
-import com.halcyonmobile.rsrvd.core.model.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -45,7 +46,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             retrieving.observe(this@OnboardingActivity) {
-                when(it) {
+                when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
                     RetrieveState.POST ->
                         if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
@@ -73,7 +74,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
             ready.setOnClickListener {
-                if(viewModel.onReadyClick(getInterests())) {
+                if (viewModel.onReadyClick(getInterests())) {
                     startActivity(Intent(this@OnboardingActivity, MainActivity::class.java))
                 }
             }
