@@ -40,9 +40,6 @@ fun TextView.formattedDistance(location: myLocation?) = if (location != null) {
         if (distances[0] > 1000) context.getString(R.string.kilometers, distances[0] / 1000)
         else context.getString(R.string.meters, distances[0])
 
-    println(context.getString(R.string.kilometers, distances[0] / 1000))
-    println(context.getString(R.string.distance_away, distanceFormatted))
-
     text = context.getString(R.string.distance_away, distanceFormatted)
 } else {
     text = ""

@@ -27,10 +27,8 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding = FragmentExploreBinding.bind(view)
         viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
 
-        binding.apply {
-            viewModel = this@ExploreFragment.viewModel
-            lifecycleOwner = activity
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         val searchResultsAdapter = CardsAdapter { /* TODO start activity to open Details */ }
         val recentlyViewedAdapter = CardsAdapter { /* TODO start activity to open Details */ }
