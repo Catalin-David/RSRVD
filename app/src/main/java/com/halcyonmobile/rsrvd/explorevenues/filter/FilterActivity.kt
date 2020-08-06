@@ -9,13 +9,13 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.shared.LocationProvider
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.databinding.FilterActivityBinding
 import com.halcyonmobile.rsrvd.onboarding.InterestView
-import com.halcyonmobile.rsrvd.onboarding.Interests
 import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
 import com.halcyonmobile.rsrvd.onboarding.RetrieveState
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
@@ -72,10 +72,6 @@ class FilterActivity : AppCompatActivity() {
         }
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
-            location.observe(this@FilterActivity) {
-                binding.location = it
-            }
-
             updateState.observe(this@FilterActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }

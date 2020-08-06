@@ -3,17 +3,16 @@ package com.halcyonmobile.rsrvd.onboarding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.halcyonmobile.rsrvd.core.me.MeRepository
-import com.halcyonmobile.rsrvd.core.repository.UserRepository
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
+import com.halcyonmobile.rsrvd.core.user.UserRepository
 
 enum class RetrieveState {
     PRE, POST
 }
 
 class LocationViewModel : ViewModel() {
-    private val meRepository: MeRepository = MeRepository()
-
     private val _location: MutableLiveData<Location> = MutableLiveData()
     private val _updateState: MutableLiveData<Boolean> = MutableLiveData()
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
@@ -29,10 +28,10 @@ class LocationViewModel : ViewModel() {
     fun setLocation(newLocation: Location) {
         _location.value = newLocation
         // TODO Should not happen if in ExploreVenuesFilter mode
-        UserRepository.location = Pair(newLocation.latitude, newLocation.longitude)
+        UserLocalRepository.location = Pair(newLocation.latitude, newLocation.longitude)
     }
 
-    fun readyToUpdate(interests: List<Interests>): Boolean =
+    fun onReadyClick(interests: List<Interests>): Boolean =
         if (_location.value == null || interests.isEmpty()) {
             _updateState.value = false
             _errorMessage.value = (if (_location.value == null) "Missing location" else "") +
@@ -40,21 +39,21 @@ class LocationViewModel : ViewModel() {
                     if (interests.isEmpty()) "No interests" else ""
             false
         } else {
-            meRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
-            UserRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
+            UserRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
+            UserLocalRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
             true
         }
 
     init {
-//        meRepository.get {
-//            _interests.value = it?.interests
-//            _location.value = it?.location
-//            if (it?.location?.latitude != null) {
-//                UserRepository.location = Pair(it.location.latitude, it.location.longitude)
-//            }
-//
-//            _retrieving.value = RetrieveState.POST
-//        }
+        UserRepository.get {
+            _interests.value = it?.interests
+            _location.value = it?.location
+            if (it?.location?.latitude != null) {
+                UserLocalRepository.location = Pair(it.location.latitude, it.location.longitude)
+            }
+
+            _retrieving.value = RetrieveState.POST
+        }
     }
 
 }

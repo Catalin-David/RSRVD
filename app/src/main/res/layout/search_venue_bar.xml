@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/box_line_height"
@@ -12,27 +19,44 @@
         <ImageView
             android:id="@+id/search_icon"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/short_margin"
             android:contentDescription="@string/search_icon"
-            android:src="@drawable/ic_baseline_search_24"
+            android:src="@drawable/ic_baseline_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/search_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/search_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:autofillHints="Search venue"
             android:gravity="center_vertical"
             android:hint="@string/search_venue"
-            android:text="@string/search_venue"
+            android:inputType="text"
+            android:text="@={viewModel.searchTerm}"
             android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/filter_icon"
             app:layout_constraintStart_toEndOf="@id/search_icon"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/short_margin"
+            android:contentDescription="@string/clear_search_term"
+            android:onClick="@{() -> viewModel.clear()}"
+            android:src="@drawable/ic_baseline_clear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/filter_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{!viewModel.searchTerm.empty}" />
 
         <ImageView
             android:id="@+id/filter_icon"

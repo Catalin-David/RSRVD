@@ -1,9 +1,9 @@
 package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.os.Parcelable
-import com.halcyonmobile.rsrvd.core.venues.models.FilterLocation
-import com.halcyonmobile.rsrvd.core.venues.models.StartEnd
-import com.halcyonmobile.rsrvd.onboarding.Interests
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
+import com.halcyonmobile.rsrvd.core.venues.dto.StartEnd
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

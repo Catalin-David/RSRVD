@@ -3,10 +3,10 @@ package com.halcyonmobile.rsrvd.explorevenues.filter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.halcyonmobile.rsrvd.core.venues.models.FilterLocation
-import com.halcyonmobile.rsrvd.core.venues.models.StartEnd
-import com.halcyonmobile.rsrvd.onboarding.Interests
-import com.halcyonmobile.rsrvd.selectlocation.Location
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
+import com.halcyonmobile.rsrvd.core.venues.dto.StartEnd
 
 class FilterViewModel : ViewModel() {
     private val _name = MutableLiveData<String>()

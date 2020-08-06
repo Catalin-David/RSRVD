@@ -11,9 +11,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/card_width"
-        android:layout_height="@dimen/card_height"
-        android:layout_marginEnd="@dimen/long_margin">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height">
 
         <ImageView
             android:id="@+id/background"
@@ -21,7 +20,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/sport_activity"
             android:scaleType="centerCrop"
-            android:src="@drawable/photo_1562771379_eafdca7a02f81"
+            android:src="@drawable/photo_onboarding"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

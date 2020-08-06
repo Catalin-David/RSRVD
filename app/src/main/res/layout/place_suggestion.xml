@@ -7,7 +7,7 @@
 
         <variable
             name="location"
-            type="com.halcyonmobile.rsrvd.selectlocation.Location" />
+            type="com.halcyonmobile.rsrvd.core.shared.Location" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{location.name}"
-            android:textColor="#fff"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/location_details"
             app:layout_constraintEnd_toEndOf="parent"
