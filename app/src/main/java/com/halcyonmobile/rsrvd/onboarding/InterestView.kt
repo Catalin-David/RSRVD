@@ -1,11 +1,13 @@
 package com.halcyonmobile.rsrvd.onboarding
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.CheckBox
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.halcyonmobile.rsrvd.R
 
-class InterestView(context: Context) : ConstraintLayout(context) {
+@SuppressLint("ViewConstructor")
+class InterestView(context: Context, checkable: Boolean? = null) : ConstraintLayout(context) {
     private val view = inflate(context, R.layout.interest, this)
     private val button = view.findViewById<CheckBox>(R.id.interest_button)
 
@@ -13,6 +15,8 @@ class InterestView(context: Context) : ConstraintLayout(context) {
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(0, 0, 25, 25)
         this.layoutParams = params
+
+        checkable?.let { view.isClickable = it }
     }
 
     constructor(context: Context, isCheckable: Boolean) : this(context) {
