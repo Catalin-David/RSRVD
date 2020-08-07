@@ -96,4 +96,13 @@
     <string name="sport_base">sport base gheorgheni</string>
     <string name="forward">forward</string>
     <string name="arrow_back">arrow back</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <string name="sun">SUN</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
 </resources>

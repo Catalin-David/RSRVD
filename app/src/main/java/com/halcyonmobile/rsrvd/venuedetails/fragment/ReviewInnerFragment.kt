@@ -13,9 +13,7 @@ class ReviewInnerFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_inner_venue_reviews, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_inner_venue_reviews, container, false)
 
     companion object {
         fun newInstance() : ReviewInnerFragment = ReviewInnerFragment()

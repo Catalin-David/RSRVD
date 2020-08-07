@@ -89,72 +89,57 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
         }
     }
 
-    private fun getDay(i: Int): String =
-        when (i) {
-            0 -> "MON"
-            1 -> "TUE"
-            2 -> "WED"
-            3 -> "THU"
-            4 -> "FRI"
-            5 -> "SAT"
-            6 -> "SUN"
-            else -> "NULL"
-        }
+    private fun getDay(i: Int): String  =
+        listOf(getString(R.string.mon),
+            getString(R.string.tue),
+            getString(R.string.wed),
+            getString(R.string.thu),
+            getString(R.string.fri),
+            getString(R.string.sat),
+            getString(R.string.sun))[i]
 
     private fun getHour(f: Float): String {
-        val hour: Int = if ( f.toInt() > 12 ) f.toInt() - 12
-        else f.toInt()
+        val minutes: Int = (f % 1 * 100).toInt()
 
-        val minutes: Int = ((f - f.toInt()) * 100).toInt()
-        var s = "$hour:"
-
-        s += if ( minutes != 0 ) "$minutes"
-        else "00"
-        s += if (f <= 12) " AM"
-        else " PM"
-
-        return s
+        return """${(f % 12).toInt()}:${if (minutes < 10) "0" else ""}$minutes ${if (f < 12) {getString(R.string.am)} else {getString(R.string.pm)}}""".trimMargin()
     }
 
-    private fun getVenueProgram(it: VenueById): String {
+    private fun getVenueProgram(venueById: VenueById): String {
         val listOpenHours: ArrayList<DailyOpenHours> = ArrayList()
-        listOpenHours.add(it.open.dayZero)
-        listOpenHours.add(it.open.dayOne)
-        listOpenHours.add(it.open.dayTwo)
-        listOpenHours.add(it.open.dayThree)
-        listOpenHours.add(it.open.dayFour)
-        listOpenHours.add(it.open.dayFive)
-        listOpenHours.add(it.open.daySix)
+        listOpenHours.add(venueById.open.dayZero)
+        listOpenHours.add(venueById.open.dayOne)
+        listOpenHours.add(venueById.open.dayTwo)
+        listOpenHours.add(venueById.open.dayThree)
+        listOpenHours.add(venueById.open.dayFour)
+        listOpenHours.add(venueById.open.dayFive)
+        listOpenHours.add(venueById.open.daySix)
 
-        var start = it.open.dayZero.start
-        var end = it.open.dayZero.end
+        var start = venueById.open.dayZero.start
+        var end = venueById.open.dayZero.end
         val listPositions: ArrayList<Int> = ArrayList()
-        for (i in listOpenHours) {
-            if ( i.start != start || i.end != end ) {
-                start = i.start
-                end = i.end
 
-                listPositions.add(listOpenHours.indexOf(i))
+        listOpenHours.map {
+            if ( it.start != start || it.end != end ) {
+                start = it.start
+                end = it.end
+
+                listPositions.add(listOpenHours.indexOf(it))
             }
         }
 
         var result = ""
-        for (i in 0 until listPositions.size) {
+        listPositions.map {i ->
             val day = getDay( listPositions[i] - 1 )
             val hStart = getHour(listOpenHours[ listPositions[i] ].start)
             val hEnd = getHour(listOpenHours[ listPositions[i] ].end)
 
             result += when {
-                i == (listPositions.size - 1) -> {
-                    "$day, $hStart - $hEnd\n"
-                }
+                i == (listPositions.size - 1) -> "$day, $hStart - $hEnd\n"
                 (listPositions[i] - listPositions[i + 1]) > 1 -> {
                     val dayNext = getDay( listPositions[i] )
                     "$day - $dayNext, $hStart - $hEnd\n"
                 }
-                else -> {
-                    "$day, $hStart - $hEnd\n"
-                }
+                else -> ""//"$day, $hStart - $hEnd\n"
             }
         }
 
@@ -180,9 +165,9 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
             "Volley" -> Interests.VOLLEY
             "Badminton" -> Interests.BADMINTON
             "Handball" -> Interests.HANDBALL
-         //   "Bowling" -> Interests.BOWLING
-            "Volleyball" -> Interests.VOLLEY
-          //  "Table tennis" -> Interests.TABLETENNIS
+            "Bowling" -> Interests.BOWLING
+            "Volleyball" -> Interests.VOLLEYBALL
+            "Table tennis" -> Interests.TABLETENNIS
             else -> Interests.RUNNING
         }
 
