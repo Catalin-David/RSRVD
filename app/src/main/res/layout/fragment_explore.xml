@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="view_model"
+            name="viewModel"
             type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
     </data>
 
@@ -41,7 +41,8 @@
                 app:layout_constraintBottom_toTopOf="@id/search_venue_bar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:viewModel="@{viewModel}" />
 
             <!-- Search Venue Bar -->
             <include
@@ -53,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/header"
-                app:viewModel="@{view_model}" />
+                app:viewModel="@{viewModel}" />
 
             <!-- No results -->
             <include
@@ -65,7 +66,7 @@
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
-                app:viewModel="@{view_model}" />
+                app:viewModel="@{viewModel}" />
 
             <!-- Search Results -->
             <include
@@ -76,7 +77,7 @@
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
-                app:viewModel="@{view_model}" />
+                app:viewModel="@{viewModel}" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content"
@@ -84,9 +85,16 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_venue_bar"
-                app:visible="@{!view_model.searching}">
+                app:visible="@{!viewModel.searching}">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/left_guideline_inner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/side_guide" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/right_guideline_inner"
@@ -114,9 +122,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/default_margin"
                     app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/left_guideline_inner"
                     app:layout_constraintTop_toBottomOf="@id/recently_visited"
-                    app:viewModel="@{view_model}" />
+                    app:viewModel="@{viewModel}" />
 
                 <!-- Explore -->
                 <include
@@ -136,7 +144,7 @@
                     android:layout_height="@dimen/cards_height_short"
                     android:layout_marginVertical="@dimen/default_margin"
                     app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/left_guideline_inner"
                     app:layout_constraintTop_toBottomOf="@id/explore" />
 
                 <!-- Read more -->
@@ -152,7 +160,7 @@
                     android:textAppearance="@style/TextAppearance.Body2"
                     android:textColor="@android:color/white"
                     app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/left_guideline_inner"
                     app:layout_constraintTop_toBottomOf="@id/we_recommend" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

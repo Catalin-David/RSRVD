@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="location"
-            type="com.halcyonmobile.rsrvd.core.shared.Location" />
+            name="viewModel"
+            type="com.halcyonmobile.rsrvd.onboarding.LocationViewModel" />
 
         <variable
             name="date"
@@ -100,13 +100,26 @@
                     android:layout_height="0dp"
                     android:gravity="center_vertical"
                     android:hint="@string/select_location"
-                    android:text="@{location.name}"
+                    android:text="@{viewModel.location.name}"
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/maps_enter"
+                    app:layout_constraintEnd_toStartOf="@id/clear_location"
                     app:layout_constraintStart_toEndOf="@id/maps_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/clear_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/short_margin"
+                    android:contentDescription="@string/maps_icon"
+                    android:onClick="@{() -> viewModel.clearLocation()}"
+                    android:src="@drawable/ic_baseline_clear"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/maps_enter"
+                    app:layout_constraintStart_toEndOf="@id/maps_text"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
@@ -118,7 +131,7 @@
                     android:src="@drawable/ic_baseline_arrow_forward"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/maps_text"
+                    app:layout_constraintStart_toEndOf="@id/clear_location"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

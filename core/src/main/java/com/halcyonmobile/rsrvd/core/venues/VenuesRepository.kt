@@ -12,9 +12,6 @@ object VenuesRepository {
     fun getExploreVenues(callback: (List<Venue>?, Boolean) -> Unit) =
         venuesRemoteSource.getExploreVenues(callback)
 
-    fun search(term: String, callback: (List<Venue>?, Boolean) -> Unit) =
-        venuesRemoteSource.search(term, callback)
-
     fun filterVenues(dto: FilterDto, callback: (List<Venue>?, Boolean) -> Unit) =
         venuesRemoteSource.filterVenues(dto, callback)
 }

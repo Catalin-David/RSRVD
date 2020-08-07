@@ -55,10 +55,16 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         viewModel.apply {
             searchResults.observe(viewLifecycleOwner) {
                 searchResultsAdapter.submitList(it)
-//                setCardInFocus(searchResults.value?.get(0))
+                if (!searchResults.value.isNullOrEmpty()) {
+                    setCardInFocus(searchResults.value!![0])
+                }
             }
-            recentlyVisitedCards.observe(viewLifecycleOwner) { recentlyViewedAdapter.submitList(it) }
-            exploreCards.observe(viewLifecycleOwner) { exploreAdapter.submitList(it) }
+            recentlyVisitedCards.observe(viewLifecycleOwner) {
+                recentlyViewedAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_RECENTS_CARD))
+            }
+            exploreCards.observe(viewLifecycleOwner) {
+                exploreAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_CARDS))
+            }
 
             error.observe(viewLifecycleOwner) { if (it) view?.showSnackbar(getString(R.string.something_went_wrong)) }
 
@@ -66,8 +72,6 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable, DEBOUNCE_DURATION)
             }
-
-            filters.observe(viewLifecycleOwner) { viewModel.filterVenues() }
         }
     }
 
@@ -112,7 +116,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             scrollListener = View.OnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
                     val firstVisiblePosition = recyclerViewLayoutManager.findFirstVisibleItemPosition()
-                    if (firstVisiblePosition != -1) {
+                    if (firstVisiblePosition != -1 && !viewModel.recentlyVisitedCards.value.isNullOrEmpty()) {
                         viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value!![firstVisiblePosition])
                     }
                 }
@@ -134,6 +138,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         if (data != null && resultCode == Activity.RESULT_OK && requestCode == FILTER_REQUEST_CODE) {
             viewModel.setFilters(data.getParcelableExtra("filters"))
+            viewModel.notifyFiltersChanged()
         }
     }
 

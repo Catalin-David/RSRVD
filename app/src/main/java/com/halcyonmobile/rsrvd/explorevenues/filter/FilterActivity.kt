@@ -34,10 +34,14 @@ class FilterActivity : AppCompatActivity() {
         binding = FilterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
+
+            viewModel = locationViewModel
+            lifecycleOwner = this@FilterActivity
 
             locationSelector.setOnClickListener {
                 startActivityForResult(
@@ -49,6 +53,10 @@ class FilterActivity : AppCompatActivity() {
                         "search_trans"
                     ).toBundle()
                 )
+            }
+
+            mapsIcon.setOnClickListener {
+                locationProvider.init()
             }
 
             cancel.setOnClickListener { finish() }
@@ -71,7 +79,7 @@ class FilterActivity : AppCompatActivity() {
             }
         }
 
-        locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java).apply {
+        locationViewModel.apply {
             updateState.observe(this@FilterActivity) {
                 binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
             }
@@ -80,21 +88,20 @@ class FilterActivity : AppCompatActivity() {
                 binding.root.showSnackbar(it).show()
             }
 
+            location.observe(this@FilterActivity) {
+                filterViewModel.setLocation(it)
+            }
+
             retrieving.observe(this@FilterActivity) {
                 when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
-                    RetrieveState.POST ->
-                        if (this@FilterActivity.locationViewModel.location.value != null) binding.mapsText.text =
-                            this@FilterActivity.locationViewModel.location.value!!.name
-                        else {
-                            binding.mapsText.text = getString(R.string.pick_location)
-                            locationProvider.init()
-                        }
+                    RetrieveState.POST -> {
+                        binding.mapsText.text = getString(R.string.pick_location)
+                        locationProvider.init()
+                    }
                 }
             }
         }
-
-        locationProvider.init()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

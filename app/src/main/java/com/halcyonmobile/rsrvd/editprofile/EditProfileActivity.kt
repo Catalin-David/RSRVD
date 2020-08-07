@@ -23,7 +23,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: EditProfileActivityBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
+    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it, true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +68,10 @@ class EditProfileActivity : AppCompatActivity() {
                 finish()
             }
 
+            mapsIcon.setOnClickListener {
+                locationProvider.init()
+            }
+
             locationSelector.setOnClickListener {
                 startActivityForResult(
                     Intent(this@EditProfileActivity, SelectLocationActivity::class.java),
@@ -92,7 +96,7 @@ class EditProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
+            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it, true) }
         }
     }
 

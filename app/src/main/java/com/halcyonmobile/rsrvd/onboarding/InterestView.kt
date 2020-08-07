@@ -16,7 +16,7 @@ class InterestView(context: Context, checkable: Boolean? = null) : ConstraintLay
         params.setMargins(0, 0, 25, 25)
         this.layoutParams = params
 
-        checkable?.let { view.isClickable = it }
+        checkable?.let { button.isClickable = it }
     }
 
     fun setInterest(interest: String) {

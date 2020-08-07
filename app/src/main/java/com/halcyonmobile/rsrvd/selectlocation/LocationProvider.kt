@@ -68,5 +68,4 @@ class LocationProvider(private val activity: Activity, private val callback: (Lo
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 2
     }
-
 }

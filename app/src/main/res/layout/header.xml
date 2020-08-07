@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="view_model"
+            name="viewModel"
             type="com.halcyonmobile.rsrvd.explorevenues.ExploreViewModel" />
     </data>
 
@@ -29,7 +29,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> view_model.clearFilters()}"
+            android:onClick="@{() -> viewModel.clearFilters()}"
             android:text="@string/clear_filters"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Body2"
@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{view_model.filtersApplied}" />
+            app:visible="@{viewModel.filtersApplied}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

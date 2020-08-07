@@ -19,8 +19,8 @@ class FilterViewModel : ViewModel() {
     val activities: LiveData<List<Interests>> = _activities
     val availability: LiveData<StartEnd> = _availability
 
-    fun setLocation(myLocation: Location) {
-        _location.value = FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS)
+    fun setLocation(myLocation: Location?) {
+        _location.value = if (myLocation != null) FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS) else null
     }
 
     // TODO activities from the FlexBox
