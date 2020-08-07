@@ -133,20 +133,14 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
             val hStart = getHour(listOpenHours[ listPositions[i] ].start)
             val hEnd = getHour(listOpenHours[ listPositions[i] ].end)
 
-            result += when {
-                i == (listPositions.size - 1) -> "$day, $hStart - $hEnd\n"
-                (listPositions[i] - listPositions[i + 1]) > 1 -> {
-                    val dayNext = getDay( listPositions[i] )
-                    "$day - $dayNext, $hStart - $hEnd\n"
-                }
-                else -> "$day, $hStart - $hEnd\n"
-            }
+            result +=
+                if ((listPositions[i] - listPositions[i + 1]) > 1)
+                    "$day - ${getDay(listPositions[i])}, $hStart - $hEnd\n"
+                else "$day, $hStart - $hEnd\n"
         }
 
-        val index = if ( listPositions.isEmpty() ) 0
-        else listPositions.size - 1
-        val day = if ( listPositions.isEmpty() ) getDay(index)
-        else getDay(listPositions[index])
+        val index = if ( listPositions.isEmpty() ) 0 else listPositions.size - 1
+        val day = if ( listPositions.isEmpty() ) getDay(index) else getDay(listPositions[index])
         val hStart = getHour(listOpenHours[index].start)
         val hEnd = getHour(listOpenHours[index].end)
         result += "$day - ${getDay(6)}, $hStart - ${hEnd}\n"
