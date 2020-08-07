@@ -60,6 +60,7 @@
                     android:text="@string/venue_name"
                     android:textAllCaps="true"
                     android:textAppearance="?attr/textAppearanceHeadline3"
+                    android:maxWidth="350dp"
                     android:paddingTop="56dp"
                     android:layout_marginStart="@dimen/long_margin"
                     app:layout_constraintStart_toStartOf="parent"

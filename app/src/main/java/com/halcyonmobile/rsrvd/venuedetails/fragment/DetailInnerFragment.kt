@@ -156,7 +156,6 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
             "Football" -> Interests.FOOTBALL
             "Basketball" -> Interests.BASKETBALL
             "Tennis" -> Interests.TENNIS
-            "Volley" -> Interests.VOLLEY
             "Badminton" -> Interests.BADMINTON
             "Handball" -> Interests.HANDBALL
             "Bowling" -> Interests.BOWLING
