@@ -33,6 +33,7 @@ class VenueDetailActivity : AppCompatActivity() {
             Glide
                 .with(this)
                 .load(it.image)
+                .placeholder(R.drawable.ic_baseline_cloud_download)
                 .into(venueBinding.venueDetailsImageView)
 
             venueBinding.venueNameTextView.text = it.name
