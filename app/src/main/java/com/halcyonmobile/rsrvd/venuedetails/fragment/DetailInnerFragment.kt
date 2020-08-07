@@ -67,9 +67,6 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
 
         //setting the on click listeners and initializing the flexbox layouts
         binding.apply {
-            dataMap = emptyList()
-            facilitiesDataMap = emptyList()
-
             youtubeVideoContainer.setOnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.venue_tour_link))))
             }

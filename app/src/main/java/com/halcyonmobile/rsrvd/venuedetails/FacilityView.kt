@@ -12,18 +12,14 @@ class FacilityView(context: Context) : ConstraintLayout(context) {
 
     fun setFacility(facility: Facilities) {
         view.findViewById<TextView>(R.id.venue_facility_name).text = facility.name
+        val imageView = view.findViewById<ImageView>(R.id.venue_facility_image)
 
         when (facility) {
-            Facilities.PARKING -> view.findViewById<ImageView>(R.id.venue_facility_image)
-                    .setImageResource(R.drawable.ic_parking)
-            Facilities.RESTAURANT -> view.findViewById<ImageView>(R.id.venue_facility_image)
-                    .setImageResource(R.drawable.ic_restaurant)
-            Facilities.ACCESSIBLE -> view.findViewById<ImageView>(R.id.venue_facility_image)
-                    .setImageResource(R.drawable.ic_accessibility)
-            Facilities.TOILET -> view.findViewById<ImageView>(R.id.venue_facility_image)
-                    .setImageResource(R.drawable.ic_toilet)
-            else -> view.findViewById<ImageView>(R.id.venue_facility_image)
-                .setImageResource(R.drawable.ic_toilet)
+            Facilities.PARKING -> imageView.setImageResource(R.drawable.ic_parking)
+            Facilities.RESTAURANT -> imageView.setImageResource(R.drawable.ic_restaurant)
+            Facilities.ACCESSIBLE -> imageView.setImageResource(R.drawable.ic_accessibility)
+            Facilities.TOILET -> imageView.setImageResource(R.drawable.ic_toilet)
+            else -> imageView.setImageResource(R.drawable.ic_toilet)
         }
     }
 

@@ -7,7 +7,6 @@
     <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
-    <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
     <string name="about_you">tell us more\nabout you</string>
     <string name="sport_photo">sport photo</string>
     <string name="location">your location</string>
@@ -46,7 +45,6 @@
     <string name="we_recommend">we recommend</string>
     <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
     <string name="we_recommend_placeholder">we recommend placeholder</string>
-    <string name="read_more_link">https://blog.myfitnesspal.com/</string>
     <string name="see_all_venues">See all venues</string>
     <string name="details_place_holder">running / 1.2 km away</string>
     <string name="account">account</string>
@@ -92,12 +90,10 @@
     <string name="accessible">accessible</string>
     <string name="toilet">toilet</string>
     <string name="description">description</string>
-    <string name="google_api_key">AIzaSyABYjMBctFxQ25UQgBIg5PEz0w-P6Kp_UA</string>
     <string name="location_description">%s, \n%s</string>
     <string name="youtube_video">youtube video</string>
     <string name="have_a_tour">have a virtual tour</string>
     <string name="sport_base">sport base gheorgheni</string>
     <string name="forward">forward</string>
-    <string name="venue_tour_link">https://www.youtube.com/watch?v=2MHWIJssvBg</string>
     <string name="arrow_back">arrow back</string>
 </resources>

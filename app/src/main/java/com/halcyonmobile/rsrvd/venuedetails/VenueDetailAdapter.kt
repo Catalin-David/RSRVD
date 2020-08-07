@@ -14,9 +14,7 @@ class VenueDetailAdapter(activity: AppCompatActivity,
     override fun getItemCount(): Int = category.size
 
     override fun createFragment(position: Int): Fragment =
-        when (position) {
-            0 -> DetailInnerFragment.newInstance(venueId)
-            1 -> ReviewInnerFragment.newInstance()
-            else -> DetailInnerFragment.newInstance(venueId)
-        }
+        if (position == 0)  DetailInnerFragment.newInstance(venueId)
+        else  ReviewInnerFragment.newInstance()
+
 }
