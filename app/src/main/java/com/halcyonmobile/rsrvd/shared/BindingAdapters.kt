@@ -14,11 +14,16 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
+import java.text.SimpleDateFormat
+import java.util.*
 import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
 
 @BindingAdapter(value = ["interests", "checkable"], requireAll = false)
-fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) = data?.map {
-    addView(InterestView(context, checkable).apply { setInterest(it.name) })
+fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
+    removeAllViews()
+    data?.map {
+        addView(InterestView(context, checkable).apply { setInterest(it.name) })
+    }
 }
 
 @BindingAdapter("visible")
@@ -51,4 +56,57 @@ fun TextView.formattedDistance(location: myLocation?) = if (location != null) {
 @BindingAdapter("imageUrl")
 fun ImageView.imageUrl(imageUrl: Uri?) {
     Glide.with(this).asBitmap().load(imageUrl).error(R.mipmap.ic_launcher).into(this)
+}
+
+@BindingAdapter("imageUrlString")
+fun ImageView.imageUrlString(imageUrlString: String?){
+    Glide.with(this).asBitmap().load(imageUrlString).error(R.mipmap.ic_launcher).into(this)
+}
+
+@BindingAdapter("reservationDate")
+fun TextView.reservationDate(dateString: String){
+    val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)
+    date?.let {
+        val calendar = Calendar.getInstance().apply {
+            time = it
+        }
+        text = context.getString(R.string.reservation_date_format, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH).toMonth(), calendar.get(Calendar.YEAR))
+    }
+}
+
+@BindingAdapter("reservationHour")
+fun TextView.reservationHour(dateString: String){
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    val date = sdf.parse(dateString)
+    date?.let {
+        val calendar = Calendar.getInstance().apply {
+            time = it
+        }
+        text = context.getString(R.string.reservation_hour_format, calendar.get(Calendar.HOUR).toDoubleDigit(), calendar.get(Calendar.MINUTE).toDoubleDigit(), calendar.get(Calendar.AM_PM).toAmPm())
+    }
+}
+
+fun Int.toAmPm() = when(this){
+    Calendar.AM -> "AM"
+    else -> "PM"
+}
+
+fun Int.toDoubleDigit() = when(this){
+    in 0.until(10) -> "0${this}"
+    else -> toString()
+}
+
+fun Int.toMonth() = when(this){
+    0 -> "January"
+    1 -> "February"
+    2 -> "March"
+    3 -> "April"
+    4 -> "May"
+    5 -> "June"
+    6 -> "July"
+    7 -> "August"
+    8 -> "September"
+    9 -> "October"
+    10 -> "November"
+    else -> "December"
 }
