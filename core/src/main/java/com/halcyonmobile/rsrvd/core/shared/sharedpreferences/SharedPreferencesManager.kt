@@ -3,7 +3,6 @@ package com.halcyonmobile.rsrvd.core.shared.sharedpreferences
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import java.lang.Long.getLong
 
 object SharedPreferencesManager {
     private const val IS_USER_LOGGED_IN_KEY = "com.halcyonmobile.rsrvd.IS_USER_LOGGED_IN_KEY"

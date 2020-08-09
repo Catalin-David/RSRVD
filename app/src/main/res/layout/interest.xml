@@ -12,7 +12,6 @@
     android:paddingHorizontal="@dimen/long_padding"
     android:paddingVertical="@dimen/default_padding"
     android:textAllCaps="true"
-    android:textAppearance="@style/TextAppearance.Headline4"
+    android:textAppearance="@style/TextAppearance.Body2"
     android:textColor="@drawable/onboarding_textcolor"
-    android:textSize="16sp"
     tools:text="Sport" />
