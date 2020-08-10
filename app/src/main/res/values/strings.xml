@@ -73,4 +73,7 @@
     <string name="reservation_image">reservation image</string>
     <string name="make_a_reservation">make a \nreservation</string>
     <string name="venue_name_reservation">venue name reservation</string>
+    <string name="what_you_like">what you\'d like to do</string>
+    <string name="how_long_to_stay">how long would you stay?</string>
+    <string name="hour">hour</string>
 </resources>

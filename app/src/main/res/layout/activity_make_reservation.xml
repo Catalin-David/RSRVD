@@ -1,60 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dataInterval"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.makereservation.Intervals>" />
+
+        <variable
+            name="dataMap"
+            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/close_reservation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_close"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginTop="@dimen/margin_big"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/cancel" />
+            <ImageView
+                android:id="@+id/close_reservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/margin_big"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/cancel" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_img_reservation"
-            app:layout_constraintTop_toBottomOf="@id/close_reservation"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/reservation_image" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_img_reservation"
+                android:scaleY="1.3"
+                android:scaleX="1.3"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_constraintTop_toBottomOf="@id/close_reservation"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/reservation_image" />
 
-        <TextView
-            android:id="@+id/make_reservation_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/make_a_reservation"
-            android:textSize="40sp"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            android:textAllCaps="true"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginStart="@dimen/medium_margin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/close_reservation"/>
+            <TextView
+                android:id="@+id/make_reservation_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/make_a_reservation"
+                android:textSize="40sp"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                android:textAllCaps="true"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/close_reservation"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/venue_name_reservation"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textAllCaps="true"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginTop="@dimen/short_margin"
-            app:layout_constraintTop_toBottomOf="@id/make_reservation_text_view"
-            app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/venue_name_reservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/venue_name_reservation"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textAllCaps="true"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/short_margin"
+                app:layout_constraintTop_toBottomOf="@id/make_reservation_text_view"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/what_you_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/what_you_like"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/long_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintTop_toBottomOf="@id/venue_name_reservation"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/interests_grid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/short_margin"
+                app:flexWrap="wrap"
+                app:interests="@{dataMap}"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/what_you_like" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/side_guide" />
+
+            <TextView
+                android:id="@+id/how_long_to_stay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_long_to_stay"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textAllCaps="true"
+                android:textColor="@color/light_gray"
+                android:layout_marginTop="@dimen/long_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintTop_toBottomOf="@id/interests_grid"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <RadioGroup
+                android:id="@+id/hour_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/how_long_to_stay">
+
+                <RadioButton
+                    android:id="@+id/hour_radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/short_margin"
+                    android:background="@drawable/reservation_radiobutton"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/short_padding"
+                    android:paddingVertical="@dimen/short_padding"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    android:textColor="@drawable/onboarding_textcolor"
+                    android:text="1 H" />
+
+                <RadioButton
+                    android:id="@+id/hour_radio_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/short_margin"
+                    android:background="@drawable/reservation_radiobutton"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:paddingHorizontal="@dimen/short_padding"
+                    android:paddingVertical="@dimen/short_padding"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    android:textColor="@drawable/onboarding_textcolor"
+                    tools:text="@string/hour" />
+
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
+import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
@@ -32,7 +33,8 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         val searchResultsAdapter = CardsAdapter { /* TODO start activity to open Details */ }
         val recentlyViewedAdapter = CardsAdapter { /* TODO start activity to open Details */ }
-        val exploreAdapter = CardsAdapter { /* TODO start activity to open Details */ }
+        val exploreAdapter = CardsAdapter { /* TODO start activity to open Details */
+        startActivity(Intent(activity, MakeReservationActivity::class.java))}
 
         setUpObservers(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
