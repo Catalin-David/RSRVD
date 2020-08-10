@@ -15,7 +15,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.places.Places
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
-import com.halcyonmobile.rsrvd.core.venues.dto.DailyOpenHours
 import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import com.halcyonmobile.rsrvd.databinding.FragmentInnerVenueDetailBinding
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel
