@@ -6,7 +6,7 @@ import com.halcyonmobile.rsrvd.core.reservation.dto.PriceDto
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
 import com.halcyonmobile.rsrvd.core.reservation.model.ReservationState
 import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.venues.dto.DailyOpenHours
+import com.halcyonmobile.rsrvd.core.venues.dto.StartEndHours
 import com.halcyonmobile.rsrvd.core.venues.dto.Open
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 
@@ -24,13 +24,13 @@ object ReservationRepository {
             "https://www.clujlife.com/wp-content/uploads/2016/12/baza-sportiva-gheorghieni-cluj.jpg",
             Location(),
             Open(
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f),
-                DailyOpenHours(1f, 2f)
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f),
+                StartEndHours(1f, 2f)
             ),
             emptyList()
         )
