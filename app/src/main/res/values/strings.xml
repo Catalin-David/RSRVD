@@ -114,4 +114,24 @@
     <string name="sun">SUN</string>
     <string name="am">AM</string>
     <string name="pm">PM</string>
+
+    <string name="reservation_date_format">%1$d %2$s, %3$d</string>
+    <string name="reservation_hour_format">%1$s:%2$s %3$s</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string name="double_digit_format">0%1$d</string>
+
 </resources>
