@@ -13,7 +13,7 @@ import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
 import com.halcyonmobile.rsrvd.core.reservation.model.ReservationState
 import com.halcyonmobile.rsrvd.databinding.ListItemReservationBinding
 
-class ReservationAdapter: ListAdapter<ReservationDto, ReservationAdapter.ViewHolder>(ReservationDiffCallback()) {
+class ReservationAdapter : ListAdapter<ReservationDto, ReservationAdapter.ViewHolder>(ReservationDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ListItemReservationBinding = ListItemReservationBinding.inflate(
@@ -27,13 +27,13 @@ class ReservationAdapter: ListAdapter<ReservationDto, ReservationAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position), position, itemCount)
 
     class ViewHolder(private val binding: ListItemReservationBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(reservation: ReservationDto, position: Int, size: Int){
+        fun bind(reservation: ReservationDto, position: Int, size: Int) {
             binding.reservation = reservation
-            if(reservation.state == ReservationState.CANCELLED){
+            if (reservation.state == ReservationState.CANCELLED) {
                 ImageViewCompat.setImageTintList(binding.statusImage, ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.error)))
                 binding.textViewReservationStatus.setTextColor(ContextCompat.getColor(binding.root.context, android.R.color.white))
             }
-            if(position +1 == size){
+            if (position + 1 == size) {
                 binding.separator.visibility = View.GONE
             }
             binding.executePendingBindings()

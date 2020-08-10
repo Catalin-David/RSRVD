@@ -5,7 +5,6 @@ import com.halcyonmobile.rsrvd.core.reservation.dto.ActivityDto
 import com.halcyonmobile.rsrvd.core.reservation.dto.PriceDto
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
 import com.halcyonmobile.rsrvd.core.reservation.model.ReservationState
-import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.venues.dto.DailyOpenHours
 import com.halcyonmobile.rsrvd.core.venues.dto.Open
@@ -14,20 +13,30 @@ import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 object ReservationRepository {
     private val remoteSource = ReservationRemoteSource()
 
-    fun getReservations(updateState: (List<ReservationDto>?) -> Unit){
+    fun getReservations(updateState: (List<ReservationDto>?) -> Unit) {
         remoteSource.get(updateState)
     }
 
-    fun loadDefaultReservations(updateState: (List<ReservationDto>?) -> Unit){
-        val venue = Venue("1",
+    fun loadDefaultReservations(updateState: (List<ReservationDto>?) -> Unit) {
+        val venue = Venue(
+            "1",
             "Baza sportiva Gheorgheni",
             "",
             "https://www.clujlife.com/wp-content/uploads/2016/12/baza-sportiva-gheorghieni-cluj.jpg",
             Location(),
-            Open(DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f),DailyOpenHours(1f, 2f)),
-            listOf())
+            Open(
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f),
+                DailyOpenHours(1f, 2f)
+            ),
+            listOf()
+        )
 
-        val list =  listOf(
+        val list = listOf(
             ReservationDto(
                 id = "1",
                 venue = venue,

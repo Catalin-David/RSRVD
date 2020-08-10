@@ -10,33 +10,34 @@ import com.halcyonmobile.rsrvd.core.reservation.repository.ReservationRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReservationObjectFragmentViewModel: ViewModel() {
+class ReservationObjectFragmentViewModel : ViewModel() {
     private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private val currentDate = Date()
     private val reservations: MutableLiveData<List<ReservationDto>> = MutableLiveData(listOf())
 
-    val upcomingReservations: LiveData<List<ReservationDto>> = Transformations.map(reservations){list -> list.filter {
-        try{
-            sdf.parse(it.date)?.after(currentDate) ?: false
+    val upcomingReservations: LiveData<List<ReservationDto>> = Transformations.map(reservations) { list ->
+        list.filter {
+            try {
+                sdf.parse(it.date)?.after(currentDate) ?: false
+            } catch (e: Throwable) {
+                Log.d("RESERVATION FVM", e.message ?: "No message")
+                false
+            }
         }
-        catch (e: Throwable){
-            Log.d("RESERVATION FVM", e.message ?: "No message")
-            false
-        }
-    }}
+    }
 
-
-    val historyReservations: LiveData<List<ReservationDto>> = Transformations.map(reservations){list -> list.filter {
-        try{
-            sdf.parse(it.date)?.before(currentDate) ?: false
+    val historyReservations: LiveData<List<ReservationDto>> = Transformations.map(reservations) { list ->
+        list.filter {
+            try {
+                sdf.parse(it.date)?.before(currentDate) ?: false
+            } catch (e: Throwable) {
+                Log.d("RESERVATION FVM", e.message ?: "No message")
+                false
+            }
         }
-        catch (e: Throwable){
-            Log.d("RESERVATION FVM", e.message ?: "No message")
-            false
-        }
-    }}
+    }
 
-    fun loadReservations(){
+    fun loadReservations() {
 //        ReservationRepository.getReservations {
 //            it?.let {
 //                reservations.value = it

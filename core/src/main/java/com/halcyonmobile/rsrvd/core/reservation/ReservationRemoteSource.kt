@@ -11,8 +11,8 @@ import retrofit2.Response
 class ReservationRemoteSource {
     private val reservationApi = RetrofitManager.retrofitWithAuthentication!!.create(ReservationApi::class.java)
 
-    fun get(updateState: (List<ReservationDto>?) -> Unit){
-        reservationApi.get().enqueue(object : Callback<List<ReservationDto>>{
+    fun get(updateState: (List<ReservationDto>?) -> Unit) {
+        reservationApi.get().enqueue(object : Callback<List<ReservationDto>> {
             override fun onFailure(call: Call<List<ReservationDto>>, t: Throwable) {
                 updateState(listOf())
                 Log.d("RESERVATION REMOTE SRC", t.message ?: "NO MESSAGE")

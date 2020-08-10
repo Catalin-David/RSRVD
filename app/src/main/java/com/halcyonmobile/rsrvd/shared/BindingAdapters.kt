@@ -59,44 +59,54 @@ fun ImageView.imageUrl(imageUrl: Uri?) {
 }
 
 @BindingAdapter("imageUrlString")
-fun ImageView.imageUrlString(imageUrlString: String?){
+fun ImageView.imageUrlString(imageUrlString: String?) {
     Glide.with(this).asBitmap().load(imageUrlString).error(R.mipmap.ic_launcher).into(this)
 }
 
 @BindingAdapter("reservationDate")
-fun TextView.reservationDate(dateString: String){
+fun TextView.reservationDate(dateString: String) {
     val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)
     date?.let {
         val calendar = Calendar.getInstance().apply {
             time = it
         }
-        text = context.getString(R.string.reservation_date_format, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH).toMonth(), calendar.get(Calendar.YEAR))
+        text = context.getString(
+            R.string.reservation_date_format,
+            calendar.get(Calendar.DAY_OF_MONTH),
+            calendar.get(Calendar.MONTH).toMonth(),
+            calendar.get(Calendar.YEAR)
+        )
     }
 }
 
 @BindingAdapter("reservationHour")
-fun TextView.reservationHour(dateString: String){
+fun TextView.reservationHour(dateString: String) {
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     val date = sdf.parse(dateString)
     date?.let {
         val calendar = Calendar.getInstance().apply {
             time = it
         }
-        text = context.getString(R.string.reservation_hour_format, calendar.get(Calendar.HOUR).toDoubleDigit(), calendar.get(Calendar.MINUTE).toDoubleDigit(), calendar.get(Calendar.AM_PM).toAmPm())
+        text = context.getString(
+            R.string.reservation_hour_format,
+            calendar.get(Calendar.HOUR).toDoubleDigit(),
+            calendar.get(Calendar.MINUTE).toDoubleDigit(),
+            calendar.get(Calendar.AM_PM).toAmPm()
+        )
     }
 }
 
-fun Int.toAmPm() = when(this){
+fun Int.toAmPm() = when (this) {
     Calendar.AM -> "AM"
     else -> "PM"
 }
 
-fun Int.toDoubleDigit() = when(this){
+fun Int.toDoubleDigit() = when (this) {
     in 0.until(10) -> "0${this}"
     else -> toString()
 }
 
-fun Int.toMonth() = when(this){
+fun Int.toMonth() = when (this) {
     0 -> "January"
     1 -> "February"
     2 -> "March"

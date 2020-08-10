@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentReservationBinding
 
-class ReservationFragment: Fragment(R.layout.fragment_reservation){
+class ReservationFragment : Fragment(R.layout.fragment_reservation) {
     private lateinit var binding: FragmentReservationBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,7 +24,7 @@ class ReservationFragment: Fragment(R.layout.fragment_reservation){
             viewPager.adapter = ReservationFragmentAdapter(this@ReservationFragment, tabList)
         }
 
-        TabLayoutMediator(binding.tabLayout, binding.viewPager){tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabList[position]
         }.attach()
 

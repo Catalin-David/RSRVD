@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentCollectionObjectBinding
 
-class ReservationObjectFragment: Fragment(R.layout.fragment_collection_object){
+class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) {
     private lateinit var binding: FragmentCollectionObjectBinding
     private val viewModel: ReservationObjectFragmentViewModel by viewModels()
 
@@ -34,12 +34,12 @@ class ReservationObjectFragment: Fragment(R.layout.fragment_collection_object){
                 layoutManager = LinearLayoutManager(context)
             }
 
-            when(getInt(ReservationFragmentAdapter.RESERVATION_TAB_INDEX_KEY)){
+            when (getInt(ReservationFragmentAdapter.RESERVATION_TAB_INDEX_KEY)) {
                 ReservationFragmentAdapter.HISTORY_RESERVATIONS_TAB -> {
-                    viewModel.historyReservations.observe(viewLifecycleOwner){recyclerViewAdapter.submitList(it)}
+                    viewModel.historyReservations.observe(viewLifecycleOwner) { recyclerViewAdapter.submitList(it) }
                 }
-                ReservationFragmentAdapter.UPCOMING_RESERVATIONS_TAB ->  {
-                    viewModel.upcomingReservations.observe(viewLifecycleOwner){recyclerViewAdapter.submitList(it)}
+                ReservationFragmentAdapter.UPCOMING_RESERVATIONS_TAB -> {
+                    viewModel.upcomingReservations.observe(viewLifecycleOwner) { recyclerViewAdapter.submitList(it) }
                 }
                 else -> recyclerViewAdapter.submitList(listOf())
             }
