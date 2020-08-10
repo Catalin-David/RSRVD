@@ -48,7 +48,7 @@ class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) 
         return binding.root
     }
 
-    companion object{
+    companion object {
         private const val RESERVATION_TAB_INDEX_KEY = "com.halcyonmobile.rsrvd.reservation.RESERVATION_TAB_INDEX_KEY"
         private const val UPCOMING_RESERVATIONS_TAB = 0
         private const val HISTORY_RESERVATIONS_TAB = 1

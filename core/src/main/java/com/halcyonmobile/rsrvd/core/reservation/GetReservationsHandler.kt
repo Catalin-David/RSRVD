@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GetReservationsHandler(private val callback: (List<ReservationDto>?) -> Unit): Callback<List<ReservationDto>> {
+class GetReservationsHandler(private val callback: (List<ReservationDto>?) -> Unit) : Callback<List<ReservationDto>> {
     override fun onFailure(call: Call<List<ReservationDto>>, t: Throwable) {
         callback(emptyList())
         Log.d("RESERVATION REMOTE SRC", t.message ?: "NO MESSAGE")

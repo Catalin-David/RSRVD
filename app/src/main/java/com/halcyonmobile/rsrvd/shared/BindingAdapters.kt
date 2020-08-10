@@ -83,7 +83,7 @@ fun TextView.reservationHour(dateString: String) =
     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)?.let { date ->
         Calendar.getInstance().apply {
             time = date
-        }.let{calendar ->
+        }.let { calendar ->
             text = context.getString(
                 R.string.reservation_hour_format,
                 calendar.get(Calendar.HOUR).toDoubleDigit(context),
