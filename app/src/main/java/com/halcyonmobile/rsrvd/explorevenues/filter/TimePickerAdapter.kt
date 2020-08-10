@@ -1,7 +1,6 @@
 package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.graphics.Color.WHITE
-import android.graphics.Color.GRAY
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
