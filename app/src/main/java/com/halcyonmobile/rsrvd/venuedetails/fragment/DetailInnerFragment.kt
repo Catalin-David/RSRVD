@@ -105,14 +105,14 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
     }
 
     private fun getVenueProgram(venueById: VenueById): String {
-        val listOpenHours: ArrayList<DailyOpenHours> = ArrayList()
-        listOpenHours.add(venueById.open.dayZero)
-        listOpenHours.add(venueById.open.dayOne)
-        listOpenHours.add(venueById.open.dayTwo)
-        listOpenHours.add(venueById.open.dayThree)
-        listOpenHours.add(venueById.open.dayFour)
-        listOpenHours.add(venueById.open.dayFive)
-        listOpenHours.add(venueById.open.daySix)
+        val listOpenHours = mutableListOf(
+            venueById.open.dayZero,
+            venueById.open.dayOne,
+            venueById.open.dayTwo,
+            venueById.open.dayThree,
+            venueById.open.dayFour,
+            venueById.open.dayFive,
+            venueById.open.daySix)
 
         var start = venueById.open.dayZero.start
         var end = venueById.open.dayZero.end

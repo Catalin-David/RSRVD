@@ -9,18 +9,24 @@ import com.halcyonmobile.rsrvd.core.shared.Facilities
 
 class FacilityView(context: Context) : ConstraintLayout(context) {
     private val view = inflate(context, R.layout.facility, this)
+    private val imageView = view.findViewById<ImageView>(R.id.venue_facility_image)
+    private val textView = view.findViewById<TextView>(R.id.venue_facility_name)
+    private var facilitiesAndDrawables : HashMap<Facilities, Int> = HashMap()
+
+    init {
+        facilitiesAndDrawables[Facilities.PARKING] = R.drawable.ic_parking
+        facilitiesAndDrawables[Facilities.RESTAURANT] = R.drawable.ic_restaurant
+        facilitiesAndDrawables[Facilities.ACCESSIBLE] = R.drawable.ic_accessibility
+        facilitiesAndDrawables[Facilities.TOILET] = R.drawable.ic_toilet
+    }
 
     fun setFacility(facility: Facilities) {
-        view.findViewById<TextView>(R.id.venue_facility_name).text = facility.name
-        val imageView = view.findViewById<ImageView>(R.id.venue_facility_image)
+        textView.text = facility.name
 
-        when (facility) {
-            Facilities.PARKING -> imageView.setImageResource(R.drawable.ic_parking)
-            Facilities.RESTAURANT -> imageView.setImageResource(R.drawable.ic_restaurant)
-            Facilities.ACCESSIBLE -> imageView.setImageResource(R.drawable.ic_accessibility)
-            Facilities.TOILET -> imageView.setImageResource(R.drawable.ic_toilet)
-            else -> imageView.setImageResource(R.drawable.ic_toilet)
-        }
+        imageView.setImageResource(
+            if (facilitiesAndDrawables.containsKey(facility)) facilitiesAndDrawables[facility]!!
+            else R.drawable.ic_toilet
+        )
     }
 
 }
