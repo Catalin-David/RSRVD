@@ -20,9 +20,11 @@ class MakeReservationViewModel : ViewModel() {
     }
 
     fun resetPosition(position: Int) {
-        _hourCards.value?.map {
-            it.isSelected = false
+        listHours.let {
+            _hourCards.value = it
         }
+
+        _hourCards.value?.get(position)?.isSelected = true
     }
 
     companion object {

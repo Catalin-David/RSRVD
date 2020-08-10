@@ -37,6 +37,8 @@ class HourCardsAdapter(
         fun bind(item: HourUiModel) {
             binding.hourRadioButton.text = item.hour
             binding.hourRadioButton.isChecked = item.isSelected
+
+
         }
     }
 
