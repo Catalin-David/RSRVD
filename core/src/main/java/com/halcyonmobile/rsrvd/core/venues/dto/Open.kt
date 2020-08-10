@@ -6,17 +6,17 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Open(
     @Json(name = "0")
-    val dayZero: StartEnd,
+    val dayZero: StartEndHours,
     @Json(name = "1")
-    val dayOne: StartEnd,
+    val dayOne: StartEndHours,
     @Json(name = "2")
-    val dayTwo: StartEnd,
+    val dayTwo: StartEndHours,
     @Json(name = "3")
-    val dayThree: StartEnd,
+    val dayThree: StartEndHours,
     @Json(name = "4")
-    val dayFour: StartEnd,
+    val dayFour: StartEndHours,
     @Json(name = "5")
-    val dayFive: StartEnd,
+    val dayFive: StartEndHours,
     @Json(name = "6")
-    val daySix: StartEnd
+    val daySix: StartEndHours
 )

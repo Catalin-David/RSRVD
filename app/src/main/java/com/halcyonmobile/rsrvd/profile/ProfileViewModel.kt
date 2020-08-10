@@ -17,9 +17,9 @@ class ProfileViewModel : ViewModel() {
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
-    val location: LiveData<String> = Transformations.map(profileData) { it.location.name }
-    val activities: LiveData<String> = Transformations.map(profileData) { it.reservations.toString() }
-    val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
+    val location: LiveData<String> = Transformations.map(profileData) { it?.location?.name }
+    val activities: LiveData<String> = Transformations.map(profileData) { it?.reservations.toString() }
+    val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it?.interests }
 
     fun setSignInAccount(newSignInAccount: GoogleSignInAccount?) {
         account.value = newSignInAccount

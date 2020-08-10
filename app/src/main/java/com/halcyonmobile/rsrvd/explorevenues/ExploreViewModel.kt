@@ -34,7 +34,7 @@ class ExploreViewModel : ViewModel() {
     fun clearFilters() {
         _filters.value = null
         _searching.value = false
-        notifyFiltersChanged()
+        search()
     }
 
     fun setFilters(filters: Filters?) {
@@ -76,7 +76,7 @@ class ExploreViewModel : ViewModel() {
         searchTerm.value = ""
     }
 
-    fun searchTermChanged() {
+    fun search() {
         _searching.value = searchTerm.value?.isNotEmpty()
 
         if (_searching.value == true) {
@@ -94,8 +94,6 @@ class ExploreViewModel : ViewModel() {
             _searchResultsCards.value = listOf()
         }
     }
-
-    fun notifyFiltersChanged() = searchTermChanged()
 
     private fun storeVenuesAsCardsIn(storage: MutableLiveData<List<Card>>?, venues: List<Venue>?, error: Boolean?) {
         _error.value = error

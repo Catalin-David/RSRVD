@@ -50,7 +50,7 @@ class FilterActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@FilterActivity,
                         binding.locationSelector,
-                        "search_trans"
+                        "search_bar_transition"
                     ).toBundle()
                 )
             }
@@ -63,11 +63,11 @@ class FilterActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 if (!filterViewModel.isReady()) {
-                    binding.root.showSnackbar("No filter applied!").show()
+                    binding.root.showSnackbar(getString(R.string.no_filters))
                 } else {
                     setResult(
                         Activity.RESULT_OK, Intent().putExtra(
-                            "filters", Filters(
+                            FILTERS, Filters(
                                 activities = if (getActivities().isNotEmpty()) getActivities() else null,
                                 location = filterViewModel.location.value
                             )
@@ -81,11 +81,11 @@ class FilterActivity : AppCompatActivity() {
 
         locationViewModel.apply {
             updateState.observe(this@FilterActivity) {
-                binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+                binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed))
             }
 
             errorMessage.observe(this@FilterActivity) {
-                binding.root.showSnackbar(it).show()
+                binding.root.showSnackbar(it)
             }
 
             location.observe(this@FilterActivity) {
@@ -108,7 +108,7 @@ class FilterActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let {
+            data.getParcelableExtra<Location>(SelectLocationActivity.LOCATION)?.let {
                 locationViewModel.setLocation(it)
                 filterViewModel.setLocation(it)
             }
@@ -129,5 +129,6 @@ class FilterActivity : AppCompatActivity() {
 
     companion object {
         const val SELECT_LOCATION_REQUEST_CODE = 1
+        const val FILTERS = "filters"
     }
 }

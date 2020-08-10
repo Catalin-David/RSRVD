@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
-import com.halcyonmobile.rsrvd.core.venues.dto.StartEnd
+import com.halcyonmobile.rsrvd.core.venues.dto.StartEndHours
 
 class FilterViewModel : ViewModel() {
     private val _name = MutableLiveData<String>()
     private val _location = MutableLiveData<FilterLocation>()
     private val _activities = MutableLiveData<List<Interests>>()
-    private val _availability = MutableLiveData<StartEnd>()
+    private val _availability = MutableLiveData<StartEndHours>()
 
     val name: LiveData<String> = _name
     val location: LiveData<FilterLocation> = _location
     val activities: LiveData<List<Interests>> = _activities
-    val availability: LiveData<StartEnd> = _availability
+    val availability: LiveData<StartEndHours> = _availability
 
     fun setLocation(myLocation: Location?) {
         _location.value = if (myLocation != null) FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS) else null

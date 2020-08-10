@@ -78,4 +78,7 @@
     <string name="profile_picture">Logged in user profile picture</string>
     <string name="art">art</string>
     <string name="edit_icon">edit icon</string>
+    <string name="no_filters">No filter applied!</string>
+    <string name="updated">Updated</string>
+    <string name="failed">Failed</string>
 </resources>

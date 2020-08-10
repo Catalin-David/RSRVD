@@ -50,13 +50,13 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
     private fun setUpObservers(searchResultsAdapter: CardsAdapter, recentlyViewedAdapter: CardsAdapter, exploreAdapter: CardsAdapter) {
         val handler = Handler()
-        val runnable = Runnable { viewModel.searchTermChanged() }
+        val runnable = Runnable { viewModel.search() }
 
         viewModel.apply {
             searchResults.observe(viewLifecycleOwner) {
                 searchResultsAdapter.submitList(it)
                 if (!searchResults.value.isNullOrEmpty()) {
-                    setCardInFocus(searchResults.value!![0])
+                    setCardInFocus(searchResults.value?.get(0))
                 }
             }
             recentlyVisitedCards.observe(viewLifecycleOwner) {
@@ -117,7 +117,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
                     val firstVisiblePosition = recyclerViewLayoutManager.findFirstVisibleItemPosition()
                     if (firstVisiblePosition != -1 && !viewModel.recentlyVisitedCards.value.isNullOrEmpty()) {
-                        viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value!![firstVisiblePosition])
+                        viewModel.setCardInFocus(viewModel.recentlyVisitedCards.value?.get(firstVisiblePosition))
                     }
                 }
             }
@@ -137,8 +137,8 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (data != null && resultCode == Activity.RESULT_OK && requestCode == FILTER_REQUEST_CODE) {
-            viewModel.setFilters(data.getParcelableExtra("filters"))
-            viewModel.notifyFiltersChanged()
+            viewModel.setFilters(data.getParcelableExtra(FilterActivity.FILTERS))
+            viewModel.search()
         }
     }
 

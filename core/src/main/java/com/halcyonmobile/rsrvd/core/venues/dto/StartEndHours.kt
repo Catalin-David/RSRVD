@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class StartEnd(
+data class StartEndHours(
     @Json(name = "start")
     val start: Float,
     @Json(name = "end")

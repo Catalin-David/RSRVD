@@ -21,7 +21,9 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it, true) }
+    private val locationProvider: LocationProvider = LocationProvider(this) {
+        viewModel.setLocation(newLocation = it, save = true)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +36,8 @@ class OnboardingActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.apply {
-            updateState.observe(this@OnboardingActivity) { binding.root.showSnackbar(if (it) "Updated" else "Failed").show() }
-            errorMessage.observe(this@OnboardingActivity) { binding.root.showSnackbar(it).show() }
+            updateState.observe(this@OnboardingActivity) { binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed)) }
+            errorMessage.observe(this@OnboardingActivity) { binding.root.showSnackbar(it) }
 
             interests.observe(this@OnboardingActivity) { markInterests() }
 
@@ -65,7 +67,7 @@ class OnboardingActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@OnboardingActivity,
                         binding.locationSelector,
-                        "search_trans"
+                        "search_bar_transition"
                     ).toBundle()
                 )
             }
@@ -82,7 +84,9 @@ class OnboardingActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it, true) }
+            data.getParcelableExtra<Location>(SelectLocationActivity.LOCATION)?.let {
+                viewModel.setLocation(newLocation = it, save = true)
+            }
         }
     }
 

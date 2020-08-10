@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.halcyonmobile.rsrvd.R
 
 @SuppressLint("ViewConstructor")
-class InterestView(context: Context, checkable: Boolean? = null) : ConstraintLayout(context) {
+class InterestView(context: Context, checkable: Boolean?) : ConstraintLayout(context) {
     private val view = inflate(context, R.layout.interest, this)
     private val button = view.findViewById<CheckBox>(R.id.interest_button)
 

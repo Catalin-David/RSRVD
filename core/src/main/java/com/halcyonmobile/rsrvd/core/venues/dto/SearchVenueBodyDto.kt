@@ -8,9 +8,9 @@ data class SearchVenueBodyDto(
     @Json(name = "name")
     val name: String?,
     @Json(name = "location")
-    val location: LatLngRad? = null,
+    val location: LatLngRad?,
     @Json(name = "activities")
-    val activities: List<String>? = null,
+    val activities: List<String>?,
     @Json(name = "availability")
-    val availability: Availability? = null
+    val availability: Availability?
 )
