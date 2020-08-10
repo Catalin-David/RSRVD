@@ -193,6 +193,7 @@
                     android:layout_height="0dp"
                     android:gravity="center_vertical"
                     android:hint="@string/_12_august_2019"
+
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
@@ -203,12 +204,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
+            <include
+                android:id="@+id/interval_picker"
+                layout="@layout/time_interval_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/default_margin"
-                android:text="Fancy Picker"
-                android:textAppearance="@style/TextAppearance.Headline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date_picker" />
@@ -223,7 +223,9 @@
                 android:textAppearance="@style/TextAppearance.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
-                app:layout_constraintStart_toStartOf="@id/left_guideline" />
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/interval_picker"
+                app:layout_constraintVertical_bias="1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

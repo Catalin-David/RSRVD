@@ -115,4 +115,6 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
     <string name="filter_date">%d %s, %d</string>
+    <string name="divider">-------------------------------------------------------------------------------------------------------------</string>
+    <string name="time">%s:%s %s</string>
 </resources>

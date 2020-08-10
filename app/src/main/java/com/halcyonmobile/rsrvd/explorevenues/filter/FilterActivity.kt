@@ -2,8 +2,13 @@ package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
@@ -25,9 +30,11 @@ class FilterActivity : AppCompatActivity() {
     private lateinit var binding: FilterActivityBinding
     private lateinit var locationViewModel: LocationViewModel
     private lateinit var filterViewModel: FilterViewModel
+    private lateinit var timeIntervalPickerViewModel: TimeIntervalPickerViewModel
 
     private val locationProvider: LocationProvider = LocationProvider(this) { locationViewModel.setLocation(it) }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FilterActivityBinding.inflate(layoutInflater)
@@ -35,8 +42,13 @@ class FilterActivity : AppCompatActivity() {
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
+        timeIntervalPickerViewModel = ViewModelProviders.of(this).get(TimeIntervalPickerViewModel::class.java)
 
-        val months = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+        timeIntervalPickerViewModel.apply {
+            init(this@FilterActivity, binding.intervalPicker.startPicker, binding.intervalPicker.finishPicker)
+            start.observe(this@FilterActivity) { filterViewModel.setStart(it) }
+            end.observe(this@FilterActivity) { filterViewModel.setFinish(it) }
+        }
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
@@ -61,7 +73,7 @@ class FilterActivity : AppCompatActivity() {
             dateText.text = getString(
                 R.string.filter_date,
                 filterViewModel.filterDate.day,
-                months[filterViewModel.filterDate.month],
+                Times.months[filterViewModel.filterDate.month],
                 filterViewModel.filterDate.year
             )
 
@@ -70,7 +82,7 @@ class FilterActivity : AppCompatActivity() {
                     this@FilterActivity,
                     R.style.DatePickerDialogStyle,
                     DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                        dateText.text = getString(R.string.filter_date, dayOfMonth, months[month], year)
+                        dateText.text = getString(R.string.filter_date, dayOfMonth, Times.months[month], year)
                         filterViewModel.setDate(year, month, dayOfMonth)
                     },
                     filterViewModel.filterDate.year,

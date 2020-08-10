@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
-import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
 import java.util.*
 
 class FilterViewModel : ViewModel() {
@@ -22,8 +20,8 @@ class FilterViewModel : ViewModel() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val startHour = calendar.get(Calendar.HOUR_OF_DAY)
         val startMinute = calendar.get(Calendar.MINUTE)
-        val finishHour = startHour // TODO
-        val finishMinute = startMinute // TODO
+        val finishHour = if (startMinute < 30) startHour else startHour + 1
+        val finishMinute = if (startMinute < 30) startMinute + 30 else startMinute
 
         filterDate = FilterDate(year, month, day)
         filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
@@ -33,8 +31,16 @@ class FilterViewModel : ViewModel() {
         filterDate = FilterDate(year, month, day)
     }
 
-    fun setInterval(startHour: Int, startMinute: Int, finishHour: Int, finishMinute: Int) {
-        filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
+    fun setStart(start: Int) {
+        val hour = start / 100
+        val minute = (start % 100) * 60 / 100
+        filterTime = FilterTime(hour, minute, filterTime.finishHour, filterTime.finishMinute)
+    }
+
+    fun setFinish(finish: Int) {
+        val hour = finish / 100
+        val minute = (finish % 100) * 60 / 100
+        filterTime = FilterTime(filterTime.startHour, filterTime.startMinute, hour, minute)
     }
 
     fun getAvailability(): FilterDateTime =

@@ -118,7 +118,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             binding.recentlyVisited.recentlyVisitedList,
             recyclerViewLayoutManager,
             recentlyViewedAdapter,
-            MarginDecorator(right = true),
+            MarginDecorator(initialLeft = true, right = true),
             snapHelper = true,
             scrollListener = View.OnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
@@ -135,7 +135,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             binding.explore.exploreList,
             LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL },
             exploreAdapter,
-            MarginDecorator(right = true),
+            MarginDecorator(initialLeft = true, right = true),
             snapHelper = true
         )
     }

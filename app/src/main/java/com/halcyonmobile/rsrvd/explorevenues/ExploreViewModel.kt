@@ -27,7 +27,7 @@ class ExploreViewModel : ViewModel() {
     val exploreCards: LiveData<List<Card>> = _exploreCards
     val error: LiveData<Boolean> = _error
     val cardInFocus: LiveData<Card> = _cardInFocus
-    val searchTerm: MutableLiveData<String> = MutableLiveData("")
+    val searchTerm: MutableLiveData<String> = MutableLiveData()
 
     val filtersApplied = MediatorLiveData<Boolean>().apply {
         addSource(_filters) { value = _filters.value != null }
@@ -75,14 +75,14 @@ class ExploreViewModel : ViewModel() {
     ) = isSearching && !isSearchResultEmpty
 
     fun clear() {
-        searchTerm.value = ""
+        searchTerm.value = null
     }
 
     fun search() {
-        _searching.value = searchTerm.value?.isNotEmpty()
+        _searching.value = !searchTerm.value.isNullOrEmpty() || _filters.value != null
 
-        val availabilityStart: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month, it.day, it.startHour, it.startMinute) }
-        val availabilityEnd: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month, it.day, it.finishHour, it.finishMinute) }
+        val availabilityStart: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month + 1, it.day, it.startHour, it.startMinute) }
+        val availabilityEnd: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month + 1, it.day, it.finishHour, it.finishMinute) }
 
         if (_searching.value == true) {
             _loading.value = true
@@ -112,7 +112,7 @@ class ExploreViewModel : ViewModel() {
     }
 
     companion object {
-        val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!")
+        val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!", location = null)
         val NO_CARDS = Card(title = "No venues found!")
     }
 }
