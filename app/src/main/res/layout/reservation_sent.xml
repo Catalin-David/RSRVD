@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_img_reservation_sent"
+        android:layout_marginBottom="@dimen/very_big_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/reservation_sent_text_view"
         android:contentDescription="@string/reservation_sent" />
