@@ -19,12 +19,13 @@
             android:paddingHorizontal="@dimen/short_padding"
             android:paddingVertical="@dimen/short_padding"
             android:textAllCaps="true"
-            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginStart="@dimen/short_margin"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@drawable/onboarding_textcolor"
             android:text="@string/hour"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
