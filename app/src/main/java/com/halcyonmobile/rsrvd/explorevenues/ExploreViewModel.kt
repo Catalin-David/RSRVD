@@ -48,14 +48,14 @@ class ExploreViewModel : ViewModel() {
 
     private fun initializeRecentlyVisitedList() = VenuesRepository.getRecentlyVisitedVenues { venues, error ->
         _error.value = error
-        (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+        (venues?.map { Card(idVenue = it.id, title = it.name, image = it.image, location = it.location) }).let {
             _recentlyVisitedCards.value = if (it == null || it.isEmpty()) listOf(NO_RECENTS_CARD) else it
         }
     }
 
     private fun initializeExploreList() = VenuesRepository.getExploreVenues { venues, error ->
         _error.value = error
-        (venues?.map { Card(title = it.name, image = it.image, location = it.location) }).let {
+        (venues?.map { Card(idVenue = it.id, title = it.name, image = it.image, location = it.location) }).let {
             _exploreCards.value = it
         }
     }
@@ -87,7 +87,7 @@ class ExploreViewModel : ViewModel() {
             VenuesRepository.search(searchTerm.value!!) { venues, error ->
                 _error.value = error
                 (venues?.map { venue ->
-                    Card(title = venue.name, image = venue.image, location = venue.location)
+                    Card(idVenue = venue.id, title = venue.name, image = venue.image, location = venue.location)
                 }).let { _searchResults.value = it }
                 if (venues.isNullOrEmpty()) {
                     _searchResults.value = emptyList()
@@ -100,6 +100,6 @@ class ExploreViewModel : ViewModel() {
     }
 
     companion object {
-        private val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!")
+        private val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!", idVenue = "")
     }
 }

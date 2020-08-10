@@ -21,7 +21,10 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
+    private val locationProvider: LocationProvider =
+        LocationProvider(this) {
+            viewModel.setLocation(it)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +101,8 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun markInterests() {
         viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            val position = Interests.values().indexOf(
+                Interests.values().find { it.name == myInterest.name })
             (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
         }
     }

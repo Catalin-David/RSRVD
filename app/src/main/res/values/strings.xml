@@ -7,7 +7,6 @@
     <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
-    <string name="client_id">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
     <string name="about_you">tell us more\nabout you</string>
     <string name="sport_photo">sport photo</string>
     <string name="location">your location</string>
@@ -46,7 +45,6 @@
     <string name="we_recommend">we recommend</string>
     <string name="we_recommend_script">Increase weekly training\nmileage by no more than 10\npercent per week.</string>
     <string name="we_recommend_placeholder">we recommend placeholder</string>
-    <string name="read_more_link">https://blog.myfitnesspal.com/</string>
     <string name="see_all_venues">See all venues</string>
     <string name="details_place_holder">running / 1.2 km away</string>
     <string name="account">account</string>
@@ -70,4 +68,41 @@
     <string name="profile_picture">Logged in user profile picture</string>
     <string name="art">art</string>
     <string name="edit_icon">edit icon</string>
+
+    <string name="venue_details_image">Venue Details Image</string>
+    <string name="venue_name">venue name</string>
+    <string name="make_a_reservation">make a reservation</string>
+    <string name="open">open</string>
+    <string name="weekly_program">weekly program</string>
+    <string name="activities">activities</string>
+    <string name="football">football</string>
+    <string name="tennis">tennis</string>
+    <string name="basketball">basketball</string>
+    <string name="volley">volley</string>
+    <string name="badminton">badminton</string>
+    <string name="handball">handball</string>
+    <string name="workout">workout</string>
+    <string name="location_text_view">location</string>
+    <string name="get_direction">Get directions</string>
+    <string name="good_to_know">good to know</string>
+    <string name="parking">parking</string>
+    <string name="restaurant">restaurant</string>
+    <string name="accessible">accessible</string>
+    <string name="toilet">toilet</string>
+    <string name="description">description</string>
+    <string name="location_description">%s, \n%s</string>
+    <string name="youtube_video">youtube video</string>
+    <string name="have_a_tour">have a virtual tour</string>
+    <string name="sport_base">sport base gheorgheni</string>
+    <string name="forward">forward</string>
+    <string name="arrow_back">arrow back</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <string name="sun">SUN</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
 </resources>
