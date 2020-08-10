@@ -8,25 +8,27 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
+import com.halcyonmobile.rsrvd.core.user.UserProfileData
 import com.halcyonmobile.rsrvd.core.user.UserRepository
-import com.halcyonmobile.rsrvd.core.user.dto.UserDto
 
 class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
-    private val profileData: MutableLiveData<UserDto> = MutableLiveData()
+    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData())
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }
-    val location: LiveData<String> = Transformations.map(profileData) { it?.location?.name }
-    val activities: LiveData<String> = Transformations.map(profileData) { it?.reservations.toString() }
-    val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it?.interests }
+    val location: LiveData<String> = Transformations.map(profileData) { it.location?.name ?: "" }
+    val activities: LiveData<String> = Transformations.map(profileData) { it.activitiesCompleted.toString() }
+    val interests: LiveData<List<Interests>> = Transformations.map(profileData) { it.interests }
 
     fun setSignInAccount(newSignInAccount: GoogleSignInAccount?) {
         account.value = newSignInAccount
     }
 
     fun loadUserInformation() {
-        UserRepository.get { profileData.value = it }
+        UserRepository.get { it?.let {
+            profileData.value = UserProfileData(it.location, it.reservations, it.interests)
+        } }
     }
 
     fun handleLogOut() {

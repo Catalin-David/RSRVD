@@ -18,6 +18,7 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
+import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
     private lateinit var binding: FragmentExploreBinding
@@ -32,9 +33,16 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val searchResultsAdapter = CardsAdapter { /* TODO start activity to open Details */ }
+        val searchResultsAdapter = CardsAdapter {
+            startActivity(context?.let { intent ->
+            it.idVenue.let { id ->
+                VenueDetailActivity.getStartIntent(intent, id)
+            }
+        })}
         val recentlyViewedAdapter = CardsAdapter { /* TODO start activity to open Details */ }
-        val exploreAdapter = CardsAdapter { /* TODO start activity to open Details */ }
+        val exploreAdapter = CardsAdapter {card ->
+            startActivity(context?.let { it -> VenueDetailActivity.getStartIntent(it, card.idVenue) })
+        }
 
         setUpObservers(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)

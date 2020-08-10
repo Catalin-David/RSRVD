@@ -98,7 +98,8 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun markInterests() {
         viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            val position = Interests.values().indexOf(
+                Interests.values().find { it.name == myInterest.name })
             (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
         }
     }

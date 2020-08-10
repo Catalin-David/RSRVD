@@ -103,6 +103,7 @@ class SignInActivity : AppCompatActivity() {
                 UserLocalRepository.accessToken = ""
                 UserLocalRepository.location = Pair(0.0, 0.0)
                 signInBinding.root.showSnackbar(getString(R.string.authentication_failed))
+                signInBinding.signInProgress.visibility = View.INVISIBLE
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

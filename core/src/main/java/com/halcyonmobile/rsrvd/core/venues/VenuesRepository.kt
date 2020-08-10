@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.core.venues
 
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
+import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 
 object VenuesRepository {
     private val venuesRemoteSource = VenuesRemoteSource()
@@ -14,4 +15,7 @@ object VenuesRepository {
 
     fun filterVenues(dto: FilterDto, callback: (List<Venue>?, Boolean) -> Unit) =
         venuesRemoteSource.filterVenues(dto, callback)
+
+    fun getVenueById(venueId: String, callback: (VenueById) -> Unit) =
+        venuesRemoteSource.getVenueById(venueId, callback)
 }
