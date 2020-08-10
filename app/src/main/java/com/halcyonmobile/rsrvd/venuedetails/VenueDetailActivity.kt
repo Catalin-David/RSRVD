@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
+import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
 
 class VenueDetailActivity : AppCompatActivity() {
 
@@ -41,6 +42,9 @@ class VenueDetailActivity : AppCompatActivity() {
 
         venueBinding.arrowBack.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+        venueBinding.makeReservationButton.setOnClickListener {
+            startActivity(Intent(this, MakeReservationActivity::class.java))
         }
 
         initTabLayout(venueId)

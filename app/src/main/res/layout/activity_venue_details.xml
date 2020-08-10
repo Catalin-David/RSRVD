@@ -99,6 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
+                android:id="@+id/make_reservation_button"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_btn_connect_sgnin"
                 android:layout_marginStart="@dimen/long_margin"

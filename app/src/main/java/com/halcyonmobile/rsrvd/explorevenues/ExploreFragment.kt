@@ -42,8 +42,6 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         val exploreAdapter = CardsAdapter {card ->
             startActivity(context?.let { it -> VenueDetailActivity.getStartIntent(it, card.idVenue) })
         }
-   //     val exploreAdapter = CardsAdapter { /* TODO start activity to open Details */
-   //     startActivity(Intent(activity, MakeReservationActivity::class.java))}
 
         setUpObservers(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)

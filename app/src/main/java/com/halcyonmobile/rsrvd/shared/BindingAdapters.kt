@@ -14,8 +14,6 @@ import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
-import com.halcyonmobile.rsrvd.makereservation.HourView
-import com.halcyonmobile.rsrvd.makereservation.Intervals
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
 
@@ -25,11 +23,6 @@ fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
     data?.map {
         addView(InterestView(context, checkable).apply { setInterest(it.name) })
     }
-}
-
-@BindingAdapter("intervals")
-fun RadioGroup.intervals(data: List<Intervals>?) = data?.map {
-    addView(HourView(context).apply { setHour(it.name) })
 }
 
 @BindingAdapter("visible")
