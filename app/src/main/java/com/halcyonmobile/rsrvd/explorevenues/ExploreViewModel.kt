@@ -99,7 +99,7 @@ class ExploreViewModel : ViewModel() {
         _error.value = error
 
         if (error == false) {
-            storage?.value = venues?.map { Card(title = it.name, image = it.image, location = it.location) }
+            storage?.value = venues?.map { Card(title = it.name, image = it.image, location = it.location, idVenue = it.id) }
         }
     }
 

@@ -13,7 +13,7 @@ import com.halcyonmobile.rsrvd.core.user.UserRepository
 
 class ProfileViewModel : ViewModel() {
     private val account: MutableLiveData<GoogleSignInAccount?> = MutableLiveData(null)
-    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData())
+    private val profileData: MutableLiveData<UserProfileData> = MutableLiveData(UserProfileData(null))
 
     val userName: LiveData<String> = Transformations.map(account) { it?.displayName }
     val imageUrl: LiveData<Uri> = Transformations.map(account) { it?.photoUrl }

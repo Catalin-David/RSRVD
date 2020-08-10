@@ -33,16 +33,9 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val searchResultsAdapter = CardsAdapter {
-            startActivity(context?.let { intent ->
-            it.idVenue.let { id ->
-                VenueDetailActivity.getStartIntent(intent, id)
-            }
-        })}
-        val recentlyViewedAdapter = CardsAdapter { /* TODO start activity to open Details */ }
-        val exploreAdapter = CardsAdapter {card ->
-            startActivity(context?.let { it -> VenueDetailActivity.getStartIntent(it, card.idVenue) })
-        }
+        val searchResultsAdapter = CardsAdapter { openVenueDetails(it) }
+        val recentlyViewedAdapter = CardsAdapter { openVenueDetails(it) }
+        val exploreAdapter = CardsAdapter { openVenueDetails(it) }
 
         setUpObservers(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
@@ -53,6 +46,12 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
+        }
+    }
+
+    private fun openVenueDetails(card: Card) {
+        if (context != null && card.idVenue != null) {
+            startActivity(VenueDetailActivity.getStartIntent(requireContext(), card.idVenue))
         }
     }
 
