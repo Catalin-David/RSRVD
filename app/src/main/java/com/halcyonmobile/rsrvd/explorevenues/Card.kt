@@ -5,6 +5,7 @@ import java.util.UUID
 
 data class Card(
     val id: UUID = UUID.randomUUID(),
+    val idVenue: String? = null,
     val title: String,
     val image: String? = null,
     val location: Location? = null

@@ -23,7 +23,9 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: EditProfileActivityBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) { viewModel.setLocation(it) }
+    private val locationProvider: LocationProvider = LocationProvider(this) {
+        viewModel.setLocation(newLocation = it, save = true)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +39,11 @@ class EditProfileActivity : AppCompatActivity() {
 
         viewModel.apply {
             updateState.observe(this@EditProfileActivity) {
-                binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
+                binding.root.showSnackbar(if (it) "Updated" else "Failed")
             }
 
             errorMessage.observe(this@EditProfileActivity) {
-                binding.root.showSnackbar(it).show()
+                binding.root.showSnackbar(it)
             }
 
             interests.observe(this@EditProfileActivity) {
@@ -68,6 +70,10 @@ class EditProfileActivity : AppCompatActivity() {
                 finish()
             }
 
+            mapsIcon.setOnClickListener {
+                locationProvider.init()
+            }
+
             locationSelector.setOnClickListener {
                 startActivityForResult(
                     Intent(this@EditProfileActivity, SelectLocationActivity::class.java),
@@ -75,7 +81,7 @@ class EditProfileActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@EditProfileActivity,
                         binding.locationSelector,
-                        "search_trans"
+                        "search_bar_transition"
                     ).toBundle()
                 )
             }
@@ -92,7 +98,9 @@ class EditProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
+            data.getParcelableExtra<Location>(SelectLocationActivity.LOCATION)?.let {
+                viewModel.setLocation(newLocation = it, save = true)
+            }
         }
     }
 
@@ -104,7 +112,8 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun markInterests() {
         viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            val position = Interests.values().indexOf(
+                Interests.values().find { it.name == myInterest.name })
             (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
         }
     }
