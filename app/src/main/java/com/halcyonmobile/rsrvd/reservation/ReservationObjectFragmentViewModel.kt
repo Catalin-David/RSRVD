@@ -13,7 +13,7 @@ import java.util.*
 class ReservationObjectFragmentViewModel : ViewModel() {
     private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private val currentDate = Date()
-    private val reservations: MutableLiveData<List<ReservationDto>> = MutableLiveData(listOf())
+    private val reservations: MutableLiveData<List<ReservationDto>> = MutableLiveData(emptyList())
 
     val upcomingReservations: LiveData<List<ReservationDto>> = Transformations.map(reservations) { list ->
         list.filter {
@@ -37,7 +37,7 @@ class ReservationObjectFragmentViewModel : ViewModel() {
         }
     }
 
-    fun loadReservations() {
+    fun loadReservations() =
 //        ReservationRepository.getReservations {
 //            it?.let {
 //                reservations.value = it
@@ -45,9 +45,7 @@ class ReservationObjectFragmentViewModel : ViewModel() {
 //        }
 //      USE THESE DEFAULT VALUES FOR TESTING AS THERE ARE NO RESERVATIONS ON THE BACKEND RIGHT NOW
         ReservationRepository.loadDefaultReservations {
-            it?.let {
-                reservations.value = it
-            }
+            reservations.value = it ?: emptyList()
         }
-    }
+
 }

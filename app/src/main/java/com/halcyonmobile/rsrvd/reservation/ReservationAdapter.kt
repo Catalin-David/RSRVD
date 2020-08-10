@@ -15,14 +15,13 @@ import com.halcyonmobile.rsrvd.databinding.ListItemReservationBinding
 
 class ReservationAdapter : ListAdapter<ReservationDto, ReservationAdapter.ViewHolder>(ReservationDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ListItemReservationBinding = ListItemReservationBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        ListItemReservationBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return ViewHolder(binding)
-    }
+    )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position), position, itemCount)
 

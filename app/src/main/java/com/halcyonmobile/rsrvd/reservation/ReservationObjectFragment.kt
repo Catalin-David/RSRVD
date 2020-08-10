@@ -28,23 +28,35 @@ class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) 
 
         viewModel.loadReservations()
 
-        arguments?.takeIf { args -> args.containsKey(ReservationFragmentAdapter.RESERVATION_TAB_INDEX_KEY) }?.apply {
+        arguments?.takeIf { args -> args.containsKey(RESERVATION_TAB_INDEX_KEY) }?.apply {
             binding.recyclerView.apply {
                 adapter = recyclerViewAdapter
                 layoutManager = LinearLayoutManager(context)
             }
 
-            when (getInt(ReservationFragmentAdapter.RESERVATION_TAB_INDEX_KEY)) {
-                ReservationFragmentAdapter.HISTORY_RESERVATIONS_TAB -> {
+            when (getInt(RESERVATION_TAB_INDEX_KEY)) {
+                HISTORY_RESERVATIONS_TAB -> {
                     viewModel.historyReservations.observe(viewLifecycleOwner) { recyclerViewAdapter.submitList(it) }
                 }
-                ReservationFragmentAdapter.UPCOMING_RESERVATIONS_TAB -> {
+                UPCOMING_RESERVATIONS_TAB -> {
                     viewModel.upcomingReservations.observe(viewLifecycleOwner) { recyclerViewAdapter.submitList(it) }
                 }
-                else -> recyclerViewAdapter.submitList(listOf())
+                else -> recyclerViewAdapter.submitList(emptyList())
             }
         }
 
         return binding.root
+    }
+
+    companion object{
+        private const val RESERVATION_TAB_INDEX_KEY = "com.halcyonmobile.rsrvd.reservation.RESERVATION_TAB_INDEX_KEY"
+        private const val UPCOMING_RESERVATIONS_TAB = 0
+        private const val HISTORY_RESERVATIONS_TAB = 1
+
+        fun createInstance(index: Int) = ReservationObjectFragment().apply {
+            arguments = Bundle().apply {
+                putInt(RESERVATION_TAB_INDEX_KEY, index)
+            }
+        }
     }
 }

@@ -13,9 +13,8 @@ import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 object ReservationRepository {
     private val remoteSource = ReservationRemoteSource()
 
-    fun getReservations(updateState: (List<ReservationDto>?) -> Unit) {
-        remoteSource.get(updateState)
-    }
+    fun getReservations(updateState: (List<ReservationDto>?) -> Unit) = remoteSource.get(updateState)
+
 
     fun loadDefaultReservations(updateState: (List<ReservationDto>?) -> Unit) {
         val venue = Venue(
@@ -33,7 +32,7 @@ object ReservationRepository {
                 DailyOpenHours(1f, 2f),
                 DailyOpenHours(1f, 2f)
             ),
-            listOf()
+            emptyList()
         )
 
         val list = listOf(

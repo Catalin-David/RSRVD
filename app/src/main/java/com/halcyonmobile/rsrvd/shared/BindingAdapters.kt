@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.shared
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.location.Location
 import android.net.Uri
 import android.view.View
@@ -54,69 +55,47 @@ fun TextView.formattedDistance(location: myLocation?) = if (location != null) {
 }
 
 @BindingAdapter("imageUrl")
-fun ImageView.imageUrl(imageUrl: Uri?) {
-    Glide.with(this).asBitmap().load(imageUrl).error(R.mipmap.ic_launcher).into(this)
-}
+fun ImageView.imageUrl(imageUrl: Uri?) = Glide.with(this).asBitmap().load(imageUrl).error(R.mipmap.ic_launcher).into(this)
+
 
 @BindingAdapter("imageUrlString")
-fun ImageView.imageUrlString(imageUrlString: String?) {
-    Glide.with(this).asBitmap().load(imageUrlString).error(R.mipmap.ic_launcher).into(this)
-}
+fun ImageView.imageUrlString(imageUrlString: String?) = Glide.with(this).asBitmap().load(imageUrlString).error(R.mipmap.ic_launcher).into(this)
+
 
 @BindingAdapter("reservationDate")
-fun TextView.reservationDate(dateString: String) {
-    val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)
-    date?.let {
-        val calendar = Calendar.getInstance().apply {
-            time = it
+fun TextView.reservationDate(dateString: String) =
+    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)?.let { date ->
+        Calendar.getInstance().apply {
+            time = date
+        }.let { calendar ->
+            text = context.getString(
+                R.string.reservation_date_format,
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH).toMonth(context),
+                calendar.get(Calendar.YEAR)
+            )
         }
-        text = context.getString(
-            R.string.reservation_date_format,
-            calendar.get(Calendar.DAY_OF_MONTH),
-            calendar.get(Calendar.MONTH).toMonth(),
-            calendar.get(Calendar.YEAR)
-        )
     }
-}
+
 
 @BindingAdapter("reservationHour")
-fun TextView.reservationHour(dateString: String) {
-    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    val date = sdf.parse(dateString)
-    date?.let {
-        val calendar = Calendar.getInstance().apply {
-            time = it
+fun TextView.reservationHour(dateString: String) =
+    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)?.let { date ->
+        Calendar.getInstance().apply {
+            time = date
+        }.let{calendar ->
+            text = context.getString(
+                R.string.reservation_hour_format,
+                calendar.get(Calendar.HOUR).toDoubleDigit(context),
+                calendar.get(Calendar.MINUTE).toDoubleDigit(context),
+                calendar.get(Calendar.AM_PM).toAmPm(context)
+            )
         }
-        text = context.getString(
-            R.string.reservation_hour_format,
-            calendar.get(Calendar.HOUR).toDoubleDigit(),
-            calendar.get(Calendar.MINUTE).toDoubleDigit(),
-            calendar.get(Calendar.AM_PM).toAmPm()
-        )
     }
-}
 
-fun Int.toAmPm() = when (this) {
-    Calendar.AM -> "AM"
-    else -> "PM"
-}
+fun Int.toAmPm(context: Context) = if (this == Calendar.AM) context.resources.getString(R.string.AM) else context.resources.getString(R.string.PM)
 
-fun Int.toDoubleDigit() = when (this) {
-    in 0.until(10) -> "0${this}"
-    else -> toString()
-}
+fun Int.toDoubleDigit(context: Context) = if (this in 0.until(10)) context.resources.getString(R.string.double_digit_format, this) else toString()
 
-fun Int.toMonth() = when (this) {
-    0 -> "January"
-    1 -> "February"
-    2 -> "March"
-    3 -> "April"
-    4 -> "May"
-    5 -> "June"
-    6 -> "July"
-    7 -> "August"
-    8 -> "September"
-    9 -> "October"
-    10 -> "November"
-    else -> "December"
-}
+fun Int.toMonth(context: Context): String = context.resources.getStringArray(R.array.months)[this]
+
