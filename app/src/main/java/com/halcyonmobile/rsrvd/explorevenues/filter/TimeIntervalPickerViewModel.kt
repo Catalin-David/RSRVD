@@ -3,6 +3,7 @@ package com.halcyonmobile.rsrvd.explorevenues.filter
 import android.content.Context
 import android.os.Build
 import android.os.Handler
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bekawestberg.loopinglayout.library.LoopingLayoutManager
 import com.bekawestberg.loopinglayout.library.LoopingSnapHelper
+import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.explorevenues.MarginDecorator
 import java.lang.Exception
 import java.util.Calendar
@@ -41,7 +43,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
                 try {
                     (startPicker.findViewHolderForAdapterPosition(it) as TimePickerAdapter.TimeStepViewHolder).unSelect()
                 } catch (e: Exception) {
-                    println(e)
+                    e.message?.let { Log.d(context.getString(R.string.timepicker_exception), e.message!!) }
                 }
             }
             // Selecting the middle one
@@ -72,7 +74,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
                 try {
                     (finishPicker.findViewHolderForAdapterPosition(it) as TimePickerAdapter.TimeStepViewHolder).unSelect()
                 } catch (e: Exception) {
-                    println(e)
+                    e.message?.let { Log.d(context.getString(R.string.timepicker_exception), e.message!!) }
                 }
             }
             // Selecting the middle one
@@ -100,10 +102,10 @@ class TimeIntervalPickerViewModel : ViewModel() {
         val minute = calendar.get(Calendar.MINUTE)
 
         val now = if (minute < 30) hour * 100 + 50 else (hour + 1) * 100
-        startLayoutManager.scrollToPosition(hours.indexOf(now) - 1)
+        startLayoutManager.scrollToPosition(hours.indexOf(now))
 
         val then = if (minute < 30) (hour + 1) * 100 else (hour + 1) * 100 + 50
-        finishLayoutManager.scrollToPosition(hours.indexOf(then) - 1)
+        finishLayoutManager.scrollToPosition(hours.indexOf(then))
     }
 
     companion object {

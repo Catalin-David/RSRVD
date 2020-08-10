@@ -38,24 +38,19 @@ class EditProfileActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.apply {
-            updateState.observe(this@EditProfileActivity) {
-                binding.root.showSnackbar(if (it) "Updated" else "Failed")
-            }
+            updateState.observe(this@EditProfileActivity) { binding.root.showSnackbar(if (it) "Updated" else "Failed") }
 
-            errorMessage.observe(this@EditProfileActivity) {
-                binding.root.showSnackbar(it)
-            }
+            errorMessage.observe(this@EditProfileActivity) { binding.root.showSnackbar(it) }
 
-            interests.observe(this@EditProfileActivity) {
-                markInterests()
-            }
+            interests.observe(this@EditProfileActivity) { markInterests() }
 
             retrieving.observe(this@EditProfileActivity) {
                 when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
                     RetrieveState.POST ->
-                        if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
-                        else {
+                        if (viewModel.location.value != null) {
+                            binding.mapsText.text = viewModel.location.value!!.name
+                        } else {
                             binding.mapsText.text = getString(R.string.pick_location)
                             locationProvider.init()
                         }
@@ -66,13 +61,9 @@ class EditProfileActivity : AppCompatActivity() {
         binding.apply {
             dataMap = Interests.values().toMutableList()
 
-            close.setOnClickListener {
-                finish()
-            }
+            close.setOnClickListener { finish() }
 
-            mapsIcon.setOnClickListener {
-                locationProvider.init()
-            }
+            mapsIcon.setOnClickListener { locationProvider.init() }
 
             locationSelector.setOnClickListener {
                 startActivityForResult(
@@ -112,8 +103,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun markInterests() {
         viewModel.interests.value?.map { myInterest ->
-            val position = Interests.values().indexOf(
-                Interests.values().find { it.name == myInterest.name })
+            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
             (binding.interestsGrid.children.toList()[position] as InterestView).setChecked(true)
         }
     }
