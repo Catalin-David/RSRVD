@@ -50,6 +50,13 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
+    <string name="cancel_filtering">cancel filtering</string>
+    <string name="date">date</string>
+    <string name="refine_results">refine results</string>
+    <string name="see_results">see results</string>
+    <string name="_12_august_2019">12 August, 2019</string>
+    <string name="yellow_shapes">yellow shapes</string>
+    <string name="clear_filters">clear filters</string>
     <string name="search_results">search results</string>
     <string name="no_results">no results</string>
     <string name="don_t_give_up">don\'t give up, just try again.</string>
@@ -68,7 +75,9 @@
     <string name="profile_picture">Logged in user profile picture</string>
     <string name="art">art</string>
     <string name="edit_icon">edit icon</string>
-
+    <string name="no_filters">No filter applied!</string>
+    <string name="updated">Updated</string>
+    <string name="failed">Failed</string>
     <string name="venue_details_image">Venue Details Image</string>
     <string name="venue_name">venue name</string>
     <string name="make_a_reservation">make a reservation</string>

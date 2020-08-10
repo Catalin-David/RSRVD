@@ -2,12 +2,8 @@ package com.halcyonmobile.rsrvd.explorevenues
 
 import android.content.res.Resources
 import android.graphics.Color
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView

@@ -1,16 +1,17 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
+import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SearchVenueBodyDto(
+data class FilterDto(
     @Json(name = "name")
     val name: String?,
     @Json(name = "location")
-    val location: LatLngRad?,
+    val location: FilterLocation?,
     @Json(name = "activities")
-    val activities: List<String>?,
+    val activities: List<Interests>?,
     @Json(name = "availability")
-    val availability: Availability?
+    val availability: StartEndHours?
 )

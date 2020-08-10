@@ -78,7 +78,7 @@
                 android:layout_height="@dimen/box_line_height"
                 android:layout_marginVertical="@dimen/default_margin"
                 android:background="@color/darker_gray"
-                android:transitionName="search_trans"
+                android:transitionName="search_bar_transition"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/location">
