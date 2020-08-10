@@ -20,8 +20,11 @@ import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
 
 @BindingAdapter(value = ["interests", "checkable"], requireAll = false)
-fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) = data?.map {
-    addView(InterestView(context, checkable).apply { setInterest(it.name) })
+fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
+    removeAllViews()
+    data?.map {
+        addView(InterestView(context, checkable).apply { setInterest(it.name) })
+    }
 }
 
 @BindingAdapter("intervals")

@@ -18,7 +18,12 @@
     <dimen name="picture_dimension">160dp</dimen>
     <dimen name="text_on_picture_margin">115dp</dimen>
 
-    <dimen name="card_width">320dp</dimen>
+    <dimen name="background_square_padding">6dp</dimen>
+    <dimen name="margin_start_square">42dp</dimen>
+    <dimen name="margin_start_venue_facilities">64dp</dimen>
+
+    <dimen name="height_btn_connect_sgnin">56dp</dimen>
+    <dimen name="card_width">400dp</dimen>
     <dimen name="card_height">220dp</dimen>
     <dimen name="card_height_short">180dp</dimen>
     <dimen name="cards_height">280dp</dimen>

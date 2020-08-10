@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="venue_tour_link" translatable="false">https://www.youtube.com/watch?v=2MHWIJssvBg</string>
+    <string name="google_api_key" translatable="false">AIzaSyABYjMBctFxQ25UQgBIg5PEz0w-P6Kp_UA</string>
+    <string name="client_id" translatable="false">966214671854-p204t3vdieiq590pgh7tqr17d5b9i6el.apps.googleusercontent.com</string>
+    <string name="read_more_link" translatable="false">https://blog.myfitnesspal.com/</string>
+</resources>
