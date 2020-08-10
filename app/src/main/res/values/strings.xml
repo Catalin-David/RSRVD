@@ -114,4 +114,5 @@
     <string name="sun">SUN</string>
     <string name="am">AM</string>
     <string name="pm">PM</string>
+    <string name="filter_date">%d %s, %d</string>
 </resources>

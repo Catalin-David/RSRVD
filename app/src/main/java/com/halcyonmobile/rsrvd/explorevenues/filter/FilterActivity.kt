@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
 import com.halcyonmobile.rsrvd.databinding.FilterActivityBinding
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
@@ -24,10 +26,7 @@ class FilterActivity : AppCompatActivity() {
     private lateinit var locationViewModel: LocationViewModel
     private lateinit var filterViewModel: FilterViewModel
 
-    private val locationProvider: LocationProvider = LocationProvider(this) {
-        locationViewModel.setLocation(it)
-        filterViewModel.setLocation(it)
-    }
+    private val locationProvider: LocationProvider = LocationProvider(this) { locationViewModel.setLocation(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +35,8 @@ class FilterActivity : AppCompatActivity() {
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
+
+        val months = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
@@ -55,49 +56,61 @@ class FilterActivity : AppCompatActivity() {
                 )
             }
 
-            mapsIcon.setOnClickListener {
-                locationProvider.init()
+            mapsIcon.setOnClickListener { locationProvider.init() }
+
+            dateText.text = getString(
+                R.string.filter_date,
+                filterViewModel.filterDate.day,
+                months[filterViewModel.filterDate.month],
+                filterViewModel.filterDate.year
+            )
+
+            datePicker.setOnClickListener {
+                DatePickerDialog(
+                    this@FilterActivity,
+                    R.style.DatePickerDialogStyle,
+                    DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                        dateText.text = getString(R.string.filter_date, dayOfMonth, months[month], year)
+                        filterViewModel.setDate(year, month, dayOfMonth)
+                    },
+                    filterViewModel.filterDate.year,
+                    filterViewModel.filterDate.month,
+                    filterViewModel.filterDate.day
+                ).show()
             }
 
             cancel.setOnClickListener { finish() }
 
             ready.setOnClickListener {
-                if (!filterViewModel.isReady()) {
-                    binding.root.showSnackbar(getString(R.string.no_filters))
-                } else {
-                    setResult(
-                        Activity.RESULT_OK, Intent().putExtra(
-                            FILTERS, Filters(
-                                activities = if (getActivities().isNotEmpty()) getActivities() else null,
-                                location = filterViewModel.location.value
-                            )
+                setResult(
+                    Activity.RESULT_OK, Intent().putExtra(
+                        FILTERS, Filters(
+                            activities = if (getActivities().isNotEmpty()) getActivities() else null,
+                            location = locationViewModel.location.value?.let {
+                                FilterLocation(it.latitude, it.longitude, RADIUS)
+                            },
+                            availability = filterViewModel.getAvailability()
                         )
                     )
+                )
 
-                    finish()
+                finish()
+            }
+
+            locationViewModel.apply {
+                updateState.observe(this@FilterActivity) {
+                    binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed))
                 }
-            }
-        }
 
-        locationViewModel.apply {
-            updateState.observe(this@FilterActivity) {
-                binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed))
-            }
+                errorMessage.observe(this@FilterActivity) { binding.root.showSnackbar(it) }
 
-            errorMessage.observe(this@FilterActivity) {
-                binding.root.showSnackbar(it)
-            }
-
-            location.observe(this@FilterActivity) {
-                filterViewModel.setLocation(it)
-            }
-
-            retrieving.observe(this@FilterActivity) {
-                when (it) {
-                    RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
-                    RetrieveState.POST -> {
-                        binding.mapsText.text = getString(R.string.pick_location)
-                        locationProvider.init()
+                retrieving.observe(this@FilterActivity) {
+                    when (it) {
+                        RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
+                        RetrieveState.POST -> {
+                            binding.mapsText.text = getString(R.string.pick_location)
+                            locationProvider.init()
+                        }
                     }
                 }
             }
@@ -110,7 +123,6 @@ class FilterActivity : AppCompatActivity() {
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             data.getParcelableExtra<Location>(SelectLocationActivity.LOCATION)?.let {
                 locationViewModel.setLocation(it)
-                filterViewModel.setLocation(it)
             }
         }
     }
@@ -129,6 +141,9 @@ class FilterActivity : AppCompatActivity() {
 
     companion object {
         const val SELECT_LOCATION_REQUEST_CODE = 1
+
         const val FILTERS = "filters"
+
+        const val RADIUS = 5000.0
     }
 }

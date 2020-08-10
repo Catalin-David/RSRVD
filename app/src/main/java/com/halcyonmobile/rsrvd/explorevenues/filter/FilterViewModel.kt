@@ -6,27 +6,45 @@ import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
-import com.halcyonmobile.rsrvd.core.venues.dto.StartEndHours
+import java.util.*
 
 class FilterViewModel : ViewModel() {
-    private val _name = MutableLiveData<String>()
-    private val _location = MutableLiveData<FilterLocation>()
     private val _activities = MutableLiveData<List<Interests>>()
-    private val _availability = MutableLiveData<StartEndHours>()
-
-    val name: LiveData<String> = _name
-    val location: LiveData<FilterLocation> = _location
     val activities: LiveData<List<Interests>> = _activities
-    val availability: LiveData<StartEndHours> = _availability
 
-    fun setLocation(myLocation: Location?) {
-        _location.value = if (myLocation != null) FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS) else null
+    var filterDate: FilterDate
+    private var filterTime: FilterTime
+
+    init {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val startHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val startMinute = calendar.get(Calendar.MINUTE)
+        val finishHour = startHour // TODO
+        val finishMinute = startMinute // TODO
+
+        filterDate = FilterDate(year, month, day)
+        filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
     }
 
-    // TODO activities from the FlexBox
-    fun isReady(): Boolean = _name.value != null || _location.value != null || !_activities.value.isNullOrEmpty() || _availability.value != null || true
-
-    companion object {
-        const val RADIUS = 5000.0
+    fun setDate(year: Int, month: Int, day: Int) {
+        filterDate = FilterDate(year, month, day)
     }
+
+    fun setInterval(startHour: Int, startMinute: Int, finishHour: Int, finishMinute: Int) {
+        filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
+    }
+
+    fun getAvailability(): FilterDateTime =
+        FilterDateTime(
+            filterDate.year,
+            filterDate.month,
+            filterDate.day,
+            filterTime.startHour,
+            filterTime.startMinute,
+            filterTime.finishHour,
+            filterTime.finishMinute
+        )
 }

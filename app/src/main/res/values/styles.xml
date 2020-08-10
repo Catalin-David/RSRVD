@@ -122,4 +122,10 @@
         <item name="android:textColor">#fff</item>
         <item name="backgroundColor">#fc000000</item>
     </style>
+
+    <style name="DatePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/darker_gray</item>
+        <item name="colorAccent">@color/primary</item>
+    </style>
 </resources>

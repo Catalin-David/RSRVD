@@ -5,9 +5,11 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
+import com.halcyonmobile.rsrvd.core.venues.dto.Availability
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
+import org.joda.time.DateTime
 
 class ExploreViewModel : ViewModel() {
     private val _searching: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -79,6 +81,9 @@ class ExploreViewModel : ViewModel() {
     fun search() {
         _searching.value = searchTerm.value?.isNotEmpty()
 
+        val availabilityStart: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month, it.day, it.startHour, it.startMinute) }
+        val availabilityEnd: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month, it.day, it.finishHour, it.finishMinute) }
+
         if (_searching.value == true) {
             _loading.value = true
             VenuesRepository.filterVenues(
@@ -86,7 +91,10 @@ class ExploreViewModel : ViewModel() {
                     name = searchTerm.value,
                     location = _filters.value?.location,
                     activities = _filters.value?.activities,
-                    availability = _filters.value?.availability
+                    availability = if (availabilityStart != null && availabilityEnd != null) Availability(
+                        availabilityStart.toString(),
+                        availabilityEnd.toString()
+                    ) else null
                 )
             ) { venues, error -> storeVenuesAsCardsIn(_searchResultsCards, venues, error) }
             _loading.value = false

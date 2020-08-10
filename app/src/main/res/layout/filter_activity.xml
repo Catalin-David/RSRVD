@@ -9,10 +9,6 @@
             type="com.halcyonmobile.rsrvd.onboarding.LocationViewModel" />
 
         <variable
-            name="date"
-            type="String" />
-
-        <variable
             name="dataMap"
             type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests&gt;" />
     </data>
@@ -197,7 +193,6 @@
                     android:layout_height="0dp"
                     android:gravity="center_vertical"
                     android:hint="@string/_12_august_2019"
-                    android:text="@{date}"
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
