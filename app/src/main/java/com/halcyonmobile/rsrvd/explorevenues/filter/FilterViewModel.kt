@@ -11,7 +11,7 @@ class FilterViewModel : ViewModel() {
     val activities: LiveData<List<Interests>> = _activities
 
     var filterDate: FilterDate
-    private var filterTime: FilterTime
+    var filterTime: FilterTime
 
     init {
         val calendar = Calendar.getInstance()

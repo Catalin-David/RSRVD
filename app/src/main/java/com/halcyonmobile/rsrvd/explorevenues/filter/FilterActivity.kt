@@ -2,14 +2,17 @@ package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
+import androidx.core.view.children
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.halcyonmobile.rsrvd.R
@@ -17,6 +20,7 @@ import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
 import com.halcyonmobile.rsrvd.databinding.FilterActivityBinding
+import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
 import com.halcyonmobile.rsrvd.onboarding.RetrieveState
@@ -32,6 +36,8 @@ class FilterActivity : AppCompatActivity() {
 
     private val locationProvider: LocationProvider = LocationProvider(this) { locationViewModel.setLocation(it) }
 
+    private var baseFilters: Filters? = null
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,14 @@ class FilterActivity : AppCompatActivity() {
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
         timeIntervalPickerViewModel = ViewModelProviders.of(this).get(TimeIntervalPickerViewModel::class.java)
+
+        baseFilters = intent.getParcelableExtra<Filters>(ExploreFragment.FILTER)
+
+        baseFilters?.let { filters ->
+            filters.availability?.let {
+                filterViewModel.filterDate = FilterDate(it.year, it.month, it.day)
+            }
+        }
 
         setUpTimeIntervalPickerViewModel()
 
@@ -96,6 +110,7 @@ class FilterActivity : AppCompatActivity() {
                                 location = locationViewModel.location.value?.let {
                                     FilterLocation(it.latitude, it.longitude, RADIUS)
                                 },
+                                fullLocation = locationViewModel.location.value,
                                 availability = filterViewModel.getAvailability()
                             )
                         )
@@ -116,17 +131,35 @@ class FilterActivity : AppCompatActivity() {
 
                 errorMessage.observe(this@FilterActivity) { binding.root.showSnackbar(it) }
 
-                retrieving.observe(this@FilterActivity) {
-                    when (it) {
-                        RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
-                        RetrieveState.POST -> {
-                            binding.mapsText.text = getString(R.string.pick_location)
-                            locationProvider.init()
+                if (baseFilters != null && baseFilters?.fullLocation != null) {
+                    locationViewModel.setLocation(baseFilters!!.fullLocation)
+                } else {
+                    retrieving.observe(this@FilterActivity) {
+                        when (it) {
+                            RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
+                            RetrieveState.POST -> {
+                                binding.mapsText.text = getString(R.string.pick_location)
+                                locationProvider.init()
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun markInterests(interests: List<Interests>) {
+        interests.map { myInterest ->
+            val position = Interests.values().indexOf(Interests.values().find { it.name == myInterest.name })
+            (binding.activities.children.toList()[position] as InterestView).setChecked(true)
+        }
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        if (!baseFilters?.activities.isNullOrEmpty()) {
+            markInterests(baseFilters?.activities!!)
+        }
+        return super.onCreateView(name, context, attrs)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -138,7 +171,8 @@ class FilterActivity : AppCompatActivity() {
                 startLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
                 finishLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
                 startPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) },
-                finishPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) }
+                finishPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) },
+                initialInterval = baseFilters?.availability
             )
             start.observe(this@FilterActivity) { filterViewModel.setStart(it) }
             end.observe(this@FilterActivity) { filterViewModel.setFinish(it) }

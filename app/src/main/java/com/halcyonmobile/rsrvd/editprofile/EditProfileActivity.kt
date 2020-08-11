@@ -38,6 +38,8 @@ class EditProfileActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.apply {
+            loadSavedLocation()
+
             updateState.observe(this@EditProfileActivity) { binding.root.showSnackbar(if (it) "Updated" else "Failed") }
 
             errorMessage.observe(this@EditProfileActivity) { binding.root.showSnackbar(it) }

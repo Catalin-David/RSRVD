@@ -17,7 +17,7 @@ class LocationViewModel : ViewModel() {
     private val _updateState: MutableLiveData<Boolean> = MutableLiveData()
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     private val _interests: MutableLiveData<List<Interests>> = MutableLiveData()
-    private val _retrieving: MutableLiveData<RetrieveState> = MutableLiveData(RetrieveState.PRE)
+    private val _retrieving: MutableLiveData<RetrieveState> = MutableLiveData()
 
     val location: LiveData<Location> = _location
     val updateState: LiveData<Boolean> = _updateState
@@ -48,7 +48,8 @@ class LocationViewModel : ViewModel() {
             true
         }
 
-    init {
+    fun loadSavedLocation() {
+        RetrieveState.PRE
         UserRepository.get {
             _interests.value = it?.interests
             _location.value = it?.location

@@ -28,6 +28,7 @@ class ExploreViewModel : ViewModel() {
     val error: LiveData<Boolean> = _error
     val cardInFocus: LiveData<Card> = _cardInFocus
     val searchTerm: MutableLiveData<String> = MutableLiveData()
+    val filters: LiveData<Filters> = _filters
 
     val filtersApplied = MediatorLiveData<Boolean>().apply {
         addSource(_filters) { value = _filters.value != null }
