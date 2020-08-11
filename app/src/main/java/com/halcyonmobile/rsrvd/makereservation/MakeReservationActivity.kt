@@ -46,7 +46,8 @@ class MakeReservationActivity : AppCompatActivity() {
         }
 
         binding.closeReservation.setOnClickListener {
-            startActivity(VenueDetailActivity.getStartIntent(this, venueById.id))
+           // startActivity(VenueDetailActivity.getStartIntent(this, venueById.id))
+            finish()
         }
 
         binding.sendReservation.setOnClickListener {

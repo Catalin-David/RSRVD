@@ -11,11 +11,11 @@ internal class CreateReservationResponseHandler(
     private val onFailure: () -> Unit
 ) : Callback<Unit> {
     override fun onFailure(call: Call<Unit>, t: Throwable) {
-        onSuccess()
+        onFailure()
     }
 
     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
         Log.d(ContentValues.TAG, "${response.code()}")
-        onFailure()
+        onSuccess()
     }
 }

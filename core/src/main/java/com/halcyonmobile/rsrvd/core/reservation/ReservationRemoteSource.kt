@@ -4,7 +4,7 @@ import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
 
 internal class ReservationRemoteSource {
-    private val reservationApi = RetrofitManager.retrofit!!.create(ReservationApi::class.java)
+    private val reservationApi = RetrofitManager.retrofitWithAuthentication!!.create(ReservationApi::class.java)
 
     fun createReservation(
         id: String,

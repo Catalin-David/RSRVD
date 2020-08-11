@@ -22,8 +22,7 @@ import com.schibstedspain.leku.LOCATION_ADDRESS
 import com.schibstedspain.leku.LocationPickerActivity
 
 
-class DetailInnerFragment(private val venueId: String): Fragment() {
-
+class DetailInnerFragment: Fragment() {
     private var mGoogleApiClient: GoogleApiClient? = null
 
     private lateinit var binding: FragmentInnerVenueDetailBinding
@@ -41,19 +40,23 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
 
-        //initializing the data for the get venue by id request
-        viewModel.getVenue(venueId, callback = {
-            binding.venueWeeklyProgramTextView.text = getVenueProgram(it)
-            binding.venueDescription.text = it.description
-            binding.venueLocationTextView.text = getString(R.string.location_description, it.location.name, it.location.details)
-            binding.facilitiesDataMap = it.facilities
+        val venueId = this.arguments?.getString(EXTRA_VENUE_ID)
 
-            val list: ArrayList<Interests> = ArrayList()
-            for (i in it.activities) {
-                list.add(getInterestBasedOnName(i.name))
-            }
-            binding.dataMap = list
-        })
+        //initializing the data for the get venue by id request
+        venueId?.let { s ->
+            viewModel.getVenue(s, callback = {
+                binding.venueWeeklyProgramTextView.text = getVenueProgram(it)
+                binding.venueDescription.text = it.description
+                binding.venueLocationTextView.text = getString(R.string.location_description, it.location.name, it.location.details)
+                binding.facilitiesDataMap = it.facilities
+
+                val list: ArrayList<Interests> = ArrayList()
+                for (i in it.activities) {
+                    list.add(getInterestBasedOnName(i.name))
+                }
+                binding.dataMap = list
+            })
+        }
 
         //for the place picker
         mGoogleApiClient = activity?.let {
@@ -165,8 +168,16 @@ class DetailInnerFragment(private val venueId: String): Fragment() {
 
     companion object {
         private const val PLACE_PICKER_REQUEST = 1
+        private const val EXTRA_VENUE_ID = "EXTRA_VENUE_ID"
 
-        fun newInstance(venueId: String) : DetailInnerFragment = DetailInnerFragment(venueId)
+        fun newInstance(venueId: String) : DetailInnerFragment {
+            val fragment = DetailInnerFragment()
+            val bundle = Bundle()
+
+            bundle.putString(EXTRA_VENUE_ID, venueId)
+            fragment.arguments = bundle
+
+            return fragment
+        }
     }
-
 }
