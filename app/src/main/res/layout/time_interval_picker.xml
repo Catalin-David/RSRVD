@@ -32,6 +32,7 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/primary"
+            android:paddingVertical="@dimen/long_margin"
             app:layout_constraintBottom_toBottomOf="@id/finish_picker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

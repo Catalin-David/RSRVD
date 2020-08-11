@@ -40,8 +40,26 @@ class FilterViewModel : ViewModel() {
         filterTime = FilterTime(filterTime.startHour, filterTime.startMinute, hour, minute)
     }
 
-    fun getAvailability(): FilterDateTime =
-        FilterDateTime(
+    private fun checkTime() = filterTime.finishHour > filterTime.startHour ||
+            (filterTime.finishHour == filterTime.startHour && filterTime.finishMinute > filterTime.startMinute)
+
+    private fun checkDate(): Boolean {
+        val now = Calendar.getInstance()
+
+        return filterDate.year >= now.get(Calendar.YEAR) && filterDate.month >= now.get(Calendar.MONTH) && filterDate.day >= now.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun getAvailability(): FilterDateTime {
+
+        if (!checkTime()) {
+            throw FilterDurationException()
+        }
+
+        if (!checkDate()) {
+            throw FilterDateException()
+        }
+
+        return FilterDateTime(
             filterDate.year,
             filterDate.month,
             filterDate.day,
@@ -50,4 +68,5 @@ class FilterViewModel : ViewModel() {
             filterTime.finishHour,
             filterTime.finishMinute
         )
+    }
 }

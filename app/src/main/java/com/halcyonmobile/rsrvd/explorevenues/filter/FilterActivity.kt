@@ -88,19 +88,25 @@ class FilterActivity : AppCompatActivity() {
             cancel.setOnClickListener { finish() }
 
             ready.setOnClickListener {
-                setResult(
-                    Activity.RESULT_OK, Intent().putExtra(
-                        FILTERS, Filters(
-                            activities = if (getActivities().isNotEmpty()) getActivities() else null,
-                            location = locationViewModel.location.value?.let {
-                                FilterLocation(it.latitude, it.longitude, RADIUS)
-                            },
-                            availability = filterViewModel.getAvailability()
+                try {
+                    setResult(
+                        Activity.RESULT_OK, Intent().putExtra(
+                            FILTERS, Filters(
+                                activities = if (getActivities().isNotEmpty()) getActivities() else null,
+                                location = locationViewModel.location.value?.let {
+                                    FilterLocation(it.latitude, it.longitude, RADIUS)
+                                },
+                                availability = filterViewModel.getAvailability()
+                            )
                         )
                     )
-                )
 
-                finish()
+                    finish()
+                } catch (filterDurationException: FilterDurationException) {
+                    root.showSnackbar(getString(R.string.interval_too_short))
+                } catch (filterDateException: FilterDateException) {
+                    root.showSnackbar(getString(R.string.filter_date_exception))
+                }
             }
 
             locationViewModel.apply {

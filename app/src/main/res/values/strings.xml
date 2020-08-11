@@ -119,4 +119,6 @@
     <string name="timepicker_exception">TIMEPICKER</string>
     <string name="timepicker_exception2">TIMEPICKER2</string>
     <string name="dashed_separator">dashed separator</string>
+    <string name="interval_too_short">Interval must be at least 30 minutes long</string>
+    <string name="filter_date_exception">Date should be in the future</string>
 </resources>
