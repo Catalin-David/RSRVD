@@ -13,9 +13,11 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.shared.Facilities
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
+import com.halcyonmobile.rsrvd.venuedetails.FacilityView
 import java.text.SimpleDateFormat
 import java.util.*
 import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
@@ -26,6 +28,11 @@ fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
     data?.map {
         addView(InterestView(context, checkable).apply { setInterest(it.name) })
     }
+}
+
+@BindingAdapter("facilities")
+fun FlexboxLayout.facilities(facilities: List<Facilities>?) {
+    facilities?.map { addView(FacilityView(context).apply { setFacility(it) }) }
 }
 
 @BindingAdapter("visible")

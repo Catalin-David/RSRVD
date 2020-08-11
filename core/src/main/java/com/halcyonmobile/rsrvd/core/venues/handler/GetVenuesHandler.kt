@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.venues
+package com.halcyonmobile.rsrvd.core.venues.handler
 
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 import retrofit2.Call

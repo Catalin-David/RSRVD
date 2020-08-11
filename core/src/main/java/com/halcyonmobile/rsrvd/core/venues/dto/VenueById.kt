@@ -1,7 +1,6 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
 import android.os.Parcelable
-import com.halcyonmobile.rsrvd.core.activity.ActivitiesDto
 import com.halcyonmobile.rsrvd.core.shared.Facilities
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.squareup.moshi.Json

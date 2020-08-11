@@ -21,5 +21,5 @@ data class Open(
     @Json(name = "5")
     val dayFive: StartEndHours,
     @Json(name = "6")
-    val daySix: DailyOpenHours
+    val daySix: StartEndHours
 ) :Parcelable

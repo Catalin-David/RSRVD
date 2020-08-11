@@ -1,6 +1,7 @@
-package com.halcyonmobile.rsrvd.core.activity
+package com.halcyonmobile.rsrvd.core.venues.dto
 
 import android.os.Parcelable
+import com.halcyonmobile.rsrvd.core.shared.dto.PriceDto
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize

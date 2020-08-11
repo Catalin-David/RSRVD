@@ -1,8 +1,10 @@
 package com.halcyonmobile.rsrvd.core.reservation.dto
 
+import com.halcyonmobile.rsrvd.core.shared.dto.PriceDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+
 
 @JsonClass(generateAdapter = true)
 data class ActivityDto(
