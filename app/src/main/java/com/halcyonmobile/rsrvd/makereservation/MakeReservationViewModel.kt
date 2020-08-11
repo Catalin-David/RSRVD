@@ -3,6 +3,7 @@ package com.halcyonmobile.rsrvd.makereservation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.halcyonmobile.rsrvd.core.reservation.ReservationRepository
 
 class MakeReservationViewModel : ViewModel() {
     private val _hourCards: MutableLiveData<List<HourUiModel>> = MutableLiveData()
@@ -26,9 +27,18 @@ class MakeReservationViewModel : ViewModel() {
         }
     }
 
+    fun makeReservation(
+        id: String,
+        start: String,
+        end: String,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit) {
+        ReservationRepository.createReservation(id, start, end, onSuccess, onFailure)
+    }
+
     companion object {
         private val listHours = listOf(
-            HourUiModel("1 H", isSelected = false),
+            HourUiModel("1 H", isSelected = true),
             HourUiModel("1:30 H", isSelected = false),
             HourUiModel("2 H", isSelected = false),
             HourUiModel("2:30 H", isSelected = false),

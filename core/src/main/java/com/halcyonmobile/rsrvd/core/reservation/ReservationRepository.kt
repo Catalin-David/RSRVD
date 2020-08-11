@@ -1,14 +1,14 @@
 package com.halcyonmobile.rsrvd.core.reservation
 
-class ReservationRepository {
+object ReservationRepository {
     private val reservationRemoteSource = ReservationRemoteSource()
 
     fun createReservation(
         id: String,
-        star: String,
+        start: String,
         end: String,
         onSuccess: () -> Unit,
         onFailure: () -> Unit) {
-        reservationRemoteSource.createReservation(id, star, end, onSuccess, onFailure)
+        reservationRemoteSource.createReservation(id, start, end, onSuccess, onFailure)
     }
 }
