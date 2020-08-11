@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.net.Uri
 import android.view.View
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.core.view.iterator
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
@@ -16,11 +19,25 @@ import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.core.shared.Location as myLocation
 
-@BindingAdapter(value = ["interests", "checkable"], requireAll = false)
-fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
+@BindingAdapter(value = ["interests", "checkable", "radio"], requireAll = false)
+fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?, radio: Boolean?) {
     removeAllViews()
-    data?.map {
-        addView(InterestView(context, checkable).apply { setInterest(it.name) })
+
+    val listener : (InterestView) -> Unit = {
+        // Remove all selection
+        this.iterator().forEach { child -> (child as InterestView).setChecked(false) }
+        // Select only the clicked one
+        it.setChecked(true)
+    }
+
+    data?.map { interest ->
+        addView(InterestView(context, checkable).apply {
+            setInterest(interest.name)
+
+            if (radio == true) {
+                setListener { listener(it) }
+            }
+        })
     }
 }
 
