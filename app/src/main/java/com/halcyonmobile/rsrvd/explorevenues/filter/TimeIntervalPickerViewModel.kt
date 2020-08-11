@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.explorevenues.filter
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Build
 import android.os.Handler
 import android.util.Log
@@ -30,6 +31,8 @@ class TimeIntervalPickerViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun init(context: Context, startPicker: RecyclerView, finishPicker: RecyclerView) {
+        val offset = Resources.getSystem().displayMetrics.widthPixels / 2
+
         val startPickerAdapter = TimePickerAdapter().apply { submitList(hours) }
         startLayoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
         val startHandler = Handler()
@@ -59,6 +62,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
                 startHandler.removeCallbacks(startRunnable)
                 startHandler.postDelayed(startRunnable, DEBOUNCE_DURATION)
             }
+            setPadding(offset, 0, offset, 0)
         }
 
         val finishPickerAdapter = TimePickerAdapter().apply { submitList(hours) }
@@ -90,6 +94,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
                 finishHandler.removeCallbacks(finishRunnable)
                 finishHandler.postDelayed(finishRunnable, DEBOUNCE_DURATION)
             }
+            setPadding(offset, 0, offset, 0)
         }
 
         scrollToNow()
