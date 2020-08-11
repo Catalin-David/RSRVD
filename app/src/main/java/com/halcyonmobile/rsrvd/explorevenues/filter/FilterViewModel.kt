@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
-import java.util.*
+import java.util.Calendar
 
 class FilterViewModel : ViewModel() {
     private val _activities = MutableLiveData<List<Interests>>()
@@ -15,15 +15,12 @@ class FilterViewModel : ViewModel() {
 
     init {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
         val startHour = calendar.get(Calendar.HOUR_OF_DAY)
         val startMinute = calendar.get(Calendar.MINUTE)
         val finishHour = if (startMinute < 30) startHour else startHour + 1
         val finishMinute = if (startMinute < 30) startMinute + 30 else startMinute
 
-        filterDate = FilterDate(year, month, day)
+        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
     }
 
