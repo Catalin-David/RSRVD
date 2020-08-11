@@ -25,9 +25,12 @@ class LocationViewModel : ViewModel() {
     val interests: LiveData<List<Interests>> = _interests
     val retrieving: LiveData<RetrieveState> = _retrieving
 
-    fun setLocation(newLocation: Location) {
+    fun setLocation(newLocation: Location?, save: Boolean? = null) {
         _location.value = newLocation
-        UserLocalRepository.location = Pair(newLocation.latitude, newLocation.longitude)
+
+        if (save == true && newLocation != null) {
+            UserLocalRepository.location = Pair(newLocation.latitude, newLocation.longitude)
+        }
     }
 
     fun onReadyClick(interests: List<Interests>): Boolean =
@@ -38,8 +41,10 @@ class LocationViewModel : ViewModel() {
                     if (interests.isEmpty()) "No interests" else ""
             false
         } else {
-            UserRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
-            UserLocalRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
+            if (_location.value != null) {
+                UserRepository.update(_location.value!!, ArrayList(interests)) { _updateState.value = it }
+                UserLocalRepository.location = Pair(_location.value!!.latitude, _location.value!!.longitude)
+            }
             true
         }
 
@@ -47,11 +52,11 @@ class LocationViewModel : ViewModel() {
         UserRepository.get {
             _interests.value = it?.interests
             _location.value = it?.location
-            if (it?.location?.latitude != null) {
-                UserLocalRepository.location = Pair(it.location.latitude, it.location.longitude)
-            }
-
             _retrieving.value = RetrieveState.POST
         }
+    }
+
+    fun clearLocation() {
+        _location.value = null
     }
 }

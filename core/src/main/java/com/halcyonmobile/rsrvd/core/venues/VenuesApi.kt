@@ -1,6 +1,6 @@
 package com.halcyonmobile.rsrvd.core.venues
 
-import com.halcyonmobile.rsrvd.core.venues.dto.SearchVenueBodyDto
+import com.halcyonmobile.rsrvd.core.venues.dto.FilterDto
 import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import retrofit2.Call
@@ -17,7 +17,7 @@ internal interface VenuesApi {
     fun getExploreVenues(): Call<List<Venue>>
 
     @POST("venues/search")
-    fun search(@Body body: SearchVenueBodyDto): Call<List<Venue>>
+    fun filterVenues(@Body body: FilterDto): Call<List<Venue>>
 
     @GET("venues/{venueId}")
     fun getVenueById(@Path("venueId") venueId: String): Call<VenueById>

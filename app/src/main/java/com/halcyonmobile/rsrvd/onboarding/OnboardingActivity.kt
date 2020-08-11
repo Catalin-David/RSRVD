@@ -21,10 +21,9 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var viewModel: LocationViewModel
 
-    private val locationProvider: LocationProvider =
-        LocationProvider(this) {
-            viewModel.setLocation(it)
-        }
+    private val locationProvider: LocationProvider = LocationProvider(this) {
+        viewModel.setLocation(newLocation = it, save = true)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,24 +36,18 @@ class OnboardingActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.apply {
-            updateState.observe(this@OnboardingActivity) {
-                binding.root.showSnackbar(if (it) "Updated" else "Failed").show()
-            }
+            updateState.observe(this@OnboardingActivity) { binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed)) }
+            errorMessage.observe(this@OnboardingActivity) { binding.root.showSnackbar(it) }
 
-            errorMessage.observe(this@OnboardingActivity) {
-                binding.root.showSnackbar(it).show()
-            }
-
-            interests.observe(this@OnboardingActivity) {
-                markInterests()
-            }
+            interests.observe(this@OnboardingActivity) { markInterests() }
 
             retrieving.observe(this@OnboardingActivity) {
                 when (it) {
                     RetrieveState.PRE -> binding.mapsText.text = getString(R.string.loading)
                     RetrieveState.POST ->
-                        if (viewModel.location.value != null) binding.mapsText.text = viewModel.location.value!!.name
-                        else {
+                        if (viewModel.location.value != null) {
+                            binding.mapsText.text = viewModel.location.value!!.name
+                        } else {
                             binding.mapsText.text = getString(R.string.pick_location)
                             locationProvider.init()
                         }
@@ -65,6 +58,8 @@ class OnboardingActivity : AppCompatActivity() {
         binding.apply {
             dataMap = Interests.values().toMutableList()
 
+            mapsIcon.setOnClickListener { locationProvider.init() }
+
             locationSelector.setOnClickListener {
                 startActivityForResult(
                     Intent(this@OnboardingActivity, SelectLocationActivity::class.java),
@@ -72,7 +67,7 @@ class OnboardingActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@OnboardingActivity,
                         binding.locationSelector,
-                        "search_trans"
+                        "search_bar_transition"
                     ).toBundle()
                 )
             }
@@ -89,7 +84,9 @@ class OnboardingActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SELECT_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            data.getParcelableExtra<Location>("location")?.let { viewModel.setLocation(it) }
+            data.getParcelableExtra<Location>(SelectLocationActivity.LOCATION)?.let {
+                viewModel.setLocation(newLocation = it, save = true)
+            }
         }
     }
 

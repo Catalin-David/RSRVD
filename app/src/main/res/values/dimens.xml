@@ -33,6 +33,9 @@
     <dimen name="picture_title_offset_small">220dp</dimen>
     <dimen name="margin_big">56dp</dimen>
     <dimen name="default_card_margin">40</dimen>
+
+    <dimen name="reservation_list_image_width">96dp</dimen>
+    <dimen name="reservation_list_image_height">56dp</dimen>
     <dimen name="reservation_image_top_margin">52dp</dimen>
     <dimen name="width_of_confirmed_message">300dp</dimen>
 </resources>

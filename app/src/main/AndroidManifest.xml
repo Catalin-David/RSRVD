@@ -68,6 +68,8 @@
             android:name=".signin.SignInActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".explorevenues.filter.FilterActivity"/>
+
         <activity
             android:name=".makereservation.MakeReservationActivity"
             android:screenOrientation="portrait"/>

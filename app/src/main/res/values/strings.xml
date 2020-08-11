@@ -50,6 +50,13 @@
     <string name="account">account</string>
     <string name="create">create</string>
     <string name="running">running</string>
+    <string name="cancel_filtering">cancel filtering</string>
+    <string name="date">date</string>
+    <string name="refine_results">refine results</string>
+    <string name="see_results">see results</string>
+    <string name="_12_august_2019">12 August, 2019</string>
+    <string name="yellow_shapes">yellow shapes</string>
+    <string name="clear_filters">clear filters</string>
     <string name="search_results">search results</string>
     <string name="no_results">no results</string>
     <string name="don_t_give_up">don\'t give up, just try again.</string>
@@ -68,7 +75,9 @@
     <string name="profile_picture">Logged in user profile picture</string>
     <string name="art">art</string>
     <string name="edit_icon">edit icon</string>
-
+    <string name="no_filters">No filter applied!</string>
+    <string name="updated">Updated</string>
+    <string name="failed">Failed</string>
     <string name="venue_details_image">Venue Details Image</string>
     <string name="venue_name">venue name</string>
     <string name="make_a_reservation">make a reservation</string>
@@ -105,6 +114,31 @@
     <string name="sun">SUN</string>
     <string name="am">AM</string>
     <string name="pm">PM</string>
+
+    <string name="tabname_upcoming">UPCOMING</string>
+    <string name="tabname_history">HISTORY</string>
+
+    <string name="reservation_date_format">%1$d %2$s, %3$d</string>
+    <string name="reservation_hour_format">%1$s:%2$s %3$s</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
+    <string name="double_digit_format">0%1$d</string>
     <string name="reservation_image">reservation image</string>
     <string name="make_a_reservation_newline">make a \nreservation</string>
     <string name="venue_name_reservation">venue name reservation</string>

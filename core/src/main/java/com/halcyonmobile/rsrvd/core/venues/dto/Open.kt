@@ -9,17 +9,17 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class Open(
     @Json(name = "0")
-    val dayZero: DailyOpenHours,
+    val dayZero: StartEndHours,
     @Json(name = "1")
-    val dayOne: DailyOpenHours,
+    val dayOne: StartEndHours,
     @Json(name = "2")
-    val dayTwo: DailyOpenHours,
+    val dayTwo: StartEndHours,
     @Json(name = "3")
-    val dayThree: DailyOpenHours,
+    val dayThree: StartEndHours,
     @Json(name = "4")
-    val dayFour: DailyOpenHours,
+    val dayFour: StartEndHours,
     @Json(name = "5")
-    val dayFive: DailyOpenHours,
+    val dayFive: StartEndHours,
     @Json(name = "6")
     val daySix: DailyOpenHours
 ) :Parcelable

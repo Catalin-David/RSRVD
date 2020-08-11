@@ -12,20 +12,26 @@ class MarginDecorator(
     private val left: Boolean? = false
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        val margin: Int = view.context.resources.getDimensionPixelSize(R.dimen.default_padding)
+        val marginDefault: Int = view.context.resources.getDimensionPixelSize(R.dimen.default_padding)
+        val marginLong = view.context.resources.getDimensionPixelSize(R.dimen.long_padding)
 
         with(outRect) {
             if (this@MarginDecorator.top == true) {
-                this.top = margin
+                this.top = marginDefault
             }
             if (this@MarginDecorator.right == true) {
-                this.right = margin
+                this.right = marginDefault
+
+                // List expands to the right --> first item is indented
+                if (parent.childCount == 1) {
+                    this.left = marginLong
+                }
             }
             if (this@MarginDecorator.bottom == true) {
-                this.bottom = margin
+                this.bottom = marginDefault
             }
             if (this@MarginDecorator.left == true) {
-                this.left = margin
+                this.left = marginDefault
             }
         }
     }

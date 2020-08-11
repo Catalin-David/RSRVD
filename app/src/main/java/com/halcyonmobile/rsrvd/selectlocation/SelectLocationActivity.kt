@@ -42,7 +42,7 @@ class SelectLocationActivity : AppCompatActivity() {
                             placeId = response.place.id
                         )
 
-                        setResult(Activity.RESULT_OK, Intent().putExtra(EXTRA_LOCATION, locationDetailed))
+                        setResult(Activity.RESULT_OK, Intent().putExtra(LOCATION, locationDetailed))
                     }
                 }
                 .addOnFailureListener { println("SOMETHING WENT WRONG ___ DETAILS") }
@@ -138,6 +138,6 @@ class SelectLocationActivity : AppCompatActivity() {
 
     companion object {
         private const val API_KEY = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
-        private const val EXTRA_LOCATION = "location"
+        const val LOCATION = "location"
     }
 }

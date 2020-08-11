@@ -7,9 +7,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class DailyOpenHours(
-    @Json(name = "start")
-    val start: Float,
-    @Json(name = "end")
-    val end: Float
-): Parcelable
+data class FilterLocation(
+    @Json(name = "latitude")
+    val latitude: Double,
+    @Json(name = "longitude")
+    val longitude: Double,
+    @Json(name = "radius")
+    val radius: Double
+) : Parcelable
