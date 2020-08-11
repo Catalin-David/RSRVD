@@ -115,6 +115,9 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
 
+    <string name="tabname_upcoming">UPCOMING</string>
+    <string name="tabname_history">HISTORY</string>
+
     <string name="reservation_date_format">%1$d %2$s, %3$d</string>
     <string name="reservation_hour_format">%1$s:%2$s %3$s</string>
 
@@ -132,9 +135,8 @@
         <item>November</item>
         <item>December</item>
     </string-array>
-    <string name="double_digit_format">0%1$d</string>
 
-    <string name="reservation_details">"reservation\ndetails"</string>
-    <string name="time">time</string>
-    <string name="cancel_reservation">cancel reservation</string>
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
+    <string name="double_digit_format">0%1$d</string>
 </resources>
