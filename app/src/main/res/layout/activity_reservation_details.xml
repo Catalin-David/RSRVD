@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".reservationdetails.ReservationDetailsActivity">
+        tools:context=".reservationdetails.activity.ReservationDetailsActivity">
 
         <ImageView
             android:layout_width="0dp"
@@ -192,6 +192,7 @@
             android:textAppearance="?attr/textAppearanceSubtitle1"/>
 
         <Button
+            android:id="@+id/button_cancel_reservation"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_btn_connect_signin"
             app:layout_constraintStart_toStartOf="@id/reservation_details_date"

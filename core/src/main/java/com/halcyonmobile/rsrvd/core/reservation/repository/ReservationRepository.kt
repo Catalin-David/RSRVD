@@ -14,7 +14,7 @@ object ReservationRepository {
     private val remoteSource = ReservationRemoteSource()
 
     fun getReservations(updateState: (List<ReservationDto>?) -> Unit) = remoteSource.get(updateState)
-
+    fun getReservationWithId(id: String, updateState: (ReservationDto?) -> Unit) = remoteSource.getWithId(id, updateState)
 
     fun loadDefaultReservations(updateState: (List<ReservationDto>?) -> Unit) {
         val venue = Venue(
