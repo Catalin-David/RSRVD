@@ -60,6 +60,7 @@ class MakeReservationActivity : AppCompatActivity() {
                 end,
                 onSuccess = {
                     startActivity(Intent(this, ReservationSentActivity::class.java))
+                    finish()
             },
                 onFailure = {
                     binding.root.showSnackbar(getString(R.string.something_went_wrong))

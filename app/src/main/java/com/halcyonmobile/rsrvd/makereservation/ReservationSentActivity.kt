@@ -14,8 +14,7 @@ class ReservationSentActivity: AppCompatActivity() {
         setContentView(R.layout.activity_reservation_sent)
 
         Handler().postDelayed({
-            startActivity(Intent(this,MainActivity::class.java))
-
+            startActivity(MainActivity.instanceAfterReservation(this, "ok"))
             finish()
         }, SPLASH_TIME_OUT)
     }

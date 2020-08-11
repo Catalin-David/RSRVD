@@ -1,5 +1,7 @@
 package com.halcyonmobile.rsrvd
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,6 +13,7 @@ import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
 import com.halcyonmobile.rsrvd.signin.SignInActivity
+import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +45,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        openFragment(ExploreFragment(), supportFragmentManager)
+
+        val message : String? = intent.getStringExtra(EXTRA_MESSAGE)
+        if (message == "ok")
+            openFragment(ReservationFragment(), supportFragmentManager)
+        else
+            openFragment(ExploreFragment(), supportFragmentManager)
     }
 
     private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null) {
@@ -52,4 +60,17 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
+
+    companion object {
+        private const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
+
+        fun instanceAfterReservation(context: Context, message: String): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra(EXTRA_MESSAGE, message)
+
+            return intent
+        }
+    }
+
 }
