@@ -1,10 +1,14 @@
 package com.halcyonmobile.rsrvd.reservationdetails.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.databinding.ActivityReservationDetailsBinding
+import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.LIST_HAS_CHANGED
+import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.NO_CHANGES
+import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.RESERVATION_ID_KEY
 import com.halcyonmobile.rsrvd.reservationdetails.viewmodel.ReservationDetailsViewModel
 
 class ReservationDetailsActivity : AppCompatActivity() {
@@ -17,21 +21,24 @@ class ReservationDetailsActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(ReservationDetailsViewModel::class.java)
 
-        intent.getStringExtra(RESERVATION_ID_KEY)?.let {
+        val reservationId = intent.getStringExtra(RESERVATION_ID_KEY)
+        reservationId?.let {
             viewModel.loadReservation(it)
         }
 
         viewModel.apply {
-            reservation.observe(this@ReservationDetailsActivity){binding.reservation = it}
+            reservation.observe(this@ReservationDetailsActivity) { binding.reservation = it }
         }
 
         binding.buttonCancelReservation.setOnClickListener {
-            // make api request
-            finish()
+            if (null != reservationId) {
+                viewModel.cancelReservation(reservationId)
+                setResult(LIST_HAS_CHANGED, Intent())
+                finish()
+            } else {
+                setResult(NO_CHANGES, Intent())
+                finish()
+            }
         }
-    }
-
-    companion object{
-        const val RESERVATION_ID_KEY = "com.halcyonmobile.rsrvd.RESERVATION_ID_KEY"
     }
 }

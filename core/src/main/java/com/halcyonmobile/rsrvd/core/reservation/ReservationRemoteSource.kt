@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.core.reservation
 
 import com.halcyonmobile.rsrvd.core.reservation.api.ReservationApi
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
+import com.halcyonmobile.rsrvd.core.reservation.handlers.CancelReservationHandler
 import com.halcyonmobile.rsrvd.core.reservation.handlers.GetReservationByIdHandler
 import com.halcyonmobile.rsrvd.core.reservation.handlers.GetReservationsHandler
 import com.halcyonmobile.rsrvd.core.shared.RetrofitManager
@@ -16,4 +17,6 @@ class ReservationRemoteSource {
     )
 
     fun getWithId(id: String, updateState: (ReservationDto?) -> Unit) = reservationApi.getWithId(id).enqueue(GetReservationByIdHandler(updateState))
+
+    fun cancelReservationWithId(id: String) = reservationApi.cancelReservationWithId(id).enqueue(CancelReservationHandler())
 }
