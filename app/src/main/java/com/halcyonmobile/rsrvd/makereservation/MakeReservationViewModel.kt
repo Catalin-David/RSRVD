@@ -19,12 +19,11 @@ class MakeReservationViewModel : ViewModel() {
         }
     }
 
-    fun resetPosition(position: Int) {
-        listHours.let {
-            _hourCards.value = it
+    fun resetPosition(position: HourUiModel) {
+        _hourCards.value = _hourCards.value?.mapIndexed { _, hourUiModel ->
+            if(hourUiModel == position) hourUiModel.copy(isSelected = true)
+            else hourUiModel.copy(isSelected = false)
         }
-
-        _hourCards.value?.get(position)?.isSelected = true
     }
 
     companion object {

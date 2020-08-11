@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.databinding.HourItemBinding
 
 class HourCardsAdapter(
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (HourUiModel) -> Unit
 ) : ListAdapter<HourUiModel, HourCardsAdapter.HourCardViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourCardViewHolder =
@@ -20,13 +20,12 @@ class HourCardsAdapter(
     override fun onBindViewHolder(holder: HourCardViewHolder, position: Int) {
         holder.apply {
             holder.bind(getItem(position))
-            itemView.setOnClickListener { onItemClick(position) }
         }
     }
 
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<HourUiModel> = object : DiffUtil.ItemCallback<HourUiModel>() {
-            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem.isSelected == newItem.isSelected
+            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem == newItem
             override fun areContentsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem == newItem
         }
     }
@@ -38,7 +37,7 @@ class HourCardsAdapter(
             binding.hourRadioButton.text = item.hour
             binding.hourRadioButton.isChecked = item.isSelected
 
-
+            binding.hourRadioButton.setOnClickListener { onItemClick(item) }
         }
     }
 

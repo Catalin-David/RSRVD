@@ -1,6 +1,9 @@
 package com.halcyonmobile.rsrvd.makereservation
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -23,9 +26,10 @@ class MakeReservationActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
 
-        val hourCardsAdapter = HourCardsAdapter { position ->
-            viewModel.resetPosition(position)
-        }
+        val hourCardsAdapter = HourCardsAdapter(onItemClick = {
+            Log.d(ContentValues.TAG, "$it hey")
+            viewModel.resetPosition(it)
+        })
 
         setUpObservers(hourCardsAdapter)
         setUpLists(hourCardsAdapter)
