@@ -115,8 +115,8 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
     <string name="filter_date">%d %s, %d</string>
-    <string name="divider">-------------------------------------------------------------------------------------------------------------</string>
     <string name="time">%s:%s %s</string>
     <string name="timepicker_exception">TIMEPICKER</string>
+    <string name="timepicker_exception2">TIMEPICKER2</string>
     <string name="dashed_separator">dashed separator</string>
 </resources>

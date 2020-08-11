@@ -11,6 +11,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
@@ -41,11 +42,7 @@ class FilterActivity : AppCompatActivity() {
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
         timeIntervalPickerViewModel = ViewModelProviders.of(this).get(TimeIntervalPickerViewModel::class.java)
 
-        timeIntervalPickerViewModel.apply {
-            init(this@FilterActivity, binding.intervalPicker.startPicker, binding.intervalPicker.finishPicker)
-            start.observe(this@FilterActivity) { filterViewModel.setStart(it) }
-            end.observe(this@FilterActivity) { filterViewModel.setFinish(it) }
-        }
+        setUpTimeIntervalPickerViewModel()
 
         binding.apply {
             dataMap = Interests.values().toMutableList()
@@ -125,6 +122,21 @@ class FilterActivity : AppCompatActivity() {
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setUpTimeIntervalPickerViewModel() =
+        timeIntervalPickerViewModel.apply {
+            init(
+                startPicker = binding.intervalPicker.startPicker,
+                finishPicker = binding.intervalPicker.finishPicker,
+                startLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
+                finishLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
+                startPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) },
+                finishPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) }
+            )
+            start.observe(this@FilterActivity) { filterViewModel.setStart(it) }
+            end.observe(this@FilterActivity) { filterViewModel.setFinish(it) }
+        }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

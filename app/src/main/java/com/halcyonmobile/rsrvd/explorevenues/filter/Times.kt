@@ -15,4 +15,6 @@ object Times {
         "November",
         "December"
     )
+
+    val hours = (0 until 2400 step 50).toList()
 }
