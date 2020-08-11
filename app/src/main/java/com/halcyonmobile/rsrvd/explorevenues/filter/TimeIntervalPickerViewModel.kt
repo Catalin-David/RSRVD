@@ -9,9 +9,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.bekawestberg.loopinglayout.library.LoopingLayoutManager
-import com.bekawestberg.loopinglayout.library.LoopingSnapHelper
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.explorevenues.MarginDecorator
 import java.lang.Exception
@@ -24,7 +23,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
     private lateinit var startLayoutManager: LinearLayoutManager
     private lateinit var finishLayoutManager: LinearLayoutManager
 
-    private val hours = (0 until 2400 step 50).toList()
+    private val hours = (0 until 2400 step 50).toMutableList()
 
     val start: LiveData<Int> = _start
     val end: LiveData<Int> = _end
@@ -32,7 +31,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun init(context: Context, startPicker: RecyclerView, finishPicker: RecyclerView) {
         val startPickerAdapter = TimePickerAdapter().apply { submitList(hours) }
-        startLayoutManager = LinearLayoutManager(context).apply { orientation = LoopingLayoutManager.HORIZONTAL }
+        startLayoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
         val startHandler = Handler()
         val startRunnable = Runnable {
             val index = (startLayoutManager.findFirstVisibleItemPosition() + startLayoutManager.findLastVisibleItemPosition()) / 2
@@ -55,7 +54,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
             layoutManager = startLayoutManager
             adapter = startPickerAdapter
             addItemDecoration(MarginDecorator(right = true))
-            LoopingSnapHelper().attachToRecyclerView(this)
+            LinearSnapHelper().attachToRecyclerView(this)
             setOnScrollChangeListener { _, _, _, _, _ ->
                 startHandler.removeCallbacks(startRunnable)
                 startHandler.postDelayed(startRunnable, DEBOUNCE_DURATION)
@@ -63,7 +62,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
         }
 
         val finishPickerAdapter = TimePickerAdapter().apply { submitList(hours) }
-        finishLayoutManager = LinearLayoutManager(context).apply { orientation = LoopingLayoutManager.HORIZONTAL }
+        finishLayoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
         val finishHandler = Handler()
         val finishRunnable = Runnable {
             val index = (finishLayoutManager.findFirstVisibleItemPosition() + finishLayoutManager.findLastVisibleItemPosition()) / 2
@@ -86,7 +85,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
             layoutManager = finishLayoutManager
             adapter = finishPickerAdapter
             addItemDecoration(MarginDecorator(right = true))
-            LoopingSnapHelper().attachToRecyclerView(this)
+            LinearSnapHelper().attachToRecyclerView(this)
             setOnScrollChangeListener { _, _, _, _, _ ->
                 finishHandler.removeCallbacks(finishRunnable)
                 finishHandler.postDelayed(finishRunnable, DEBOUNCE_DURATION)
@@ -94,6 +93,10 @@ class TimeIntervalPickerViewModel : ViewModel() {
         }
 
         scrollToNow()
+
+        // Trigger snap helper, after automated scrolling to current position
+        startPicker.smoothScrollBy(1, 0)
+        finishPicker.smoothScrollBy(1, 0)
     }
 
     private fun scrollToNow() {

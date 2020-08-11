@@ -17,6 +17,17 @@ class TimePickerAdapter : ListAdapter<Int, TimePickerAdapter.TimeStepViewHolder>
 
     override fun onBindViewHolder(holder: TimeStepViewHolder, position: Int) = holder.bind(getItem(position % currentList.size))
 
+    override fun submitList(list: MutableList<Int>?) {
+        val adaptedList = ArrayList<Int>()
+        adaptedList.add(-1)
+        adaptedList.add(-1)
+        list?.map { adaptedList.add(it) }
+        adaptedList.add(-1)
+        adaptedList.add(-1)
+
+        super.submitList(adaptedList)
+    }
+
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Int>() {
             override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean = oldItem == newItem
@@ -26,15 +37,19 @@ class TimePickerAdapter : ListAdapter<Int, TimePickerAdapter.TimeStepViewHolder>
 
     inner class TimeStepViewHolder(private val binding: TimeStepBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Int) {
-            val hour = (item / 100 % 12)
-            val minute = ((item % 100) * 60 / 100)
+            if (item == -1) {
+                binding.step.text = "                "
+            } else {
+                val hour = (item / 100 % 12)
+                val minute = ((item % 100) * 60 / 100)
 
-            binding.step.text = binding.root.context.getString(
-                R.string.time,
-                if (hour < 10) "0$hour" else hour,
-                if (minute < 10) "0$minute" else minute,
-                if (item / 100 < 12) "AM" else "PM"
-            )
+                binding.step.text = binding.root.context.getString(
+                    R.string.time,
+                    if (hour < 10) "0$hour" else hour,
+                    if (minute < 10) "0$minute" else minute,
+                    if (item / 100 < 12) "AM" else "PM"
+                )
+            }
         }
 
         fun select() = binding.step.setTextColor(WHITE)

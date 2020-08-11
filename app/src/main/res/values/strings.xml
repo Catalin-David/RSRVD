@@ -118,4 +118,5 @@
     <string name="divider">-------------------------------------------------------------------------------------------------------------</string>
     <string name="time">%s:%s %s</string>
     <string name="timepicker_exception">TIMEPICKER</string>
+    <string name="dashed_separator">dashed separator</string>
 </resources>
