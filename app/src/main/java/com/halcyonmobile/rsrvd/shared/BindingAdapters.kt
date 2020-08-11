@@ -27,6 +27,12 @@ fun FlexboxLayout.interests(data: List<Interests>?, checkable: Boolean?) {
     }
 }
 
+@BindingAdapter("interest")
+fun FlexboxLayout.interest(interest: String, checkable: Boolean?){
+    removeAllViews()
+    addView(InterestView(context, checkable).apply { setInterest(interest) })
+}
+
 @BindingAdapter("visible")
 fun View.visible(visibility: Boolean) {
     isVisible = visibility

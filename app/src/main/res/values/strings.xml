@@ -134,4 +134,7 @@
     </string-array>
     <string name="double_digit_format">0%1$d</string>
 
+    <string name="reservation_details">"reservation\ndetails"</string>
+    <string name="time">time</string>
+    <string name="cancel_reservation">cancel reservation</string>
 </resources>
