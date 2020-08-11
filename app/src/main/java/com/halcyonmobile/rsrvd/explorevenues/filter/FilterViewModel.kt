@@ -40,8 +40,14 @@ class FilterViewModel : ViewModel() {
         filterTime = FilterTime(filterTime.startHour, filterTime.startMinute, hour, minute)
     }
 
-    private fun checkTime() = filterTime.finishHour > filterTime.startHour ||
-            (filterTime.finishHour == filterTime.startHour && filterTime.finishMinute > filterTime.startMinute)
+    private fun checkTime(): Boolean {
+        val now = Calendar.getInstance()
+
+        return (filterTime.finishHour > filterTime.startHour ||
+                (filterTime.finishHour == filterTime.startHour && filterTime.finishMinute > filterTime.startMinute)) &&
+                (filterTime.startHour > (now.get(Calendar.HOUR_OF_DAY)) ||
+                        ((now.get(Calendar.HOUR_OF_DAY) == filterTime.startHour) && (filterTime.startMinute > now.get(Calendar.MINUTE))))
+    }
 
     private fun checkDate(): Boolean {
         val now = Calendar.getInstance()
