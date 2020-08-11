@@ -1,11 +1,14 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
+import android.os.Parcelable
 import com.halcyonmobile.rsrvd.core.activity.ActivitiesDto
 import com.halcyonmobile.rsrvd.core.shared.Facilities
 import com.halcyonmobile.rsrvd.core.shared.Location
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class VenueById (
     @Json(name = "id")
@@ -24,4 +27,4 @@ data class VenueById (
     val facilities: List<Facilities>,
     @Json(name = "activities")
     val activities: List<ActivitiesDto>
-)
+) : Parcelable

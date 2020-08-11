@@ -1,8 +1,10 @@
 package com.halcyonmobile.rsrvd.venuedetails
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
 
@@ -29,8 +32,10 @@ class VenueDetailActivity : AppCompatActivity() {
 
         venueBinding = DataBindingUtil.setContentView(this, R.layout.activity_venue_details)
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
+        var venueById: VenueById? = null
 
         viewModel.getVenue(venueId) {
+            venueById = it
             Glide
                 .with(this)
                 .load(it.image)
@@ -43,8 +48,13 @@ class VenueDetailActivity : AppCompatActivity() {
         venueBinding.arrowBack.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
         venueBinding.makeReservationButton.setOnClickListener {
-            startActivity(Intent(this, MakeReservationActivity::class.java))
+            startActivity(venueById?.let { it1 ->
+                MakeReservationActivity.getStartIntent(this,
+                    it1
+                )
+            })
         }
 
         initTabLayout(venueId)
@@ -71,5 +81,4 @@ class VenueDetailActivity : AppCompatActivity() {
         fun getStartIntent(context: Context, venueId: String) =
             Intent(context, VenueDetailActivity::class.java).putExtra(REQUEST_VENUE_ID, venueId)
     }
-
 }

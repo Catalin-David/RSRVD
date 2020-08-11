@@ -1,8 +1,11 @@
 package com.halcyonmobile.rsrvd.core.activity
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class ActivitiesDto (
     @Json(name = "id")
@@ -13,4 +16,4 @@ data class ActivitiesDto (
     val max: Int,
     @Json(name = "price")
     val price: PriceDto
-)
+): Parcelable
