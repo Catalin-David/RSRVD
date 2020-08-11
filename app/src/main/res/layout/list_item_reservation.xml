@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reservation"
+            type="com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingTop="@dimen/long_padding"
+        android:paddingEnd="0dp">
+
+        <ImageView
+            android:id="@+id/image_view_reservation_list_item"
+            android:layout_width="@dimen/reservation_list_image_width"
+            android:layout_height="@dimen/reservation_list_image_height"
+            app:imageUrlString="@{reservation.venue.image}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding"
+            android:text="@{reservation.venue.name}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_reservation_activity"
+            app:layout_constraintStart_toEndOf="@id/image_view_reservation_list_item"
+            app:layout_constraintTop_toTopOf="@id/image_view_reservation_list_item"
+            tools:text="Baza sportiva Gheorgheni" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{reservation.activity.name}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_reservation_list_item"
+            app:layout_constraintStart_toStartOf="@id/text_view_reservation_location"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_reservation_location"
+            tools:text="Running" />
+
+        <ImageButton
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:backgroundTint="@color/dark_gray"
+            android:clickable="false"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:src="@drawable/ic_status"
+            android:tint="@color/primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_reservation_list_item" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{reservation.state.toString()}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/status_image"
+            app:layout_constraintEnd_toEndOf="@id/status_image"
+            app:layout_constraintStart_toStartOf="@id/status_image"
+            app:layout_constraintTop_toTopOf="@id/status_image"
+            tools:text="Completed" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toBottomOf="@id/status_image"
+            app:layout_constraintStart_toStartOf="@id/image_view_reservation_list_item"
+            app:layout_constraintTop_toTopOf="@id/status_image"
+            app:reservationDate="@{reservation.date}"
+            tools:text="12 may, 2019" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_hour_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toEndOf="@id/text_view_reservation_date"
+            app:layout_constraintTop_toTopOf="@id/text_view_reservation_date"
+            app:reservationHour="@{reservation.date}"
+            tools:text="04:00 PM" />
+
+        <TextView
+            android:id="@+id/hour_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_reservation_hour_start"
+            app:layout_constraintStart_toEndOf="@id/text_view_reservation_hour_start"
+            app:layout_constraintTop_toTopOf="@id/text_view_reservation_hour_start" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toEndOf="@id/hour_separator"
+            app:layout_constraintTop_toTopOf="@id/text_view_reservation_hour_start"
+            app:reservationHour="@{reservation.endDate}"
+            tools:text="06:00 PM" />
+
+        <FrameLayout
+            android:id="@+id/separator"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
