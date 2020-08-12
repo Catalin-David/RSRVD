@@ -3,6 +3,7 @@ package com.halcyonmobile.rsrvd.onboarding
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
@@ -64,16 +65,9 @@ class OnboardingActivity : AppCompatActivity() {
 
             locationSelector.setOnClickListener {
                 startActivityForResult(
-                    Intent(this@OnboardingActivity, SelectLocationActivity::class.java).putExtra(
-                        SelectLocationActivity.EXTRA_STRING,
-                        locationViewModel?.location?.value?.name
-                    ),
+                    getStartIntent(this@OnboardingActivity, locationViewModel?.location?.value?.name),
                     SELECT_LOCATION_REQUEST_CODE,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@OnboardingActivity,
-                        binding.locationSelector,
-                        "search_bar_transition"
-                    ).toBundle()
+                    getTransition(this@OnboardingActivity, binding.locationSelector)
                 )
             }
 
@@ -117,5 +111,18 @@ class OnboardingActivity : AppCompatActivity() {
 
     companion object {
         private const val SELECT_LOCATION_REQUEST_CODE = 1
+
+        private const val TRANSITION = "search_bar_transition"
+
+        fun getStartIntent(activity: Activity, locationName: String?) = Intent(activity, SelectLocationActivity::class.java).putExtra(
+            SelectLocationActivity.EXTRA_STRING,
+            locationName
+        )
+
+        fun getTransition(activity: Activity, element: View) = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            activity,
+            element,
+            TRANSITION
+        ).toBundle()
     }
 }

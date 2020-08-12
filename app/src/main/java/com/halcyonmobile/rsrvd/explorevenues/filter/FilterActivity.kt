@@ -68,11 +68,7 @@ class FilterActivity : AppCompatActivity() {
                 startActivityForResult(
                     Intent(this@FilterActivity, SelectLocationActivity::class.java),
                     SELECT_LOCATION_REQUEST_CODE,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@FilterActivity,
-                        binding.locationSelector,
-                        "search_bar_transition"
-                    ).toBundle()
+                    getTransition(this@FilterActivity, binding.locationSelector)
                 )
             }
 
@@ -208,7 +204,14 @@ class FilterActivity : AppCompatActivity() {
         const val SELECT_LOCATION_REQUEST_CODE = 1
 
         const val FILTERS = "filters"
+        private const val TRANSITION = "search_bar_transition"
 
         const val RADIUS = 5000.0
+
+        fun getTransition(activity: Activity, element: View) = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            activity,
+            element,
+            TRANSITION
+        ).toBundle()
     }
 }
