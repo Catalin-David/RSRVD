@@ -143,4 +143,7 @@
     <string name="PM">PM</string>
     <string name="double_digit_format">0%1$d</string>
     <string name="back_button">back button</string>
+    <string name="reservation_details">"reservation\ndetails"</string>
+    <string name="reservation_time">time</string>
+    <string name="cancel_reservation">cancel reservation</string>
 </resources>

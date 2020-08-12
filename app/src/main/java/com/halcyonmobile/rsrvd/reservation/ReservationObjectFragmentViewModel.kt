@@ -38,14 +38,9 @@ class ReservationObjectFragmentViewModel : ViewModel() {
     }
 
     fun loadReservations() =
-//        ReservationRepository.getReservations {
-//            it?.let {
-//                reservations.value = it
-//            }
-//        }
-//      USE THESE DEFAULT VALUES FOR TESTING AS THERE ARE NO RESERVATIONS ON THE BACKEND RIGHT NOW
-        ReservationRepository.loadDefaultReservations {
-            reservations.value = it ?: emptyList()
+        ReservationRepository.getReservations {
+            it?.let {
+                reservations.value = it
+            }
         }
-
 }
