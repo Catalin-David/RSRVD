@@ -66,6 +66,11 @@ class SelectLocationActivity : AppCompatActivity() {
 
         client = Places.createClient(this)
 
+        intent.getStringExtra(EXTRA_STRING)?.let {
+            binding.searchText.setText(it)
+            setSuggestions(it)
+        }
+
         binding.searchText.apply {
             addTextChangedListener(
                 object : TextWatcher {
@@ -88,7 +93,6 @@ class SelectLocationActivity : AppCompatActivity() {
         binding.clear.setOnClickListener {
             binding.searchText.text.clear()
             adapter.submitList(listOf())
-            binding.emptyPlaceholder.visibility = View.VISIBLE
         }
 
         binding.locationList.apply {
@@ -97,7 +101,12 @@ class SelectLocationActivity : AppCompatActivity() {
             addItemDecoration(Divider(context))
         }
 
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.back.setOnClickListener {
+            this.currentFocus?.let { view ->
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
+            }
+            supportFinishAfterTransition()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -130,7 +139,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
             adapter.submitList(predictions)
 
-            binding.emptyPlaceholder.visibility = if (predictions.isNotEmpty()) View.INVISIBLE else View.VISIBLE
+//            binding.emptyPlaceholder.visibility = if (predictions.isNotEmpty()) View.INVISIBLE else View.VISIBLE
         }.addOnFailureListener {
             Log.d("autocompletion error", "error")
         }
@@ -139,5 +148,6 @@ class SelectLocationActivity : AppCompatActivity() {
     companion object {
         private const val API_KEY = "AIzaSyASUTwECBS--kaaBj71LFjps6kcGEh9Suo"
         const val LOCATION = "location"
+        const val EXTRA_STRING = "extra_string"
     }
 }

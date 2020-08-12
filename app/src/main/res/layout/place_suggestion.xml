@@ -13,13 +13,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/short_margin">
+        android:layout_marginVertical="@dimen/default_margin">
 
         <TextView
             android:id="@+id/location_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{location.name}"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/location_details"
@@ -33,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{location.details}"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
             android:textColor="#9fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,8 +1,10 @@
 package com.halcyonmobile.rsrvd.editprofile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
@@ -69,13 +71,9 @@ class EditProfileActivity : AppCompatActivity() {
 
             locationSelector.setOnClickListener {
                 startActivityForResult(
-                    Intent(this@EditProfileActivity, SelectLocationActivity::class.java),
+                    getStartIntent(this@EditProfileActivity),
                     SELECT_LOCATION_REQUEST_CODE,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@EditProfileActivity,
-                        binding.locationSelector,
-                        "search_bar_transition"
-                    ).toBundle()
+                    getTransition(this@EditProfileActivity, binding.locationSelector)
                 )
             }
 
@@ -118,5 +116,15 @@ class EditProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val SELECT_LOCATION_REQUEST_CODE = 1
+
+        private const val TRANSITION = "search_bar_transition"
+
+        fun getStartIntent(context: Context) = Intent(context, SelectLocationActivity::class.java)
+
+        fun getTransition(activity: Activity, element: View) = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            activity,
+            element,
+            TRANSITION
+        ).toBundle()
     }
 }

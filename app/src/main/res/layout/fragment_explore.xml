@@ -39,8 +39,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/search_venue_bar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toTopOf="parent"
                 app:viewModel="@{viewModel}" />
 
@@ -50,7 +50,6 @@
                 layout="@layout/search_venue_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/long_margin"
                 app:layout_constraintEnd_toEndOf="@id/right_guideline"
                 app:layout_constraintStart_toStartOf="@id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/header"
@@ -132,7 +131,6 @@
                     layout="@layout/explore"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/cards_height"
-                    android:layout_marginVertical="@dimen/default_margin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/activity_info" />
 
@@ -142,7 +140,7 @@
                     layout="@layout/we_recommend"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/cards_height_short"
-                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginVertical="@dimen/side_guide"
                     app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
                     app:layout_constraintStart_toStartOf="@id/left_guideline_inner"
                     app:layout_constraintTop_toBottomOf="@id/explore" />
@@ -154,11 +152,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/long_margin"
                     android:background="?attr/selectableItemBackground"
                     android:text="@string/read_more"
-                    android:textAppearance="@style/TextAppearance.Body2"
+                    android:textAppearance="@style/TextAppearance.Subtitle1"
                     android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/right_guideline_inner"
                     app:layout_constraintStart_toStartOf="@id/left_guideline_inner"
                     app:layout_constraintTop_toBottomOf="@id/we_recommend" />

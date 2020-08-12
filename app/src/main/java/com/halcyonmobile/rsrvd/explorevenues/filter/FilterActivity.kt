@@ -68,11 +68,7 @@ class FilterActivity : AppCompatActivity() {
                 startActivityForResult(
                     Intent(this@FilterActivity, SelectLocationActivity::class.java),
                     SELECT_LOCATION_REQUEST_CODE,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@FilterActivity,
-                        binding.locationSelector,
-                        "search_bar_transition"
-                    ).toBundle()
+                    getTransition(this@FilterActivity, binding.locationSelector)
                 )
             }
 
@@ -99,7 +95,10 @@ class FilterActivity : AppCompatActivity() {
                 ).show()
             }
 
-            cancel.setOnClickListener { finish() }
+            cancel.setOnClickListener {
+                finish()
+                overridePendingTransition(android.R.anim.fade_in, R.anim.slide_down)
+            }
 
             ready.setOnClickListener {
                 try {
@@ -117,6 +116,7 @@ class FilterActivity : AppCompatActivity() {
                     )
 
                     finish()
+                    overridePendingTransition(android.R.anim.fade_in, R.anim.slide_down)
                 } catch (filterDurationException: FilterDurationException) {
                     root.showSnackbar(getString(R.string.interval_too_short))
                 } catch (filterDateException: FilterDateException) {
@@ -204,7 +204,14 @@ class FilterActivity : AppCompatActivity() {
         const val SELECT_LOCATION_REQUEST_CODE = 1
 
         const val FILTERS = "filters"
+        private const val TRANSITION = "search_bar_transition"
 
         const val RADIUS = 5000.0
+
+        fun getTransition(activity: Activity, element: View) = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            activity,
+            element,
+            TRANSITION
+        ).toBundle()
     }
 }

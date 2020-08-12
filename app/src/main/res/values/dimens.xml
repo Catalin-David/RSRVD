@@ -12,8 +12,8 @@
     <dimen name="height_btn_connect_signin">56dp</dimen>
 
     <dimen name="width_text_view_anim">900dp</dimen>
-    <dimen name="box_line_height">40dp</dimen>
-    <dimen name="side_guide">20dp</dimen>
+    <dimen name="box_line_height">48dp</dimen>
+    <dimen name="side_guide">24dp</dimen>
 
     <dimen name="picture_dimension">160dp</dimen>
     <dimen name="text_on_picture_margin">115dp</dimen>
@@ -29,7 +29,7 @@
     <dimen name="cards_height">280dp</dimen>
     <dimen name="cards_height_short">240dp</dimen>
     <dimen name="picture_small">250dp</dimen>
-    <dimen name="picture_title_offset_small">220dp</dimen>
+    <dimen name="picture_title_offset_small">206dp</dimen>
     <dimen name="margin_big">56dp</dimen>
     <dimen name="default_card_margin">40</dimen>
 

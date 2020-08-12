@@ -10,7 +10,7 @@
             android:id="@+id/recently_visited_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginStart="@dimen/side_guide"
             android:alpha=".25"
             android:text="@string/recently_visited"
             android:textAllCaps="true"
