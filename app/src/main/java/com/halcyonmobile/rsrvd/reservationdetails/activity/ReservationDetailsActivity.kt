@@ -26,19 +26,16 @@ class ReservationDetailsActivity : AppCompatActivity() {
             viewModel.loadReservation(it)
         }
 
-        viewModel.apply {
-            reservation.observe(this@ReservationDetailsActivity) { binding.reservation = it }
-        }
+        viewModel.reservation.observe(this@ReservationDetailsActivity) { binding.reservation = it }
 
         binding.buttonCancelReservation.setOnClickListener {
             if (null != reservationId) {
                 viewModel.cancelReservation(reservationId)
                 setResult(LIST_HAS_CHANGED, Intent())
-                finish()
             } else {
                 setResult(NO_CHANGES, Intent())
-                finish()
             }
+            finish()
         }
     }
 }
