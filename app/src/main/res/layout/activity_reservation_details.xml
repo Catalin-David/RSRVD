@@ -79,7 +79,7 @@
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
             android:src="@drawable/ic_status"
-            app:tint="@{detailsViewModel.cancelDesign ? @color/error : @color/primary}"
+            app:tintByState="@{detailsViewModel.reservation.state}"
             app:layout_constraintBottom_toBottomOf="@id/text_view_reservation_venue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_view_reservation_venue" />

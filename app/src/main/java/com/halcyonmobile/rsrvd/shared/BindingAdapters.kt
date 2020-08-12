@@ -2,17 +2,22 @@ package com.halcyonmobile.rsrvd.shared
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.location.Location
 import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.iterator
+import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.reservation.model.ReservationState
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.onboarding.InterestView
@@ -114,6 +119,13 @@ fun TextView.reservationHour(dateString: String) =
         }
     }
 
+@BindingAdapter("tintByState")
+fun ImageButton.tintByState(state: ReservationState){
+    ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, when(state){
+        ReservationState.CANCELLED -> R.color.error
+        else -> R.color.primary
+    })))
+}
 fun Int.toAmPm(context: Context) = if (this == Calendar.AM) context.resources.getString(R.string.am) else context.resources.getString(R.string.pm)
 
 fun Int.toDoubleDigit(context: Context) = if (this in 0.until(10)) context.resources.getString(R.string.double_digit_format, this) else toString()
