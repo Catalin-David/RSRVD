@@ -126,6 +126,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/right_guideline"/>
 
+            <include
+                android:id="@+id/interval_picker"
+                layout="@layout/time_interval_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/long_margin"
+                app:layout_constraintBottom_toTopOf="@id/send_reservation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+
             <Button
                 android:id="@+id/send_reservation"
                 android:layout_width="0dp"
@@ -139,7 +150,7 @@
                 android:layout_marginEnd="@dimen/long_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view"/>
+                app:layout_constraintTop_toBottomOf="@id/interval_picker"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

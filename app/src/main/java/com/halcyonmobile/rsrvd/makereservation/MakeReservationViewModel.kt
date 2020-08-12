@@ -6,14 +6,28 @@ import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.reservation.ReservationRepository
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.venues.dto.ActivitiesDto
+import com.halcyonmobile.rsrvd.explorevenues.filter.FilterDate
+import com.halcyonmobile.rsrvd.explorevenues.filter.FilterTime
+import java.util.*
 
 class MakeReservationViewModel : ViewModel() {
     private val _hourCards: MutableLiveData<List<HourUiModel>> = MutableLiveData()
+    private val _time: MutableLiveData<FilterTime> = MutableLiveData()
 
     val hourCards: LiveData<List<HourUiModel>> = _hourCards
+    val time: LiveData<FilterTime> = _time
+    private var filterDate: FilterDate
 
     init {
         _hourCards.value = listHours
+        val calendar = Calendar.getInstance()
+        val startHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val startMinute = calendar.get(Calendar.MINUTE)
+        val finishHour = startHour + 1
+
+        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH))
+        _time.value = FilterTime(startHour, startMinute, finishHour, startMinute)
     }
 
     fun setSelected(position: HourUiModel) {
@@ -33,6 +47,18 @@ class MakeReservationViewModel : ViewModel() {
         onSuccess: () -> Unit,
         onFailure: () -> Unit) {
         ReservationRepository.createReservation(id, start, end, onSuccess, onFailure)
+    }
+
+    fun setStart(start: Int) {
+        val hour = start / 100
+        val minute = (start % 100) * 60 / 100
+        _time.value = FilterTime(hour, minute, _time.value!!.finishHour, _time.value!!.finishMinute)
+    }
+
+    fun setFinish(finish: Int) {
+        val hour = finish / 100
+        val minute = (finish % 100) * 60 / 100
+        _time.value = FilterTime(_time.value!!.startHour, _time.value!!.startMinute, hour, minute)
     }
 
     companion object {

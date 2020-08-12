@@ -30,12 +30,12 @@ class TimeIntervalPickerViewModel : ViewModel() {
         finishLayoutManager: LinearLayoutManager,
         startPickerAdapter: TimePickerAdapter,
         finishPickerAdapter: TimePickerAdapter,
-        initialInterval: FilterDateTime? = null
+        initialInterval: FilterTime? = null
     ) {
         setUpPicker(startPicker, _start, startLayoutManager, lastStartIndex, startPickerAdapter)
         setUpPicker(finishPicker, _end, finishLayoutManager, lastFinishIndex, finishPickerAdapter)
 
-        scrollToNow(initialInterval, startPicker, finishPicker)
+        scrollTo(initialInterval, startPicker, finishPicker)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -73,7 +73,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
         }
     }
 
-    private fun scrollToNow(initialInterval: FilterDateTime?, startPicker: RecyclerView, finishPicker: RecyclerView) {
+    private fun scrollTo(initialInterval: FilterTime?, startPicker: RecyclerView, finishPicker: RecyclerView) {
         val startIndex: Int
         val finishIndex: Int
 
