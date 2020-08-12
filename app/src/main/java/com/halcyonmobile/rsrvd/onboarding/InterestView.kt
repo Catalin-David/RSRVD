@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.onboarding
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
 import android.widget.CheckBox
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.halcyonmobile.rsrvd.R
@@ -21,6 +22,10 @@ class InterestView(context: Context, checkable: Boolean?) : ConstraintLayout(con
 
     fun setInterest(interest: String) {
         button.text = interest
+    }
+
+    fun setListener(callback: (InterestView) -> Unit) {
+        button.setOnClickListener { callback(this) }
     }
 
     fun isChecked() = button?.isChecked ?: false
