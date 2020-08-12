@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/filter_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{!viewModel.searchTerm.empty}" />
+            app:visible="@{viewModel.searchTerm != null}" />
 
         <ImageView
             android:id="@+id/filter_icon"

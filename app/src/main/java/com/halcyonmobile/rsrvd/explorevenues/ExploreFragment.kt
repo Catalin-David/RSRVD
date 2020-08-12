@@ -18,6 +18,7 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
+import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
@@ -42,7 +43,12 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
 
         binding.searchVenueBar.filterIcon.setOnClickListener {
-            startActivityForResult(Intent(context, FilterActivity::class.java), FILTER_REQUEST_CODE)
+            startActivityForResult(Intent(context, FilterActivity::class.java).putExtra(FILTER, viewModel.filters.value), FILTER_REQUEST_CODE)
+        }
+
+        binding.activityInfo.allVenues.setOnClickListener {
+            viewModel.setFilters(Filters())
+            viewModel.search()
         }
 
         binding.readMore.setOnClickListener {
@@ -63,12 +69,13 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         viewModel.apply {
             searchResults.observe(viewLifecycleOwner) {
                 searchResultsAdapter.submitList(it)
-                if (!searchResults.value.isNullOrEmpty()) {
-                    setCardInFocus(searchResults.value?.get(0))
-                }
             }
             recentlyVisitedCards.observe(viewLifecycleOwner) {
                 recentlyViewedAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_RECENTS_CARD))
+
+                if (!recentlyVisitedCards.value.isNullOrEmpty()) {
+                    setCardInFocus(recentlyVisitedCards.value?.get(0))
+                }
             }
             exploreCards.observe(viewLifecycleOwner) {
                 exploreAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_CARDS))
@@ -119,7 +126,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             binding.recentlyVisited.recentlyVisitedList,
             recyclerViewLayoutManager,
             recentlyViewedAdapter,
-            MarginDecorator(right = true),
+            MarginDecorator(initialLeft = true, right = true),
             snapHelper = true,
             scrollListener = View.OnScrollChangeListener { _, _, _, _, _ ->
                 viewModel.recentlyVisitedCards.value?.isNotEmpty().let {
@@ -136,7 +143,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             binding.explore.exploreList,
             LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL },
             exploreAdapter,
-            MarginDecorator(right = true),
+            MarginDecorator(initialLeft = true, right = true),
             snapHelper = true
         )
     }
@@ -153,5 +160,6 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     companion object {
         const val DEBOUNCE_DURATION: Long = 500
         const val FILTER_REQUEST_CODE = 1
+        const val FILTER = "filter"
     }
 }
