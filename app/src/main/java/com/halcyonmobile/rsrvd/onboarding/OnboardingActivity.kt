@@ -36,6 +36,8 @@ class OnboardingActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.apply {
+            loadSavedLocation()
+
             updateState.observe(this@OnboardingActivity) { binding.root.showSnackbar(if (it) getString(R.string.updated) else getString(R.string.failed)) }
             errorMessage.observe(this@OnboardingActivity) { binding.root.showSnackbar(it) }
 

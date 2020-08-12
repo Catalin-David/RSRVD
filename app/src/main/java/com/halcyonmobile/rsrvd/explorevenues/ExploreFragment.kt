@@ -41,7 +41,7 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
 
         binding.searchVenueBar.filterIcon.setOnClickListener {
-            startActivityForResult(Intent(context, FilterActivity::class.java), FILTER_REQUEST_CODE)
+            startActivityForResult(Intent(context, FilterActivity::class.java).putExtra(FILTER, viewModel.filters.value), FILTER_REQUEST_CODE)
         }
 
         binding.readMore.setOnClickListener {
@@ -152,5 +152,6 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
     companion object {
         const val DEBOUNCE_DURATION: Long = 500
         const val FILTER_REQUEST_CODE = 1
+        const val FILTER = "filter"
     }
 }
