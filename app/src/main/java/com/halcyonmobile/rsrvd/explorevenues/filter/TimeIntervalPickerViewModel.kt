@@ -78,8 +78,8 @@ class TimeIntervalPickerViewModel : ViewModel() {
         val finishIndex: Int
 
         if (initialInterval != null) {
-            startIndex = initialInterval.startHour * 100 + initialInterval.startMinute * 100 / 60
-            finishIndex = initialInterval.finishHour * 100 + initialInterval.finishMinute * 100 / 60
+            startIndex = if (initialInterval.startMinute < 30) initialInterval.startHour * 100 + initialInterval.startMinute * 100 / 60 else (initialInterval.startHour + 1) * 100
+            finishIndex = if (initialInterval.finishMinute < 30) initialInterval.finishHour * 100 + initialInterval.finishMinute * 100 / 60 else (initialInterval.finishHour + 1) * 100
         } else {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)

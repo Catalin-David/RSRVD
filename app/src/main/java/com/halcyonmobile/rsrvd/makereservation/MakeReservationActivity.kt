@@ -60,6 +60,20 @@ class MakeReservationActivity : AppCompatActivity() {
 
         val hourCardsAdapter = HourCardsAdapter(onItemClick = {
             viewModel.setSelected(it)
+
+            viewModel.adjustFinish(viewModel.returnCorrespondingHour(it.hour))
+
+            viewModel.time.value?.let { filterTime ->
+                val startIndex = if (filterTime.startMinute < 30) filterTime.startHour * 100 + filterTime.startMinute * 100 / 60 else (filterTime.startHour + 1) * 100
+                val finishIndex = if (filterTime.finishMinute < 30) filterTime.finishHour * 100 + filterTime.finishMinute * 100 / 60 else (filterTime.finishHour + 1) * 100
+
+                binding.intervalPicker.startPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(startIndex))
+                binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(finishIndex))
+
+                // Trigger snap helper, after automated scrolling to current position
+                binding.intervalPicker.startPicker.smoothScrollBy(1, 0)
+                binding.intervalPicker.finishPicker.smoothScrollBy(1, 0)
+            }
         })
 
         timeIntervalPickerViewModel.apply {

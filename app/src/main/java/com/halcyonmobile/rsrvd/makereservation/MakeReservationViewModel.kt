@@ -61,6 +61,30 @@ class MakeReservationViewModel : ViewModel() {
         _time.value = FilterTime(_time.value!!.startHour, _time.value!!.startMinute, hour, minute)
     }
 
+    fun adjustFinish(value: Int) {
+        var hour = value / 100 + time.value!!.startHour
+        var minute = (value % 100) * 60 / 100 + time.value!!.startMinute
+
+        if (minute >= 60){
+            hour += 1
+            minute = 0
+        }
+
+        _time.value = FilterTime(_time.value!!.startHour, _time.value!!.startMinute, hour, minute)
+    }
+
+    fun returnCorrespondingHour(hour: String): Int =
+        when(hour){
+            "1 H" -> 100
+            "1:30 H" -> 150
+            "2 H" -> 200
+            "2:30 H" -> 250
+            "3 H" -> 300
+            "3:30 H" -> 350
+            "4 H" -> 400
+            else -> 100
+        }
+
     companion object {
         private val listHours = listOf(
             HourUiModel("1 H", isSelected = true),
