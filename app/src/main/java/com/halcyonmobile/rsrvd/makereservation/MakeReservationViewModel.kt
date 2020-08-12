@@ -21,13 +21,27 @@ class MakeReservationViewModel : ViewModel() {
     init {
         _hourCards.value = listHours
         val calendar = Calendar.getInstance()
-        val startHour = calendar.get(Calendar.HOUR_OF_DAY)
-        val startMinute = calendar.get(Calendar.MINUTE)
-        val finishHour = startHour + 1
 
-        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH))
-        _time.value = FilterTime(startHour, startMinute, finishHour, startMinute)
+        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        setInitialInterval()
+    }
+
+    fun setInitialInterval() {
+        _time.value = calculateInitialInterval()
+    }
+
+    private fun calculateInitialInterval(): FilterTime {
+        val calendar = Calendar.getInstance()
+
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentMinute = calendar.get(Calendar.MINUTE)
+
+        val startHour = if (currentMinute < 30) currentHour else currentHour + 1
+        val startMinute = if (currentMinute < 30) 50 else 0
+        val finishHour = startHour + 1
+        val finishMinute = startMinute
+
+        return FilterTime(startHour, startMinute, finishHour, finishMinute)
     }
 
     fun setSelected(position: HourUiModel) {
@@ -45,27 +59,28 @@ class MakeReservationViewModel : ViewModel() {
         start: String,
         end: String,
         onSuccess: () -> Unit,
-        onFailure: () -> Unit) {
+        onFailure: () -> Unit
+    ) {
         ReservationRepository.createReservation(id, start, end, onSuccess, onFailure)
     }
 
     fun setStart(start: Int) {
         val hour = start / 100
-        val minute = (start % 100) * 60 / 100
+        val minute = start % 100
         _time.value = FilterTime(hour, minute, _time.value!!.finishHour, _time.value!!.finishMinute)
     }
 
     fun setFinish(finish: Int) {
         val hour = finish / 100
-        val minute = (finish % 100) * 60 / 100
+        val minute = finish % 100
         _time.value = FilterTime(_time.value!!.startHour, _time.value!!.startMinute, hour, minute)
     }
 
     fun adjustFinish(value: Int) {
         var hour = value / 100 + time.value!!.startHour
-        var minute = (value % 100) * 60 / 100 + time.value!!.startMinute
+        var minute = value % 100 + time.value!!.startMinute
 
-        if (minute >= 60){
+        if (minute == 100) {
             hour += 1
             minute = 0
         }
@@ -74,7 +89,7 @@ class MakeReservationViewModel : ViewModel() {
     }
 
     fun returnCorrespondingHour(hour: String): Int =
-        when(hour){
+        when (hour) {
             "1 H" -> 100
             "1:30 H" -> 150
             "2 H" -> 200

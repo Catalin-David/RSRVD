@@ -37,7 +37,7 @@ class MakeReservationActivity : AppCompatActivity() {
         val venueById: VenueById? = intent.getParcelableExtra(REQUEST_RESERVATION)
 
         binding.apply {
-         //   dataMap = viewModel.generateInterestList(venueById.activities)
+            //   dataMap = viewModel.generateInterestList(venueById.activities)
         }
 
         binding.closeReservation.setOnClickListener {
@@ -54,11 +54,13 @@ class MakeReservationActivity : AppCompatActivity() {
                 onSuccess = {
                     startActivity(Intent(this, ReservationSentActivity::class.java))
                     finish()
-            },
+                },
                 onFailure = {
                     binding.root.showSnackbar(getString(R.string.something_went_wrong))
-            })
+                })
         }
+
+        viewModel.setInitialInterval()
 
         val hourCardsAdapter = HourCardsAdapter(onItemClick = {
             viewModel.setSelected(it)
@@ -66,27 +68,15 @@ class MakeReservationActivity : AppCompatActivity() {
             viewModel.adjustFinish(viewModel.returnCorrespondingHour(it.hour))
 
             viewModel.time.value?.let { filterTime ->
-                val startIndex = if (filterTime.startMinute < 50) filterTime.startHour * 100 + filterTime.startMinute * 100 / 60 else (filterTime.startHour + 1) * 100
-                val finishIndex = if (filterTime.finishMinute < 50) filterTime.finishHour * 100 + filterTime.finishMinute * 100 / 60 else (filterTime.finishHour + 1) * 100
-
-                Log.d(ContentValues.TAG, "${Times.hours}")
-                Log.d(ContentValues.TAG, "$startIndex  ---------------- $finishIndex")
-
-                val aux = Times.hours.indexOf(startIndex)
-                val aux2 = Times.hours.indexOf(finishIndex)
-                Log.d(ContentValues.TAG, "$aux  ---------------- $aux2")
-
-                binding.intervalPicker.startPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(startIndex))
-                binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(finishIndex))
-
+                binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(filterTime.finishHour * 100 + filterTime.finishMinute))
                 // Trigger snap helper, after automated scrolling to current position
-                binding.intervalPicker.startPicker.smoothScrollBy(1, 0)
-                binding.intervalPicker.finishPicker.smoothScrollBy(1, 0)
+                binding.intervalPicker.finishPicker.smoothScrollBy(5, 0)
             }
         })
 
         timeIntervalPickerViewModel.apply {
-            setup(binding.intervalPicker.startPicker,
+            setup(
+                binding.intervalPicker.startPicker,
                 binding.intervalPicker.finishPicker,
                 LinearLayoutManager(this@MakeReservationActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
                 LinearLayoutManager(this@MakeReservationActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
@@ -103,15 +93,7 @@ class MakeReservationActivity : AppCompatActivity() {
 
         setUpLists(hourCardsAdapter)
     }
-/*
-val year: Int,
-    val month: Int,
-    val day: Int,
-    val startHour: Int,
-    val startMinute: Int,
-    val finishHour: Int,
-    val finishMinute: Int
- */
+
     private fun setUpLists(hourCardsAdapter: HourCardsAdapter) {
         setUpRecyclerView(
             binding.recyclerView,
@@ -124,12 +106,12 @@ val year: Int,
         recyclerView: RecyclerView,
         linearLayoutManager: LinearLayoutManager,
         listAdapter: HourCardsAdapter
-    ){
-      recyclerView.apply {
-          setHasFixedSize(false)
-          layoutManager = linearLayoutManager
-          adapter = listAdapter
-      }
+    ) {
+        recyclerView.apply {
+            setHasFixedSize(false)
+            layoutManager = linearLayoutManager
+            adapter = listAdapter
+        }
     }
 
     companion object {
