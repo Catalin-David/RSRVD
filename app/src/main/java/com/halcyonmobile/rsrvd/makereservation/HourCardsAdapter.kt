@@ -17,15 +17,13 @@ class HourCardsAdapter(
             parent,
             false))
 
-    override fun onBindViewHolder(holder: HourCardViewHolder, position: Int) {
-        holder.apply {
-            holder.bind(getItem(position))
-        }
-    }
+    override fun onBindViewHolder(
+        holder: HourCardViewHolder,
+        position: Int) = holder.bind(getItem(position))
 
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<HourUiModel> = object : DiffUtil.ItemCallback<HourUiModel>() {
-            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem == newItem
+            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = (oldItem.isSelected == newItem.isSelected || oldItem.hour == newItem.hour)
             override fun areContentsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem == newItem
         }
     }
@@ -34,8 +32,10 @@ class HourCardsAdapter(
         private val binding: HourItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: HourUiModel) {
-            binding.hourRadioButton.text = item.hour
-            binding.hourRadioButton.isChecked = item.isSelected
+            binding.apply {
+                hourRadioButton.text = item.hour
+                hourRadioButton.isChecked = item.isSelected
+            }
 
             binding.hourRadioButton.setOnClickListener { onItemClick(item) }
         }

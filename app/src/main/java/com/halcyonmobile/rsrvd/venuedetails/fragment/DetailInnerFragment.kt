@@ -44,17 +44,17 @@ class DetailInnerFragment: Fragment() {
 
         //initializing the data for the get venue by id request
         venueId?.let { s ->
-            viewModel.getVenue(s, callback = {
-                binding.venueWeeklyProgramTextView.text = getVenueProgram(it)
-                binding.venueDescription.text = it.description
-                binding.venueLocationTextView.text = getString(R.string.location_description, it.location.name, it.location.details)
-                binding.facilitiesDataMap = it.facilities
-
+            viewModel.getVenue(s, callback = { venueById ->
+                binding.venueWeeklyProgramTextView.text = getVenueProgram(venueById)
+                binding.venueDescription.text = venueById.description
+                binding.venueLocationTextView.text = getString(R.string.location_description, venueById.location.name, venueById.location.details)
+                binding.facilitiesDataMap = venueById.facilities
+/*
                 val list: ArrayList<Interests> = ArrayList()
-                for (i in it.activities) {
-                    list.add(getInterestBasedOnName(i.name))
-                }
-                binding.dataMap = list
+                for (i in venueById.activities) {
+                    list.add(Interests.getInterestBasedOnName(i.name))
+                }*/
+                binding.dataMap = venueById.activities.map { Interests.getInterestBasedOnName(it.name) }.toList()
             })
         }
 
@@ -136,7 +136,7 @@ class DetailInnerFragment: Fragment() {
             val hEnd = getHour(listOpenHours[ listPositions[i] ].end)
 
             result +=
-                if ((listPositions[i] - listPositions[i + 1]) > 1)
+                if ( (i < listPositions.size - 1) && (listPositions[i] - listPositions[i + 1]) > 1)
                     "$day - ${getDay(listPositions[i])}, $hStart - $hEnd\n"
                 else "$day, $hStart - $hEnd\n"
         }
@@ -150,34 +150,13 @@ class DetailInnerFragment: Fragment() {
         return result
     }
 
-    private fun getInterestBasedOnName(s: String) : Interests =
-        when (s) {
-            "Running" -> Interests.RUNNING
-            "Workout" -> Interests.WORKOUT
-            "Yoga" -> Interests.YOGA
-            "Football" -> Interests.FOOTBALL
-            "Basketball" -> Interests.BASKETBALL
-            "Tennis" -> Interests.TENNIS
-            "Badminton" -> Interests.BADMINTON
-            "Handball" -> Interests.HANDBALL
-            "Bowling" -> Interests.BOWLING
-            "Volleyball" -> Interests.VOLLEYBALL
-            "Table tennis" -> Interests.TABLETENNIS
-            else -> Interests.RUNNING
-        }
-
     companion object {
         private const val PLACE_PICKER_REQUEST = 1
         private const val EXTRA_VENUE_ID = "EXTRA_VENUE_ID"
 
-        fun newInstance(venueId: String) : DetailInnerFragment {
-            val fragment = DetailInnerFragment()
-            val bundle = Bundle()
-
-            bundle.putString(EXTRA_VENUE_ID, venueId)
-            fragment.arguments = bundle
-
-            return fragment
-        }
+        fun newInstance(venueId: String) : DetailInnerFragment =
+            DetailInnerFragment().apply {
+                arguments = Bundle().apply { putString(EXTRA_VENUE_ID, venueId) }
+            }
     }
 }

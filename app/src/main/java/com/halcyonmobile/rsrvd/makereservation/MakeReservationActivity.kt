@@ -20,9 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MakeReservationActivity : AppCompatActivity() {
-    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private lateinit var binding: ActivityMakeReservationBinding
     private lateinit var viewModel: MakeReservationViewModel
 
@@ -33,16 +31,12 @@ class MakeReservationActivity : AppCompatActivity() {
         binding.dataMap = Interests.values().toMutableList()
 
         viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
-        val venueById = intent.getParcelableExtra<VenueById>(REQUEST_RESERVATION)
+        val venueById: VenueById? = intent.getParcelableExtra<VenueById>(REQUEST_RESERVATION)
 
         binding.apply {
-            venueNameReservation.text = venueById.name
+            venueNameReservation.text = venueById!!.name
 
-            val list: ArrayList<Interests> = ArrayList()
-            for (i in venueById.activities) {
-                list.add(getInterestBasedOnName(i.name))
-            }
-            dataMap = list
+            dataMap = venueById.activities.map { Interests.getInterestBasedOnName(it.name) }.toList()
         }
 
         binding.closeReservation.setOnClickListener {
@@ -51,13 +45,11 @@ class MakeReservationActivity : AppCompatActivity() {
         }
 
         binding.sendReservation.setOnClickListener {
-            val id = venueById.activities[0].id
-            val start = "2020-08-02T13:00:00.119Z"
-            val end = "2020-08-02T15:00:00.119Z"
 
-            viewModel.makeReservation(id,
-                start,
-                end,
+            viewModel.makeReservation(
+                venueById!!.activities[0].id,
+                "2020-08-02T13:00:00.119Z",
+                "2020-08-02T15:00:00.119Z",
                 onSuccess = {
                     startActivity(Intent(this, ReservationSentActivity::class.java))
                     finish()
@@ -71,14 +63,9 @@ class MakeReservationActivity : AppCompatActivity() {
             viewModel.resetPosition(it)
         })
 
-        setUpObservers(hourCardsAdapter)
+        viewModel.hourCards.observe(this@MakeReservationActivity) { hourCardsAdapter.submitList(it) }
+        
         setUpLists(hourCardsAdapter)
-    }
-
-    private fun setUpObservers(hourCardsAdapter: HourCardsAdapter) {
-        viewModel.apply {
-            hourCards.observe(this@MakeReservationActivity) { hourCardsAdapter.submitList(it) }
-        }
     }
 
     private fun setUpLists(hourCardsAdapter: HourCardsAdapter) {
@@ -100,22 +87,6 @@ class MakeReservationActivity : AppCompatActivity() {
           adapter = listAdapter
       }
     }
-
-    private fun getInterestBasedOnName(s: String) : Interests =
-        when (s) {
-            "Running" -> Interests.RUNNING
-            "Workout" -> Interests.WORKOUT
-            "Yoga" -> Interests.YOGA
-            "Football" -> Interests.FOOTBALL
-            "Basketball" -> Interests.BASKETBALL
-            "Tennis" -> Interests.TENNIS
-            "Badminton" -> Interests.BADMINTON
-            "Handball" -> Interests.HANDBALL
-            "Bowling" -> Interests.BOWLING
-            "Volleyball" -> Interests.VOLLEYBALL
-            "Table tennis" -> Interests.TABLETENNIS
-            else -> Interests.RUNNING
-        }
 
     companion object {
         private const val REQUEST_RESERVATION = "REQUEST_RESERVATION"

@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val message : String? = intent.getStringExtra(EXTRA_MESSAGE)
-        if (message == "ok")
+        if (message == MESSAGE_OK)
             openFragment(ReservationFragment(), supportFragmentManager)
         else
             openFragment(ExploreFragment(), supportFragmentManager)
@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
+        const val MESSAGE_OK = "OK"
 
         fun instanceAfterReservation(context: Context, message: String): Intent {
             val intent = Intent(context, MainActivity::class.java)

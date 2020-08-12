@@ -15,13 +15,11 @@ class MakeReservationViewModel : ViewModel() {
     }
 
     private fun initializeHourCards() {
-        listHours.let {
-            _hourCards.value = it
-        }
+        _hourCards.value = listHours
     }
 
     fun resetPosition(position: HourUiModel) {
-        _hourCards.value = _hourCards.value?.mapIndexed { _, hourUiModel ->
+        _hourCards.value = _hourCards.value?.map { hourUiModel ->
             if(hourUiModel == position) hourUiModel.copy(isSelected = true)
             else hourUiModel.copy(isSelected = false)
         }

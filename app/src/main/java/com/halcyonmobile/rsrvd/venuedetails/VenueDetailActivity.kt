@@ -50,11 +50,9 @@ class VenueDetailActivity : AppCompatActivity() {
         }
 
         venueBinding.makeReservationButton.setOnClickListener {
-            startActivity(venueById?.let { it1 ->
-                MakeReservationActivity.getStartIntent(this,
-                    it1
-                )
-            })
+            venueById?.let { venue ->
+                startActivity(MakeReservationActivity.getStartIntent(this, venue))
+            }
         }
 
         initTabLayout(venueId)
