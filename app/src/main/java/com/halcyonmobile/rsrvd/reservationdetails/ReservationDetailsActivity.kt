@@ -1,25 +1,22 @@
-package com.halcyonmobile.rsrvd.reservationdetails.activity
+package com.halcyonmobile.rsrvd.reservationdetails
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.databinding.ActivityReservationDetailsBinding
 import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.LIST_HAS_CHANGED
 import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.NO_CHANGES
 import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.RESERVATION_ID_KEY
-import com.halcyonmobile.rsrvd.reservationdetails.viewmodel.ReservationDetailsViewModel
 
 class ReservationDetailsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityReservationDetailsBinding
-    private lateinit var viewModel: ReservationDetailsViewModel
+    private val viewModel: ReservationDetailsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityReservationDetailsBinding.inflate(layoutInflater)
+        val binding = ActivityReservationDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = ViewModelProviders.of(this).get(ReservationDetailsViewModel::class.java)
 
         val reservationId = intent.getStringExtra(RESERVATION_ID_KEY)
         reservationId?.let {

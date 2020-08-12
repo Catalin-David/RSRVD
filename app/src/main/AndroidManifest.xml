@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".reservationdetails.activity.ReservationDetailsActivity"></activity>
+        <activity android:name=".reservationdetails.ReservationDetailsActivity"></activity>
         <activity
             android:name=".launcher.activity.LauncherActivity"
             android:screenOrientation="portrait"

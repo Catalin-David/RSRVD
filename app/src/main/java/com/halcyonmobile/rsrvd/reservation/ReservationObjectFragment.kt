@@ -12,7 +12,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentCollectionObjectBinding
-import com.halcyonmobile.rsrvd.reservationdetails.activity.ReservationDetailsActivity
+import com.halcyonmobile.rsrvd.reservationdetails.ReservationDetailsActivity
 
 class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) {
     private lateinit var binding: FragmentCollectionObjectBinding
