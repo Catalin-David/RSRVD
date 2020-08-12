@@ -25,6 +25,7 @@ class ReservationDetailsActivity : AppCompatActivity() {
 
         binding.apply {
             detailsViewModel = viewModel
+            lifecycleOwner = this@ReservationDetailsActivity
             buttonCancelReservation.setOnClickListener {
                 if (null != reservationId) {
                     viewModel.cancelReservation(reservationId)
