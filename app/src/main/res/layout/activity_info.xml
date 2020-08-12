@@ -18,12 +18,12 @@
             android:id="@+id/details_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/long_margin"
             android:alpha=".25"
             android:text="@string/running"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Body2"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visible="@{viewModel.cardInFocus.location != null}" />
 
@@ -31,24 +31,27 @@
             android:id="@+id/details_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/long_margin"
             android:alpha=".25"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Body2"
+            app:visible="@{viewModel.cardInFocus.location != null}"
             app:formattedDistance="@{viewModel.cardInFocus.location}"
             app:layout_constraintStart_toEndOf="@id/details_activity"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text=" / 1.2 km away" />
 
-        <TextView
+        <Button
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/all_venues"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/long_margin"
             android:text="@string/see_all_venues"
+            android:textColor="@android:color/white"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Body2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

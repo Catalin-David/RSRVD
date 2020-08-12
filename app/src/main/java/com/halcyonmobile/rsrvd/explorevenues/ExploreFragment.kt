@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
+import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
@@ -44,6 +45,11 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
             startActivityForResult(Intent(context, FilterActivity::class.java).putExtra(FILTER, viewModel.filters.value), FILTER_REQUEST_CODE)
         }
 
+        binding.activityInfo.allVenues.setOnClickListener {
+            viewModel.setFilters(Filters())
+            viewModel.search()
+        }
+
         binding.readMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.read_more_link))))
         }
@@ -62,12 +68,13 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         viewModel.apply {
             searchResults.observe(viewLifecycleOwner) {
                 searchResultsAdapter.submitList(it)
-                if (!searchResults.value.isNullOrEmpty()) {
-                    setCardInFocus(searchResults.value?.get(0))
-                }
             }
             recentlyVisitedCards.observe(viewLifecycleOwner) {
                 recentlyViewedAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_RECENTS_CARD))
+
+                if (!recentlyVisitedCards.value.isNullOrEmpty()) {
+                    setCardInFocus(recentlyVisitedCards.value?.get(0))
+                }
             }
             exploreCards.observe(viewLifecycleOwner) {
                 exploreAdapter.submitList(if (it.isNotEmpty()) it else listOf(ExploreViewModel.NO_CARDS))
