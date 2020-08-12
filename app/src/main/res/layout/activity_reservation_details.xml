@@ -146,7 +146,7 @@
             android:id="@+id/reservation_details_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time"
+            android:text="@string/reservation_time"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:textColor="@color/light_gray"
