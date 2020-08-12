@@ -10,8 +10,8 @@
     android:checked="false"
     android:gravity="center"
     android:paddingHorizontal="@dimen/long_padding"
-    android:paddingVertical="@dimen/default_padding"
+    android:paddingVertical="@dimen/short_padding"
     android:textAllCaps="true"
-    android:textAppearance="@style/TextAppearance.Body2"
+    android:textAppearance="@style/TextAppearance.Subtitle1"
     android:textColor="@drawable/onboarding_textcolor"
     tools:text="Sport" />

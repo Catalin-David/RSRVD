@@ -99,7 +99,10 @@ class FilterActivity : AppCompatActivity() {
                 ).show()
             }
 
-            cancel.setOnClickListener { finish() }
+            cancel.setOnClickListener {
+                finish()
+                overridePendingTransition(android.R.anim.fade_in, R.anim.slide_down)
+            }
 
             ready.setOnClickListener {
                 try {
@@ -117,6 +120,7 @@ class FilterActivity : AppCompatActivity() {
                     )
 
                     finish()
+                    overridePendingTransition(android.R.anim.fade_in, R.anim.slide_down)
                 } catch (filterDurationException: FilterDurationException) {
                     root.showSnackbar(getString(R.string.interval_too_short))
                 } catch (filterDateException: FilterDateException) {

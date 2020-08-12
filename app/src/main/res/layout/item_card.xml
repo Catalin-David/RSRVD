@@ -27,12 +27,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:padding="@dimen/long_padding"
             android:id="@+id/title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Headline4"
+            android:textAppearance="@style/TextAppearance.Headline5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

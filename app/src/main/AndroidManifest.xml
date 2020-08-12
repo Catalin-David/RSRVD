@@ -31,33 +31,32 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
-
         <activity
             android:name="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name="com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity"
-            android:parentActivityName="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".venuedetails.VenueDetailActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".venuedetails.VenueDetailActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.schibstedspain.leku.LocationPickerActivity"
+            android:parentActivityName=".venuedetails.VenueDetailActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".venuedetails.VenueDetailActivity">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
+
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/leku_searchable" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,13 +67,13 @@
             android:name=".signin.SignInActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".explorevenues.filter.FilterActivity"/>
+        <activity android:name=".explorevenues.filter.FilterActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_api_key"/>
+            android:value="@string/google_api_key" />
     </application>
 </manifest>

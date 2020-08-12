@@ -1,6 +1,7 @@
 package com.halcyonmobile.rsrvd.explorevenues
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -42,7 +43,8 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
 
         binding.searchVenueBar.filterIcon.setOnClickListener {
-            startActivityForResult(Intent(context, FilterActivity::class.java).putExtra(FILTER, viewModel.filters.value), FILTER_REQUEST_CODE)
+            startActivityForResult(Intent(activity, FilterActivity::class.java).putExtra(FILTER, viewModel.filters.value), FILTER_REQUEST_CODE)
+            activity?.overridePendingTransition(R.anim.slide_up, android.R.anim.fade_out)
         }
 
         binding.activityInfo.allVenues.setOnClickListener {

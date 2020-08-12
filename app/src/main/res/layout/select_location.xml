@@ -22,6 +22,32 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/side_guide" />
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/short_margin"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toTopOf="@id/search"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/short_margin"
+            android:text="@string/rsrvd"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.Subtitle1.Bold"
+            app:layout_constraintBottom_toTopOf="@id/search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search"
             android:layout_width="0dp"
@@ -31,7 +57,7 @@
             app:layout_constraintBottom_toTopOf="@id/location_list"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/title">
 
             <ImageView
                 android:id="@+id/search_icon"
@@ -39,7 +65,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/short_margin"
                 android:contentDescription="@string/search_icon"
-                android:src="@drawable/ic_baseline_search"
+                android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/search_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +79,14 @@
                 android:gravity="center_vertical"
                 android:hint="@string/select_location"
                 android:inputType="text"
-                android:textAppearance="@style/TextAppearance.Body2"
-                android:textColor="@android:color/white"
+                android:textAppearance="@style/TextAppearance.Subtitle1"
                 android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/clear"
                 app:layout_constraintStart_toEndOf="@id/search_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="LabelFor"
                 tools:text="Select location" />
 
             <ImageButton
@@ -70,7 +96,7 @@
                 android:layout_margin="@dimen/short_margin"
                 android:background="?attr/selectableItemBackground"
                 android:contentDescription="@string/maps_icon"
-                android:src="@drawable/ic_baseline_close"
+                android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/search_text"
@@ -81,17 +107,6 @@
             android:id="@+id/location_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/right_guideline"
-            app:layout_constraintStart_toStartOf="@id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@id/search" />
-
-        <ImageView
-            android:id="@+id/empty_placeholder"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/placeholder_for_empty_search"
-            android:src="@drawable/ic_baseline_hourglass_empty"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@id/search" />

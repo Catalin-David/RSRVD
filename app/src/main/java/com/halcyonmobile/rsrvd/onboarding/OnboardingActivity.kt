@@ -64,7 +64,10 @@ class OnboardingActivity : AppCompatActivity() {
 
             locationSelector.setOnClickListener {
                 startActivityForResult(
-                    Intent(this@OnboardingActivity, SelectLocationActivity::class.java),
+                    Intent(this@OnboardingActivity, SelectLocationActivity::class.java).putExtra(
+                        SelectLocationActivity.EXTRA_STRING,
+                        locationViewModel?.location?.value?.name
+                    ),
                     SELECT_LOCATION_REQUEST_CODE,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@OnboardingActivity,
