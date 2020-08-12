@@ -1,9 +1,11 @@
 package com.halcyonmobile.rsrvd.makereservation
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -64,8 +66,15 @@ class MakeReservationActivity : AppCompatActivity() {
             viewModel.adjustFinish(viewModel.returnCorrespondingHour(it.hour))
 
             viewModel.time.value?.let { filterTime ->
-                val startIndex = if (filterTime.startMinute < 30) filterTime.startHour * 100 + filterTime.startMinute * 100 / 60 else (filterTime.startHour + 1) * 100
-                val finishIndex = if (filterTime.finishMinute < 30) filterTime.finishHour * 100 + filterTime.finishMinute * 100 / 60 else (filterTime.finishHour + 1) * 100
+                val startIndex = if (filterTime.startMinute < 50) filterTime.startHour * 100 + filterTime.startMinute * 100 / 60 else (filterTime.startHour + 1) * 100
+                val finishIndex = if (filterTime.finishMinute < 50) filterTime.finishHour * 100 + filterTime.finishMinute * 100 / 60 else (filterTime.finishHour + 1) * 100
+
+                Log.d(ContentValues.TAG, "${Times.hours}")
+                Log.d(ContentValues.TAG, "$startIndex  ---------------- $finishIndex")
+
+                val aux = Times.hours.indexOf(startIndex)
+                val aux2 = Times.hours.indexOf(finishIndex)
+                Log.d(ContentValues.TAG, "$aux  ---------------- $aux2")
 
                 binding.intervalPicker.startPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(startIndex))
                 binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(finishIndex))
