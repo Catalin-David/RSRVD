@@ -38,24 +38,16 @@ class DetailInnerFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
 
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         val venueId = this.arguments?.getString(EXTRA_VENUE_ID)
 
         //initializing the data for the get venue by id request
-        venueId?.let { s ->
-            viewModel.getVenue(s, callback = { venueById ->
-                binding.venueWeeklyProgramTextView.text = getVenueProgram(venueById)
-                binding.venueDescription.text = venueById.description
-                binding.venueLocationTextView.text = getString(R.string.location_description, venueById.location.name, venueById.location.details)
-                binding.facilitiesDataMap = venueById.facilities
-/*
-                val list: ArrayList<Interests> = ArrayList()
-                for (i in venueById.activities) {
-                    list.add(Interests.getInterestBasedOnName(i.name))
-                }*/
-                binding.dataMap = venueById.activities.map { Interests.getInterestBasedOnName(it.name) }.toList()
-            })
+        venueId?.let {
+            viewModel.getVenue(it)
         }
 
         //for the place picker

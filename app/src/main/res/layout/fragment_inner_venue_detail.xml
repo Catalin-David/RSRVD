@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
-
-        <variable
-            name="facilitiesDataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Facilities>" />
+            name="viewModel"
+            type="com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel" />
     </data>
 
     <ScrollView
@@ -42,7 +38,8 @@
                 android:id="@+id/venue_weekly_program_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weekly_program"
+                tools:text="@string/weekly_program"
+                app:getVenueProgram="@{viewModel.venue.open}"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
@@ -71,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:flexWrap="wrap"
-                app:interests="@{dataMap}"
+                app:interests="@{viewModel.listActivities}"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +92,8 @@
                 android:id="@+id/venue_location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/location_text_view"
+                tools:text="@string/location_text_view"
+                app:getVenueLocation="@{viewModel.venue.location}"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
@@ -155,7 +153,7 @@
                 android:id="@+id/facilities_flex_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:facilities="@{facilitiesDataMap}"
+                app:facilities="@{viewModel.listFacilities}"
                 app:flexWrap="wrap"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/long_margin"
@@ -180,7 +178,8 @@
                 android:id="@+id/venue_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
+                tools:text="@string/description"
+                android:text="@{viewModel.venue.description}"
                 android:textColor="@android:color/white"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:fontFamily="@font/oswald"

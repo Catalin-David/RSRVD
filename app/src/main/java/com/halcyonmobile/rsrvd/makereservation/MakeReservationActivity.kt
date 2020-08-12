@@ -3,7 +3,6 @@ package com.halcyonmobile.rsrvd.makereservation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -11,14 +10,9 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import com.halcyonmobile.rsrvd.databinding.ActivityMakeReservationBinding
 import com.halcyonmobile.rsrvd.utils.showSnackbar
-import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MakeReservationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakeReservationBinding
@@ -28,24 +22,22 @@ class MakeReservationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_make_reservation)
         binding.lifecycleOwner = this
-        binding.dataMap = Interests.values().toMutableList()
+        binding.viewModel = viewModel
 
         viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
-        val venueById: VenueById? = intent.getParcelableExtra<VenueById>(REQUEST_RESERVATION)
+        val venueById: VenueById? = intent.getParcelableExtra(REQUEST_RESERVATION)
 
         binding.apply {
-            venueNameReservation.text = venueById!!.name
-
-            dataMap = venueById.activities.map { Interests.getInterestBasedOnName(it.name) }.toList()
+         //   dataMap = viewModel.generateInterestList(venueById.activities)
         }
 
         binding.closeReservation.setOnClickListener {
-           // startActivity(VenueDetailActivity.getStartIntent(this, venueById.id))
             finish()
         }
 
         binding.sendReservation.setOnClickListener {
 
+            startActivity(Intent(this, ReservationSentActivity::class.java))
             viewModel.makeReservation(
                 venueById!!.activities[0].id,
                 "2020-08-02T13:00:00.119Z",
@@ -60,11 +52,11 @@ class MakeReservationActivity : AppCompatActivity() {
         }
 
         val hourCardsAdapter = HourCardsAdapter(onItemClick = {
-            viewModel.resetPosition(it)
+            viewModel.setSelected(it)
         })
 
         viewModel.hourCards.observe(this@MakeReservationActivity) { hourCardsAdapter.submitList(it) }
-        
+
         setUpLists(hourCardsAdapter)
     }
 

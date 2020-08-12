@@ -1,12 +1,12 @@
 package com.halcyonmobile.rsrvd.venuedetails
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -26,23 +26,17 @@ class VenueDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-        val venueId : String
-                = intent.getStringExtra(REQUEST_VENUE_ID)
+        val venueId : String? = intent.getStringExtra(REQUEST_VENUE_ID)
 
         venueBinding = DataBindingUtil.setContentView(this, R.layout.activity_venue_details)
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
-        var venueById: VenueById? = null
+        venueBinding.lifecycleOwner = this
+        venueBinding.viewModel = viewModel
+        val venueById: VenueById? = null
 
-        viewModel.getVenue(venueId) {
-            venueById = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .placeholder(R.drawable.ic_baseline_cloud_download)
-                .into(venueBinding.venueDetailsImageView)
-
-            venueBinding.venueNameTextView.text = it.name
+        venueId?.let {
+            viewModel.getVenue(it)
+            initTabLayout(it)
         }
 
         venueBinding.arrowBack.setOnClickListener {
@@ -54,8 +48,6 @@ class VenueDetailActivity : AppCompatActivity() {
                 startActivity(MakeReservationActivity.getStartIntent(this, venue))
             }
         }
-
-        initTabLayout(venueId)
     }
 
     private fun initTabLayout(venueId: String) {

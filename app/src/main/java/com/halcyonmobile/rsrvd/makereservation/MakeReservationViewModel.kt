@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.reservation.ReservationRepository
+import com.halcyonmobile.rsrvd.core.shared.Interests
+import com.halcyonmobile.rsrvd.core.venues.dto.ActivitiesDto
 
 class MakeReservationViewModel : ViewModel() {
     private val _hourCards: MutableLiveData<List<HourUiModel>> = MutableLiveData()
@@ -11,19 +13,18 @@ class MakeReservationViewModel : ViewModel() {
     val hourCards: LiveData<List<HourUiModel>> = _hourCards
 
     init {
-        initializeHourCards()
-    }
-
-    private fun initializeHourCards() {
         _hourCards.value = listHours
     }
 
-    fun resetPosition(position: HourUiModel) {
+    fun setSelected(position: HourUiModel) {
         _hourCards.value = _hourCards.value?.map { hourUiModel ->
-            if(hourUiModel == position) hourUiModel.copy(isSelected = true)
-            else hourUiModel.copy(isSelected = false)
+            hourUiModel.copy(isSelected = (hourUiModel == position))
         }
     }
+
+    fun generateInterestList(
+        list: List<ActivitiesDto>
+    ): List<Interests> = list.map { Interests.getInterestBasedOnName(it.name) }.toList()
 
     fun makeReservation(
         id: String,
