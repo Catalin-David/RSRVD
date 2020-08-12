@@ -4,29 +4,75 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.shared.Interests
-import com.halcyonmobile.rsrvd.core.shared.Location
-import com.halcyonmobile.rsrvd.core.venues.dto.FilterLocation
-import com.halcyonmobile.rsrvd.core.venues.dto.StartEndHours
+import java.util.Calendar
 
 class FilterViewModel : ViewModel() {
-    private val _name = MutableLiveData<String>()
-    private val _location = MutableLiveData<FilterLocation>()
     private val _activities = MutableLiveData<List<Interests>>()
-    private val _availability = MutableLiveData<StartEndHours>()
-
-    val name: LiveData<String> = _name
-    val location: LiveData<FilterLocation> = _location
     val activities: LiveData<List<Interests>> = _activities
-    val availability: LiveData<StartEndHours> = _availability
 
-    fun setLocation(myLocation: Location?) {
-        _location.value = if (myLocation != null) FilterLocation(myLocation.latitude, myLocation.longitude, RADIUS) else null
+    var filterDate: FilterDate
+    var filterTime: FilterTime
+
+    init {
+        val calendar = Calendar.getInstance()
+        val startHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val startMinute = calendar.get(Calendar.MINUTE)
+        val finishHour = if (startMinute < 30) startHour else startHour + 1
+        val finishMinute = if (startMinute < 30) startMinute + 30 else startMinute
+
+        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
     }
 
-    // TODO activities from the FlexBox
-    fun isReady(): Boolean = _name.value != null || _location.value != null || !_activities.value.isNullOrEmpty() || _availability.value != null || true
+    fun setDate(year: Int, month: Int, day: Int) {
+        filterDate = FilterDate(year, month, day)
+    }
 
-    companion object {
-        const val RADIUS = 5000.0
+    fun setStart(start: Int) {
+        val hour = start / 100
+        val minute = (start % 100) * 60 / 100
+        filterTime = FilterTime(hour, minute, filterTime.finishHour, filterTime.finishMinute)
+    }
+
+    fun setFinish(finish: Int) {
+        val hour = finish / 100
+        val minute = (finish % 100) * 60 / 100
+        filterTime = FilterTime(filterTime.startHour, filterTime.startMinute, hour, minute)
+    }
+
+    private fun checkTime(): Boolean {
+        val now = Calendar.getInstance()
+
+        return (filterTime.finishHour > filterTime.startHour ||
+                (filterTime.finishHour == filterTime.startHour && filterTime.finishMinute > filterTime.startMinute)) &&
+                (filterTime.startHour > (now.get(Calendar.HOUR_OF_DAY)) ||
+                        ((now.get(Calendar.HOUR_OF_DAY) == filterTime.startHour) && (filterTime.startMinute > now.get(Calendar.MINUTE))))
+    }
+
+    private fun checkDate(): Boolean {
+        val now = Calendar.getInstance()
+
+        return filterDate.year >= now.get(Calendar.YEAR) && filterDate.month >= now.get(Calendar.MONTH) && filterDate.day >= now.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun getAvailability(): FilterDateTime {
+
+        if (!checkTime()) {
+            throw FilterDurationException()
+        }
+
+        if (!checkDate()) {
+            throw FilterDateException()
+        }
+
+        return FilterDateTime(
+            filterDate.year,
+            filterDate.month,
+            filterDate.day,
+            filterTime.startHour,
+            filterTime.startMinute,
+            filterTime.finishHour,
+            filterTime.finishMinute
+        )
     }
 }

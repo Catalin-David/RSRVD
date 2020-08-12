@@ -13,5 +13,5 @@ data class FilterDto(
     @Json(name = "activities")
     val activities: List<Interests>?,
     @Json(name = "availability")
-    val availability: StartEndHours?
+    val availability: Availability?
 )

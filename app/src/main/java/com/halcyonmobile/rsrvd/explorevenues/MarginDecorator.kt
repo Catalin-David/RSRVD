@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 
 class MarginDecorator(
+    private val initialLeft: Boolean? = false,
     private val top: Boolean? = false,
     private val right: Boolean? = false,
     private val bottom: Boolean? = false,
@@ -21,17 +22,16 @@ class MarginDecorator(
             }
             if (this@MarginDecorator.right == true) {
                 this.right = marginDefault
-
-                // List expands to the right --> first item is indented
-                if (parent.childCount == 1) {
-                    this.left = marginLong
-                }
             }
             if (this@MarginDecorator.bottom == true) {
                 this.bottom = marginDefault
             }
             if (this@MarginDecorator.left == true) {
                 this.left = marginDefault
+            }
+
+            if (initialLeft == true && parent.childCount == 1) {
+                this.left = marginLong
             }
         }
     }

@@ -2,6 +2,7 @@ package com.halcyonmobile.rsrvd.onboarding
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
 import android.widget.CheckBox
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.halcyonmobile.rsrvd.R
@@ -13,7 +14,8 @@ class InterestView(context: Context, checkable: Boolean?) : ConstraintLayout(con
 
     init {
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        params.setMargins(0, 0, 25, 25)
+        val margin = view.context.resources.getDimensionPixelSize(R.dimen.default_padding)
+        params.setMargins(0, 0, margin, margin)
         this.layoutParams = params
 
         checkable?.let { button.isClickable = it }
@@ -21,6 +23,10 @@ class InterestView(context: Context, checkable: Boolean?) : ConstraintLayout(con
 
     fun setInterest(interest: String) {
         button.text = interest
+    }
+
+    fun setListener(callback: (InterestView) -> Unit) {
+        button.setOnClickListener { callback(this) }
     }
 
     fun isChecked() = button?.isChecked ?: false

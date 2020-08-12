@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/start_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/default_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:contentDescription="@string/dashed_separator"
+            android:src="@drawable/dashed"
+            app:layout_constraintBottom_toTopOf="@id/finish_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start_picker" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/primary"
+            android:paddingVertical="@dimen/long_margin"
+            app:layout_constraintBottom_toBottomOf="@id/finish_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/start_picker" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/finish_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/default_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
