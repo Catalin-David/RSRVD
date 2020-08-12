@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.core.reservation.handler
+package com.halcyonmobile.rsrvd.core.reservation.handlers
 
 import android.content.ContentValues
 import android.util.Log

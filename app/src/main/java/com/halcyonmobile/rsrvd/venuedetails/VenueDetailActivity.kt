@@ -32,7 +32,7 @@ class VenueDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
         venueBinding.lifecycleOwner = this
         venueBinding.viewModel = viewModel
-        val venueById: VenueById? = null
+    //    val venueById: VenueById? = null
 
         venueId?.let {
             viewModel.getVenue(it)
@@ -44,9 +44,7 @@ class VenueDetailActivity : AppCompatActivity() {
         }
 
         venueBinding.makeReservationButton.setOnClickListener {
-            venueById?.let { venue ->
-                startActivity(MakeReservationActivity.getStartIntent(this, venue))
-            }
+            startActivity(Intent(this, MakeReservationActivity::class.java))
         }
     }
 

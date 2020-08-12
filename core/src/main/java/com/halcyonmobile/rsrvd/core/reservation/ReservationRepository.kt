@@ -121,7 +121,8 @@ object ReservationRepository {
         onFailure: () -> Unit) {
         remoteSource.createReservation(id, start, end, onSuccess, onFailure)
     }
-}
+
     fun getReservationWithId(id: String, updateState: (ReservationDto?) -> Unit) = remoteSource.getWithId(id, updateState)
     fun cancelReservation(id: String) = remoteSource.cancelReservationWithId(id)
 }
+

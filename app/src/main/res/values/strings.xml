@@ -4,7 +4,7 @@
     <string name="welcome_to">welcome to</string>
     <string name="rsrvd">rsrvd</string>
     <string name="connect_with_google">connect with google</string>
-    <string name="explore_reserve_live">EXPLORE\t\t\t\t\t\tRESERVE \u0020 LIVE \u0020 EXPLORE \u0020 RESERVE \u0020 LIVE \u0020 EXPLORE \u0020 RESERVE \u0020 LIVE \u0020 EXPLORE \u0020 RESERVE \u0020 LIVE \u0020 EXPLORE \u0020 RESERVE \u0020 LIVE \u0020 EXPLORE \u0020 RESERVE \u0020 LIVE</string>
+    <string name="explore_reserve_live">EXPLORE\t\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
     <string name="about_you">tell us more\nabout you</string>

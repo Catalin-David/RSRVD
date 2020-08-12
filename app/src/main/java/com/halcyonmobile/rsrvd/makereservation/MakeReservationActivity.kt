@@ -21,10 +21,10 @@ class MakeReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_make_reservation)
+        viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
         val venueById: VenueById? = intent.getParcelableExtra(REQUEST_RESERVATION)
 
         binding.apply {

@@ -2,98 +2,103 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_sign_in"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ImageView
-            android:id="@+id/running_sign_in_image_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/running_sign_up_image"
-            android:src="@drawable/img_authentication_running"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/welcome_to_rsrvd_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/long_margin"
-            android:text="@string/welcome_to"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            app:layout_constraintBottom_toBottomOf="@id/running_sign_in_image_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/running_sign_in_image_view" />
+            <ImageView
+                android:id="@+id/running_sign_in_image_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/running_sign_up_image"
+                android:src="@drawable/img_authentication_running"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/rsrvd_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/long_margin"
-            android:text="@string/rsrvd"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            android:textColor="@color/primary"
-            app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
+            <TextView
+                android:id="@+id/welcome_to_rsrvd_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:text="@string/welcome_to"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                app:layout_constraintBottom_toBottomOf="@id/running_sign_in_image_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/running_sign_in_image_view" />
 
-        <TextView
-            android:id="@+id/expl_rsrvd_live_first_text_view"
-            android:layout_width="@dimen/width_text_view_anim"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="@string/explore_reserve_live"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textIsSelectable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view" />
+            <TextView
+                android:id="@+id/rsrvd_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:text="@string/rsrvd"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                android:textColor="@color/primary"
+                app:layout_constraintBottom_toTopOf="@id/expl_rsrvd_live_first_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcome_to_rsrvd_text_view" />
 
-        <Button
-            android:id="@+id/connect_google_button"
-            style="@style/MaterialComponents.Button.Icon"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_btn_connect_signin"
-            android:layout_marginStart="@dimen/long_margin"
-            android:layout_marginEnd="@dimen/long_margin"
-            android:layout_marginBottom="@dimen/short_margin"
-            android:text="@string/connect_with_google"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceBody1"
-            app:icon="@drawable/ic_google"
-            app:layout_constraintBottom_toTopOf="@id/explore_first"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/expl_rsrvd_live_first_text_view"
+                android:layout_width="@dimen/width_text_view_anim"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@string/explore_reserve_live"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textIsSelectable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rsrvd_text_view" />
 
-        <TextView
-            android:id="@+id/explore_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/medium_margin"
-            android:text="@string/explore_the_app_first"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/connect_google_button"
+                style="@style/MaterialComponents.Button.Icon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_btn_connect_signin"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginEnd="@dimen/long_margin"
+                android:layout_marginBottom="@dimen/short_margin"
+                android:text="@string/connect_with_google"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:icon="@drawable/ic_google"
+                app:layout_constraintBottom_toTopOf="@id/explore_first"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/sign_in_progress"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/explore_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:text="@string/explore_the_app_first"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/sign_in_progress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
