@@ -5,10 +5,8 @@ import android.content.Context
 import android.location.Location
 import android.net.Uri
 import android.view.View
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.iterator
 import androidx.databinding.BindingAdapter

@@ -15,13 +15,33 @@ import com.halcyonmobile.rsrvd.core.venues.dto.Venue
 
 class ReservationDetailsViewModel : ViewModel() {
     private val _reservation: MutableLiveData<ReservationDto> = MutableLiveData()
+    private val _showCancelButton: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _cancelDesign: MutableLiveData<Boolean> = MutableLiveData(false)
+
     val reservation: LiveData<ReservationDto> = _reservation
+    val showCancelButton: LiveData<Boolean> = _showCancelButton
+    val cancelDesign: LiveData<Boolean> = _cancelDesign
 
     fun cancelReservation(id: String) = ReservationRepository.cancelReservation(id)
+
     fun loadReservation(reservationId: String) {
         ReservationRepository.getReservationWithId(reservationId){
             it?.let {
                 _reservation.value = it
+                when(it.state){
+                    ReservationState.CONFIRMED -> {
+                        _showCancelButton.value = true
+                        _cancelDesign.value = false
+                    }
+                    ReservationState.COMPLETED -> {
+                        _showCancelButton.value = false
+                        _cancelDesign.value = false
+                    }
+                    ReservationState.CANCELLED -> {
+                        _showCancelButton.value = false
+                        _cancelDesign.value = true
+                    }
+                }
             }
         }
     }

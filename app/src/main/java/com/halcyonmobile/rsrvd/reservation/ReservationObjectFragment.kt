@@ -20,9 +20,7 @@ class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val recyclerViewAdapter = ReservationAdapter { reservationId ->
-            startActivityForResult(Intent(activity, ReservationDetailsActivity::class.java).apply {
-                putExtra(RESERVATION_ID_KEY, reservationId)
-            }, DETAILS_ACTIVITY_REQUEST_CODE)
+            startActivityForResult(ReservationDetailsActivity.getStartIntent(requireContext(), reservationId), DETAILS_ACTIVITY_REQUEST_CODE)
         }
 
         binding = FragmentCollectionObjectBinding.inflate(
@@ -76,8 +74,6 @@ class ReservationObjectFragment : Fragment(R.layout.fragment_collection_object) 
         const val DETAILS_ACTIVITY_REQUEST_CODE = 1000
         const val LIST_HAS_CHANGED = 1001
         const val NO_CHANGES = 1002
-
-        const val RESERVATION_ID_KEY = "com.halcyonmobile.rsrvd.reservation.RESERVATION_ID_KEY"
 
         fun createInstance(index: Int) = ReservationObjectFragment().apply {
             arguments = Bundle().apply {
