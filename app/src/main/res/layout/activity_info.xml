@@ -21,9 +21,9 @@
             android:alpha=".25"
             android:text="@string/running"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Body2"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visible="@{viewModel.cardInFocus.location != null}" />
 
@@ -33,25 +33,24 @@
             android:layout_height="wrap_content"
             android:alpha=".25"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Body2"
-            app:visible="@{viewModel.cardInFocus.location != null}"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
             app:formattedDistance="@{viewModel.cardInFocus.location}"
-            app:layout_constraintStart_toEndOf="@id/details_activity"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/details_activity"
             app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{viewModel.cardInFocus.location != null}"
             tools:text=" / 1.2 km away" />
 
         <Button
-            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/all_venues"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/see_all_venues"
+            android:textAppearance="@style/TextAppearance.Subtitle1"
             android:textColor="@android:color/white"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Body2"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
