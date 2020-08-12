@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".reservationdetails.ReservationDetailsActivity"></activity>
+        <activity android:name=".reservationdetails.ReservationDetailsActivity" />
         <activity
             android:name=".launcher.activity.LauncherActivity"
             android:screenOrientation="portrait"
@@ -36,11 +36,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".selectlocation.SelectLocationActivity"
-            android:parentActivityName=".onboarding.OnboardingActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
