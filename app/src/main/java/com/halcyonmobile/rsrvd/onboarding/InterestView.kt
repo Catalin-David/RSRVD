@@ -14,7 +14,8 @@ class InterestView(context: Context, checkable: Boolean?) : ConstraintLayout(con
 
     init {
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        params.setMargins(0, 0, 25, 25)
+        val margin = view.context.resources.getDimensionPixelSize(R.dimen.default_padding)
+        params.setMargins(0, 0, margin, margin)
         this.layoutParams = params
 
         checkable?.let { button.isClickable = it }
