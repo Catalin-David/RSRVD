@@ -132,7 +132,7 @@ class FilterActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun setUpTimeIntervalPickerViewModel() =
         timeIntervalPickerViewModel.apply {
-            init(
+            setup(
                 startPicker = binding.intervalPicker.startPicker,
                 finishPicker = binding.intervalPicker.finishPicker,
                 startLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },

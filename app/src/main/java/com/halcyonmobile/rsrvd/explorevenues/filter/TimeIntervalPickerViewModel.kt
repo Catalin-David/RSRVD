@@ -23,7 +23,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
     private val lastStartIndex = MutableLiveData(-1)
     private val lastFinishIndex = MutableLiveData(-1)
 
-    fun init(
+    fun setup(
         startPicker: RecyclerView,
         finishPicker: RecyclerView,
         startLayoutManager: LinearLayoutManager,
