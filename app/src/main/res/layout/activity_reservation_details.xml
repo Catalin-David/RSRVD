@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="detailsViewModel"
+            type="com.halcyonmobile.rsrvd.reservationdetails.ReservationDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".reservationdetails.ReservationDetailsActivity">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/picture_dimension"
+            android:scaleType="fitXY"
+            app:imageUrlString="@{detailsViewModel.reservation.venue.image}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservation_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/text_on_picture_margin"
+            android:maxLines="2"
+            android:text="@string/reservation_details"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceHeadline3"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/corner_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_yellow_shape"
+            app:layout_constraintBottom_toBottomOf="@id/reservation_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/reservation_details" />
+
+        <TextView
+            android:id="@+id/reservation_details_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/profile_location"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@id/reservation_details"
+            app:layout_constraintTop_toBottomOf="@id/reservation_details" />
+
+        <TextView
+            android:id="@+id/text_view_reservation_venue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{detailsViewModel.reservation.venue.name}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintStart_toStartOf="@id/reservation_details_location"
+            app:layout_constraintTop_toBottomOf="@id/reservation_details_location"
+            tools:text="baza sportiva gheorgheni" />
+
+        <ImageButton
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_gray"
+            android:clickable="false"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:src="@drawable/ic_status"
+            app:tintByState="@{detailsViewModel.reservation.state}"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_reservation_venue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_reservation_venue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{detailsViewModel.reservation.state.toString()}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@{detailsViewModel.cancelDesign ? @android:color/white : @color/dark_gray}"
+            app:layout_constraintBottom_toBottomOf="@id/status_image"
+            app:layout_constraintEnd_toEndOf="@id/status_image"
+            app:layout_constraintStart_toStartOf="@id/status_image"
+            app:layout_constraintTop_toTopOf="@id/status_image"
+            tools:text="confirmed" />
+
+        <TextView
+            android:id="@+id/reservation_activities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/activities"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@id/text_view_reservation_venue"
+            app:layout_constraintTop_toBottomOf="@id/status_image" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexbox_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:checkable="@{false}"
+            app:interest="@{detailsViewModel.reservation.activity.name}"
+            app:layout_constraintStart_toStartOf="@id/reservation_activities"
+            app:layout_constraintTop_toBottomOf="@id/reservation_activities" />
+
+        <FrameLayout
+            android:id="@+id/separator"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/long_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/reservation_activities"
+            app:layout_constraintTop_toBottomOf="@id/flexbox_activity" />
+
+        <TextView
+            android:id="@+id/reservation_details_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="@string/date"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@id/separator"
+            app:layout_constraintTop_toBottomOf="@id/separator" />
+
+        <TextView
+            android:id="@+id/reservation_details_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_time"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="@id/separator"
+            app:layout_constraintTop_toTopOf="@id/reservation_details_date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintStart_toStartOf="@id/reservation_details_date"
+            app:layout_constraintTop_toBottomOf="@id/reservation_details_date"
+            app:reservationDate="@{detailsViewModel.reservation.date}"
+            tools:text="12 august, 2020" />
+
+        <TextView
+            android:id="@+id/end_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintEnd_toEndOf="@id/reservation_details_hour"
+            app:layout_constraintTop_toBottomOf="@id/reservation_details_hour"
+            app:reservationHour="@{detailsViewModel.reservation.endDate}"
+            tools:text="11:00 AM" />
+
+        <TextView
+            android:id="@+id/hour_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintEnd_toStartOf="@id/end_hour"
+            app:layout_constraintTop_toTopOf="@id/end_hour" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintEnd_toStartOf="@id/hour_separator"
+            app:layout_constraintTop_toTopOf="@id/hour_separator"
+            app:reservationHour="@{detailsViewModel.reservation.date}"
+            tools:text="09:00 AM" />
+
+        <Button
+            android:id="@+id/button_cancel_reservation"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_btn_connect_signin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/cancel_reservation"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/reservation_details_hour"
+            app:layout_constraintStart_toStartOf="@id/reservation_details_date"
+            android:visibility="@{detailsViewModel.showCancelButton ? View.VISIBLE : View.GONE}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
