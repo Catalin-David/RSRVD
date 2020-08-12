@@ -141,7 +141,11 @@
     </string-array>
     <string name="AM">AM</string>
     <string name="PM">PM</string>
+
     <string name="double_digit_format">0%1$d</string>
+    <string name="reservation_details">"reservation\ndetails"</string>
+    <string name="reservation_time">time</string>
+    <string name="cancel_reservation">cancel reservation</string>
     <string name="reservation_image">reservation image</string>
     <string name="make_a_reservation_newline">make a \nreservation</string>
     <string name="venue_name_reservation">venue name reservation</string>

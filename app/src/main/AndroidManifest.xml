@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.halcyonmobile.rsrvd">
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-
+        <activity android:name=".reservationdetails.ReservationDetailsActivity"></activity>
         <activity
             android:name=".launcher.activity.LauncherActivity"
             android:screenOrientation="portrait"
@@ -30,45 +31,42 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity
-            android:name="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity"
+            android:name=".onboarding.OnboardingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
-            android:name="com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity"
-            android:parentActivityName="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity">
+            android:name=".selectlocation.SelectLocationActivity"
+            android:parentActivityName=".onboarding.OnboardingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.halcyonmobile.rsrvd.onboarding.OnboardingActivity" />
         </activity>
-
         <activity
-            android:name="com.halcyonmobile.rsrvd.editprofile.EditProfileActivity"
+            android:name=".editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".venuedetails.VenueDetailActivity" android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".venuedetails.VenueDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.schibstedspain.leku.LocationPickerActivity"
+            android:parentActivityName=".venuedetails.VenueDetailActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".venuedetails.VenueDetailActivity">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
+
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/leku_searchable" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".venuedetails.VenueDetailActivity" />
         </activity>
-
         <activity
             android:name=".signin.SignInActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".explorevenues.filter.FilterActivity"/>
+        <activity android:name=".explorevenues.filter.FilterActivity" />
 
         <activity
             android:name=".makereservation.MakeReservationActivity"
@@ -83,6 +81,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_api_key"/>
+            android:value="@string/google_api_key" />
     </application>
+
 </manifest>
