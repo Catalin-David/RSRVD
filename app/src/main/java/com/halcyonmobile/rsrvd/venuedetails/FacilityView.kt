@@ -18,6 +18,9 @@ class FacilityView(context: Context) : ConstraintLayout(context) {
         facilitiesAndDrawables[Facilities.RESTAURANT] = R.drawable.ic_restaurant
         facilitiesAndDrawables[Facilities.ACCESSIBLE] = R.drawable.ic_accessibility
         facilitiesAndDrawables[Facilities.TOILET] = R.drawable.ic_toilet
+        facilitiesAndDrawables[Facilities.LOCKER] = R.drawable.ic_locker
+        facilitiesAndDrawables[Facilities.SHOP] = R.drawable.ic_shop
+        facilitiesAndDrawables[Facilities.SHOWER] = R.drawable.ic_shower
     }
 
     fun setFacility(facility: Facilities) {

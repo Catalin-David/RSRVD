@@ -9,11 +9,14 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.core.shared.Location
+import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
@@ -73,7 +76,7 @@ class OnboardingActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 if (viewModel.onReadyClick(getInterests())) {
-                    startActivity(Intent(this@OnboardingActivity, MainActivity::class.java))
+                    startActivity(MainActivity.instanceAfterReservation(this@OnboardingActivity, "false"))
                 }
             }
         }
@@ -93,6 +96,25 @@ class OnboardingActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         locationProvider.onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    override fun onBackPressed() {
+        if (UserLocalRepository.isUserLoggedIn) {
+            GoogleSignIn.getClient(
+                this,
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+            )
+                .signOut()
+                .addOnCompleteListener {
+                    UserLocalRepository.apply {
+                        isUserLoggedIn = false
+                        exploreFirst = false
+                        accessToken = ""
+                        location = Pair(0.0, 0.0)
+                    }
+                }
+        }
+        super.onBackPressed()
     }
 
     private fun markInterests() {

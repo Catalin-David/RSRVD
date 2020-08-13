@@ -52,7 +52,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         .signOut()
                         .addOnCompleteListener {
                             viewModel.handleLogOut()
-                            startActivity(Intent(activity, SignInActivity::class.java))
+
+                            startActivity(SignInActivity.instanceStackClear(activity))
                         }
                 }
                 setNegativeButton(getString(R.string.cancel)) { _, _ -> }

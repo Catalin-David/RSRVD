@@ -115,5 +115,12 @@ class SignInActivity : AppCompatActivity() {
 
         fun getStartIntent(context: Context, showSignUp: Boolean) =
             Intent(context, SignInActivity::class.java).putExtra(SIGN_UP_KEY, showSignUp)
+        
+        fun instanceStackClear(context: Context?): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+
+            return intent
+        }
     }
 }
