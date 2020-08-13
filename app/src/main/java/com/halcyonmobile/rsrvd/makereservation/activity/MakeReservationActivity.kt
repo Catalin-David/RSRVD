@@ -81,6 +81,8 @@ class MakeReservationActivity : AppCompatActivity() {
             else {
                 val id = venueDetailViewModel.hashMapActivities.value?.get(verifyInterests())
 
+                while (id == null) {}
+
                 filterDateTime?.let {
                     val dateStart = DateTime(it.year, it.month + 1, it.day, it.startHour, it.startMinute * 60 / 100).toString()
                     val dateFinish = DateTime(it.year, it.month + 1, it.day, it.finishHour, it.finishMinute * 60 / 100).toString()

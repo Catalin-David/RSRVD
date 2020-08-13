@@ -26,7 +26,8 @@ class VenueDetailViewModel : ViewModel() {
                 _venue.value = it
                 _listActivities.value = it.activities.map {index -> Interests.getInterestBasedOnName(index.name) }.toList()
                 _listFacilities.value = it.facilities
-                _hashMapActivities.value = it.activities.map {index -> Interests.getInterestBasedOnName(index.name) to index.id }.toMap()
+                _hashMapActivities.value = it.activities.map {
+                        index -> Interests.getInterestBasedOnName(index.name) to index.id }.toMap()
             })
     }
 }
