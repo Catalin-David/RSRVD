@@ -14,6 +14,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
+import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.databinding.ActivityMakeReservationBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.*
@@ -69,27 +70,25 @@ class MakeReservationActivity : AppCompatActivity() {
                 viewModel.time.value?.let {
                     val hourStart: String = if (it.startHour < 10) "0${it.startHour}" else "${it.startHour}"
                     val newMinute = if ( it.startMinute == 50 ) it.startMinute - 20 else it.startMinute
-                    val minutesStart: String = if (newMinute < 10) "0${newMinute}" else "${newMinute}"
+                    val minutesStart: String = if (newMinute < 10) "0${newMinute}" else "$newMinute"
                     val month: String = if (filterViewModel.filterDate.month < 12) "0${filterViewModel.filterDate.month}" else "${filterViewModel.filterDate.month}"
 
-                    val dateStart = "${filterViewModel.filterDate.year}-$month-${filterViewModel.filterDate.day}T$hourStart:${minutesStart}.000Z"
+                    val hourFinish: String = if (it.finishHour < 10) "0${it.finishHour}" else "${it.finishHour}"
+                    val newMinuteFinish = if ( it.finishMinute == 50 ) it.finishMinute - 20 else it.finishMinute
+                    val minutesStartFinish: String = if (newMinuteFinish < 10) "0${newMinuteFinish}" else "$newMinuteFinish"
 
-                    binding.root.showSnackbar(dateStart)
+                    val dateStart = "${filterViewModel.filterDate.year}-$month-${filterViewModel.filterDate.day}T$hourStart:${minutesStart}.000Z"
+                    val dateFinish = "${filterViewModel.filterDate.year}-$month-${filterViewModel.filterDate.day}T$hourFinish:${minutesStartFinish}.000Z"
+
+                    id?.let { activityId ->
+                        startActivity(ReservationSentActivity.getStartIntent(
+                            this,
+                            ReservationRequestDto(activityId, dateStart, dateFinish),
+                            venueById!!
+                        ))
+                    }
                 }
             }
-/*
-            startActivity(Intent(this, ReservationSentActivity::class.java))
-            viewModel.makeReservation(
-                venueById!!.activities[0].id,
-                "2020-08-02T13:00:00.119Z",
-                "2020-08-02T15:00:00.119Z",
-                onSuccess = {
-                    startActivity(Intent(this, ReservationSentActivity::class.java))
-                    finish()
-                },
-                onFailure = {
-                    binding.root.showSnackbar(getString(R.string.something_went_wrong))
-                })*/
         }
 
         //setup for the date picker
