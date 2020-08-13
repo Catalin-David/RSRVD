@@ -1,11 +1,9 @@
 package com.halcyonmobile.rsrvd.makereservation
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -85,8 +83,14 @@ class MakeReservationActivity : AppCompatActivity() {
                 viewModel.time.value
             )
 
-            start.observe(this@MakeReservationActivity) { viewModel.setStart(it) }
-            end.observe(this@MakeReservationActivity) { viewModel.setFinish(it) }
+            start.observe(this@MakeReservationActivity) {
+                viewModel.setStart(it)
+                viewModel.setSelectedByStart(it)
+            }
+            end.observe(this@MakeReservationActivity) {
+                viewModel.setFinish(it)
+                viewModel.setSelectedByFinish(it)
+            }
         }
 
         viewModel.hourCards.observe(this@MakeReservationActivity) { hourCardsAdapter.submitList(it) }
@@ -117,7 +121,7 @@ class MakeReservationActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_RESERVATION = "REQUEST_RESERVATION"
 
-        fun getStartIntent(context: Context, venueById: VenueById) =
+        fun getStartIntent(context: Context, venueById: String) =
             Intent(context, MakeReservationActivity::class.java).putExtra(REQUEST_RESERVATION, venueById)
     }
 

@@ -1,5 +1,7 @@
 package com.halcyonmobile.rsrvd.makereservation
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,13 +11,16 @@ import com.halcyonmobile.rsrvd.core.venues.dto.ActivitiesDto
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterDate
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterTime
 import java.util.*
+import kotlin.math.abs
 
 class MakeReservationViewModel : ViewModel() {
     private val _hourCards: MutableLiveData<List<HourUiModel>> = MutableLiveData()
     private val _time: MutableLiveData<FilterTime> = MutableLiveData()
+    private val _intervalDuration: MutableLiveData<Int> = MutableLiveData()
 
     val hourCards: LiveData<List<HourUiModel>> = _hourCards
     val time: LiveData<FilterTime> = _time
+    val intervalDuration: LiveData<Int> = _intervalDuration
     private var filterDate: FilterDate
 
     init {
@@ -47,6 +52,36 @@ class MakeReservationViewModel : ViewModel() {
     fun setSelected(position: HourUiModel) {
         _hourCards.value = _hourCards.value?.map { hourUiModel ->
             hourUiModel.copy(isSelected = (hourUiModel == position))
+        }
+    }
+
+    fun setSelectedByStart(start: Int) {
+        val hour = start / 100
+        val minute = start % 100
+
+        var diffHour = abs(hour - _time.value!!.finishHour)
+        val diffMinutes = abs(minute - _time.value!!.finishMinute)
+
+        if (minute == 0 && _time.value!!.finishMinute == 50 && hour > _time.value!!.finishHour) diffHour--
+
+        setSelectedByInterval(diffHour*100 + diffMinutes)
+    }
+
+    fun setSelectedByFinish(finish: Int) {
+        val hour = finish / 100
+        val minute = finish % 100
+
+        var diffHour = abs(hour - _time.value!!.startHour)
+        val diffMinutes = abs(minute - _time.value!!.startMinute)
+
+        if (minute == 0 && _time.value!!.startMinute == 50 && hour > _time.value!!.startHour) diffHour--
+
+        setSelectedByInterval(diffHour*100 + diffMinutes)
+    }
+
+    private fun setSelectedByInterval(interval: Int) {
+        _hourCards.value = _hourCards.value?.map { hourUiModel ->
+            hourUiModel.copy(isSelected = ( returnCorrespondingHour(hourUiModel.hour) == interval))
         }
     }
 
