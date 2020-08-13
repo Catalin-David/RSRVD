@@ -125,7 +125,8 @@
                 android:layout_marginEnd="@dimen/short_margin"
                 app:layout_constraintTop_toBottomOf="@id/how_long_to_stay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/right_guideline"/>
+                app:layout_constraintEnd_toStartOf="@id/right_guideline"
+                />
 
             <TextView
                 android:id="@+id/date_title"
@@ -187,17 +188,17 @@
             <Button
                 android:id="@+id/send_reservation"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/height_btn_connect_sgnin"
+                android:layout_height="wrap_content"
                 android:text="@string/send_reservation"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textAllCaps="true"
                 style="@style/MaterialComponents.Button.Icon"
-                android:layout_marginTop="@dimen/long_margin"
-                android:layout_marginStart="@dimen/long_margin"
-                android:layout_marginEnd="@dimen/long_margin"
+                android:padding="@dimen/default_padding"
+                android:layout_margin="@dimen/long_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/interval_picker"/>
+                app:layout_constraintTop_toBottomOf="@id/interval_picker"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

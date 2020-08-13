@@ -69,6 +69,7 @@
                 android:layout_height="wrap_content"
                 app:flexWrap="wrap"
                 app:interests="@{viewModel.listActivities}"
+                app:checkable="@{false}"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
