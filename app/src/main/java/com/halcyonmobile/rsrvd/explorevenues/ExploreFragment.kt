@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
@@ -19,6 +20,7 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
 import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
+import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
@@ -35,9 +37,9 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val searchResultsAdapter = CardsAdapter { openVenueDetails(it) }
-        val recentlyViewedAdapter = CardsAdapter { openVenueDetails(it) }
-        val exploreAdapter = CardsAdapter { openVenueDetails(it) }
+        val searchResultsAdapter = CardsAdapter { card, id -> openVenueDetails(card, id) }
+        val recentlyViewedAdapter = CardsAdapter { card, id -> openVenueDetails(card, id) }
+        val exploreAdapter = CardsAdapter { card, id -> openVenueDetails(card, id) }
 
         setUpObservers(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
         setUpLists(searchResultsAdapter, recentlyViewedAdapter, exploreAdapter)
@@ -57,9 +59,17 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         }
     }
 
-    private fun openVenueDetails(card: Card) {
+    private fun openVenueDetails(card: Card, id: Int) {
         if (context != null && card.idVenue != null) {
             startActivity(VenueDetailActivity.getStartIntent(requireContext(), card.idVenue))
+//            startActivity(
+////                VenueDetailActivity.getStartIntent(requireContext(), card.idVenue),
+////                if (activity != null && binding.explore.exploreList.getChildAt(id) != null) {
+////                    OnboardingActivity.getTransition(
+////                        requireActivity(),
+////                        binding.explore.exploreList.getChildAt(id).findViewById(R.id.background_card)
+////                    )
+////                } else null
         }
     }
 
@@ -162,7 +172,11 @@ class ExploreFragment : Fragment(R.layout.fragment_explore) {
         const val DEBOUNCE_DURATION: Long = 500
         const val FILTER_REQUEST_CODE = 1
         const val FILTER = "filter"
+        private const val TRANSITION = "card_background_transition"
 
         fun getStartIntent(context: Context?, filters: Filters?) = Intent(context, FilterActivity::class.java).putExtra(FILTER, filters)
+
+        fun getTransition(activity: Activity, element: View) =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(activity, element, TRANSITION).toBundle()
     }
 }

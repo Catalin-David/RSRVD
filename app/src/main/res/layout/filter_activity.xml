@@ -111,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/short_margin"
                     android:contentDescription="@string/maps_icon"
+                    app:visible="@{viewModel.location != null}"
                     android:onClick="@{() -> viewModel.clearLocation()}"
                     android:src="@drawable/ic_close"
                     app:layout_constraintBottom_toBottomOf="parent"

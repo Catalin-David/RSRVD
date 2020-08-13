@@ -119,13 +119,11 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/long_margin"
-                android:layout_marginEnd="@dimen/short_margin"
                 app:layout_constraintTop_toBottomOf="@id/how_long_to_stay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/right_guideline" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/date_title"
@@ -193,7 +191,7 @@
                 android:textAllCaps="true"
                 style="@style/MaterialComponents.Button.Icon"
                 android:padding="@dimen/default_padding"
-                android:layout_margin="@dimen/long_margin"
+                android:layout_margin="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/interval_picker"

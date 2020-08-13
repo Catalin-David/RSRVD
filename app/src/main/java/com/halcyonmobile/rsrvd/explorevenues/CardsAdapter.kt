@@ -11,14 +11,14 @@ import com.bumptech.glide.Glide
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ItemCardBinding
 
-class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, CardsAdapter.CardViewHolder>(DIFF_CALLBACK) {
+class CardsAdapter(private val listener: (Card, Int) -> Unit) : ListAdapter<Card, CardsAdapter.CardViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder =
         CardViewHolder(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.apply {
             holder.bind(getItem(position))
-            itemView.setOnClickListener { listener(getItem(position)) }
+            itemView.setOnClickListener { listener(getItem(position), position) }
         }
     }
 
@@ -41,7 +41,7 @@ class CardsAdapter(private val listener: (Card) -> Unit) : ListAdapter<Card, Car
                     .with(binding.root)
                     .load(item.image)
                     .placeholder(R.drawable.ic_baseline_cloud_download)
-                    .into(binding.background)
+                    .into(binding.backgroundCard)
             }
         }
     }

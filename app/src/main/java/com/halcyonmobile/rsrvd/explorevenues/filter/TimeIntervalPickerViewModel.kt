@@ -93,7 +93,7 @@ class TimeIntervalPickerViewModel : ViewModel() {
         finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(finishIndex))
 
         // Trigger snap helper, after automated scrolling to current position
-        startPicker.smoothScrollBy(3, 0)
-        finishPicker.smoothScrollBy(3, 0)
+        startPicker.smoothScrollBy(5, 0)
+        finishPicker.smoothScrollBy(5, 0)
     }
 }

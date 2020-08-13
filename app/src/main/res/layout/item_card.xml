@@ -15,25 +15,27 @@
         android:layout_height="@dimen/card_height">
 
         <ImageView
-            android:id="@+id/background"
+            android:id="@+id/background_card"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/sport_activity"
             android:scaleType="centerCrop"
             android:src="@drawable/photo_onboarding"
+            android:transitionName="card_background_transition"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:padding="@dimen/long_padding"
             android:id="@+id/title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="@dimen/long_padding"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.Headline5"
+            android:transitionName="card_text_transition"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

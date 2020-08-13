@@ -15,14 +15,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.databinding.ActivityMakeReservationBinding
+import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.explorevenues.filter.*
 import com.halcyonmobile.rsrvd.makereservation.HourCardsAdapter
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
 import com.halcyonmobile.rsrvd.onboarding.InterestView
+import com.halcyonmobile.rsrvd.profile.ProfileFragment
+import com.halcyonmobile.rsrvd.reservation.ReservationFragment
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel
 import org.joda.time.DateTime
@@ -40,12 +45,17 @@ class MakeReservationActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_make_reservation)
         viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
         timeIntervalPickerViewModel = ViewModelProviders.of(this).get(TimeIntervalPickerViewModel::class.java)
-        venueDetailViewModel =  ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
+        venueDetailViewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
         filterViewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.detailViewModel = venueDetailViewModel
+
+        intent.getStringExtra(MESSAGE)?.let {
+            binding.root.showSnackbar(it)
+            println(it)
+        }
 
         val venueById: String? = intent.getStringExtra(REQUEST_RESERVATION)
         venueById?.let {
@@ -78,11 +88,16 @@ class MakeReservationActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "$dateStart $dateFinish")
 
                     id?.let { activityId ->
-                        startActivity(ReservationSentActivity.getStartIntent(
-                            this,
-                            ReservationRequestDto(activityId, dateStart, dateFinish),
-                            venueById!!
-                        ))
+                        Log.d(ContentValues.TAG, id)
+
+                        startActivity(
+                            ReservationSentActivity.getStartIntent(
+                                this,
+                                ReservationRequestDto(activityId, dateStart, dateFinish),
+                                venueById!!
+                            )
+                        )
+
                     }
                 }
             }
@@ -188,7 +203,7 @@ class MakeReservationActivity : AppCompatActivity() {
             .toList()
 
         list.map {
-            if(it.name != null) interestView = it
+            if (it.name != null) interestView = it
         }
 
         return interestView
@@ -196,10 +211,17 @@ class MakeReservationActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_RESERVATION = "REQUEST_RESERVATION"
+        private const val MESSAGE = "message"
 
         fun getStartIntent(context: Context, venueById: String) =
             Intent(context, MakeReservationActivity::class.java).putExtra(
-                REQUEST_RESERVATION, venueById)
+                REQUEST_RESERVATION, venueById
+            )
+
+        fun startIntentWithMessage(context: Context, venueId: String, message: String) =
+            Intent(context, MakeReservationActivity::class.java)
+                .putExtra(REQUEST_RESERVATION, venueId)
+                .putExtra(MESSAGE, message)
     }
 
 }

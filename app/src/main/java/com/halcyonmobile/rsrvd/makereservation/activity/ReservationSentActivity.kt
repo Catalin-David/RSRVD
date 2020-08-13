@@ -27,12 +27,14 @@ class ReservationSentActivity: AppCompatActivity() {
                 requestDto.start,
                 requestDto.end,
                 onSuccess = {
-                    startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.RESERVATION))
-                    finish()
+                    Handler().postDelayed({
+                        startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.RESERVATION))
+                        finish()
+                    }, 2500)
                 },
                 onFailure = {
                     id?.let {
-                        startActivity(MakeReservationActivity.getStartIntent(this, it))
+                        startActivity(MakeReservationActivity.startIntentWithMessage(this, it, "Failed"))
                         finish()
                     }
                 }
@@ -49,6 +51,5 @@ class ReservationSentActivity: AppCompatActivity() {
                 putExtra(RESERVATION_REQUEST, reservationRequestDto)
                 putExtra(VENUE_ID, venueId)
             }
-
     }
 }
