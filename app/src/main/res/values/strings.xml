@@ -155,4 +155,5 @@
     <string name="reservation_sent">reservation sent</string>
     <string name="confirmation_message">your reservation will be valid after being confirmed by the venue admin</string>
     <string name="send_reservation">send reservation</string>
+    <string name="please_select_activity">Please select what you\'d like to do</string>
 </resources>

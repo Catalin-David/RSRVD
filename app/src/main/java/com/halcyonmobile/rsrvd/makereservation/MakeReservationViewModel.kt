@@ -1,14 +1,9 @@
 package com.halcyonmobile.rsrvd.makereservation
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.reservation.ReservationRepository
-import com.halcyonmobile.rsrvd.core.shared.Interests
-import com.halcyonmobile.rsrvd.core.venues.dto.ActivitiesDto
-import com.halcyonmobile.rsrvd.explorevenues.filter.FilterDate
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterTime
 import java.util.*
 import kotlin.math.abs
@@ -19,13 +14,9 @@ class MakeReservationViewModel : ViewModel() {
 
     val hourCards: LiveData<List<HourUiModel>> = _hourCards
     val time: LiveData<FilterTime> = _time
-    private var filterDate: FilterDate
 
     init {
         _hourCards.value = listHours
-        val calendar = Calendar.getInstance()
-
-        filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         setInitialInterval()
     }
 
@@ -42,9 +33,8 @@ class MakeReservationViewModel : ViewModel() {
         val startHour = if (currentMinute < 30) currentHour else currentHour + 1
         val startMinute = if (currentMinute < 30) 50 else 0
         val finishHour = startHour + 1
-        val finishMinute = startMinute
 
-        return FilterTime(startHour, startMinute, finishHour, finishMinute)
+        return FilterTime(startHour, startMinute, finishHour, startMinute)
     }
 
     fun setSelected(position: HourUiModel) {
@@ -82,10 +72,6 @@ class MakeReservationViewModel : ViewModel() {
             hourUiModel.copy(isSelected = ( returnCorrespondingHour(hourUiModel.hour) == interval))
         }
     }
-
-    fun generateInterestList(
-        list: List<ActivitiesDto>
-    ): List<Interests> = list.map { Interests.getInterestBasedOnName(it.name) }.toList()
 
     fun makeReservation(
         id: String,

@@ -90,7 +90,7 @@
                 android:layout_marginVertical="@dimen/short_margin"
                 app:flexWrap="wrap"
                 app:interests="@{detailViewModel.listActivities}"
-                radio="true"
+                app:radio="@{true}"
                 android:layout_marginStart="@dimen/short_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/what_you_like" />
@@ -127,6 +127,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/right_guideline"/>
 
+            <TextView
+                android:id="@+id/date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/date_picker"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_line_height"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:background="@color/darker_gray"
+                android:transitionName="search_bar_transition"
+                android:layout_marginHorizontal="@dimen/medium_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_title">
+
+                <ImageView
+                    android:id="@+id/date_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/short_margin"
+                    android:contentDescription="@string/maps_icon"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/date_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/_12_august_2019"
+                    android:textAppearance="@style/TextAppearance.Subtitle1"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/date_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <include
                 android:id="@+id/interval_picker"
                 layout="@layout/time_interval_picker"
@@ -136,7 +182,7 @@
                 app:layout_constraintBottom_toTopOf="@id/send_reservation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+                app:layout_constraintTop_toBottomOf="@id/date_picker" />
 
             <Button
                 android:id="@+id/send_reservation"
