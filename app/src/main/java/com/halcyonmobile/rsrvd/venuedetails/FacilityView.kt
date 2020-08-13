@@ -11,7 +11,7 @@ class FacilityView(context: Context) : ConstraintLayout(context) {
     private val view = inflate(context, R.layout.facility, this)
     private val imageView = view.findViewById<ImageView>(R.id.venue_facility_image)
     private val textView = view.findViewById<TextView>(R.id.venue_facility_name)
-    private var facilitiesAndDrawables : HashMap<Facilities, Int> = HashMap()
+    private var facilitiesAndDrawables: HashMap<Facilities, Int> = HashMap()
 
     init {
         facilitiesAndDrawables[Facilities.PARKING] = R.drawable.ic_parking

@@ -22,4 +22,4 @@ data class Open(
     val dayFive: StartEndHours,
     @Json(name = "6")
     val daySix: StartEndHours
-) :Parcelable
+) : Parcelable

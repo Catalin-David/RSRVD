@@ -14,4 +14,4 @@ data class ReservationRequestDto(
     val start: String,
     @Json(name = "end")
     val end: String
-): Parcelable
+) : Parcelable

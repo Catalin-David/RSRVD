@@ -52,7 +52,7 @@ class MakeReservationViewModel : ViewModel() {
 
         if (minute == 0 && _time.value!!.finishMinute == 50 && hour > _time.value!!.finishHour) diffHour--
 
-        setSelectedByInterval(diffHour*100 + diffMinutes)
+        setSelectedByInterval(diffHour * 100 + diffMinutes)
     }
 
     fun setSelectedByFinish(finish: Int) {
@@ -64,12 +64,12 @@ class MakeReservationViewModel : ViewModel() {
 
         if (minute == 0 && _time.value!!.startMinute == 50 && hour > _time.value!!.startHour) diffHour--
 
-        setSelectedByInterval(diffHour*100 + diffMinutes)
+        setSelectedByInterval(diffHour * 100 + diffMinutes)
     }
 
     private fun setSelectedByInterval(interval: Int) {
         _hourCards.value = _hourCards.value?.map { hourUiModel ->
-            hourUiModel.copy(isSelected = ( returnCorrespondingHour(hourUiModel.hour) == interval))
+            hourUiModel.copy(isSelected = (returnCorrespondingHour(hourUiModel.hour) == interval))
         }
     }
 

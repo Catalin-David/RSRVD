@@ -8,7 +8,6 @@ import android.net.Uri
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -120,18 +119,20 @@ fun TextView.reservationDate(dateString: String?) =
 @BindingAdapter("reservationHour")
 fun TextView.reservationHour(dateString: String?) {
     dateString?.let {
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString)?.let { date ->
-            Calendar.getInstance().apply {
-                time = date
-            }.let { calendar ->
-                text = context.getString(
-                    R.string.reservation_hour_format,
-                    calendar.get(Calendar.HOUR).toDoubleDigit(context),
-                    calendar.get(Calendar.MINUTE).toDoubleDigit(context),
-                    calendar.get(Calendar.AM_PM).toAmPm(context)
-                )
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.000'Z'", Locale.getDefault())
+            .apply { timeZone = TimeZone.getTimeZone("GMT") }
+            .parse(dateString)?.let { date ->
+                Calendar.getInstance().apply {
+                    time = date
+                }.let { calendar ->
+                    text = context.getString(
+                        R.string.reservation_hour_format,
+                        calendar.get(Calendar.HOUR).toDoubleDigit(context),
+                        calendar.get(Calendar.MINUTE).toDoubleDigit(context),
+                        calendar.get(Calendar.AM_PM).toAmPm(context)
+                    )
+                }
             }
-        }
     }
 }
 

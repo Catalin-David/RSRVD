@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.halcyonmobile.rsrvd.R
 
-class ReviewInnerFragment: Fragment() {
+class ReviewInnerFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,6 +16,6 @@ class ReviewInnerFragment: Fragment() {
     ): View? = inflater.inflate(R.layout.fragment_inner_venue_reviews, container, false)
 
     companion object {
-        fun newInstance() : ReviewInnerFragment = ReviewInnerFragment()
+        fun newInstance(): ReviewInnerFragment = ReviewInnerFragment()
     }
 }

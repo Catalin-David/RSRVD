@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class VenueById (
+data class VenueById(
     @Json(name = "id")
     val id: String,
     @Json(name = "name")

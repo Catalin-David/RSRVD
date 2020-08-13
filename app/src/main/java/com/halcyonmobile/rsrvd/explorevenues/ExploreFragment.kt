@@ -20,7 +20,6 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
 import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
-import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 

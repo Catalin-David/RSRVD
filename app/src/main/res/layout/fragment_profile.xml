@@ -16,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/long_padding">
 
             <ImageView
                 android:id="@+id/image_view_profile_picture"
@@ -34,7 +35,7 @@
                 android:id="@+id/text_view_profile_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_on_picture_margin"
+                android:layout_marginTop="88dp"
                 android:maxLines="3"
                 android:text="@{viewmodel.userName}"
                 android:textAllCaps="true"

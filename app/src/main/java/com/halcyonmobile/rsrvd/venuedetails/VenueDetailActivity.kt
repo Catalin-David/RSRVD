@@ -11,7 +11,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
-import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.makereservation.activity.MakeReservationActivity
 
 class VenueDetailActivity : AppCompatActivity() {
@@ -23,10 +22,11 @@ class VenueDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val venueId : String? = intent.getStringExtra(REQUEST_VENUE_ID)
+        val venueId: String? = intent.getStringExtra(REQUEST_VENUE_ID)
 
         venueBinding = DataBindingUtil.setContentView(this, R.layout.activity_venue_details)
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
+
         venueBinding.lifecycleOwner = this
         venueBinding.viewModel = viewModel
 
@@ -48,10 +48,7 @@ class VenueDetailActivity : AppCompatActivity() {
     private fun initTabLayout(venueId: String) {
         val category = listOf("Details", "Reviews")
 
-        venueDetailAdapter = VenueDetailAdapter(
-            this,
-            category,
-            venueId)
+        venueDetailAdapter = VenueDetailAdapter(this, category, venueId)
         viewPager = venueBinding.viewPager
         viewPager.adapter = venueDetailAdapter
 

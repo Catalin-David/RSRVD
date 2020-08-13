@@ -111,13 +111,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/short_margin"
                     android:contentDescription="@string/maps_icon"
-                    app:visible="@{viewModel.location != null}"
                     android:onClick="@{() -> viewModel.clearLocation()}"
                     android:src="@drawable/ic_close"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/maps_enter"
                     app:layout_constraintStart_toEndOf="@id/maps_text"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visible="@{viewModel.location != null}" />
 
                 <ImageView
                     android:id="@+id/maps_enter"

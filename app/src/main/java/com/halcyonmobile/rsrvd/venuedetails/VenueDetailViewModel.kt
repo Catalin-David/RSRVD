@@ -7,7 +7,6 @@ import com.halcyonmobile.rsrvd.core.shared.Facilities
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.venues.VenuesRepository
 import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
-import com.halcyonmobile.rsrvd.makereservation.HourUiModel
 
 class VenueDetailViewModel : ViewModel() {
     private val _listActivities: MutableLiveData<List<Interests>> = MutableLiveData()
@@ -24,10 +23,11 @@ class VenueDetailViewModel : ViewModel() {
         VenuesRepository.getVenueById(venueId,
             callback = {
                 _venue.value = it
-                _listActivities.value = it.activities.map {index -> Interests.getInterestBasedOnName(index.name) }.toList()
+                _listActivities.value = it.activities.map { index -> Interests.getInterestBasedOnName(index.name) }.toList()
                 _listFacilities.value = it.facilities
-                _hashMapActivities.value = it.activities.map {
-                        index -> Interests.getInterestBasedOnName(index.name) to index.id }.toMap()
+                _hashMapActivities.value = it.activities.map { index -> Interests.getInterestBasedOnName(index.name) to index.id }.toMap()
+                println("------------------------------------------- ${_hashMapActivities.value}")
             })
+
     }
 }

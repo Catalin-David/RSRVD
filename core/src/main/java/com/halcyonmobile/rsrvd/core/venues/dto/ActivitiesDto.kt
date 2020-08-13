@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class ActivitiesDto (
+data class ActivitiesDto(
     @Json(name = "id")
     val id: String,
     @Json(name = "name")
@@ -17,4 +17,4 @@ data class ActivitiesDto (
     val max: Int,
     @Json(name = "price")
     val price: PriceDto
-): Parcelable
+) : Parcelable

@@ -12,4 +12,4 @@ data class StartEndHours(
     val start: Float,
     @Json(name = "end")
     val end: Float
-): Parcelable
+) : Parcelable

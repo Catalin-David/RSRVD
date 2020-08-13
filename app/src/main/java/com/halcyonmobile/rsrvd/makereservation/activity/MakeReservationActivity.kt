@@ -1,12 +1,11 @@
 package com.halcyonmobile.rsrvd.makereservation.activity
 
 import android.app.DatePickerDialog
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.widget.CheckBox
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -20,13 +19,10 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.databinding.ActivityMakeReservationBinding
-import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.explorevenues.filter.*
 import com.halcyonmobile.rsrvd.makereservation.HourCardsAdapter
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
 import com.halcyonmobile.rsrvd.onboarding.InterestView
-import com.halcyonmobile.rsrvd.profile.ProfileFragment
-import com.halcyonmobile.rsrvd.reservation.ReservationFragment
 import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel
@@ -57,54 +53,52 @@ class MakeReservationActivity : AppCompatActivity() {
             println(it)
         }
 
-        val venueById: String? = intent.getStringExtra(REQUEST_RESERVATION)
-        venueById?.let {
-            venueDetailViewModel.getVenue(it)
+        if (intent.getStringExtra(REQUEST_RESERVATION) == null) {
+            startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.EXPLORE))
         }
+
+        val venueById: String = intent.getStringExtra(REQUEST_RESERVATION)!!
+
+        venueDetailViewModel.getVenue(venueById)
 
         binding.closeReservation.setOnClickListener {
             finish()
         }
 
         binding.sendReservation.setOnClickListener {
-            var filterDateTime: FilterDateTime? = null
-            try {
-                filterDateTime = filterViewModel.getAvailability()
-            } catch (filterDurationException: FilterDurationException) {
-                binding.root.showSnackbar(getString(R.string.interval_too_short))
-            } catch (filterDateException: FilterDateException) {
-                binding.root.showSnackbar(getString(R.string.filter_date_exception))
-            }
-
             if (verifyInterests() == null)
                 binding.root.showSnackbar(getString(R.string.please_select_activity))
             else {
-                val id = venueDetailViewModel.hashMapActivities.value?.get(verifyInterests())
+                try {
+                    val filterDateTime = filterViewModel.getAvailability()
 
-                while (id == null) {}
-
-                filterDateTime?.let {
-                    val dateStart = DateTime(it.year, it.month + 1, it.day, it.startHour, it.startMinute * 60 / 100).toString()
-                    val dateFinish = DateTime(it.year, it.month + 1, it.day, it.finishHour, it.finishMinute * 60 / 100).toString()
-
-                    Log.d(ContentValues.TAG, "$dateStart $dateFinish")
-
-                    if (id == null) {
-                        binding.root.showSnackbar("Overbooked!")
+                    while (venueDetailViewModel.hashMapActivities.value == null) {
+                        venueDetailViewModel.getVenue(venueById)
                     }
+                    val id = venueDetailViewModel.hashMapActivities.value!![verifyInterests()]
 
-                    id?.let { activityId ->
-                        Log.d(ContentValues.TAG, id)
+                    val dateStart = DateTime(
+                        filterDateTime.year,
+                        filterDateTime.month + 1,
+                        filterDateTime.day,
+                        filterDateTime.startHour,
+                        filterDateTime.startMinute * 60 / 100
+                    ).toString()
 
-                        startActivity(
-                            ReservationSentActivity.getStartIntent(
-                                this,
-                                ReservationRequestDto(activityId, dateStart, dateFinish),
-                                venueById!!
-                            )
-                        )
+                    val dateFinish = DateTime(
+                        filterDateTime.year,
+                        filterDateTime.month + 1,
+                        filterDateTime.day,
+                        filterDateTime.finishHour,
+                        filterDateTime.finishMinute * 60 / 100
+                    ).toString()
 
-                    }
+                    startActivity(ReservationSentActivity.getStartIntent(this, ReservationRequestDto(id!!, dateStart, dateFinish), venueById))
+
+                } catch (filterDurationException: FilterDurationException) {
+                    binding.root.showSnackbar(getString(R.string.interval_too_short))
+                } catch (filterDateException: FilterDateException) {
+                    binding.root.showSnackbar(getString(R.string.filter_date_exception))
                 }
             }
         }
@@ -175,7 +169,8 @@ class MakeReservationActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.hourCards.observe(this@MakeReservationActivity) { hourCardsAdapter.submitList(it) }
+        viewModel.hourCards.observe(this@MakeReservationActivity)
+        { hourCardsAdapter.submitList(it) }
 
         setUpLists(hourCardsAdapter)
     }
@@ -201,19 +196,15 @@ class MakeReservationActivity : AppCompatActivity() {
     }
 
     private fun verifyInterests(): Interests? {
-        var interestView: Interests? = null
         val list = binding.interestsGrid.children
             .filterIsInstance<InterestView>()
-            .mapIndexed { index, view -> if (view.isChecked()) Interests.values()[index] else null }
+            .map { if (it.isChecked()) Interests.valueOf((it.getViewById(R.id.interest_button) as CheckBox).text as String) else null }
             .filterNotNull()
             .toList()
 
-        list.map {
-            if (it.name != null) interestView = it
-        }
-
-        return interestView
+        return if (list.isNotEmpty()) list[0] else null
     }
+
 
     companion object {
         private const val REQUEST_RESERVATION = "REQUEST_RESERVATION"
@@ -226,6 +217,7 @@ class MakeReservationActivity : AppCompatActivity() {
 
         fun startIntentWithMessage(context: Context, venueId: String, message: String) =
             Intent(context, MakeReservationActivity::class.java)
+                .apply { flags = Intent.FLAG_ACTIVITY_CLEAR_TOP }
                 .putExtra(REQUEST_RESERVATION, venueId)
                 .putExtra(MESSAGE, message)
     }

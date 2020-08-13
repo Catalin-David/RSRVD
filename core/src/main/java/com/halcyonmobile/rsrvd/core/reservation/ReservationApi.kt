@@ -13,7 +13,7 @@ interface ReservationApi {
     fun get(): Call<List<ReservationDto>>
 
     @POST("reservations")
-    fun createReservation(@Body reservationRequestDto: ReservationRequestDto) : Call<Unit>
+    fun createReservation(@Body reservationRequestDto: ReservationRequestDto): Call<Unit>
 
     @GET("reservations/{reservationId}")
     fun getWithId(@Path("reservationId") id: String): Call<ReservationDto>

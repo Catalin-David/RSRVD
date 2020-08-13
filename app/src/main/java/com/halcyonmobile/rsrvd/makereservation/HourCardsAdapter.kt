@@ -12,18 +12,24 @@ class HourCardsAdapter(
 ) : ListAdapter<HourUiModel, HourCardsAdapter.HourCardViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourCardViewHolder =
-        HourCardViewHolder(HourItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false))
+        HourCardViewHolder(
+            HourItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(
         holder: HourCardViewHolder,
-        position: Int) = holder.bind(getItem(position))
+        position: Int
+    ) = holder.bind(getItem(position))
 
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<HourUiModel> = object : DiffUtil.ItemCallback<HourUiModel>() {
-            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = (oldItem.isSelected == newItem.isSelected || oldItem.hour == newItem.hour)
+            override fun areItemsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean =
+                (oldItem.isSelected == newItem.isSelected || oldItem.hour == newItem.hour)
+
             override fun areContentsTheSame(oldItem: HourUiModel, newItem: HourUiModel): Boolean = oldItem == newItem
         }
     }

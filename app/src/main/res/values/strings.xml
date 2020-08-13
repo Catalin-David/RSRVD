@@ -160,4 +160,6 @@
     <string name="review1">Clean and full of healthy activities. The location is nice and modern, highly recommend!</string>
     <string name="name2">barry graves</string>
     <string name="review2">Great area of Seoul ... great when the Korean Football League and Korean Baseball League is runnung... always a game there apart from Monday\'s for the baseball... and a good family based team calles Seoul E-Land play in the Seoul Olympic stadium ... watch football in a piece of history. The Stadium of the 1988 Seoul olympics...</string>
+    <string name="divider_short">\t-\t\t</string>
+    <string name="google_maps">google.navigation:q=%f,%f</string>
 </resources>

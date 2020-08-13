@@ -12,7 +12,7 @@ import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
 import com.halcyonmobile.rsrvd.shared.FragmentDecision
 
-class ReservationSentActivity: AppCompatActivity() {
+class ReservationSentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +30,17 @@ class ReservationSentActivity: AppCompatActivity() {
                     Handler().postDelayed({
                         startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.RESERVATION))
                         finish()
-                    }, 2500)
+                    }, 1500)
                 },
                 onFailure = {
-                    id?.let {
-                        startActivity(MakeReservationActivity.startIntentWithMessage(this, it, "Failed"))
+                    Handler().postDelayed({
+                        if (id != null) {
+                            startActivity(MakeReservationActivity.startIntentWithMessage(this, id, "Overbooked"))
+                        } else {
+                            startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.RESERVATION))
+                        }
                         finish()
-                    }
+                    }, 1500)
                 }
             )
         }

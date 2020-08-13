@@ -14,7 +14,6 @@ import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
 import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.signin.SignInActivity
-import com.halcyonmobile.rsrvd.venuedetails.VenueDetailActivity
 
 class MainActivity : AppCompatActivity() {
 

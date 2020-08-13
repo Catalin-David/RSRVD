@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="detailViewModel"
             type="com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel" />
@@ -26,74 +27,74 @@
                 android:id="@+id/close_reservation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close"
                 android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/margin_big"
+                android:contentDescription="@string/cancel"
+                android:src="@drawable/ic_close"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/cancel" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_reservation"
-                android:scaleY="1.3"
-                android:scaleX="1.3"
                 android:layout_marginTop="@dimen/medium_margin"
-                app:layout_constraintTop_toBottomOf="@id/close_reservation"
+                android:contentDescription="@string/reservation_image"
+                android:scaleX="1.3"
+                android:scaleY="1.3"
+                android:src="@drawable/ic_img_reservation"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/reservation_image" />
+                app:layout_constraintTop_toBottomOf="@id/close_reservation" />
 
             <TextView
                 android:id="@+id/make_reservation_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/make_a_reservation_newline"
-                android:textSize="40sp"
-                android:textAppearance="?attr/textAppearanceHeadline3"
-                android:textAllCaps="true"
-                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/make_a_reservation_newline"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                android:textSize="40sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/close_reservation"/>
+                app:layout_constraintTop_toBottomOf="@id/close_reservation" />
 
             <TextView
                 android:id="@+id/venue_name_reservation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/venue_name_reservation"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textAllCaps="true"
-                android:text="@{detailViewModel.venue.name}"
                 android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/short_margin"
+                android:text="@{detailViewModel.venue.name}"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/make_reservation_text_view"
-                app:layout_constraintStart_toStartOf="parent"/>
+                tools:text="@string/venue_name_reservation" />
 
             <TextView
                 android:id="@+id/what_you_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/what_you_like"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textAllCaps="true"
-                android:textColor="@color/light_gray"
-                android:layout_marginTop="@dimen/long_margin"
                 android:layout_marginStart="@dimen/medium_margin"
-                app:layout_constraintTop_toBottomOf="@id/venue_name_reservation"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_marginTop="@dimen/long_margin"
+                android:text="@string/what_you_like"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/venue_name_reservation" />
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/interests_grid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/short_margin"
+                android:layout_marginStart="@dimen/short_margin"
                 app:flexWrap="wrap"
                 app:interests="@{detailViewModel.listActivities}"
-                app:radio="@{true}"
-                android:layout_marginStart="@dimen/short_margin"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/what_you_like" />
+                app:layout_constraintTop_toBottomOf="@id/what_you_like"
+                app:radio="@{true}" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/right_guideline"
@@ -106,14 +107,14 @@
                 android:id="@+id/how_long_to_stay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/how_long_to_stay"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textAllCaps="true"
-                android:textColor="@color/light_gray"
-                android:layout_marginTop="@dimen/long_margin"
                 android:layout_marginStart="@dimen/medium_margin"
-                app:layout_constraintTop_toBottomOf="@id/interests_grid"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_marginTop="@dimen/long_margin"
+                android:text="@string/how_long_to_stay"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/interests_grid" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -121,25 +122,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/long_margin"
-                app:layout_constraintTop_toBottomOf="@id/how_long_to_stay"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/how_long_to_stay" />
 
             <TextView
                 android:id="@+id/date_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view"/>
+                app:layout_constraintTop_toBottomOf="@id/recycler_view" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/date_picker"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/box_line_height"
+                android:layout_marginHorizontal="@dimen/medium_margin"
                 android:layout_marginVertical="@dimen/default_margin"
                 android:background="@color/darker_gray"
                 android:transitionName="search_bar_transition"
-                android:layout_marginHorizontal="@dimen/medium_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date_title">
@@ -184,18 +185,18 @@
 
             <Button
                 android:id="@+id/send_reservation"
+                style="@style/MaterialComponents.Button.Icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/send_reservation"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:textAllCaps="true"
-                style="@style/MaterialComponents.Button.Icon"
-                android:padding="@dimen/default_padding"
                 android:layout_margin="@dimen/default_margin"
-                app:layout_constraintStart_toStartOf="parent"
+                android:padding="@dimen/default_padding"
+                android:text="@string/send_reservation"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/interval_picker"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/interval_picker" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

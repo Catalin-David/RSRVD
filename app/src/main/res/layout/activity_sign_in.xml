@@ -27,20 +27,20 @@
                 android:id="@+id/close_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close"
-                android:visibility="gone"
                 android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/long_margin"
+                android:contentDescription="@string/cancel"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/cancel" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/welcome_to_rsrvd_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lineHeight="@dimen/box_line_height"
                 android:layout_marginStart="@dimen/long_margin"
+                android:lineHeight="@dimen/box_line_height"
                 android:text="@string/welcome_to"
                 android:textAllCaps="true"
                 android:textAppearance="?attr/textAppearanceHeadline3"
@@ -84,33 +84,33 @@
                 app:layout_constraintTop_toBottomOf="@id/expl_rsrvd_live_first_text_view"
                 app:layout_constraintVertical_bias="1">
 
-                    <Button
-                        android:id="@+id/connect_google_button"
-                        style="@style/MaterialComponents.Button.Icon"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/long_margin"
-                        android:padding="@dimen/default_padding"
-                        android:text="@string/connect_with_google"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.Subtitle1"
-                        app:icon="@drawable/ic_google"
-                        app:layout_constraintBottom_toTopOf="@id/explore_first"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/connect_google_button"
+                    style="@style/MaterialComponents.Button.Icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/long_margin"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/connect_with_google"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Subtitle1"
+                    app:icon="@drawable/ic_google"
+                    app:layout_constraintBottom_toTopOf="@id/explore_first"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/explore_first"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/medium_margin"
-                        android:text="@string/explore_the_app_first"
-                        android:textAppearance="?attr/textAppearanceSubtitle1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/connect_google_button" />
+                <TextView
+                    android:id="@+id/explore_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:text="@string/explore_the_app_first"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/connect_google_button" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="houriModel"
             type="com.halcyonmobile.rsrvd.makereservation.HourUiModel" />
@@ -18,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/short_margin"
+            android:layout_marginStart="@dimen/short_margin"
             android:background="@drawable/reservation_radiobutton"
             android:button="@null"
             android:checked="false"
@@ -25,12 +27,11 @@
             android:paddingHorizontal="@dimen/short_padding"
             android:paddingVertical="@dimen/short_padding"
             android:textAllCaps="true"
-            android:layout_marginStart="@dimen/short_margin"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@drawable/onboarding_textcolor"
-            tool:text="@string/hour"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="@string/hour" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

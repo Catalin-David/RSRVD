@@ -5,8 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import com.halcyonmobile.rsrvd.databinding.ActivityReservationDetailsBinding
 import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.LIST_HAS_CHANGED
 import com.halcyonmobile.rsrvd.reservation.ReservationObjectFragment.Companion.NO_CHANGES
@@ -33,6 +31,9 @@ class ReservationDetailsActivity : AppCompatActivity() {
                 } else {
                     setResult(NO_CHANGES, Intent())
                 }
+                finish()
+            }
+            close.setOnClickListener {
                 finish()
             }
         }

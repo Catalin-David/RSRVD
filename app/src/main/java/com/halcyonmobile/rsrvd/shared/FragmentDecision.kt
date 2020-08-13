@@ -1,3 +1,3 @@
 package com.halcyonmobile.rsrvd.shared
 
-enum class FragmentDecision {EXPLORE, RESERVATION, PROFILE}
+enum class FragmentDecision { EXPLORE, RESERVATION, PROFILE }
