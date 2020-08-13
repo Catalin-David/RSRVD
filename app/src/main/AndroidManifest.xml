@@ -65,11 +65,11 @@
         <activity android:name=".explorevenues.filter.FilterActivity" />
 
         <activity
-            android:name=".makereservation.MakeReservationActivity"
+            android:name=".makereservation.activity.MakeReservationActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".makereservation.ReservationSentActivity"
+            android:name=".makereservation.activity.ReservationSentActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

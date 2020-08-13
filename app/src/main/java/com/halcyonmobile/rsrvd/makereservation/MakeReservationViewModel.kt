@@ -16,11 +16,9 @@ import kotlin.math.abs
 class MakeReservationViewModel : ViewModel() {
     private val _hourCards: MutableLiveData<List<HourUiModel>> = MutableLiveData()
     private val _time: MutableLiveData<FilterTime> = MutableLiveData()
-    private val _intervalDuration: MutableLiveData<Int> = MutableLiveData()
 
     val hourCards: LiveData<List<HourUiModel>> = _hourCards
     val time: LiveData<FilterTime> = _time
-    val intervalDuration: LiveData<Int> = _intervalDuration
     private var filterDate: FilterDate
 
     init {

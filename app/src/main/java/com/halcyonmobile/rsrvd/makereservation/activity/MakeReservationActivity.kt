@@ -1,4 +1,4 @@
-package com.halcyonmobile.rsrvd.makereservation
+package com.halcyonmobile.rsrvd.makereservation.activity
 
 import android.content.Context
 import android.content.Intent
@@ -12,14 +12,16 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import com.halcyonmobile.rsrvd.databinding.ActivityMakeReservationBinding
 import com.halcyonmobile.rsrvd.explorevenues.filter.*
-import com.halcyonmobile.rsrvd.utils.showSnackbar
+import com.halcyonmobile.rsrvd.makereservation.HourCardsAdapter
+import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
+import com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel
 
 class MakeReservationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakeReservationBinding
     private lateinit var viewModel: MakeReservationViewModel
+    private lateinit var venueDetailViewModel: VenueDetailViewModel
     private lateinit var timeIntervalPickerViewModel: TimeIntervalPickerViewModel
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -28,14 +30,15 @@ class MakeReservationActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_make_reservation)
         viewModel = ViewModelProviders.of(this).get(MakeReservationViewModel::class.java)
         timeIntervalPickerViewModel = ViewModelProviders.of(this).get(TimeIntervalPickerViewModel::class.java)
+        venueDetailViewModel =  ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.detailViewModel = venueDetailViewModel
 
-        val venueById: VenueById? = intent.getParcelableExtra(REQUEST_RESERVATION)
-
-        binding.apply {
-            //   dataMap = viewModel.generateInterestList(venueById.activities)
+        val venueById: String? = intent.getStringExtra(REQUEST_RESERVATION)
+        venueById?.let {
+            venueDetailViewModel.getVenue(it)
         }
 
         binding.closeReservation.setOnClickListener {
@@ -43,7 +46,7 @@ class MakeReservationActivity : AppCompatActivity() {
         }
 
         binding.sendReservation.setOnClickListener {
-
+/*
             startActivity(Intent(this, ReservationSentActivity::class.java))
             viewModel.makeReservation(
                 venueById!!.activities[0].id,
@@ -55,22 +58,27 @@ class MakeReservationActivity : AppCompatActivity() {
                 },
                 onFailure = {
                     binding.root.showSnackbar(getString(R.string.something_went_wrong))
-                })
+                })*/
         }
 
         viewModel.setInitialInterval()
 
-        val hourCardsAdapter = HourCardsAdapter(onItemClick = {
-            viewModel.setSelected(it)
+        val hourCardsAdapter =
+            HourCardsAdapter(onItemClick = {
+                viewModel.setSelected(it)
 
-            viewModel.adjustFinish(viewModel.returnCorrespondingHour(it.hour))
+                viewModel.adjustFinish(viewModel.returnCorrespondingHour(it.hour))
 
-            viewModel.time.value?.let { filterTime ->
-                binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(filterTime.finishHour * 100 + filterTime.finishMinute))
-                // Trigger snap helper, after automated scrolling to current position
-                binding.intervalPicker.finishPicker.smoothScrollBy(5, 0)
-            }
-        })
+                viewModel.time.value?.let { filterTime ->
+                    binding.intervalPicker.finishPicker.layoutManager?.scrollToPosition(
+                        Times.hours.indexOf(
+                            filterTime.finishHour * 100 + filterTime.finishMinute
+                        )
+                    )
+                    // Trigger snap helper, after automated scrolling to current position
+                    binding.intervalPicker.finishPicker.smoothScrollBy(5, 0)
+                }
+            })
 
         timeIntervalPickerViewModel.apply {
             setup(
@@ -122,7 +130,8 @@ class MakeReservationActivity : AppCompatActivity() {
         private const val REQUEST_RESERVATION = "REQUEST_RESERVATION"
 
         fun getStartIntent(context: Context, venueById: String) =
-            Intent(context, MakeReservationActivity::class.java).putExtra(REQUEST_RESERVATION, venueById)
+            Intent(context, MakeReservationActivity::class.java).putExtra(
+                REQUEST_RESERVATION, venueById)
     }
 
 }

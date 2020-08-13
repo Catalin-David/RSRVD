@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.FragmentExploreBinding
-import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
 import com.halcyonmobile.rsrvd.explorevenues.filter.FilterActivity
 import com.halcyonmobile.rsrvd.explorevenues.filter.Filters
 import com.halcyonmobile.rsrvd.utils.showSnackbar

@@ -3,19 +3,15 @@ package com.halcyonmobile.rsrvd.venuedetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
-import com.halcyonmobile.rsrvd.core.venues.dto.VenueById
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
-import com.halcyonmobile.rsrvd.makereservation.MakeReservationActivity
+import com.halcyonmobile.rsrvd.makereservation.activity.MakeReservationActivity
 
 class VenueDetailActivity : AppCompatActivity() {
 
@@ -32,7 +28,6 @@ class VenueDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
         venueBinding.lifecycleOwner = this
         venueBinding.viewModel = viewModel
-    //    val venueById: VenueById? = null
 
         venueId?.let {
             viewModel.getVenue(it)
@@ -44,7 +39,7 @@ class VenueDetailActivity : AppCompatActivity() {
         }
 
         venueBinding.makeReservationButton.setOnClickListener {
-            startActivity(Intent(this, MakeReservationActivity::class.java))
+            startActivity(venueId?.let { it1 -> MakeReservationActivity.getStartIntent(this, it1) })
         }
     }
 

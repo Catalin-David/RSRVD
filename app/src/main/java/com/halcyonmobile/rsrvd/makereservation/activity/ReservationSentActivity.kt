@@ -1,6 +1,5 @@
-package com.halcyonmobile.rsrvd.makereservation
+package com.halcyonmobile.rsrvd.makereservation.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,9 @@ class ReservationSentActivity: AppCompatActivity() {
         Handler().postDelayed({
             startActivity(MainActivity.instanceAfterReservation(this, MainActivity.MESSAGE_OK))
             finish()
-        }, SPLASH_TIME_OUT)
+        },
+            SPLASH_TIME_OUT
+        )
     }
 
     companion object {
