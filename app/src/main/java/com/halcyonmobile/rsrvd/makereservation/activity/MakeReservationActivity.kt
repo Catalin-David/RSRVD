@@ -1,10 +1,12 @@
 package com.halcyonmobile.rsrvd.makereservation.activity
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -23,6 +25,7 @@ import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
 import com.halcyonmobile.rsrvd.onboarding.InterestView
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 import com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel
+import org.joda.time.DateTime
 
 class MakeReservationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakeReservationBinding
@@ -54,8 +57,9 @@ class MakeReservationActivity : AppCompatActivity() {
         }
 
         binding.sendReservation.setOnClickListener {
+            var filterDateTime: FilterDateTime? = null
             try {
-                filterViewModel.getAvailability()
+                filterDateTime = filterViewModel.getAvailability()
             } catch (filterDurationException: FilterDurationException) {
                 binding.root.showSnackbar(getString(R.string.interval_too_short))
             } catch (filterDateException: FilterDateException) {
@@ -67,18 +71,11 @@ class MakeReservationActivity : AppCompatActivity() {
             else {
                 val id = venueDetailViewModel.hashMapActivities.value?.get(verifyInterests())
 
-                viewModel.time.value?.let {
-                    val hourStart: String = if (it.startHour < 10) "0${it.startHour}" else "${it.startHour}"
-                    val newMinute = if ( it.startMinute == 50 ) it.startMinute - 20 else it.startMinute
-                    val minutesStart: String = if (newMinute < 10) "0${newMinute}" else "$newMinute"
-                    val month: String = if (filterViewModel.filterDate.month < 12) "0${filterViewModel.filterDate.month}" else "${filterViewModel.filterDate.month}"
+                filterDateTime?.let {
+                    val dateStart = DateTime(it.year, it.month + 1, it.day, it.startHour, it.startMinute * 60 / 100).toString()
+                    val dateFinish = DateTime(it.year, it.month + 1, it.day, it.finishHour, it.finishMinute * 60 / 100).toString()
 
-                    val hourFinish: String = if (it.finishHour < 10) "0${it.finishHour}" else "${it.finishHour}"
-                    val newMinuteFinish = if ( it.finishMinute == 50 ) it.finishMinute - 20 else it.finishMinute
-                    val minutesStartFinish: String = if (newMinuteFinish < 10) "0${newMinuteFinish}" else "$newMinuteFinish"
-
-                    val dateStart = "${filterViewModel.filterDate.year}-$month-${filterViewModel.filterDate.day}T$hourStart:${minutesStart}.000Z"
-                    val dateFinish = "${filterViewModel.filterDate.year}-$month-${filterViewModel.filterDate.day}T$hourFinish:${minutesStartFinish}.000Z"
+                    Log.d(ContentValues.TAG, "$dateStart $dateFinish")
 
                     id?.let { activityId ->
                         startActivity(ReservationSentActivity.getStartIntent(
@@ -147,10 +144,12 @@ class MakeReservationActivity : AppCompatActivity() {
 
             start.observe(this@MakeReservationActivity) {
                 viewModel.setStart(it)
+                filterViewModel.setStart(it)
                 viewModel.setSelectedByStart(it)
             }
             end.observe(this@MakeReservationActivity) {
                 viewModel.setFinish(it)
+                filterViewModel.setFinish(it)
                 viewModel.setSelectedByFinish(it)
             }
         }

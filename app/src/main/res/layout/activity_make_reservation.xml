@@ -125,8 +125,7 @@
                 android:layout_marginEnd="@dimen/short_margin"
                 app:layout_constraintTop_toBottomOf="@id/how_long_to_stay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/right_guideline"
-                />
+                app:layout_constraintEnd_toStartOf="@id/right_guideline" />
 
             <TextView
                 android:id="@+id/date_title"
