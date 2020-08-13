@@ -19,6 +19,7 @@ import com.halcyonmobile.rsrvd.core.shared.Location
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.databinding.ActivityOnboardingBinding
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class OnboardingActivity : AppCompatActivity() {
@@ -76,7 +77,7 @@ class OnboardingActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 if (viewModel.onReadyClick(getInterests())) {
-                    startActivity(MainActivity.instanceAfterReservation(this@OnboardingActivity, getString(R.string.cancel)))
+                    startActivity(MainActivity.instanceAfterReservation(this@OnboardingActivity, FragmentDecision.EXPLORE))
                 }
             }
         }

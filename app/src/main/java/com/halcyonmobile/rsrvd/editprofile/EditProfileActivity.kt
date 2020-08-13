@@ -10,6 +10,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.Interests
 import com.halcyonmobile.rsrvd.core.shared.Location
@@ -19,6 +20,7 @@ import com.halcyonmobile.rsrvd.onboarding.LocationViewModel
 import com.halcyonmobile.rsrvd.onboarding.RetrieveState
 import com.halcyonmobile.rsrvd.selectlocation.LocationProvider
 import com.halcyonmobile.rsrvd.selectlocation.SelectLocationActivity
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class EditProfileActivity : AppCompatActivity() {
@@ -65,7 +67,9 @@ class EditProfileActivity : AppCompatActivity() {
         binding.apply {
             dataMap = Interests.values().toMutableList()
 
-            close.setOnClickListener { finish() }
+            close.setOnClickListener {
+                startActivity(MainActivity.instanceAfterReservation(this@EditProfileActivity, FragmentDecision.PROFILE))
+            }
 
             mapsIcon.setOnClickListener { locationProvider.init() }
 
@@ -79,7 +83,7 @@ class EditProfileActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 if (viewModel.onReadyClick(getInterests())) {
-                    finish()
+                    startActivity(MainActivity.instanceAfterReservation(this@EditProfileActivity, FragmentDecision.PROFILE))
                 }
             }
         }

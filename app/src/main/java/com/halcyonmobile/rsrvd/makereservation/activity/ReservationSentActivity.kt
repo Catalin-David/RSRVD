@@ -10,6 +10,7 @@ import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationRequestDto
 import com.halcyonmobile.rsrvd.makereservation.MakeReservationViewModel
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 
 class ReservationSentActivity: AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class ReservationSentActivity: AppCompatActivity() {
                 requestDto.start,
                 requestDto.end,
                 onSuccess = {
-                    startActivity(MainActivity.instanceAfterReservation(this, MainActivity.MESSAGE_OK))
+                    startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.RESERVATION))
                     finish()
                 },
                 onFailure = {

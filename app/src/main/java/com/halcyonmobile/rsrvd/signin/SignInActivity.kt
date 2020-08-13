@@ -18,6 +18,7 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class SignInActivity : AppCompatActivity() {
@@ -54,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         signInBinding.closeSignUp.setOnClickListener {
-            startActivity(MainActivity.instanceAfterReservation(this, getString(R.string.cancel)))
+            startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.EXPLORE))
         }
     }
 
