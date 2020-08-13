@@ -74,11 +74,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
+        private const val MESSAGE = "message"
 
-        fun instanceAfterReservation(context: Context, fragment: FragmentDecision): Intent {
+        fun instanceAfterReservation(context: Context, fragment: FragmentDecision, message: String? = null): Intent {
             val intent = Intent(context, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             intent.putExtra(EXTRA_MESSAGE, fragment)
+            intent.putExtra(MESSAGE, message)
 
             return intent
         }

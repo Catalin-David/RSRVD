@@ -87,6 +87,10 @@ class MakeReservationActivity : AppCompatActivity() {
 
                     Log.d(ContentValues.TAG, "$dateStart $dateFinish")
 
+                    if (id == null) {
+                        binding.root.showSnackbar("Overbooked!")
+                    }
+
                     id?.let { activityId ->
                         Log.d(ContentValues.TAG, id)
 
