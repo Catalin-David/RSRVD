@@ -51,17 +51,33 @@ class ExploreViewModel : ViewModel() {
     val noResultsVisible = MediatorLiveData<Boolean>().apply {
         addSource(_loading) { value = checkNoResults(isLoading = it) }
         addSource(_searching) { value = checkNoResults(isSearching = it) }
-        addSource(_searchResultsCards) { value = checkNoResults(isSearchResultEmpty = it?.isEmpty() ?: true) }
+        addSource(_searchResultsCards) {
+            value = checkNoResults(isSearchResultEmpty = it?.isEmpty() ?: true)
+        }
     }
 
     val searchResultsVisible = MediatorLiveData<Boolean>().apply {
         addSource(_searching) { value = checkSearchResults(isSearching = it) }
-        addSource(_searchResultsCards) { value = checkSearchResults(isSearchResultEmpty = it?.isEmpty() ?: true) }
+        addSource(_searchResultsCards) {
+            value = checkSearchResults(isSearchResultEmpty = it?.isEmpty() ?: true)
+        }
     }
 
     init {
-        VenuesRepository.getRecentlyVisitedVenues { venues, error -> storeVenuesAsCardsIn(_recentlyVisitedCards, venues, error) }
-        VenuesRepository.getExploreVenues { venues, error -> storeVenuesAsCardsIn(_exploreCards, venues, error) }
+        VenuesRepository.getRecentlyVisitedVenues { venues, error ->
+            storeVenuesAsCardsIn(
+                _recentlyVisitedCards,
+                venues,
+                error
+            )
+        }
+        VenuesRepository.getExploreVenues { venues, error ->
+            storeVenuesAsCardsIn(
+                _exploreCards,
+                venues,
+                error
+            )
+        }
     }
 
     private fun checkNoResults(
@@ -82,8 +98,24 @@ class ExploreViewModel : ViewModel() {
     fun search() {
         _searching.value = !searchTerm.value.isNullOrEmpty() || _filters.value != null
 
-        val availabilityStart: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month + 1, it.day, it.startHour, it.startMinute) }
-        val availabilityEnd: DateTime? = _filters.value?.availability?.let { DateTime(it.year, it.month + 1, it.day, it.finishHour, it.finishMinute) }
+        val availabilityStart: DateTime? = _filters.value?.availability?.let {
+            DateTime(
+                it.year,
+                it.month + 1,
+                it.day,
+                it.startHour,
+                it.startMinute * 60 / 100
+            )
+        }
+        val availabilityEnd: DateTime? = _filters.value?.availability?.let {
+            DateTime(
+                it.year,
+                it.month + 1,
+                it.day,
+                it.finishHour,
+                it.finishMinute * 60 / 100
+            )
+        }
 
         if (_searching.value == true) {
             _loading.value = true
@@ -104,16 +136,28 @@ class ExploreViewModel : ViewModel() {
         }
     }
 
-    private fun storeVenuesAsCardsIn(storage: MutableLiveData<List<Card>>?, venues: List<Venue>?, error: Boolean?) {
+    private fun storeVenuesAsCardsIn(
+        storage: MutableLiveData<List<Card>>?,
+        venues: List<Venue>?,
+        error: Boolean?
+    ) {
         _error.value = error
 
         if (error == false) {
-            storage?.value = venues?.map { Card(title = it.name, image = it.image, location = it.location, idVenue = it.id) }
+            storage?.value = venues?.map {
+                Card(
+                    title = it.name,
+                    image = it.image,
+                    location = it.location,
+                    idVenue = it.id
+                )
+            }
         }
     }
 
     companion object {
-        val NO_RECENTS_CARD = Card(title = "No activity yet. But it looks like it’s time for some!", location = null)
+        val NO_RECENTS_CARD =
+            Card(title = "No activity yet. But it looks like it’s time for some!", location = null)
         val NO_CARDS = Card(title = "No venues found!")
     }
 }

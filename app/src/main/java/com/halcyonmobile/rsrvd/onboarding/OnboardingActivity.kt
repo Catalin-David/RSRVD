@@ -76,7 +76,7 @@ class OnboardingActivity : AppCompatActivity() {
 
             ready.setOnClickListener {
                 if (viewModel.onReadyClick(getInterests())) {
-                    startActivity(MainActivity.instanceAfterReservation(this@OnboardingActivity, "false"))
+                    startActivity(MainActivity.instanceAfterReservation(this@OnboardingActivity, getString(R.string.cancel)))
                 }
             }
         }

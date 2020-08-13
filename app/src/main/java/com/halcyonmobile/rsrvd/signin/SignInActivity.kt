@@ -33,6 +33,7 @@ class SignInActivity : AppCompatActivity() {
             signInBinding.exploreFirst.visibility = View.GONE
             signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
             signInBinding.rsrvdTextView.text = getString(R.string.account)
+            signInBinding.closeSignUp.visibility = View.VISIBLE
         }
 
         signInBinding.exploreFirst.isSelected = true
@@ -50,6 +51,10 @@ class SignInActivity : AppCompatActivity() {
 
         signInBinding.exploreFirst.setOnClickListener {
             exploreFirst()
+        }
+
+        signInBinding.closeSignUp.setOnClickListener {
+            startActivity(MainActivity.instanceAfterReservation(this, getString(R.string.cancel)))
         }
     }
 

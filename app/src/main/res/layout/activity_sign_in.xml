@@ -23,6 +23,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/close_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/long_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/cancel" />
+
             <TextView
                 android:id="@+id/welcome_to_rsrvd_text_view"
                 android:layout_width="wrap_content"
