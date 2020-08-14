@@ -1,5 +1,6 @@
 package com.halcyonmobile.rsrvd.core.reservation.handlers
 
+import android.content.ContentValues
 import android.util.Log
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
 import retrofit2.Call
@@ -13,7 +14,7 @@ class GetReservationsHandler(private val callback: (List<ReservationDto>?) -> Un
     }
 
     override fun onResponse(call: Call<List<ReservationDto>>, response: Response<List<ReservationDto>>) {
-        Log.d("TAG", response.body().toString()) // LOOKS LIKE THERE ARE NO RESERVATIONS RIGHT NOW AS THIS LOGS AN EMPTY LIST
+        Log.d(ContentValues.TAG, response.body().toString()) // LOOKS LIKE THERE ARE NO RESERVATIONS RIGHT NOW AS THIS LOGS AN EMPTY LIST
         callback(response.body())
     }
 }

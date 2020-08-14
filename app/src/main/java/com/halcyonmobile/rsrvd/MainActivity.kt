@@ -1,5 +1,7 @@
 package com.halcyonmobile.rsrvd
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,15 +12,17 @@ import com.halcyonmobile.rsrvd.databinding.ActivityMainBinding
 import com.halcyonmobile.rsrvd.explorevenues.ExploreFragment
 import com.halcyonmobile.rsrvd.profile.ProfileFragment
 import com.halcyonmobile.rsrvd.reservation.ReservationFragment
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.signin.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -42,7 +46,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        openFragment(ExploreFragment(), supportFragmentManager)
+
+        when (intent.getSerializableExtra(EXTRA_MESSAGE)) {
+            FragmentDecision.RESERVATION -> {
+                openFragment(ReservationFragment(), supportFragmentManager)
+                binding.bottomNavigationView.selectedItemId = R.id.navigation_reservations
+            }
+            FragmentDecision.PROFILE -> {
+                openFragment(ProfileFragment(), supportFragmentManager)
+                binding.bottomNavigationView.selectedItemId = R.id.navigation_profile
+            }
+            else -> {
+                openFragment(ExploreFragment(), supportFragmentManager)
+                binding.bottomNavigationView.selectedItemId = R.id.navigation_explore
+            }
+        }
     }
 
     private fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, addToBackStackParameter: String? = null) {
@@ -52,4 +70,19 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
+
+    companion object {
+        private const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
+        private const val MESSAGE = "message"
+
+        fun instanceAfterReservation(context: Context, fragment: FragmentDecision, message: String? = null): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra(EXTRA_MESSAGE, fragment)
+            intent.putExtra(MESSAGE, message)
+
+            return intent
+        }
+    }
+
 }

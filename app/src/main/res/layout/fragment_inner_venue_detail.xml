@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="dataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Interests>" />
 
         <variable
-            name="facilitiesDataMap"
-            type="java.util.List&lt;com.halcyonmobile.rsrvd.core.shared.Facilities>" />
+            name="viewModel"
+            type="com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars = "vertical"
+        android:fillViewport="true"
         android:scrollbarStyle="insideInset"
-        android:fillViewport="true">
+        android:scrollbars="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,13 +25,13 @@
                 android:id="@+id/open_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/long_margin"
+                android:fontFamily="@font/oswald"
                 android:text="@string/open"
                 android:textAllCaps="true"
-                android:textColor="@color/light_gray"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:layout_marginTop="@dimen/long_margin"
-                android:layout_marginStart="@dimen/long_margin"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,70 +39,73 @@
                 android:id="@+id/venue_weekly_program_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weekly_program"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:layout_marginTop="@dimen/short_margin"
                 android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/short_margin"
+                android:fontFamily="@font/oswald"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@android:color/white"
+                app:getVenueProgram="@{viewModel.venue.open}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/open_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/open_text_view"
+                tools:text="@string/weekly_program" />
 
             <TextView
                 android:id="@+id/activities_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/activities"
-                android:textAllCaps="true"
-                android:textColor="@color/light_gray"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
                 android:layout_marginStart="@dimen/long_margin"
                 android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/oswald"
+                android:text="@string/activities"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/venue_weekly_program_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/venue_weekly_program_text_view" />
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/activities_flex_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:flexWrap="wrap"
-                app:interests="@{dataMap}"
-                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                app:checkable="@{false}"
+                app:flexWrap="wrap"
+                app:interests="@{viewModel.listActivities}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activities_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/activities_text_view" />
 
             <TextView
                 android:id="@+id/location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/oswald"
                 android:text="@string/location_text_view"
                 android:textAllCaps="true"
-                android:textColor="@color/light_gray"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginStart="@dimen/long_margin"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activities_flex_box"/>
+                app:layout_constraintTop_toBottomOf="@id/activities_flex_box" />
 
             <TextView
                 android:id="@+id/venue_location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/location_text_view"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:maxWidth="180dp"
                 android:layout_marginStart="@dimen/long_margin"
                 android:layout_marginTop="@dimen/short_margin"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/oswald"
+                android:maxWidth="180dp"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@android:color/white"
+                app:getVenueLocation="@{viewModel.venue.location}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/location_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/location_text_view"
+                tools:text="@string/location_text_view" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container_directions"
@@ -119,21 +119,21 @@
                     android:id="@+id/directions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/get_direction"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:fontFamily="@font/oswald"
                     android:layout_marginEnd="@dimen/medium_margin"
+                    android:fontFamily="@font/oswald"
+                    android:text="@string/get_direction"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    android:textColor="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:contentDescription="@string/forward"
                     android:src="@drawable/ic_forward"
                     app:layout_constraintStart_toEndOf="@id/directions"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/forward" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,100 +141,100 @@
                 android:id="@+id/good_to_know"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/oswald"
                 android:text="@string/good_to_know"
                 android:textAllCaps="true"
-                android:textColor="@color/light_gray"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginStart="@dimen/long_margin"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/venue_location_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/venue_location_text_view" />
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/facilities_flex_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:facilities="@{facilitiesDataMap}"
-                app:flexWrap="wrap"
-                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                app:facilities="@{viewModel.listFacilities}"
+                app:flexWrap="wrap"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/good_to_know"/>
+                app:layout_constraintTop_toBottomOf="@id/good_to_know" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/oswald"
                 android:text="@string/description"
                 android:textAllCaps="true"
-                android:textColor="@color/light_gray"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:fontFamily="@font/oswald"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginStart="@dimen/long_margin"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/facilities_flex_box"/>
+                app:layout_constraintTop_toBottomOf="@id/facilities_flex_box" />
 
             <TextView
                 android:id="@+id/venue_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
-                android:textColor="@android:color/white"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:layout_marginStart="@dimen/long_margin"
+                android:layout_marginTop="@dimen/background_square_padding"
                 android:fontFamily="@font/oswald"
                 android:maxLines="15"
-                android:layout_marginTop="@dimen/background_square_padding"
-                android:layout_marginStart="@dimen/long_margin"
+                android:text="@{viewModel.venue.description}"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description"/>
+                app:layout_constraintTop_toBottomOf="@id/description"
+                tools:text="@string/description" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/youtube_video_container"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginBottom="@dimen/default_margin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="@dimen/long_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/venue_description">
 
                 <ImageView
-                    android:layout_width="335dp"
+                    android:layout_width="0dp"
                     android:layout_height="174dp"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/sport_base"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baza_sportiva_gheorghieni_cluj"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:contentDescription="@string/sport_base" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     android:id="@+id/play_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_play"
                     android:layout_marginBottom="@dimen/medium_margin"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/youtube_video"
+                    android:src="@drawable/ic_play"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:contentDescription="@string/youtube_video" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
                     android:text="@string/have_a_tour"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:layout_marginTop="@dimen/default_margin"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/play_button"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/play_button" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

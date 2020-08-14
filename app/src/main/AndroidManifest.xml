@@ -36,7 +36,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".selectlocation.SelectLocationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".editprofile.EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -63,6 +63,14 @@
             android:name=".signin.SignInActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".explorevenues.filter.FilterActivity" />
+
+        <activity
+            android:name=".makereservation.activity.MakeReservationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".makereservation.activity.ReservationSentActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"

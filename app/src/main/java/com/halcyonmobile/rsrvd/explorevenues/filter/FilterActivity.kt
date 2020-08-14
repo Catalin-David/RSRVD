@@ -172,7 +172,9 @@ class FilterActivity : AppCompatActivity() {
                 finishLayoutManager = LinearLayoutManager(this@FilterActivity).apply { orientation = LinearLayoutManager.HORIZONTAL },
                 startPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) },
                 finishPickerAdapter = TimePickerAdapter().apply { submitList(Times.hours) },
-                initialInterval = baseFilters?.availability
+                initialInterval = baseFilters?.availability?.let {
+                    FilterTime(it.startHour, it.startMinute, it.finishHour, it.finishMinute)
+                }
             )
             start.observe(this@FilterActivity) { filterViewModel.setStart(it) }
             end.observe(this@FilterActivity) { filterViewModel.setFinish(it) }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="houriModel"
+            type="com.halcyonmobile.rsrvd.makereservation.HourUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/hour_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/short_margin"
+            android:layout_marginStart="@dimen/short_margin"
+            android:background="@drawable/reservation_radiobutton"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/short_padding"
+            android:paddingVertical="@dimen/short_padding"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@drawable/onboarding_textcolor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="@string/hour" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.halcyonmobile.rsrvd.core.reservation.dto.ReservationDto
-import com.halcyonmobile.rsrvd.core.reservation.repository.ReservationRepository
+import com.halcyonmobile.rsrvd.core.reservation.ReservationRepository
 import java.text.SimpleDateFormat
 import java.util.*
 

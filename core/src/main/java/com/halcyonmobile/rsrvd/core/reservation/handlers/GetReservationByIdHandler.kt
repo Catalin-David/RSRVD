@@ -6,8 +6,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GetReservationByIdHandler(private val callback: (ReservationDto?) -> Unit): Callback<ReservationDto> {
-    override fun onFailure(call: Call<ReservationDto>, t: Throwable){
+class GetReservationByIdHandler(private val callback: (ReservationDto?) -> Unit) : Callback<ReservationDto> {
+    override fun onFailure(call: Call<ReservationDto>, t: Throwable) {
         Log.d("RESERVATION_BY_ID", "request failed: ${t.message}")
         callback(null)
     }

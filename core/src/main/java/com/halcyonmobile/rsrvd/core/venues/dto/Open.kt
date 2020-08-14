@@ -1,8 +1,11 @@
 package com.halcyonmobile.rsrvd.core.venues.dto
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Open(
     @Json(name = "0")
@@ -19,4 +22,4 @@ data class Open(
     val dayFive: StartEndHours,
     @Json(name = "6")
     val daySix: StartEndHours
-)
+) : Parcelable

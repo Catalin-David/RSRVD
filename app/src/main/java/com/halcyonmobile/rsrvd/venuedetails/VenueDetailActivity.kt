@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.halcyonmobile.rsrvd.MainActivity
 import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.databinding.ActivityVenueDetailsBinding
+import com.halcyonmobile.rsrvd.makereservation.activity.MakeReservationActivity
 
 class VenueDetailActivity : AppCompatActivity() {
 
@@ -22,37 +22,33 @@ class VenueDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-        val venueId : String
-                = intent.getStringExtra(REQUEST_VENUE_ID)
+        val venueId: String? = intent.getStringExtra(REQUEST_VENUE_ID)
 
         venueBinding = DataBindingUtil.setContentView(this, R.layout.activity_venue_details)
         viewModel = ViewModelProviders.of(this).get(VenueDetailViewModel::class.java)
 
-        viewModel.getVenue(venueId) {
-            Glide
-                .with(this)
-                .load(it.image)
-                .placeholder(R.drawable.ic_baseline_cloud_download)
-                .into(venueBinding.venueDetailsImageView)
+        venueBinding.lifecycleOwner = this
+        venueBinding.viewModel = viewModel
 
-            venueBinding.venueNameTextView.text = it.name
+        venueId?.let {
+            viewModel.getVenue(it)
+            initTabLayout(it)
         }
 
         venueBinding.arrowBack.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java), ExploreFragment.getTransition(this, venueBinding.venueDetailsImageView))
         }
 
-        initTabLayout(venueId)
+        venueBinding.makeReservationButton.setOnClickListener {
+            startActivity(venueId?.let { it1 -> MakeReservationActivity.getStartIntent(this, it1) })
+        }
     }
 
     private fun initTabLayout(venueId: String) {
         val category = listOf("Details", "Reviews")
 
-        venueDetailAdapter = VenueDetailAdapter(
-            this,
-            category,
-            venueId)
+        venueDetailAdapter = VenueDetailAdapter(this, category, venueId)
         viewPager = venueBinding.viewPager
         viewPager.adapter = venueDetailAdapter
 
@@ -67,5 +63,4 @@ class VenueDetailActivity : AppCompatActivity() {
         fun getStartIntent(context: Context, venueId: String) =
             Intent(context, VenueDetailActivity::class.java).putExtra(REQUEST_VENUE_ID, venueId)
     }
-
 }

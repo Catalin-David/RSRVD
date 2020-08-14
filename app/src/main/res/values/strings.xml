@@ -4,7 +4,7 @@
     <string name="welcome_to">welcome to</string>
     <string name="rsrvd">rsrvd</string>
     <string name="connect_with_google">connect with google</string>
-    <string name="explore_reserve_live">EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE EXPLORE RESERVE LIVE</string>
+    <string name="explore_reserve_live">EXPLORE\t\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE\t\t\t\tEXPLORE\t\t\t\tRESERVE\t\t\t\tLIVE</string>
     <string name="explore_the_app_first">I want to explore the app first</string>
     <string name="authentication_failed">Authentication Failed</string>
     <string name="about_you">tell us more\nabout you</string>
@@ -146,4 +146,20 @@
     <string name="reservation_details">"reservation\ndetails"</string>
     <string name="reservation_time">time</string>
     <string name="cancel_reservation">cancel reservation</string>
+    <string name="reservation_image">reservation image</string>
+    <string name="make_a_reservation_newline">make a \nreservation</string>
+    <string name="venue_name_reservation">venue name reservation</string>
+    <string name="what_you_like">what you\'d like to do</string>
+    <string name="how_long_to_stay">how long would you stay?</string>
+    <string name="hour">hour</string>
+    <string name="reservation_sent">reservation sent</string>
+    <string name="confirmation_message">your reservation will be valid after being confirmed by the venue admin</string>
+    <string name="send_reservation">send reservation</string>
+    <string name="please_select_activity">Please select what you\'d like to do</string>
+    <string name="name1">gertrude rose</string>
+    <string name="review1">Clean and full of healthy activities. The location is nice and modern, highly recommend!</string>
+    <string name="name2">barry graves</string>
+    <string name="review2">Great area of Seoul ... great when the Korean Football League and Korean Baseball League is runnung... always a game there apart from Monday\'s for the baseball... and a good family based team calles Seoul E-Land play in the Seoul Olympic stadium ... watch football in a piece of history. The Stadium of the 1988 Seoul olympics...</string>
+    <string name="divider_short">\t-\t\t</string>
+    <string name="google_maps">google.navigation:q=%f,%f</string>
 </resources>

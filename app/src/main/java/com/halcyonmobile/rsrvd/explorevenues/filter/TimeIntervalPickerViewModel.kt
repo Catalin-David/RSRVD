@@ -30,12 +30,12 @@ class TimeIntervalPickerViewModel : ViewModel() {
         finishLayoutManager: LinearLayoutManager,
         startPickerAdapter: TimePickerAdapter,
         finishPickerAdapter: TimePickerAdapter,
-        initialInterval: FilterDateTime? = null
+        initialInterval: FilterTime? = null
     ) {
         setUpPicker(startPicker, _start, startLayoutManager, lastStartIndex, startPickerAdapter)
         setUpPicker(finishPicker, _end, finishLayoutManager, lastFinishIndex, finishPickerAdapter)
 
-        scrollToNow(initialInterval, startPicker, finishPicker)
+        scrollTo(initialInterval, startPicker, finishPicker)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -73,27 +73,27 @@ class TimeIntervalPickerViewModel : ViewModel() {
         }
     }
 
-    private fun scrollToNow(initialInterval: FilterDateTime?, startPicker: RecyclerView, finishPicker: RecyclerView) {
+    private fun scrollTo(initialInterval: FilterTime?, startPicker: RecyclerView, finishPicker: RecyclerView) {
         val startIndex: Int
         val finishIndex: Int
 
         if (initialInterval != null) {
-            startIndex = initialInterval.startHour * 100 + initialInterval.startMinute * 100 / 60
-            finishIndex = initialInterval.finishHour * 100 + initialInterval.finishMinute * 100 / 60
+            startIndex = initialInterval.startHour * 100 + initialInterval.startMinute
+            finishIndex = initialInterval.finishHour * 100 + initialInterval.finishMinute
         } else {
             val calendar = Calendar.getInstance()
-            val hour = calendar.get(Calendar.HOUR_OF_DAY)
-            val minute = calendar.get(Calendar.MINUTE)
+            val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+            val currentMinute = calendar.get(Calendar.MINUTE)
 
-            startIndex = if (minute < 30) hour * 100 + 50 else (hour + 1) * 100
-            finishIndex = if (minute < 30) (hour + 1) * 100 else (hour + 1) * 100 + 50
+            startIndex = if (currentMinute < 30) currentHour * 100 + 50 else (currentHour + 1) * 100
+            finishIndex = if (currentMinute < 30) (currentHour + 1) * 100 else (currentHour + 1) * 100 + 50
         }
 
         startPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(startIndex))
         finishPicker.layoutManager?.scrollToPosition(Times.hours.indexOf(finishIndex))
 
         // Trigger snap helper, after automated scrolling to current position
-        startPicker.smoothScrollBy(1, 0)
-        finishPicker.smoothScrollBy(1, 0)
+        startPicker.smoothScrollBy(5, 0)
+        finishPicker.smoothScrollBy(5, 0)
     }
 }

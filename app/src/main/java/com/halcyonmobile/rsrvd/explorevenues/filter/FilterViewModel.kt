@@ -11,14 +11,16 @@ class FilterViewModel : ViewModel() {
     val activities: LiveData<List<Interests>> = _activities
 
     var filterDate: FilterDate
-    var filterTime: FilterTime
+    private var filterTime: FilterTime
 
     init {
         val calendar = Calendar.getInstance()
-        val startHour = calendar.get(Calendar.HOUR_OF_DAY)
-        val startMinute = calendar.get(Calendar.MINUTE)
-        val finishHour = if (startMinute < 30) startHour else startHour + 1
-        val finishMinute = if (startMinute < 30) startMinute + 30 else startMinute
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentMinute = calendar.get(Calendar.MINUTE)
+        val startHour = if (currentMinute < 30) currentHour else currentHour + 1
+        val startMinute = if (currentMinute < 30) 50 else 0
+        val finishHour = if (startMinute < 50) startHour else startHour + 1
+        val finishMinute = if (startMinute < 50) 50 else 0
 
         filterDate = FilterDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         filterTime = FilterTime(startHour, startMinute, finishHour, finishMinute)
@@ -30,13 +32,13 @@ class FilterViewModel : ViewModel() {
 
     fun setStart(start: Int) {
         val hour = start / 100
-        val minute = (start % 100) * 60 / 100
+        val minute = start % 100
         filterTime = FilterTime(hour, minute, filterTime.finishHour, filterTime.finishMinute)
     }
 
     fun setFinish(finish: Int) {
         val hour = finish / 100
-        val minute = (finish % 100) * 60 / 100
+        val minute = finish % 100
         filterTime = FilterTime(filterTime.startHour, filterTime.startMinute, hour, minute)
     }
 

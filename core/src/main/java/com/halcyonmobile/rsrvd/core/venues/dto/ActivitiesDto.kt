@@ -1,10 +1,14 @@
-package com.halcyonmobile.rsrvd.core.activity
+package com.halcyonmobile.rsrvd.core.venues.dto
 
+import android.os.Parcelable
+import com.halcyonmobile.rsrvd.core.shared.dto.PriceDto
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
-data class ActivitiesDto (
+data class ActivitiesDto(
     @Json(name = "id")
     val id: String,
     @Json(name = "name")
@@ -13,4 +17,4 @@ data class ActivitiesDto (
     val max: Int,
     @Json(name = "price")
     val price: PriceDto
-)
+) : Parcelable

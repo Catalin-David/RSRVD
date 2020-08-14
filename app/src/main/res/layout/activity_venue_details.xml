@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.halcyonmobile.rsrvd.venuedetails.VenueDetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,13 +18,13 @@
             android:id="@+id/scroll_view_venue_details"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scrollbars = "vertical"
-            android:scrollbarStyle="insideInset"
             android:layout_marginBottom="@dimen/default_margin"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toTopOf="@id/bottom_constraint_layout"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,65 +34,74 @@
                     android:id="@+id/venue_details_image_view"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
-                    android:scaleType="centerCrop"
                     android:contentDescription="@string/venue_details_image"
+                    android:scaleType="centerCrop"
+                    android:transitionName="card_background_transition"
+                    app:imageUrlDetail="@{viewModel.venue.image}"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/arrow_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/long_margin"
                     android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/long_margin"
+                    android:contentDescription="@string/arrow_back"
                     android:src="@drawable/ic_arrow_back"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/arrow_back" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/yellow_shape_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart = "@drawable/ic_yellow_shape"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:drawableStart="@drawable/ic_yellow_shape"
                     app:layout_constraintBottom_toBottomOf="@id/venue_details_image_view"
-                    app:layout_constraintTop_toBottomOf="@id/venue_details_image_view"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/venue_details_image_view" />
 
                 <TextView
                     android:id="@+id/venue_name_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/venue_name"
+                    android:layout_marginStart="@dimen/long_margin"
+                    android:layout_marginTop="200dp"
+                    android:maxWidth="350dp"
+                    android:text="@{viewModel.venue.name}"
                     android:textAllCaps="true"
                     android:textAppearance="?attr/textAppearanceHeadline3"
-                    android:maxWidth="350dp"
-                    android:paddingTop="56dp"
-                    android:layout_marginStart="@dimen/long_margin"
+                    android:transitionName="card_text_transition"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/venue_details_image_view"
-                    app:layout_constraintTop_toBottomOf="@id/venue_details_image_view"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/venue_name" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="0dp"
-                    app:tabSelectedTextColor="@android:color/white"
-                    android:layout_marginTop="42dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="42dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/yellow_shape_text_view"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/yellow_shape_text_view"
+                    app:tabSelectedTextColor="@android:color/white" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layoutDirection="ltr"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tab_layout"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -94,23 +110,24 @@
             android:id="@+id/bottom_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_btn_connect_sgnin"
-                android:layout_marginStart="@dimen/long_margin"
-                android:layout_marginEnd="@dimen/long_margin"
-                android:layout_marginBottom="@dimen/short_margin"
-                android:text="@string/make_a_reservation"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:textAllCaps="true"
+                android:id="@+id/make_reservation_button"
                 style="@style/MaterialComponents.Button.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/long_margin"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:padding="@dimen/default_padding"
+                android:text="@string/make_a_reservation"
+                android:textAllCaps="true"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

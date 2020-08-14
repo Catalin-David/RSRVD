@@ -26,9 +26,11 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun loadUserInformation() {
-        UserRepository.get { it?.let {
-            profileData.value = UserProfileData(it.location, it.reservations, it.interests)
-        } }
+        UserRepository.get {
+            it?.let {
+                profileData.value = UserProfileData(it.location, it.reservations, it.interests)
+            }
+        }
     }
 
     fun handleLogOut() {

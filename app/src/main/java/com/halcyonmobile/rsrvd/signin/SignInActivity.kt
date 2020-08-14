@@ -18,6 +18,7 @@ import com.halcyonmobile.rsrvd.R
 import com.halcyonmobile.rsrvd.core.shared.repository.UserLocalRepository
 import com.halcyonmobile.rsrvd.databinding.ActivitySignInBinding
 import com.halcyonmobile.rsrvd.onboarding.OnboardingActivity
+import com.halcyonmobile.rsrvd.shared.FragmentDecision
 import com.halcyonmobile.rsrvd.utils.showSnackbar
 
 class SignInActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class SignInActivity : AppCompatActivity() {
             signInBinding.exploreFirst.visibility = View.GONE
             signInBinding.welcomeToRsrvdTextView.text = getString(R.string.create)
             signInBinding.rsrvdTextView.text = getString(R.string.account)
+            signInBinding.closeSignUp.visibility = View.VISIBLE
         }
 
         signInBinding.exploreFirst.isSelected = true
@@ -50,6 +52,10 @@ class SignInActivity : AppCompatActivity() {
 
         signInBinding.exploreFirst.setOnClickListener {
             exploreFirst()
+        }
+
+        signInBinding.closeSignUp.setOnClickListener {
+            startActivity(MainActivity.instanceAfterReservation(this, FragmentDecision.EXPLORE))
         }
     }
 
@@ -115,5 +121,12 @@ class SignInActivity : AppCompatActivity() {
 
         fun getStartIntent(context: Context, showSignUp: Boolean) =
             Intent(context, SignInActivity::class.java).putExtra(SIGN_UP_KEY, showSignUp)
+
+        fun instanceStackClear(context: Context?): Intent {
+            val intent = Intent(context, SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+
+            return intent
+        }
     }
 }
